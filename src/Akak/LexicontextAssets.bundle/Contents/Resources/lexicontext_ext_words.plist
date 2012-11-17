@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>although</key>
+	<dict>
+		<key>Conjunction</key>
+		<array>
+			<string>In spite of the fact that; even though</string>
+		</array>
+	</dict>
+	<key>amid</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>Surrounded by; in the middle of</string>
+		</array>
+	</dict>
+	<key>among</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>Surrounded by; in the company of</string>
+		</array>
+	</dict>
+	<key>anyone</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Any person or people</string>
+		</array>
+	</dict>
+	<key>anything</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used to refer to a thing, no matter what</string>
+		</array>
+	</dict>
+	<key>because</key>
+	<dict>
+		<key>Conjunction</key>
+		<array>
+			<string>For the reason that; since</string>
+		</array>
+	</dict>
+	<key>beside</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>At the side of; next to</string>
+		</array>
+	</dict>
+	<key>cannot</key>
+	<dict>
+		<key>Contraction</key>
+		<array>
+			<string>Can not</string>
+		</array>
+	</dict>
+	<key>could</key>
+	<dict>
+		<key>Verb</key>
+		<array>
+			<string>Used to indicate possibility</string>
+		</array>
+	</dict>
+	<key>during</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>Throughout the course or duration of (a period of time)</string>
+		</array>
+	</dict>
+	<key>eg</key>
+	<dict>
+		<key>Abbreviation</key>
+		<array>
+			<string>For example</string>
+		</array>
+	</dict>
+	<key>else</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>In addition; besides</string>
+		</array>
+	</dict>
+	<key>etc</key>
+	<dict>
+		<key>Abbreviation</key>
+		<array>
+			<string>Et cetera</string>
+		</array>
+	</dict>
+	<key>everyone</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Every person</string>
+		</array>
+	</dict>
+	<key>everything</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>All things; all the things of a group or class</string>
+		</array>
+	</dict>
+	<key>for</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>In support of or in favor of (a person or policy)</string>
+		</array>
+	</dict>
+	<key>from</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>Indicating the point in space at which a journey, motion, or action starts</string>
+		</array>
+	</dict>
+	<key>her</key>
+	<dict>
+		<key>Determiner</key>
+		<array>
+			<string>Belonging to or associated with a female person or animal previously mentioned or easily identified</string>
+		</array>
+	</dict>
+	<key>hers</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used to refer to a thing or things belonging to or associated with a female person or animal previously mentioned</string>
+		</array>
+	</dict>
+	<key>him</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used as the object of a verb or preposition to refer to a male person or animal previously mentioned or easily identified</string>
+		</array>
+	</dict>
+	<key>himself</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used as the object of a verb or preposition to refer to a male person or animal previously mentioned as the subject of the clause</string>
+		</array>
+	</dict>
+	<key>his</key>
+	<dict>
+		<key>Determiner</key>
+		<array>
+			<string>Belonging to or associated with a male person or animal previously mentioned or easily identified</string>
+		</array>
+	</dict>
+	<key>how</key>
+	<dict>
+		<key>Exclamation</key>
+		<array>
+			<string>A greeting attributed to North American Indians (used in humorous imitation)</string>
+		</array>
+	</dict>
+	<key>if</key>
+	<dict>
+		<key>Noun</key>
+		<array>
+			<string>On the condition or supposition that; in the event that</string>
+		</array>
+	</dict>
+	<key>into</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>Expressing movement or action with the result that someone or something becomes enclosed or surrounded by something else</string>
+		</array>
+	</dict>
+	<key>my</key>
+	<dict>
+		<key>Determiner</key>
+		<array>
+			<string>Belonging to or associated with the speaker</string>
+		</array>
+	</dict>
+	<key>myself</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used by a speaker to refer to himself or herself as the object of a verb or preposition when he or she is the subject of the clause</string>
+		</array>
+	</dict>
+	<key>neither</key>
+	<dict>
+		<key>Determiner</key>
+		<array>
+			<string>Not the one nor the other of two people or things; not either</string>
+		</array>
+	</dict>
+	<key>never</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>At no time in the past or future; on no occasion; not ever</string>
+		</array>
+	</dict>
+	<key>next</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>On the first or soonest occasion after the present; immediately afterward</string>
+		</array>
+	</dict>
+	<key>nor</key>
+	<dict>
+		<key>Conjunction</key>
+		<array>
+			<string>Used before the second or further of two or more alternatives (the first being introduced by a negative such as ‚Äúneither‚Äù or ‚Äúnot‚Äù) to indicate that they are each untrue or each do not happen</string>
+		</array>
+	</dict>
+	<key>of</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>Expressing the relationship between a part and a whole</string>
+		</array>
+	</dict>
+	<key>onto</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>Moving to a location on (the surface of something)</string>
+		</array>
+	</dict>
+	<key>our</key>
+	<dict>
+		<key>Determiner</key>
+		<array>
+			<string>Belonging to or associated with the speaker and one or more other people previously mentioned or easily identified</string>
+		</array>
+	</dict>
+	<key>ours</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used to refer to a thing or things belonging to or associated with the speaker and one or more other people previously mentioned or easily identified</string>
+		</array>
+	</dict>
+	<key>ourselves</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used as the object of a verb or preposition when this is the same as the subject of the clause and the subject is the speaker and one or more other people considered together</string>
+		</array>
+	</dict>
+	<key>own</key>
+	<dict>
+		<key>Verb</key>
+		<array>
+			<string>Have (something) as one&apos;s own; possess</string>
+		</array>
+	</dict>
+	<key>per</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>For each (used with units to express a rate)</string>
+		</array>
+	</dict>
+	<key>she</key>
+	<dict>
+		<key>Noun</key>
+		<array>
+			<string>A female; a woman</string>
+		</array>
+	</dict>
+	<key>should</key>
+	<dict>
+		<key>Verb</key>
+		<array>
+			<string>Used to indicate obligation, duty, or correctness, typically when criticizing someone&apos;s actions</string>
+		</array>
+	</dict>
+	<key>since</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>In the intervening period between (the time mentioned) and the time under consideration, typically the present</string>
+		</array>
+	</dict>
+	<key>something</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>Used for emphasis with a following adjective functioning as an adverb</string>
+		</array>
+	</dict>
+	<key>than</key>
+	<dict>
+		<key>Conjunction</key>
+		<array>
+			<string>Introducing the second element in a comparison</string>
+		</array>
+	</dict>
+	<key>that</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used to identify a specific person or thing observed by the speaker</string>
+		</array>
+	</dict>
+	<key>the</key>
+	<dict>
+		<key>Determiner</key>
+		<array>
+			<string>Denoting one or more people or things already mentioned or assumed to be common knowledge</string>
+		</array>
+	</dict>
+	<key>their</key>
+	<dict>
+		<key>Determiner</key>
+		<array>
+			<string>Belonging to or associated with the people or things previously mentioned or easily identified</string>
+		</array>
+	</dict>
+	<key>theirs</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used to refer to a thing or things belonging to or associated with two or more people or things previously mentioned</string>
+		</array>
+	</dict>
+	<key>them</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used as the object of a verb or preposition to refer to two or more people or things previously mentioned or easily identified</string>
+		</array>
+	</dict>
+	<key>themselves</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used as the object of a verb or preposition to refer to a group of people or things previously mentioned as the subject of the clause</string>
+		</array>
+	</dict>
+	<key>thence</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>From a place or source previously mentioned</string>
+		</array>
+	</dict>
+	<key>thereafter</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>After that time</string>
+		</array>
+	</dict>
+	<key>thereupon</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>Immediately or shortly after that</string>
+		</array>
+	</dict>
+	<key>they</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used to refer to two or more people or things previously mentioned or easily identified</string>
+		</array>
+	</dict>
+	<key>this</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>To the degree or extent indicated</string>
+		</array>
+	</dict>
+	<key>to</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>So as to be closed or nearly closed</string>
+		</array>
+	</dict>
+	<key>toward</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>In the direction of</string>
+		</array>
+	</dict>
+	<key>unless</key>
+	<dict>
+		<key>Conjunction</key>
+		<array>
+			<string>Except if (used to introduce a case in which a statement being made is not true or valid)</string>
+		</array>
+	</dict>
+	<key>until</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>Up to (the point in time or the event mentioned)</string>
+		</array>
+	</dict>
+	<key>versus</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>Against (esp. in sports and legal use)</string>
+		</array>
+	</dict>
+	<key>via</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>Traveling through (a place) en route to a destination</string>
+		</array>
+	</dict>
+	<key>we</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used by a speaker to refer to himself or herself and one or more other people considered together</string>
+		</array>
+	</dict>
+	<key>what</key>
+	<dict>
+		<key>Determiner</key>
+		<array>
+			<string>Asking for information specifying something</string>
+		</array>
+	</dict>
+	<key>when</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>At or on which (referring to a time or circumstance)</string>
+		</array>
+	</dict>
+	<key>whenever</key>
+	<dict>
+		<key>Conjunction</key>
+		<array>
+			<string>At whatever time; on whatever occasion (emphasizing a lack of restriction)</string>
+		</array>
+	</dict>
+	<key>where</key>
+	<dict>
+		<key>Conjunction</key>
+		<array>
+			<string>That</string>
+		</array>
+	</dict>
+	<key>whereafter</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>After which</string>
+		</array>
+	</dict>
+	<key>whereas</key>
+	<dict>
+		<key>Conjunction</key>
+		<array>
+			<string>In contrast or comparison with the fact that</string>
+		</array>
+	</dict>
+	<key>whereby</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>By which</string>
+		</array>
+	</dict>
+	<key>wherein</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>In which</string>
+		</array>
+	</dict>
+	<key>whereupon</key>
+	<dict>
+		<key>Conjunction</key>
+		<array>
+			<string>Immediately after which</string>
+		</array>
+	</dict>
+	<key>whether</key>
+	<dict>
+		<key>Conjunction</key>
+		<array>
+			<string>Expressing a doubt or choice between alternatives</string>
+		</array>
+	</dict>
+	<key>which</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used referring to something previously mentioned when introducing a clause giving further information</string>
+		</array>
+	</dict>
+	<key>whither</key>
+	<dict>
+		<key>Adverb</key>
+		<array>
+			<string>To what place or state</string>
+		</array>
+	</dict>
+	<key>whoever</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>The person or people who; any person who</string>
+		</array>
+	</dict>
+	<key>whom</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used instead of ‚Äúwho‚Äù as the object of a verb or preposition</string>
+		</array>
+	</dict>
+	<key>whose</key>
+	<dict>
+		<key>Determiner</key>
+		<array>
+			<string>Of whom or which (used to indicate that the following noun belongs to or is associated with the person or thing mentioned in the previous clause)</string>
+		</array>
+	</dict>
+	<key>with</key>
+	<dict>
+		<key>Preposition</key>
+		<array>
+			<string>Accompanied by (another person or thing)</string>
+		</array>
+	</dict>
+	<key>without</key>
+	<dict>
+		<key>Conjunction</key>
+		<array>
+			<string>Without it being the case that</string>
+		</array>
+	</dict>
+	<key>would</key>
+	<dict>
+		<key>Verb</key>
+		<array>
+			<string>(expressing the conditional mood) Indicating the consequence of an imagined event or situation</string>
+		</array>
+	</dict>
+	<key>you</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used to refer to the person or people that the speaker is addressing</string>
+		</array>
+	</dict>
+	<key>your</key>
+	<dict>
+		<key>Determiner</key>
+		<array>
+			<string>Belonging to or associated with the person or people that the speaker is addressing</string>
+		</array>
+	</dict>
+	<key>yours</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used to refer to a thing or things belonging to or associated with the person or people that the speaker is addressing</string>
+		</array>
+	</dict>
+	<key>yourself</key>
+	<dict>
+		<key>Pronoun</key>
+		<array>
+			<string>Used to refer to the person being addressed as the object of a verb or preposition when they are also the subject of the clause</string>
+		</array>
+	</dict>
+</dict>
+</plist>
