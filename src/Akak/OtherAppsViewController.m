@@ -192,7 +192,8 @@
 
 - (IBAction)done:(id)sender
 {
-    [self.delegate otherAppsViewControllerDidFinish:self];
+    //[self.delegate otherAppsViewControllerDidFinish:self];
+    [self.navigationController popViewControllerAnimated: YES];
 }
 
 - (void)viewDidUnload

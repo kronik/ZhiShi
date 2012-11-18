@@ -11,6 +11,7 @@
 #import "DictSearcher.h"
 #import "Resources.h"
 #import "AdWhirlView.h"
+#import "RulesSearcherViewController.h"
 
 #if LITE_VER == 0
 
@@ -841,12 +842,6 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.highlightedTextColor = [UIColor blackColor];
         cell.textLabel.textColor = [UIColor darkGrayColor];
-        //cell.textLabel.font = [UIFont fontWithName:@"days" size:18.0];
-        /*
-        UILongPressGestureRecognizer *longPressGesture =
-        [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
-		[cell addGestureRecognizer:longPressGesture];
-         */
 	}
     
     switch (indexPath.section)
@@ -1101,7 +1096,9 @@
     controller.delegate = self;
     
     controller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentModalViewController:controller animated:YES];
+//    [self presentModalViewController:controller animated:YES];
+    
+    [self.navigationController pushViewController:controller animated: YES];
 }
 
 - (void)aboutViewControllerDidFinish:(AboutViewController *)controller
@@ -1116,33 +1113,18 @@
 
 - (IBAction)showRulesButtonClicked: (UIButton*)button
 {
-    OnlineDictViewController *controller = nil;
-    
-    self.noNeedToShowActionSheet = YES;
-#if LITE_VER == 0
-    controller = [[OnlineDictViewController alloc] initWithNibName:@"OnlineDictView" bundle:nil];
-#else
+#if LITE_VER != 0
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ATTENTION_TXT message:FEATURE_NOT_AVAILABLE delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     alert.tag = 1001;
     [alert show];
-    return;
-    
-    //controller = [[OnlineDictViewController alloc] initWithNibName:@"OnlineDictView_lite" bundle:nil];
-#endif
-    controller.delegate = self;
-    controller.word = nil;
-    
-#if RU_LANG == 1    
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"rules" ofType:@"html"];
-    controller.localHtml = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-#else
-    controller.localHtml = nil;
+    return;    
 #endif
     
-    controller.header = RULES_TXT;
-    controller.searchURL = GOOGLE_URL_RU;
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentModalViewController:controller animated:YES];
+    RulesSearcherViewController *searchRulesController = [[RulesSearcherViewController alloc] init];
+    [self.navigationController pushViewController:searchRulesController animated:YES];//:searchRulesController animated:YES];
+
+    self.navigationController.navigationBarHidden = NO;
+    self.noNeedToShowActionSheet = YES;
 }
 
 - (void)onlineDictViewControllerDidFinish:(OnlineDictViewController *)controller
@@ -1226,8 +1208,13 @@
     
     controller.header = title;
     controller.searchURL = searchURL;
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentModalViewController:controller animated:YES];    
+    //controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
+    [self.navigationController pushViewController:controller animated: YES];
+
+    self.navigationController.navigationBarHidden = NO;
+
+    //[self presentModalViewController:controller animated:YES];
 }
 
 #pragma mark - View lifecycle
@@ -1249,6 +1236,8 @@
 
 - (void)viewDidLoad
 {
+    self.navigationController.navigationBarHidden = YES;
+    
     [super viewDidLoad];
     UInt32 sessionCategory = kAudioSessionCategory_AmbientSound;
     AudioSessionSetProperty (kAudioSessionProperty_AudioCategory,
@@ -1355,7 +1344,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated
-{    
+{
+    self.navigationController.navigationBarHidden = YES;
+
     self.tableView.allowsSelection = YES;
 
     [self.searchBar becomeFirstResponder];

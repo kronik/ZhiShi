@@ -18,7 +18,8 @@
 
 - (IBAction)done:(id)sender
 {
-    [self.delegate aboutViewControllerDidFinish:self];
+    //[self.delegate aboutViewControllerDidFinish:self];
+    [self.navigationController popViewControllerAnimated: YES];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

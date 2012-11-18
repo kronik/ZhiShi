@@ -10,6 +10,12 @@
 #import "Resources.h"
 #import "AdWhirlView.h"
 
+@interface OnlineDictViewController()
+
+@property (nonatomic) BOOL alreadyLoaded;
+
+@end
+
 @implementation OnlineDictViewController
 
 @synthesize webView = _webView;
@@ -17,19 +23,20 @@
 @synthesize word = _word;
 @synthesize searchURL = _searchURL;
 @synthesize av = _av;
-@synthesize header = _header;
-@synthesize barItem = _barItem;
-@synthesize toolBar = _toolBar;
-@synthesize barBackItem = _barBackItem;
 @synthesize bannerView = _bannerView;
 @synthesize localHtml = _localHtml;
 @synthesize bannerIsVisible = _bannerIsVisible;
 @synthesize myAdView = _myAdView;
-@synthesize navBar = _navBar;
+@synthesize alreadyLoaded = _alreadyLoaded;
 
 #if LITE_VER == 1
 @synthesize adView;
 #endif
+
+- (void)goBack
+{
+    [self.navigationController popViewControllerAnimated: YES];
+}
 
 - (void)deviceOrientationDidChange:(NSNotification *)notification
 {
@@ -71,20 +78,7 @@
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
     
     self.webView.backgroundColor = UIColorFromRGB(0xFFF4CB);
-    self.barItem.title = self.header;
-    self.barBackItem.title = BACK_TXT;
     
-    self.navBar.title = self.header;
-    
-    NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                               [UIColor whiteColor],UITextAttributeTextColor,
-                                               [UIColor blackColor], UITextAttributeTextShadowColor,
-                                               [NSValue valueWithUIOffset:UIOffsetMake(-1, 0)], UITextAttributeTextShadowOffset, nil];
-    
-    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
-    
-    self.toolBar.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"ipad-menubar-right.png"]];
-
     UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar-right"];
     [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
     
@@ -92,10 +86,19 @@
     
     UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
     [button setImage:buttonImage forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    [self.navBar setLeftBarButtonItem:backButton];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    self.navigationItem.title = self.header;
+    
+    NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                               [UIColor whiteColor],UITextAttributeTextColor,
+                                               [UIColor blackColor], UITextAttributeTextShadowColor,
+                                               [NSValue valueWithUIOffset:UIOffsetMake(-1, 0)], UITextAttributeTextShadowOffset, nil];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
     
     NSString *urlAddress = [[NSString alloc] initWithFormat:self.searchURL, self.word];
     
@@ -114,7 +117,7 @@
     }
     else
     {
-        [self.webView loadHTMLString:self.localHtml baseURL:baseURL];
+        [self.webView loadHTMLString:self.localHtml baseURL:baseURL];        
     }
     
 #if LITE_VER == 1

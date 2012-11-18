@@ -33,11 +33,7 @@
 
 @property (assign, nonatomic) IBOutlet id <OnlineDictViewControllerDelegate> delegate;
 @property (assign, nonatomic) IBOutlet UIWebView *webView;
-@property (assign, nonatomic) IBOutlet UIBarButtonItem *barItem;
-@property (assign, nonatomic) IBOutlet UIToolbar *toolBar;
-@property (assign, nonatomic) IBOutlet UIBarButtonItem *barBackItem;
 @property (assign, nonatomic) IBOutlet ADBannerView *bannerView;
-@property (assign, nonatomic) IBOutlet UINavigationItem *navBar;
 
 @property (strong, nonatomic) UIActivityIndicatorView *av;
 @property (strong, nonatomic) NSString *word;

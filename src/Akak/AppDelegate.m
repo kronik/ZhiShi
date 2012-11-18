@@ -50,7 +50,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"ipad-menubar-right"] forBarMetrics:UIBarMetricsDefault];
+    
     // Override point for customization after application launch.
     
 #if LITE_VER == 0
@@ -59,7 +61,11 @@
     self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController_iPhone_lite" bundle:nil];
 #endif
     
-    self.window.rootViewController = self.mainViewController;
+    UINavigationController *navig = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
+
+    
+    
+    self.window.rootViewController = navig;
     
 //    self.mainViewController.managedObjectContextRu = self.managedObjectContextRu;
 //    self.mainViewController.managedObjectContextEn = self.managedObjectContextEn;
