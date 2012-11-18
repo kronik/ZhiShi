@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/MainViewController.m"
-         timestampString = "374920038.622113"
+         timestampString = "374921639.139535"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1433"
-         endingLineNumber = "1433"
+         startingLineNumber = "1435"
+         endingLineNumber = "1435"
          landmarkName = "-startToBuildIndex"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/MainViewController.m"
-         timestampString = "374920038.622113"
+         timestampString = "374921639.139535"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1443"
-         endingLineNumber = "1443"
+         startingLineNumber = "1445"
+         endingLineNumber = "1445"
          landmarkName = "-startToBuildIndex"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/MainViewController.m"
-         timestampString = "374920038.622113"
+         timestampString = "374921639.139535"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1441"
-         endingLineNumber = "1441"
+         startingLineNumber = "1443"
+         endingLineNumber = "1443"
          landmarkName = "-startToBuildIndex"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/MainViewController.m"
-         timestampString = "374919830.426296"
+         timestampString = "374921639.139535"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1188"
-         endingLineNumber = "1188"
+         startingLineNumber = "1190"
+         endingLineNumber = "1190"
          landmarkName = "-showOnlineDetails:searchURL:title:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,11 +177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/MainViewController.m"
-         timestampString = "374919830.426296"
+         timestampString = "374921639.139535"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1184"
-         endingLineNumber = "1184"
+         startingLineNumber = "1186"
+         endingLineNumber = "1186"
          landmarkName = "-showOnlineDetails:searchURL:title:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -320,11 +320,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/RulesSearcherViewController.m"
-         timestampString = "374919342.102561"
+         timestampString = "374922502.942425"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "183"
-         endingLineNumber = "183"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
          landmarkName = "-touchesBegan:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -372,12 +372,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/MainViewController.m"
-         timestampString = "374919944.955549"
+         timestampString = "374921639.139535"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1213"
-         endingLineNumber = "1213"
+         startingLineNumber = "1215"
+         endingLineNumber = "1215"
          landmarkName = "-showOnlineDetails:searchURL:title:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Akak/MainViewController.m"
+         timestampString = "374921639.139535"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1570"
+         endingLineNumber = "1570"
+         landmarkName = "-bannerView:didFailToReceiveAdWithError:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

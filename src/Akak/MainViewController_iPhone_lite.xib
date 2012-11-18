@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2177</string>
-		<string key="IBDocument.AppKitVersion">1138.32</string>
-		<string key="IBDocument.HIToolboxVersion">568.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">12C3006</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1173</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBADBannerView</string>
-			<string>IBUIView</string>
 			<string>IBProxyObject</string>
+			<string>IBUIButton</string>
 			<string>IBUILabel</string>
 			<string>IBUISearchBar</string>
 			<string>IBUITableView</string>
-			<string>IBUIButton</string>
+			<string>IBUIView</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
 			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -52,7 +52,8 @@
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<set class="NSMutableSet" key="IBADRequiredContentSizeIdentifiers">
+						<int key="IBADAdType">0</int>
+						<set key="IBADRequiredContentSizeIdentifiers">
 							<string>ADBannerContentSize320x50</string>
 							<string>ADBannerContentSize480x32</string>
 						</set>
@@ -218,6 +219,7 @@
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MCAwIDAAA</bytes>
+							<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -260,7 +262,7 @@
 						<reference key="IBUIHighlightedTitleColor" ref="215588712"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC45NjQ3MDU4ODI0IDAuODUwOTgwMzkyMiAwLjU3NjQ3MDU4ODIAA</bytes>
+							<bytes key="NSRGB">MC4yMTE3NjQ3MDU5IDAuMDkwMTk2MDc4NDMgMC4wMjc0NTA5ODAzOQA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="563489657"/>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="310648472">
@@ -279,7 +281,6 @@
 						<string key="NSFrame">{{255, 55}, {62, 34}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:225</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -289,7 +290,7 @@
 						<reference key="IBUIHighlightedTitleColor" ref="215588712"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC45NjQ3MDU4ODI0IDAuODUwOTgwMzkyMiAwLjU3NjQ3MDU4ODIAA</bytes>
+							<bytes key="NSRGB">MC4yMTE3NjQ3MDU5IDAuMDkwMTk2MDc4NDMgMC4wMjc0NTA5ODAzOQA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="563489657"/>
 						<reference key="IBUIFontDescription" ref="310648472"/>
@@ -298,7 +299,7 @@
 					<object class="IBUITableView" id="76317245">
 						<reference key="NSNextResponder" ref="883825266"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 95}, {320, 365}}</string>
+						<string key="NSFrame">{{0, 95}, {320, 313}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:418</string>
@@ -596,7 +597,9 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="buyFullVerButtonClicked:">UIButton</string>
+						<string key="onRecognize:">UIButton</string>
 						<string key="searchBarCustomCancelButtonClicked:">UIButton</string>
+						<string key="showAbout:">UIButton</string>
 						<string key="showRulesButtonClicked:">UIButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -604,8 +607,16 @@
 							<string key="name">buyFullVerButtonClicked:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
+						<object class="IBActionInfo" key="onRecognize:">
+							<string key="name">onRecognize:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBActionInfo" key="searchBarCustomCancelButtonClicked:">
 							<string key="name">searchBarCustomCancelButtonClicked:</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBActionInfo" key="showAbout:">
+							<string key="name">showAbout:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBActionInfo" key="showRulesButtonClicked:">
@@ -618,7 +629,7 @@
 						<string key="cancelButton">UIButton</string>
 						<string key="myAdView">UIView</string>
 						<string key="progressView">UIProgressView</string>
-						<string key="searchBar">UISearchBar</string>
+						<string key="recognizeButton">UIButton</string>
 						<string key="showRulesButton">UIButton</string>
 						<string key="tableView">UITableView</string>
 					</dictionary>
@@ -639,9 +650,9 @@
 							<string key="name">progressView</string>
 							<string key="candidateClassName">UIProgressView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="searchBar">
-							<string key="name">searchBar</string>
-							<string key="candidateClassName">UISearchBar</string>
+						<object class="IBToOneOutletInfo" key="recognizeButton">
+							<string key="name">recognizeButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="showRulesButton">
 							<string key="name">showRulesButton</string>
@@ -667,6 +678,6 @@
 			<string key="NS.key.0">icon_full_ru.png</string>
 			<string key="NS.object.0">{57, 57}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">1173</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>

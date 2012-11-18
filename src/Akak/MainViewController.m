@@ -1113,6 +1113,8 @@
 
 - (IBAction)showRulesButtonClicked: (UIButton*)button
 {
+    self.noNeedToShowActionSheet = YES;
+    
 #if LITE_VER != 0
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ATTENTION_TXT message:FEATURE_NOT_AVAILABLE delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     alert.tag = 1001;

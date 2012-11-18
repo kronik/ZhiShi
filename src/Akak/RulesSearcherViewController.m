@@ -173,6 +173,14 @@
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation))
+    {
+        self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 22);
+    }
+    else
+    {
+        self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
+    }
     return YES;
 }
 
