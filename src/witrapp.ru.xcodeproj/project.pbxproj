@@ -460,6 +460,10 @@
 		0254FFD81567B6A20004019C /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0254FFD21567B6A20004019C /* logo.png */; };
 		0254FFD91567B6A20004019C /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0254FFD21567B6A20004019C /* logo.png */; };
 		0254FFDA1567B6A20004019C /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0254FFD21567B6A20004019C /* logo.png */; };
+		02714553165A787D00832759 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02714552165A787D00832759 /* GameViewController.m */; };
+		02714554165A787D00832759 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02714552165A787D00832759 /* GameViewController.m */; };
+		02714555165A787D00832759 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02714552165A787D00832759 /* GameViewController.m */; };
+		02714556165A787D00832759 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02714552165A787D00832759 /* GameViewController.m */; };
 		3203FE29151B1D780048DA3C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3203FE28151B1D780048DA3C /* Security.framework */; };
 		32077D4414C80C0900AA6FB6 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 32727D7614C6B23200F60302 /* Default-Landscape~ipad.png */; };
 		32077D4514C80C0900AA6FB6 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 32727D7714C6B23200F60302 /* Default-Portrait~ipad.png */; };
@@ -1082,6 +1086,8 @@
 		0254FFCC1567B5CF0004019C /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		0254FFD11567B6A20004019C /* logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo@2x.png"; sourceTree = "<group>"; };
 		0254FFD21567B6A20004019C /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		02714551165A787D00832759 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		02714552165A787D00832759 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		02D00B1D14ABD8A700806A2D /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resources.h; sourceTree = "<group>"; };
 		3203FE28151B1D780048DA3C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		320A1D5415AD28F5001C8580 /* OtherAppsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherAppsView.xib; sourceTree = "<group>"; };
@@ -1547,6 +1553,21 @@
 			path = Rules;
 			sourceTree = "<group>";
 		};
+		02714550165A781200832759 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				024BD18E16319DA100C93EE5 /* full_dict_ru.txt */,
+				326408B514A9886D00C3A53B /* ModelRU.sqlite */,
+				32C5123D14C6874C00151879 /* ModelEN.sqlite */,
+				326408B914A9901100C3A53B /* dict_ru.txt */,
+				322079C1157708D7003214DB /* dict_ru.bin */,
+				325FCB12158AC9E300AF58AD /* dict_en.bin */,
+				32C5123C14C6872100151879 /* dict_en.txt */,
+				3264080B14A96BD200C3A53B /* Model.xcdatamodeld */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		321EA82F14A0291F002D5D23 = {
 			isa = PBXGroup;
 			children = (
@@ -1603,6 +1624,7 @@
 		321EA84414A02920002D5D23 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				02714550165A781200832759 /* Data */,
 				024F19BB1658CC11002185A9 /* Rules */,
 				02D00B1D14ABD8A700806A2D /* Resources.h */,
 				321EA84D14A02920002D5D23 /* AppDelegate.h */,
@@ -1629,20 +1651,14 @@
 				024F19A016588E88002185A9 /* RulesSearcherViewController.m */,
 				024F19AA1658AEEA002185A9 /* UITableView+Toches.h */,
 				024F19AB1658AEEA002185A9 /* UITableView+Toches.m */,
-				326408B914A9901100C3A53B /* dict_ru.txt */,
-				322079C1157708D7003214DB /* dict_ru.bin */,
-				325FCB12158AC9E300AF58AD /* dict_en.bin */,
-				32C5123C14C6872100151879 /* dict_en.txt */,
-				3264080B14A96BD200C3A53B /* Model.xcdatamodeld */,
+				02714551165A787D00832759 /* GameViewController.h */,
+				02714552165A787D00832759 /* GameViewController.m */,
 				323B304014C9016B00F72486 /* DictEntry.h */,
 				323B304114C9016B00F72486 /* DictEntry.m */,
-				326408B514A9886D00C3A53B /* ModelRU.sqlite */,
-				32C5123D14C6874C00151879 /* ModelEN.sqlite */,
 				3264081014A96CDD00C3A53B /* DictIndex.h */,
 				3264081114A96CDD00C3A53B /* DictIndex.m */,
 				32BE92DD15DA2C46008507D7 /* earcon_done_listening.wav */,
 				32BE92DE15DA2C46008507D7 /* earcon_listening.wav */,
-				024BD18E16319DA100C93EE5 /* full_dict_ru.txt */,
 				321EA84514A02920002D5D23 /* Supporting Files */,
 			);
 			name = Sources;
@@ -2847,6 +2863,7 @@
 				024BD1D31632D99300C93EE5 /* DBController.m in Sources */,
 				024F19A116588E88002185A9 /* RulesSearcherViewController.m in Sources */,
 				024F19AC1658AEEA002185A9 /* UITableView+Toches.m in Sources */,
+				02714553165A787D00832759 /* GameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2905,6 +2922,7 @@
 				024BD1D41632D99300C93EE5 /* DBController.m in Sources */,
 				024F19A216588E88002185A9 /* RulesSearcherViewController.m in Sources */,
 				024F19AD1658AEEA002185A9 /* UITableView+Toches.m in Sources */,
+				02714554165A787D00832759 /* GameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2933,6 +2951,7 @@
 				024BD1D51632D99300C93EE5 /* DBController.m in Sources */,
 				024F19A316588E88002185A9 /* RulesSearcherViewController.m in Sources */,
 				024F19AE1658AEEA002185A9 /* UITableView+Toches.m in Sources */,
+				02714555165A787D00832759 /* GameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2991,6 +3010,7 @@
 				024BD1D61632D99300C93EE5 /* DBController.m in Sources */,
 				024F19A416588E88002185A9 /* RulesSearcherViewController.m in Sources */,
 				024F19AF1658AEEA002185A9 /* UITableView+Toches.m in Sources */,
+				02714556165A787D00832759 /* GameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
