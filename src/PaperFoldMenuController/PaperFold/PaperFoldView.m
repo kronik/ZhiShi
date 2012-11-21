@@ -59,8 +59,21 @@
 	[self initialize];
 }
 
+- (void)hideLeftView:(NSNotification *)inNotification
+{
+    [self setPaperFoldState: PaperFoldStateDefault];
+}
+
+- (void)hideRightView:(NSNotification *)inNotification
+{
+    [self setPaperFoldState: PaperFoldStateDefault];
+}
+
 - (void)initialize
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideLeftView:) name: NOTIFICATION_HIDE_LEFT_VIEW object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideRightView:) name: NOTIFICATION_HIDE_RIGHT_VIEW object:nil];
+    
     _useOptimizedScreenshot = YES;
     
     [self setBackgroundColor:[UIColor darkGrayColor]];

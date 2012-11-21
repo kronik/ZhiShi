@@ -11,4 +11,7 @@
 
 @interface GameViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) NSArray *ruWords;
+- (void)addBackButton;
+
 @end

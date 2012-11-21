@@ -20,7 +20,6 @@ typedef enum gameTableMode
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic) gameTableMode tableMode;
-@property (nonatomic, strong) NSArray *ruWords;
 @property (nonatomic, strong) NSDictionary *rules;
 @property (nonatomic, strong) NSArray *task;
 @property (nonatomic) int score;
@@ -56,7 +55,7 @@ typedef enum gameTableMode
     self.maxInSequence = 0;
     self.tableMode = kModeStart;
     
-    self.task = @[[self getScoreText], @"Начать?", @"", @"Да", @"Нет"];
+    self.task = @[[self getScoreText], @"Поиграем?", @"", @"Да", @"Нет"];
     self.correctWordIndex = 3;
     
     [self.tableView reloadData];
@@ -83,6 +82,11 @@ typedef enum gameTableMode
     }
     
     return word;
+}
+
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
+    return NO;
 }
 
 - (NSString *) getIncorrectWordBasedOn: (NSString*) correctWord
@@ -167,6 +171,11 @@ typedef enum gameTableMode
     [self.tableView reloadData];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName: @"hideKeypad" object: nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -183,26 +192,30 @@ typedef enum gameTableMode
         
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG@2x.png"]];
     
+    self.rules = [NSDictionary dictionaryWithObjectsAndKeys:@"раст", @"рост", @"жи", @"жы", @"ши", @"шы", @"нн", @"н", @"ок", @"окк",  @"ак", @"акк",  @"акк", @"ак",  @"окк", @"ок",  @"лаг", @"лог",  @"лог", @"лаг",  @"рост", @"раст", @"ращ", @"рощ",  @"рощ", @"ращ", @"рос", @"рас", @"рас", @"рос",  @"лож", @"лаж", @"кас", @"кос",  @"кос", @"кас", @"гар", @"гор",  @"гор", @"гар", @"зар", @"зор", @"зор", @"зар", @"клан", @"клон", @"клон", @"клан", @"твар", @"твор", @"твор", @"твар", @"мак", @"мок", @"мок", @"мак", @"равн", @"ровн", @"ровн", @"равн", @"цы", @"ци", @"ци", @"цы", @"ше", @"шо", @"шо", @"ше", @"же", @"жо", @"жо", @"же", @"пре", @"при", @"при", @"пре", @"ива", @"ыва", @"ыва", @"ива", @"ова", @"ева", @"ева", @"ова", @"не", @"ни", @"ни", @"не", @"бир", @"бер", @"бер", @"бир", @"дер", @"дир", @"дир", @"дер", @"мир", @"мер", @"мер", @"мир", @"тир", @"тер", @"тер", @"тир", @"пир", @"пер", @"пер", @"пир", @"жиг", @"жег", @"жег", @"жиг", @"стил", @"стел", @"стел", @"стил", @"блист", @"блест",  @"блест", @"блист", @"чит", @"чет", @"чет", @"чит", @"чот", @"чет", @"чет", @"чот", @"че", @"чо", @"чо", @"че", @"рос", @"роз", @"роз", @"рос",nil];
+    
+    [self resetGame];    
+}
+
+- (void)addBackButton
+{
     UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar-right"];
     [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
     
-    UIImage* buttonImage = [UIImage imageNamed:@"back.png"];
+    UIImage* buttonImage = [UIImage imageNamed:@"back_right"];
     
     UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
     [button setImage:buttonImage forState:UIControlStateNormal];
     [button addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.leftBarButtonItem = backButton;
-    
-    self.rules = [NSDictionary dictionaryWithObjectsAndKeys:@"раст", @"рост", @"жи", @"жы", @"ши", @"шы", @"нн", @"н", @"ок", @"окк",  @"ак", @"акк",  @"акк", @"ак",  @"окк", @"ок",  @"лаг", @"лог",  @"лог", @"лаг",  @"рост", @"раст", @"ращ", @"рощ",  @"рощ", @"ращ", @"рос", @"рас", @"рас", @"рос",  @"лож", @"лаж", @"кас", @"кос",  @"кос", @"кас", @"гар", @"гор",  @"гор", @"гар", @"зар", @"зор", @"зор", @"зар", @"клан", @"клон", @"клон", @"клан", @"твар", @"твор", @"твор", @"твар", @"мак", @"мок", @"мок", @"мак", @"равн", @"ровн", @"ровн", @"равн", @"цы", @"ци", @"ци", @"цы", @"ше", @"шо", @"шо", @"ше", @"же", @"жо", @"жо", @"же", @"пре", @"при", @"при", @"пре", @"ива", @"ыва", @"ыва", @"ива", @"ова", @"ева", @"ева", @"ова", @"не", @"ни", @"ни", @"не", @"бир", @"бер", @"бер", @"бир", @"дер", @"дир", @"дир", @"дер", @"мир", @"мер", @"мер", @"мир", @"тир", @"тер", @"тер", @"тир", @"пир", @"пер", @"пер", @"пир", @"жиг", @"жег", @"жег", @"жиг", @"стил", @"стел", @"стел", @"стил", @"блист", @"блест",  @"блест", @"блист", @"чит", @"чет", @"чет", @"чит", @"чот", @"чет", @"чет", @"чот", @"че", @"чо", @"чо", @"че", @"рос", @"роз", @"роз", @"рос",nil];
-    
-    [self resetGame];    
+    self.navigationItem.rightBarButtonItem = backButton;
 }
 
 - (void)goBack
 {
     [self.navigationController popViewControllerAnimated: YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_HIDE_LEFT_VIEW object: nil];
 }
 
 #pragma mark - Table view data source
@@ -249,15 +262,15 @@ typedef enum gameTableMode
     if (indexPath.row == 1)
     {
         // Header cell
-        cell.textLabel.font = [UIFont boldSystemFontOfSize: 16.0];
+        cell.textLabel.font = [UIFont boldSystemFontOfSize: 36.0];
     }
     else if (indexPath.row == 3 && self.tableMode == kModeStart)
     {
-        cell.textLabel.font = [UIFont systemFontOfSize: 18.0];
+        cell.textLabel.font = [UIFont systemFontOfSize: 38.0];
     }
     else
     {
-        cell.textLabel.font = [UIFont systemFontOfSize: 14.0];
+        cell.textLabel.font = [UIFont systemFontOfSize: 34.0];
     }
     
     cell.textLabel.text = self.task [indexPath.row];

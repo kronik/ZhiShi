@@ -25,6 +25,7 @@
 @synthesize displayDataList = _displayDataList;
 @synthesize tableView = _tableView;
 @synthesize searchBar = _searchBar;
+@synthesize sendNotifications = _sendNotifications;
 
 - (void)viewDidLoad
 {
@@ -54,7 +55,12 @@
     
     //self.tableView.separatorColor = [UIColor clearColor];//[UIColor colorWithRed:180/255.0f green:188/255.0f blue:164/255.0f alpha:1.0];
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG@2x.png"]];
-        
+
+    [self.tableView reloadData];
+}
+
+- (void)addBackButton
+{
     UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar-right"];
     [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
     
@@ -66,13 +72,16 @@
     
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = backButton;
-
-    [self.tableView reloadData];
 }
 
 - (void)goBack
 {
     [self.navigationController popViewControllerAnimated: YES];
+    
+    if (self.sendNotifications)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_HIDE_RIGHT_VIEW object: nil];
+    }
 }
 
 #pragma mark - Table view data source
@@ -198,6 +207,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName: @"hideKeypad" object: nil];
+
     [self.searchBar becomeFirstResponder];
 }
 

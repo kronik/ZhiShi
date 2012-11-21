@@ -30,7 +30,6 @@
 @property (strong, nonatomic) NSMutableArray *oneEdits;
 @property (strong, nonatomic) NSMutableArray *twoEdits;
 @property (strong, nonatomic) NSMutableArray *threeEdits;
-@property (strong, nonatomic) NSMutableArray *dictionaryRu;
 @property (strong, nonatomic) DictSearcher *dictSearcherRu;
 @property (strong, nonatomic) NSMutableArray *dictionaryEn;
 @property (strong, nonatomic) DictSearcher *dictSearcherEn;
@@ -1123,6 +1122,8 @@
 #endif
     
     RulesSearcherViewController *searchRulesController = [[RulesSearcherViewController alloc] init];
+    searchRulesController.sendNotifications = NO;
+    [searchRulesController addBackButton];
     [self.navigationController pushViewController:searchRulesController animated:YES];//:searchRulesController animated:YES];
 
     self.navigationController.navigationBarHidden = NO;
@@ -1329,16 +1330,30 @@
     
     [self adjustAdSize];
 #endif 
-        
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideKeypad:) name:@"hideKeypad" object:nil];
+    
 	// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)hideKeypad:(NSNotification *)inNotification
+{
+    [self.searchBar resignFirstResponder];
+
+//    UIViewController *dummyController = [[UIViewController alloc] init];
+//    UIView *dummy = [[UIView alloc] initWithFrame:CGRectMake(-1, -1,1,1)];
+//    [dummyController setView:dummy];
+//    [self presentModalViewController:dummyController animated:NO];
+//    [dummyController dismissModalViewControllerAnimated:NO];
+    [self searchBarCancelButtonClicked: self.searchBar];
 }
 
 - (void)viewDidUnload
 {
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+     
     [super viewDidUnload];
-    
-//    _clickPlayer = nil;
-//    _stopRecPlayer = nil;
+
     self.hostReach = nil;
     
     // Release any retained subviews of the main view.
@@ -1347,16 +1362,19 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+
     self.navigationController.navigationBarHidden = YES;
 
     self.tableView.allowsSelection = YES;
 
     [self.searchBar becomeFirstResponder];
     
+    [self searchBarTextDidBeginEditing: self.searchBar];
+    
     self.showRulesButton.titleLabel.textColor = UIColorFromRGB(0x361707);//[UIColor brownColor];
     self.cancelButton.titleLabel.textColor = UIColorFromRGB(0x361707);//[UIColor brownColor];
     
-    [super viewWillAppear:animated];
 }
 
 - (void)deviceOrientationDidChange:(NSNotification *)notification

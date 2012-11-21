@@ -11,4 +11,8 @@
 
 @interface RulesSearcherViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+- (void)addBackButton;
+
+@property (nonatomic) BOOL sendNotifications;
+
 @end

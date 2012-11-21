@@ -69,6 +69,18 @@
 		023452D41643805A001EE347 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023452D31643805A001EE347 /* AdSupport.framework */; };
 		023452D5164380B3001EE347 /* libSpeechToText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 024BD1991632A8C000C93EE5 /* libSpeechToText.a */; };
 		023452D9164381D5001EE347 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023452D8164381D5001EE347 /* StoreKit.framework */; };
+		0244DB56165D1468009A7383 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 0244DB54165D1468009A7383 /* back_right.png */; };
+		0244DB57165D1468009A7383 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 0244DB54165D1468009A7383 /* back_right.png */; };
+		0244DB58165D1468009A7383 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 0244DB54165D1468009A7383 /* back_right.png */; };
+		0244DB59165D1468009A7383 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 0244DB54165D1468009A7383 /* back_right.png */; };
+		0244DB5A165D1468009A7383 /* back_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0244DB55165D1468009A7383 /* back_right@2x.png */; };
+		0244DB5B165D1468009A7383 /* back_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0244DB55165D1468009A7383 /* back_right@2x.png */; };
+		0244DB5C165D1468009A7383 /* back_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0244DB55165D1468009A7383 /* back_right@2x.png */; };
+		0244DB5D165D1468009A7383 /* back_right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0244DB55165D1468009A7383 /* back_right@2x.png */; };
+		0244DB60165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */; };
+		0244DB61165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */; };
+		0244DB62165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */; };
+		0244DB63165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */; };
 		024A425315ACED030047D18F /* OtherAppsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024A425215ACED030047D18F /* OtherAppsViewController.m */; };
 		024A425415ACED030047D18F /* OtherAppsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024A425215ACED030047D18F /* OtherAppsViewController.m */; };
 		024A425515ACED030047D18F /* OtherAppsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024A425215ACED030047D18F /* OtherAppsViewController.m */; };
@@ -1046,6 +1058,10 @@
 		021C7BC7165BD28D00A48648 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		023452D31643805A001EE347 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		023452D8164381D5001EE347 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0244DB54165D1468009A7383 /* back_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_right.png; sourceTree = "<group>"; };
+		0244DB55165D1468009A7383 /* back_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_right@2x.png"; sourceTree = "<group>"; };
+		0244DB5E165D2625009A7383 /* UINavigationController+Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Keyboard.h"; sourceTree = "<group>"; };
+		0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Keyboard.m"; sourceTree = "<group>"; };
 		024A425115ACED030047D18F /* OtherAppsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherAppsViewController.h; sourceTree = "<group>"; };
 		024A425215ACED030047D18F /* OtherAppsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherAppsViewController.m; sourceTree = "<group>"; };
 		024A425715ACED270047D18F /* AppDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDescription.h; sourceTree = "<group>"; };
@@ -1795,6 +1811,8 @@
 				32BE92DD15DA2C46008507D7 /* earcon_done_listening.wav */,
 				32BE92DE15DA2C46008507D7 /* earcon_listening.wav */,
 				321EA84514A02920002D5D23 /* Supporting Files */,
+				0244DB5E165D2625009A7383 /* UINavigationController+Keyboard.h */,
+				0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */,
 			);
 			name = Sources;
 			path = Akak;
@@ -1823,6 +1841,8 @@
 				024BD20516343C7100C93EE5 /* Default-568h@2x.png */,
 				328DEA0315AD2F1F00A42906 /* back.png */,
 				328DEA0415AD2F1F00A42906 /* back@2x.png */,
+				0244DB54165D1468009A7383 /* back_right.png */,
+				0244DB55165D1468009A7383 /* back_right@2x.png */,
 				024A427715ACEE3E0047D18F /* ifeelgood.png */,
 				320A1D5D15AD2952001C8580 /* button-blue.png */,
 				320A1D5E15AD2952001C8580 /* button-blue@2x.png */,
@@ -2427,6 +2447,8 @@
 				021C7BA3165BD26B00A48648 /* PaperFoldResources.bundle in Resources */,
 				021C7BAF165BD26B00A48648 /* swipe_guide.psd in Resources */,
 				021C7BB3165BD26B00A48648 /* swipe_guide2.psd in Resources */,
+				0244DB56165D1468009A7383 /* back_right.png in Resources */,
+				0244DB5A165D1468009A7383 /* back_right@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2616,6 +2638,8 @@
 				021C7BA4165BD26B00A48648 /* PaperFoldResources.bundle in Resources */,
 				021C7BB0165BD26B00A48648 /* swipe_guide.psd in Resources */,
 				021C7BB4165BD26B00A48648 /* swipe_guide2.psd in Resources */,
+				0244DB57165D1468009A7383 /* back_right.png in Resources */,
+				0244DB5B165D1468009A7383 /* back_right@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2802,6 +2826,8 @@
 				021C7BA5165BD26B00A48648 /* PaperFoldResources.bundle in Resources */,
 				021C7BB1165BD26B00A48648 /* swipe_guide.psd in Resources */,
 				021C7BB5165BD26B00A48648 /* swipe_guide2.psd in Resources */,
+				0244DB58165D1468009A7383 /* back_right.png in Resources */,
+				0244DB5C165D1468009A7383 /* back_right@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2986,6 +3012,8 @@
 				021C7BA6165BD26B00A48648 /* PaperFoldResources.bundle in Resources */,
 				021C7BB2165BD26B00A48648 /* swipe_guide.psd in Resources */,
 				021C7BB6165BD26B00A48648 /* swipe_guide2.psd in Resources */,
+				0244DB59165D1468009A7383 /* back_right.png in Resources */,
+				0244DB5D165D1468009A7383 /* back_right@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3028,6 +3056,7 @@
 				021C7BBB165BD26B00A48648 /* TouchThroughUIView.m in Sources */,
 				021C7BBF165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
 				021C7BC3165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
+				0244DB60165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3097,6 +3126,7 @@
 				021C7BBC165BD26B00A48648 /* TouchThroughUIView.m in Sources */,
 				021C7BC0165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
 				021C7BC4165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
+				0244DB61165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3136,6 +3166,7 @@
 				021C7BBD165BD26B00A48648 /* TouchThroughUIView.m in Sources */,
 				021C7BC1165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
 				021C7BC5165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
+				0244DB62165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3205,6 +3236,7 @@
 				021C7BBE165BD26B00A48648 /* TouchThroughUIView.m in Sources */,
 				021C7BC2165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
 				021C7BC6165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
+				0244DB63165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

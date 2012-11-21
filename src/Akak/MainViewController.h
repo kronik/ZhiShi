@@ -43,6 +43,7 @@
 @property (assign,nonatomic) IBOutlet UIButton *cancelButton;
 @property (assign,nonatomic) IBOutlet UIButton *showRulesButton;
 @property (assign,nonatomic) IBOutlet UIButton *recognizeButton;
+@property (strong, nonatomic) NSMutableArray *dictionaryRu;
 
 #ifdef LITE_VERSION
 @property (strong, nonatomic) AdWhirlView *adView;
