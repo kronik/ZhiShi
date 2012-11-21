@@ -185,6 +185,7 @@
 						<string key="NSFrame">{{300, 436}, {18, 19}}</string>
 						<reference key="NSSuperview" ref="883825266"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -458,6 +459,7 @@
 						<string key="myAdView">UIView</string>
 						<string key="progressView">UIProgressView</string>
 						<string key="recognizeButton">UIButton</string>
+						<string key="searchBar">UISearchBar</string>
 						<string key="showRulesButton">UIButton</string>
 						<string key="tableView">UITableView</string>
 					</dictionary>
@@ -481,6 +483,10 @@
 						<object class="IBToOneOutletInfo" key="recognizeButton">
 							<string key="name">recognizeButton</string>
 							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchBar">
+							<string key="name">searchBar</string>
+							<string key="candidateClassName">UISearchBar</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="showRulesButton">
 							<string key="name">showRulesButton</string>

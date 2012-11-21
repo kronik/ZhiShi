@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "iRate.h"
 #import "Resources.h"
+#import "GameViewController.h"
 
 @implementation AppDelegate
 
@@ -61,16 +62,19 @@
     self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController_iPhone_lite" bundle:nil];
 #endif
     
-    UINavigationController *navig = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
-
-    
-    
-    self.window.rootViewController = navig;
-    
-//    self.mainViewController.managedObjectContextRu = self.managedObjectContextRu;
-//    self.mainViewController.managedObjectContextEn = self.managedObjectContextEn;
-
     [self.mainViewController startToBuildIndex];
+
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
+    PaperFoldNavigationController *paperFoldNavController = [[PaperFoldNavigationController alloc] initWithRootViewController:navController];
+
+    self.window.rootViewController = paperFoldNavController;
+
+    GameViewController *leftViewController = [[GameViewController alloc] init];
+
+    UINavigationController *leftNavController = [[UINavigationController alloc] initWithRootViewController:leftViewController];
+    [leftNavController setNavigationBarHidden:YES];
+    [paperFoldNavController setLeftViewController:leftNavController width: 310];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

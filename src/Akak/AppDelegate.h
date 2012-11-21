@@ -7,23 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PaperFoldNavigationController.h"
 
 @class MainViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-//@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContextRu;
-//@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContextEn;
-//
-//@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModelRu;
-//@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinatorRu;
-//
-//@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModelEn;
-//@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinatorEn;
-//
-//- (void)saveContext;
 
 - (NSURL *)applicationDocumentsDirectory;
 
