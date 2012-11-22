@@ -23,7 +23,7 @@
 
 @property (strong, nonatomic) MainViewController *mainViewController;
 
-@property (retain) UIAcceleration* lastAcceleration;
+@property (strong, nonatomic) UIAcceleration* lastAcceleration;
 
 + (AppDelegate *)appDelegate;
 

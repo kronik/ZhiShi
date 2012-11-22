@@ -165,6 +165,8 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    [UIAccelerometer sharedAccelerometer].delegate = nil;
+
     /*
      Called when the application is about to terminate.
      Save data if appropriate.
