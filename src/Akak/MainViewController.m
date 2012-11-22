@@ -12,6 +12,7 @@
 #import "Resources.h"
 #import "AdWhirlView.h"
 #import "RulesSearcherViewController.h"
+#import "GameViewController.h"
 
 #if LITE_VER == 0
 
@@ -1331,9 +1332,23 @@
     [self adjustAdSize];
 #endif 
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideKeypad:) name:@"hideKeypad" object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideKeypad:) name:NOTIFICATION_REQUEST_TO_HIDE_KEYPAD object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shakeDetected:) name:NOTIFICATION_SHAKE_DETECTED object:nil];
+
 	// Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)shakeDetected:(NSNotification *)inNotification
+{
+    if (self.view.isHidden == NO)
+    {
+        GameViewController *gameController = [[GameViewController alloc] init];
+        gameController.ruWords = self.dictionaryRu;
+        [gameController addBackButton];
+        
+        [self.navigationController pushViewController:gameController animated:YES];
+        self.navigationController.navigationBarHidden = NO;
+    }
 }
 
 - (void)hideKeypad:(NSNotification *)inNotification
@@ -1440,9 +1455,12 @@
             NSLog(@"Dict words count: %d", _dictionary.count);
             NSLog(@"New dict.bin: %@", dictFile);
             
-            [_dictionary writeToFile:dictFile atomically:YES];                
+            [_dictionary writeToFile:dictFile atomically:YES];
             */
             _dictionaryRu = [NSMutableArray arrayWithContentsOfFile:filePathRu];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_DICTIONARY_READY object: self.dictionaryRu];
+            
             _dictionaryEn = [NSMutableArray arrayWithContentsOfFile:filePathEn];
 
             //}

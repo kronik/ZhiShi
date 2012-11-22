@@ -17,6 +17,9 @@
 
 #define NOTIFICATION_HIDE_LEFT_VIEW @"NOTIFICATION_HIDE_LEFT_VIEW"
 #define NOTIFICATION_HIDE_RIGHT_VIEW @"NOTIFICATION_HIDE_RIGHT_VIEW"
+#define NOTIFICATION_SHAKE_DETECTED @"NOTIFICATION_SHAKE_DETECTED"
+#define NOTIFICATION_REQUEST_TO_HIDE_KEYPAD @"NOTIFICATION_REQUEST_TO_HIDE_KEYPAD"
+#define NOTIFICATION_DICTIONARY_READY @"NOTIFICATION_DICTIONARY_READY"
 
 #define ApplicationDelegate                 ((MyAppDelegate *)[[UIApplication sharedApplication] delegate])
 #define UserDefaults                        [NSUserDefaults standardUserDefaults]

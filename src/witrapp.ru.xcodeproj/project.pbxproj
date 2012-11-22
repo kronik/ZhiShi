@@ -81,6 +81,7 @@
 		0244DB61165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */; };
 		0244DB62165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */; };
 		0244DB63165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */; };
+		0244DB7B165DB57F009A7383 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0244DB7A165DB57F009A7383 /* Accelerate.framework */; };
 		024A425315ACED030047D18F /* OtherAppsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024A425215ACED030047D18F /* OtherAppsViewController.m */; };
 		024A425415ACED030047D18F /* OtherAppsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024A425215ACED030047D18F /* OtherAppsViewController.m */; };
 		024A425515ACED030047D18F /* OtherAppsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 024A425215ACED030047D18F /* OtherAppsViewController.m */; };
@@ -1062,6 +1063,7 @@
 		0244DB55165D1468009A7383 /* back_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_right@2x.png"; sourceTree = "<group>"; };
 		0244DB5E165D2625009A7383 /* UINavigationController+Keyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Keyboard.h"; sourceTree = "<group>"; };
 		0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Keyboard.m"; sourceTree = "<group>"; };
+		0244DB7A165DB57F009A7383 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		024A425115ACED030047D18F /* OtherAppsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherAppsViewController.h; sourceTree = "<group>"; };
 		024A425215ACED030047D18F /* OtherAppsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherAppsViewController.m; sourceTree = "<group>"; };
 		024A425715ACED270047D18F /* AppDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDescription.h; sourceTree = "<group>"; };
@@ -1434,6 +1436,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0244DB7B165DB57F009A7383 /* Accelerate.framework in Frameworks */,
 				021C7BC8165BD28D00A48648 /* QuartzCore.framework in Frameworks */,
 				024BD1AE1632CEC300C93EE5 /* libsqlite3.0.dylib in Frameworks */,
 				024BD19C1632A8D800C93EE5 /* libSpeechToText.a in Frameworks */,
@@ -1748,6 +1751,7 @@
 		321EA83D14A02920002D5D23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0244DB7A165DB57F009A7383 /* Accelerate.framework */,
 				021C7BC7165BD28D00A48648 /* QuartzCore.framework */,
 				023452D8164381D5001EE347 /* StoreKit.framework */,
 				023452D31643805A001EE347 /* AdSupport.framework */,

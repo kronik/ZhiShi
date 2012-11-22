@@ -11,13 +11,19 @@
 
 @class MainViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UIAccelerometerDelegate>
+{
+	BOOL histeresisExcited;
+	UIAcceleration* lastAcceleration;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 
 - (NSURL *)applicationDocumentsDirectory;
 
 @property (strong, nonatomic) MainViewController *mainViewController;
+
+@property (retain) UIAcceleration* lastAcceleration;
 
 + (AppDelegate *)appDelegate;
 

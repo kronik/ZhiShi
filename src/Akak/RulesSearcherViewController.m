@@ -207,7 +207,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName: @"hideKeypad" object: nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_REQUEST_TO_HIDE_KEYPAD object: nil];
 
     [self.searchBar becomeFirstResponder];
 }

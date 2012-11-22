@@ -14,7 +14,22 @@
 #import "GameViewController.h"
 #import "RulesSearcherViewController.h"
 
+static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* current, double threshold)
+{
+	double
+    deltaX = fabs(last.x - current.x),
+    deltaY = fabs(last.y - current.y),
+    deltaZ = fabs(last.z - current.z);
+    
+	return
+    (deltaX > threshold && deltaY > threshold) ||
+    (deltaX > threshold && deltaZ > threshold) ||
+    (deltaY > threshold && deltaZ > threshold);
+}
+
 @implementation AppDelegate
+
+@synthesize lastAcceleration = _lastAcceleration;
 
 @synthesize window = _window;
 //@synthesize managedObjectContextRu = __managedObjectContextRu;
@@ -49,8 +64,30 @@
 }
 #endif
 
+- (void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+    
+	if (self.lastAcceleration)
+    {
+		if (!histeresisExcited && L0AccelerationIsShaking(self.lastAcceleration, acceleration, 0.7))
+        {
+			histeresisExcited = YES;
+            
+			/* SHAKE DETECTED. DO HERE WHAT YOU WANT. */
+            [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_SHAKE_DETECTED object: nil];
+		}
+        else if (histeresisExcited && !L0AccelerationIsShaking(self.lastAcceleration, acceleration, 0.2))
+        {
+			histeresisExcited = NO;
+		}
+	}
+    
+	self.lastAcceleration = acceleration;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [UIAccelerometer sharedAccelerometer].delegate = self;
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"ipad-menubar-right"] forBarMetrics:UIBarMetricsDefault];

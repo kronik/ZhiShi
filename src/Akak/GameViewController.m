@@ -10,6 +10,7 @@
 
 typedef enum gameTableMode
 {
+    kModeInit,
     kModeStart,
     kModeGameRu,
     kModeGameEn,
@@ -53,10 +54,21 @@ typedef enum gameTableMode
     self.correctWordIndex = 0;
     self.inSequence = 0;
     self.maxInSequence = 0;
-    self.tableMode = kModeStart;
     
-    self.task = @[[self getScoreText], @"Поиграем?", @"", @"Да", @"Нет"];
-    self.correctWordIndex = 3;
+    if (self.ruWords != nil && self.ruWords.count > 0)
+    {
+        self.tableMode = kModeStart;
+        
+        self.task = @[[self getScoreText], @"Поиграем?", @"", @"Да", @"Нет"];
+        self.correctWordIndex = 3;
+    }
+    else
+    {
+        self.tableMode = kModeInit;
+        
+        self.task = @[@"", @"", @"", @"Загрузка...", @""];
+        self.correctWordIndex = 100;
+    }
     
     [self.tableView reloadData];
 }
@@ -173,11 +185,13 @@ typedef enum gameTableMode
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName: @"hideKeypad" object: nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_REQUEST_TO_HIDE_KEYPAD object: nil];
 }
 
 - (void)viewDidLoad
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dictionaryReady:) name:NOTIFICATION_DICTIONARY_READY object:nil];
+
     [super viewDidLoad];
     
     self.tableView = [[MYTableView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style: UITableViewStylePlain];
@@ -194,7 +208,24 @@ typedef enum gameTableMode
     
     self.rules = [NSDictionary dictionaryWithObjectsAndKeys:@"раст", @"рост", @"жи", @"жы", @"ши", @"шы", @"нн", @"н", @"ок", @"окк",  @"ак", @"акк",  @"акк", @"ак",  @"окк", @"ок",  @"лаг", @"лог",  @"лог", @"лаг",  @"рост", @"раст", @"ращ", @"рощ",  @"рощ", @"ращ", @"рос", @"рас", @"рас", @"рос",  @"лож", @"лаж", @"кас", @"кос",  @"кос", @"кас", @"гар", @"гор",  @"гор", @"гар", @"зар", @"зор", @"зор", @"зар", @"клан", @"клон", @"клон", @"клан", @"твар", @"твор", @"твор", @"твар", @"мак", @"мок", @"мок", @"мак", @"равн", @"ровн", @"ровн", @"равн", @"цы", @"ци", @"ци", @"цы", @"ше", @"шо", @"шо", @"ше", @"же", @"жо", @"жо", @"же", @"пре", @"при", @"при", @"пре", @"ива", @"ыва", @"ыва", @"ива", @"ова", @"ева", @"ева", @"ова", @"не", @"ни", @"ни", @"не", @"бир", @"бер", @"бер", @"бир", @"дер", @"дир", @"дир", @"дер", @"мир", @"мер", @"мер", @"мир", @"тир", @"тер", @"тер", @"тир", @"пир", @"пер", @"пер", @"пир", @"жиг", @"жег", @"жег", @"жиг", @"стил", @"стел", @"стел", @"стил", @"блист", @"блест",  @"блест", @"блист", @"чит", @"чет", @"чет", @"чит", @"чот", @"чет", @"чет", @"чот", @"че", @"чо", @"чо", @"че", @"рос", @"роз", @"роз", @"рос",nil];
     
-    [self resetGame];    
+    [self resetGame];
+}
+
+- (void)dictionaryReady:(NSNotification *)inNotification
+{
+    NSArray *notificationData = (NSArray *)inNotification.object;
+    
+    if (notificationData != nil)
+    {
+        self.ruWords = notificationData;
+    
+        self.tableMode = kModeStart;
+
+        self.task = @[[self getScoreText], @"Поиграем?", @"", @"Да", @"Нет"];
+        self.correctWordIndex = 3;
+        
+        [self.tableView reloadData];
+    }
 }
 
 - (void)addBackButton
@@ -202,14 +233,14 @@ typedef enum gameTableMode
     UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar-right"];
     [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
     
-    UIImage* buttonImage = [UIImage imageNamed:@"back_right"];
+    UIImage* buttonImage = [UIImage imageNamed:@"back"];
     
     UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
     [button setImage:buttonImage forState:UIControlStateNormal];
     [button addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = backButton;
+    self.navigationItem.leftBarButtonItem = backButton;
 }
 
 - (void)goBack
@@ -295,6 +326,7 @@ typedef enum gameTableMode
         else
         {
             // Quit somehow
+            [self goBack];
         }
     }
     else
@@ -320,6 +352,11 @@ typedef enum gameTableMode
         
         [self performSelector:@selector(generateNextTask) withObject:nil afterDelay:2];
     }
+}
+
+- (float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
 }
 
 - (void)showCorrectWord
