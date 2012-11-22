@@ -50,6 +50,8 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (strong, nonatomic) SpeechToTextModule* STTConroller;
 @property (strong, nonatomic) Reachability* hostReach;
+@property (nonatomic) BOOL isVisible;
+
 //@property (nonatomic, strong) AVAudioPlayer *clickPlayer;
 //@property (nonatomic, strong) AVAudioPlayer *stopRecPlayer;
 
@@ -107,6 +109,7 @@
 @synthesize timer = _timer;
 @synthesize STTConroller = _STTConroller;
 @synthesize hostReach = _hostReach;
+@synthesize isVisible = _isVisible;
 //@synthesize clickPlayer = _clickPlayer;
 //@synthesize stopRecPlayer = _stopRecPlayer;
 
@@ -1340,7 +1343,7 @@
 
 - (void)shakeDetected:(NSNotification *)inNotification
 {
-    if (self.view.isHidden == NO)
+    if (self.isVisible == YES)
     {
         GameViewController *gameController = [[GameViewController alloc] init];
         gameController.ruWords = self.dictionaryRu;
@@ -1390,6 +1393,7 @@
     self.showRulesButton.titleLabel.textColor = UIColorFromRGB(0x361707);//[UIColor brownColor];
     self.cancelButton.titleLabel.textColor = UIColorFromRGB(0x361707);//[UIColor brownColor];
     
+    self.isVisible = YES;
 }
 
 - (void)deviceOrientationDidChange:(NSNotification *)notification
@@ -1551,6 +1555,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
+    
+    self.isVisible = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated

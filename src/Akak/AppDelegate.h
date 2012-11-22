@@ -11,7 +11,7 @@
 
 @class MainViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UIAccelerometerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
 	BOOL histeresisExcited;
 	UIAcceleration* lastAcceleration;
