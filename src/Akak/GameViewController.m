@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "MBProgressHUD.h"
 
 #define TESTS_IN_SESSION 5
 
@@ -34,6 +35,7 @@ typedef enum gameTableMode
 @property (nonatomic) int maxInSequence;
 @property (strong, nonatomic) NSArray *yesSounds;
 @property (strong, nonatomic) NSArray *noSounds;
+@property (strong, nonatomic) MBProgressHUD *hud;
 
 @end
 
@@ -52,6 +54,7 @@ typedef enum gameTableMode
 @synthesize maxInSequence = _maxInSequence;
 @synthesize yesSounds = _yesSounds;
 @synthesize noSounds = _noSounds;
+@synthesize hud = _hud;
 
 - (id) init
 {
@@ -64,15 +67,26 @@ typedef enum gameTableMode
     return self;
 }
 
-- (void)playBgSound: (NSString*)soundFile
+- (void)playSound: (NSString*)soundFile
 {
+    NSArray *tokens = [soundFile componentsSeparatedByString:@"."];
+    
+    SystemSoundID soundID;
+    NSString *path = [[NSBundle mainBundle] pathForResource: tokens[0] ofType:tokens[1]];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundID);
+    AudioServicesPlaySystemSound(soundID);
+    AudioServicesDisposeSystemSoundID(soundID);    
+}
+
+- (void)playBgSound: (NSString*)soundFile
+{    
     NSError *error = nil;
     NSString *path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], soundFile];
     NSURL *url = [NSURL fileURLWithPath:path];
     
     if( [[NSFileManager defaultManager] fileExistsAtPath: path] == NO)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:[NSString stringWithFormat: @"Нет файла: %@", path] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:[NSString stringWithFormat: @"Нет файла: %@", soundFile] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         
         return;
@@ -99,6 +113,8 @@ typedef enum gameTableMode
 
 -(void)playNoSound
 {
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+
     int idx = arc4random() % self.noSounds.count;
     [self playBgSound:[self.noSounds objectAtIndex:idx]];
 }
@@ -158,8 +174,18 @@ typedef enum gameTableMode
     {
         self.tableMode = kModeInit;
         
-        self.task = @[@"", @"", @"Загрузка...", @"", @""];
+        self.task = @[@""];
         self.correctWordIndex = 100;
+        
+        self.hud = [[MBProgressHUD alloc] initWithView:self.tableView];
+        self.hud.removeFromSuperViewOnHide = YES;
+        self.hud.labelText = @"Подождите";
+        self.hud.detailsLabelText = @"Идет загрузка словаря...";
+        self.hud.alpha = 0.7;
+        
+        [self.tableView addSubview: self.hud];
+
+        [self.hud show: YES];
     }
     
     [self.tableView reloadData];
@@ -168,10 +194,8 @@ typedef enum gameTableMode
 - (void)showScore
 {
     self.tableMode = kModeScore;
-    self.task = @[@"Итого:", [NSString stringWithFormat: @"Слов: %d", self.totalPassed],
-                             [NSString stringWithFormat: @"Правильно: %d", self.score],
-                             [NSString stringWithFormat: @"Ошибок: %d", self.errors], @"", @"Начать заново"];
-    self.correctWordIndex = 5;
+    self.task = @[@"Итого:", @"Слов:", @"Ошибок:", @"Правильно:", @"Правильно подряд:", @"", @"Начать заново"];
+    self.correctWordIndex = 6;
 
     [self.tableView reloadData];
 }
@@ -255,12 +279,14 @@ typedef enum gameTableMode
     NSString *baseWord = nil;
     NSString *firstIncorrect = nil;
     NSString *secondIncorrect = nil;
+    //NSString *thirdIncorrect = nil;
     
     while (baseWord == nil || firstIncorrect == nil || secondIncorrect == nil || ([secondIncorrect isEqualToString:firstIncorrect]))
     {
         baseWord = [self getNextWord];
         firstIncorrect = [self getIncorrectWordBasedOn: baseWord];
         secondIncorrect = [self getIncorrectWordBasedOn: baseWord];
+        //thirdIncorrect = [self getIncorrectWordBasedOn: baseWord];
     }
     
     int permut = arc4random() % 3;
@@ -268,17 +294,21 @@ typedef enum gameTableMode
     switch (permut)
     {
         case 0:
-            self.task = @[@"", @"Выбери правильный вариант:", baseWord, firstIncorrect, secondIncorrect];
-            self.correctWordIndex = 2;
-            break;
-        case 1:
-            self.task = @[@"", @"Выбери правильный вариант:", firstIncorrect, baseWord, secondIncorrect];
+            self.task = @[@"", @"Выбери правильный вариант:", @"", baseWord, firstIncorrect, secondIncorrect];
             self.correctWordIndex = 3;
             break;
-        case 2:
-            self.task = @[@"", @"Выбери правильный вариант:", firstIncorrect, secondIncorrect, baseWord];
+        case 1:
+            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, baseWord, secondIncorrect];
             self.correctWordIndex = 4;
             break;
+        case 2:
+            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, baseWord];
+            self.correctWordIndex = 5;
+            break;
+//        case 3:
+//            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, thirdIncorrect, baseWord];
+//            self.correctWordIndex = 6;
+//            break;
             
         default:
             break;
@@ -310,7 +340,7 @@ typedef enum gameTableMode
         
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG@2x.png"]];
     
-    self.rules = [NSDictionary dictionaryWithObjectsAndKeys:@"раст", @"рост", @"жы", @"жи", @"шы", @"ши", @"н", @"нн", @"ок", @"окк",  @"ак", @"акк",  @"акк", @"ак",  @"окк", @"ок",  @"лаг", @"лог",  @"лог", @"лаг",  @"рост", @"раст", @"ращ", @"рощ",  @"рощ", @"ращ", @"рос", @"рас", @"рас", @"рос",  @"лож", @"лаж", @"кас", @"кос",  @"кос", @"кас", @"гар", @"гор",  @"гор", @"гар", @"зар", @"зор", @"зор", @"зар", @"клан", @"клон", @"клон", @"клан", @"твар", @"твор", @"твор", @"твар", @"мак", @"мок", @"мок", @"мак", @"равн", @"ровн", @"ровн", @"равн", @"цы", @"ци", @"ци", @"цы", @"ше", @"шо", @"шо", @"ше", @"же", @"жо", @"жо", @"же", @"пре", @"при", @"при", @"пре", @"ива", @"ыва", @"ыва", @"ива", @"ова", @"ева", @"ева", @"ова", @"не", @"ни", @"ни", @"не", @"бир", @"бер", @"бер", @"бир", @"дер", @"дир", @"дир", @"дер", @"мир", @"мер", @"мер", @"мир", @"тир", @"тер", @"тер", @"тир", @"пир", @"пер", @"пер", @"пир", @"жиг", @"жег", @"жег", @"жиг", @"стил", @"стел", @"стел", @"стил", @"блист", @"блест",  @"блест", @"блист", @"чит", @"чет", @"чет", @"чит", @"чот", @"чет", @"чет", @"чот", @"че", @"чо", @"чо", @"че", @"рос", @"роз", @"роз", @"рос",nil];
+    self.rules = [NSDictionary dictionaryWithObjectsAndKeys:@"раст", @"рост", @"жы", @"жи", @"шы", @"ши", @"н", @"нн", @"ок", @"окк",  @"ак", @"акк",  @"акк", @"ак",  @"окк", @"ок",  @"лаг", @"лог",  @"лог", @"лаг",  @"рост", @"раст", @"ращ", @"рощ",  @"рощ", @"ращ", @"рос", @"рас", @"рас", @"рос",  @"лож", @"лаж", @"кас", @"кос",  @"кос", @"кас", @"гар", @"гор",  @"гор", @"гар", @"зар", @"зор", @"зор", @"зар", @"клан", @"клон", @"клон", @"клан", @"твар", @"твор", @"твор", @"твар", @"мак", @"мок", @"мок", @"мак", @"равн", @"ровн", @"ровн", @"равн", @"цы", @"ци", @"ци", @"цы", @"ше", @"шо", @"шо", @"ше", @"же", @"жо", @"жо", @"же", @"пре", @"при", @"при", @"пре", @"ива", @"ыва", @"ыва", @"ива", @"ова", @"ева", @"ева", @"ова", @"не", @"ни", @"ни", @"не", @"бир", @"бер", @"бер", @"бир", @"дер", @"дир", @"дир", @"дер", @"мир", @"мер", @"мер", @"мир", @"тир", @"тер", @"тер", @"тир", @"пир", @"пер", @"пер", @"пир", @"жиг", @"жег", @"жег", @"жиг", @"стил", @"стел", @"стел", @"стил", @"блист", @"блест",  @"блест", @"блист", @"чит", @"чет", @"чет", @"чит", @"чот", @"чет", @"чет", @"чот", @"че", @"чо", @"чо", @"че", @"рос", @"роз", @"роз", @"рос", @"шу", @"шю", @"жу", @"жю", nil];
         
     [self resetGame];
 }
@@ -323,6 +353,9 @@ typedef enum gameTableMode
     {
         self.ruWords = notificationData;
     
+        [self.hud hide:YES];
+
+        [self.hud removeFromSuperview];
         [self resetGame];
     }
 }
@@ -364,14 +397,29 @@ typedef enum gameTableMode
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CellForSearchTable";
+    NSString *CellIdentifier = @"CellForGameTable";
+    
+    if ((self.tableMode == kModeScore) && ((indexPath.row == 1) || (indexPath.row == 2) || (indexPath.row == 3) || (indexPath.row == 4)))
+    {
+        CellIdentifier = @"CellForScoreTable";
+    }
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        if ([CellIdentifier isEqualToString:@"CellForGameTable"])
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        else
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        }
         cell.textLabel.highlightedTextColor = [UIColor blackColor];
         cell.textLabel.textColor = [UIColor darkGrayColor];
+        cell.detailTextLabel.textColor = [UIColor darkGrayColor];
+        cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:28.0f];
         cell.textLabel.numberOfLines = 1;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
@@ -383,7 +431,7 @@ typedef enum gameTableMode
             cell.imageView.image = nil;
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
             cell.userInteractionEnabled = NO;
-            cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12.0f];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.numberOfLines = 1;
 
@@ -395,7 +443,7 @@ typedef enum gameTableMode
             
             cell.textLabel.numberOfLines = 1;
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
-            cell.textLabel.font = [UIFont boldSystemFontOfSize: 28.0];
+            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:28.0f];
             
             if (indexPath.row == 3 || indexPath.row == 4)
             {
@@ -406,11 +454,11 @@ typedef enum gameTableMode
                 
                 if (indexPath.row == 3)
                 {
-                    cell.textLabel.font = [UIFont boldSystemFontOfSize: 26.0];
+                    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:26.0f];
                 }
                 else if (indexPath.row == 4)
                 {
-                    cell.textLabel.font = [UIFont systemFontOfSize: 24.0];
+                    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:24.0f];
                 }
             }
             else
@@ -431,7 +479,7 @@ typedef enum gameTableMode
             if (indexPath.row == 1)
             {
                 // Question cell
-                cell.textLabel.font = [UIFont boldSystemFontOfSize: 26.0];
+                cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size: 26.0f];
                 cell.textLabel.numberOfLines = 2;
                 cell.imageView.image = nil;
                 cell.userInteractionEnabled = NO;
@@ -440,19 +488,20 @@ typedef enum gameTableMode
             }
             else
             {
-                cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+                cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size: 24.0f];
                 cell.textLabel.numberOfLines = 1;
                 cell.textLabel.textAlignment = NSTextAlignmentLeft;
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
-                cell.userInteractionEnabled = YES;
                 
                 if ([self.task [indexPath.row] isEqualToString:@""])
                 {
                     cell.imageView.image = nil;
+                    cell.userInteractionEnabled = NO;
                 }
                 else
                 {
                     cell.imageView.image = [UIImage imageNamed:@"point2"];
+                    cell.userInteractionEnabled = YES;
                 }
             }
             
@@ -465,22 +514,24 @@ typedef enum gameTableMode
             cell.imageView.image = nil;
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
             cell.userInteractionEnabled = NO;
-            cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.numberOfLines = 1;
-            
-            if ((indexPath.row == 0) || (indexPath.row == 5))
+            cell.textLabel.text = @"";
+            cell.imageView.image = nil;
+
+            if ((indexPath.row == 0) || (indexPath.row == 6))
             {
                 cell.imageView.image = nil;
-                cell.textLabel.font = [UIFont boldSystemFontOfSize: 28.0];
+                cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:28.0f];
                 cell.textLabel.textAlignment = NSTextAlignmentCenter;
                 
-                if (indexPath.row == 5)
+                if (indexPath.row == 6)
                 {
-                    cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+                    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
                     cell.selectionStyle = UITableViewCellSelectionStyleGray;
                     cell.userInteractionEnabled = YES;
-                    cell.imageView.image = [UIImage imageNamed:@"point2"];
+                    //cell.imageView.image = [UIImage imageNamed:@"point2"];
                 }
                 
                 cell.textLabel.text = self.task [indexPath.row];
@@ -488,19 +539,38 @@ typedef enum gameTableMode
             else
             {
                 cell.textLabel.textAlignment = NSTextAlignmentLeft;
-                cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+                cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
                 
+//                if (indexPath.row == 1)
+//                {
+//                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.totalPassed];
+//                }
+//                else if (indexPath.row == 2)
+//                {
+//                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.score];
+//                }
+//                else if (indexPath.row == 3)
+//                {
+//                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.errors];
+//                }
+                
+                cell.textLabel.text = self.task [indexPath.row];
+
                 if (indexPath.row == 1)
                 {
-                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.totalPassed];
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.totalPassed];
                 }
                 else if (indexPath.row == 2)
                 {
-                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.score];
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.errors];
                 }
                 else if (indexPath.row == 3)
                 {
-                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.errors];
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.score];
+                }
+                else if (indexPath.row == 4)
+                {
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.maxInSequence];
                 }
             }
 
@@ -537,11 +607,28 @@ typedef enum gameTableMode
     }
     else
     {
+        UITableViewCell *cell = nil;
+        
+        for (int i=0; i<self.task.count; i++)
+        {
+            cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForItem: i inSection:0]];
+            cell.userInteractionEnabled = NO;
+
+            if (cell.imageView.image != nil)
+            {
+                if (i == self.correctWordIndex)
+                {
+                    cell.imageView.image = [UIImage imageNamed:@"correct2"];
+                }
+                else
+                {
+                    cell.imageView.image = [UIImage imageNamed:@"wrong"];
+                }
+            }
+        }
+
         if (indexPath.row == self.correctWordIndex)
         {
-            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath: indexPath];
-            cell.imageView.image = [UIImage imageNamed:@"correct2"];
-
             [self playYesSound];
 
             self.score++;
@@ -554,14 +641,11 @@ typedef enum gameTableMode
             
             if (self.tableMode == kModeScore)
             {
-                [self performSelector:@selector(startNewGame) withObject:nil afterDelay:1];
+                [self startNewGame];
             }
         }
         else
         {
-            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath: indexPath];
-            cell.imageView.image = [UIImage imageNamed:@"wrong"];
-
             self.inSequence = 0;
             self.errors++;
             
@@ -575,7 +659,14 @@ typedef enum gameTableMode
 
 - (float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    if ((self.tableMode == kModeScore) && (indexPath.row > 0))
+    {
+        return 40;
+    }
+    else
+    {
+        return 60;
+    }
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

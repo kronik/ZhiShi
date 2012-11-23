@@ -13,6 +13,7 @@
 #import "Resources.h"
 #import "GameViewController.h"
 #import "RulesSearcherViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* current, double threshold)
 {
@@ -91,7 +92,7 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"ipad-menubar-right"] forBarMetrics:UIBarMetricsDefault];
-    
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], UITextAttributeTextColor, [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0, -1)], UITextAttributeTextShadowOffset, nil]];
     // Override point for customization after application launch.
     
 #if LITE_VER == 0
@@ -123,6 +124,23 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 //    UINavigationController *rightNavController = [[UINavigationController alloc] initWithRootViewController:searchRulesController];
 //    [rightNavController setNavigationBarHidden:NO];
 //    [paperFoldNavController setRightViewController:rightNavController width:ScreenWidth rightViewFoldCount:3 rightViewPullFactor:0.9];
+    
+    NSError *error = nil;
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    
+    [session setCategory: AVAudioSessionCategorySoloAmbient error: &error];
+    
+    if (error != nil)
+    {
+        NSLog(@"Failed to set category on AVAudioSession");
+    }
+    
+    BOOL active = [session setActive: YES error: nil];
+    
+    if (!active)
+    {
+        NSLog(@"Failed to set category on AVAudioSession");
+    }
     
     [self.window makeKeyAndVisible];
     return YES;

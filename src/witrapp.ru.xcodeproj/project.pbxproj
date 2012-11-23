@@ -482,6 +482,14 @@
 		02714554165A787D00832759 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02714552165A787D00832759 /* GameViewController.m */; };
 		02714555165A787D00832759 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02714552165A787D00832759 /* GameViewController.m */; };
 		02714556165A787D00832759 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02714552165A787D00832759 /* GameViewController.m */; };
+		02A948D0165FC72500C004E5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948CF165FC72500C004E5 /* MBProgressHUD.m */; };
+		02A948D1165FC72500C004E5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948CF165FC72500C004E5 /* MBProgressHUD.m */; };
+		02A948D2165FC72500C004E5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948CF165FC72500C004E5 /* MBProgressHUD.m */; };
+		02A948D3165FC72500C004E5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948CF165FC72500C004E5 /* MBProgressHUD.m */; };
+		02A948E4165FCF7D00C004E5 /* FlatPillButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948E3165FCF7D00C004E5 /* FlatPillButton.m */; };
+		02A948E5165FCF7D00C004E5 /* FlatPillButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948E3165FCF7D00C004E5 /* FlatPillButton.m */; };
+		02A948E6165FCF7D00C004E5 /* FlatPillButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948E3165FCF7D00C004E5 /* FlatPillButton.m */; };
+		02A948E7165FCF7D00C004E5 /* FlatPillButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948E3165FCF7D00C004E5 /* FlatPillButton.m */; };
 		02F1DAF2165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
 		02F1DAF3165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
 		02F1DAF4165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
@@ -1135,18 +1143,6 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		32727D1E14C6AD0700F60302 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 7;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		021C7B79165BD26B00A48648 /* FacingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacingView.h; sourceTree = "<group>"; };
 		021C7B7A165BD26B00A48648 /* FacingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacingView.m; sourceTree = "<group>"; };
@@ -1295,6 +1291,10 @@
 		0254FFCC1567B5CF0004019C /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		02714551165A787D00832759 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		02714552165A787D00832759 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		02A948CE165FC72500C004E5 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
+		02A948CF165FC72500C004E5 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
+		02A948E2165FCF7D00C004E5 /* FlatPillButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatPillButton.h; sourceTree = SOURCE_ROOT; };
+		02A948E3165FCF7D00C004E5 /* FlatPillButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatPillButton.m; sourceTree = SOURCE_ROOT; };
 		02D00B1D14ABD8A700806A2D /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resources.h; sourceTree = "<group>"; };
 		02F1DAAB165F5C26001B32D2 /* back_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_right.png; path = Images/back_right.png; sourceTree = "<group>"; };
 		02F1DAAC165F5C26001B32D2 /* back_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back_right@2x.png"; path = "Images/back_right@2x.png"; sourceTree = "<group>"; };
@@ -1970,6 +1970,10 @@
 				02714550165A781200832759 /* Data */,
 				024F19BB1658CC11002185A9 /* Rules */,
 				02D00B1D14ABD8A700806A2D /* Resources.h */,
+				02A948CE165FC72500C004E5 /* MBProgressHUD.h */,
+				02A948CF165FC72500C004E5 /* MBProgressHUD.m */,
+				02A948E2165FCF7D00C004E5 /* FlatPillButton.h */,
+				02A948E3165FCF7D00C004E5 /* FlatPillButton.m */,
 				321EA84D14A02920002D5D23 /* AppDelegate.h */,
 				321EA84E14A02920002D5D23 /* AppDelegate.m */,
 				321EA85014A02920002D5D23 /* MainViewController.h */,
@@ -2318,7 +2322,6 @@
 				321EA83614A02920002D5D23 /* Sources */,
 				321EA83714A02920002D5D23 /* Frameworks */,
 				321EA83814A02920002D5D23 /* Resources */,
-				32727D1E14C6AD0700F60302 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -3343,6 +3346,8 @@
 				021C7BBF165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
 				021C7BC3165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
 				0244DB60165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
+				02A948D0165FC72500C004E5 /* MBProgressHUD.m in Sources */,
+				02A948E4165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3413,6 +3418,8 @@
 				021C7BC0165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
 				021C7BC4165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
 				0244DB61165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
+				02A948D1165FC72500C004E5 /* MBProgressHUD.m in Sources */,
+				02A948E5165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3453,6 +3460,8 @@
 				021C7BC1165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
 				021C7BC5165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
 				0244DB62165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
+				02A948D2165FC72500C004E5 /* MBProgressHUD.m in Sources */,
+				02A948E6165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3523,6 +3532,8 @@
 				021C7BC2165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
 				021C7BC6165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
 				0244DB63165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
+				02A948D3165FC72500C004E5 /* MBProgressHUD.m in Sources */,
+				02A948E7165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
