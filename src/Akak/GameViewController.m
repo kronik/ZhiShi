@@ -7,6 +7,7 @@
 //
 
 #import "GameViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define TESTS_IN_SESSION 5
 
@@ -31,6 +32,8 @@ typedef enum gameTableMode
 @property (nonatomic) int correctWordIndex;
 @property (nonatomic) int inSequence;
 @property (nonatomic) int maxInSequence;
+@property (strong, nonatomic) NSArray *yesSounds;
+@property (strong, nonatomic) NSArray *noSounds;
 
 @end
 
@@ -47,6 +50,8 @@ typedef enum gameTableMode
 @synthesize correctWordIndex = _correctWordIndex;
 @synthesize inSequence = _inSequence;
 @synthesize maxInSequence = _maxInSequence;
+@synthesize yesSounds = _yesSounds;
+@synthesize noSounds = _noSounds;
 
 - (id) init
 {
@@ -57,6 +62,65 @@ typedef enum gameTableMode
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dictionaryReady:) name:NOTIFICATION_DICTIONARY_READY object:nil];
     }
     return self;
+}
+
+- (void)playBgSound: (NSString*)soundFile
+{
+    NSError *error = nil;
+    NSString *path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], soundFile];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    
+    if( [[NSFileManager defaultManager] fileExistsAtPath: path] == NO)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:[NSString stringWithFormat: @"Нет файла: %@", path] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        
+        return;
+    }
+        
+    AVAudioPlayer *soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    soundPlayer.numberOfLoops = 0;
+    soundPlayer.volume = 1.0;
+    
+    if (error != nil)
+    {
+        NSLog(@"%@", [error description]);
+    }
+    
+    [soundPlayer prepareToPlay];
+    [soundPlayer play];
+}
+
+-(void)playYesSound
+{
+    int idx = arc4random() % self.yesSounds.count;
+    [self playBgSound:[self.yesSounds objectAtIndex:idx]];
+}
+
+-(void)playNoSound
+{
+    int idx = arc4random() % self.noSounds.count;
+    [self playBgSound:[self.noSounds objectAtIndex:idx]];
+}
+
+-(NSArray*)yesSounds
+{
+    if (_yesSounds == nil)
+    {
+        _yesSounds = [[NSArray alloc] initWithObjects:@"да.mp3", @"здорово.mp3", @"молодец.mp3", @"отлично.mp3", @"умничка.mp3", nil];
+    }
+    
+    return _yesSounds;
+}
+
+-(NSArray*)noSounds
+{
+    if (_noSounds == nil)
+    {
+        _noSounds = [[NSArray alloc] initWithObjects:@"еще разок1.mp3", @"еще разок2.mp3", @"нееет.mp3", @"нет.mp3", @"попробуй еще раз1.mp3", @"попробуй еще раз2.mp3", @"хммм.mp3", nil];
+    }
+    
+    return _noSounds;
 }
 
 - (void)resetGame
