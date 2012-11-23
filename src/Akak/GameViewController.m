@@ -9,8 +9,9 @@
 #import "GameViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "MBProgressHUD.h"
+#import "FlatPillButton.h"
 
-#define TESTS_IN_SESSION 5
+#define TESTS_IN_SESSION 20
 
 typedef enum gameTableMode
 {
@@ -139,8 +140,13 @@ typedef enum gameTableMode
     return _noSounds;
 }
 
-- (void)startNewGame
+- (void)startNewGame: (UIView*) button
 {
+    if (button != nil)
+    {
+        [button removeFromSuperview];
+    }
+
     self.score = 0;
     self.errors = 0;
     self.totalPassed = 0;
@@ -148,6 +154,29 @@ typedef enum gameTableMode
     self.inSequence = 0;
     
     self.tableMode = kModeGameRu;
+    [self generateNextTask];
+}
+
+- (void)nextTaskButton: (UIView*) button
+{    
+    for (int i=0; i<self.task.count; i++)
+    {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForItem: i inSection:0]];
+        
+        for (UIView *subButton in cell.subviews)
+        {
+            if ([subButton isKindOfClass:[FlatPillButton class]])
+            {
+                [subButton removeFromSuperview];
+            }
+        }
+    }
+    
+    [self playYesSound];
+    
+    // Start the game
+    self.tableMode = kModeGameRu;
+    
     [self generateNextTask];
 }
 
@@ -340,7 +369,7 @@ typedef enum gameTableMode
         
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG@2x.png"]];
     
-    self.rules = [NSDictionary dictionaryWithObjectsAndKeys:@"раст", @"рост", @"жы", @"жи", @"шы", @"ши", @"н", @"нн", @"ок", @"окк",  @"ак", @"акк",  @"акк", @"ак",  @"окк", @"ок",  @"лаг", @"лог",  @"лог", @"лаг",  @"рост", @"раст", @"ращ", @"рощ",  @"рощ", @"ращ", @"рос", @"рас", @"рас", @"рос",  @"лож", @"лаж", @"кас", @"кос",  @"кос", @"кас", @"гар", @"гор",  @"гор", @"гар", @"зар", @"зор", @"зор", @"зар", @"клан", @"клон", @"клон", @"клан", @"твар", @"твор", @"твор", @"твар", @"мак", @"мок", @"мок", @"мак", @"равн", @"ровн", @"ровн", @"равн", @"цы", @"ци", @"ци", @"цы", @"ше", @"шо", @"шо", @"ше", @"же", @"жо", @"жо", @"же", @"пре", @"при", @"при", @"пре", @"ива", @"ыва", @"ыва", @"ива", @"ова", @"ева", @"ева", @"ова", @"не", @"ни", @"ни", @"не", @"бир", @"бер", @"бер", @"бир", @"дер", @"дир", @"дир", @"дер", @"мир", @"мер", @"мер", @"мир", @"тир", @"тер", @"тер", @"тир", @"пир", @"пер", @"пер", @"пир", @"жиг", @"жег", @"жег", @"жиг", @"стил", @"стел", @"стел", @"стил", @"блист", @"блест",  @"блест", @"блист", @"чит", @"чет", @"чет", @"чит", @"чот", @"чет", @"чет", @"чот", @"че", @"чо", @"чо", @"че", @"рос", @"роз", @"роз", @"рос", @"шу", @"шю", @"жу", @"жю", nil];
+    self.rules = [NSDictionary dictionaryWithObjectsAndKeys:@"раст", @"рост", @"жы", @"жи", @"шы", @"ши", @"н", @"нн", @"ок", @"окк",  @"ак", @"акк",  @"акк", @"ак",  @"окк", @"ок",  @"лаг", @"лог",  @"лог", @"лаг",  @"рост", @"раст", @"ращ", @"рощ",  @"рощ", @"ращ", @"рос", @"рас", @"рас", @"рос",  @"лож", @"лаж", @"кас", @"кос",  @"кос", @"кас", @"гар", @"гор",  @"гор", @"гар", @"зар", @"зор", @"зор", @"зар", @"клан", @"клон", @"клон", @"клан", @"твар", @"твор", @"твор", @"твар", @"мак", @"мок", @"мок", @"мак", @"равн", @"ровн", @"ровн", @"равн", @"цы", @"ци", @"ци", @"цы", @"ше", @"шо", @"шо", @"ше", @"же", @"жо", @"жо", @"же", @"пре", @"при", @"при", @"пре", @"ива", @"ыва", @"ыва", @"ива", @"ова", @"ева", @"ева", @"ова", @"не", @"ни", @"ни", @"не", @"бир", @"бер", @"бер", @"бир", @"дер", @"дир", @"дир", @"дер", @"мир", @"мер", @"мер", @"мир", @"тир", @"тер", @"тер", @"тир", @"пир", @"пер", @"пер", @"пир", @"жиг", @"жег", @"жег", @"жиг", @"стил", @"стел", @"стел", @"стил", @"блист", @"блест",  @"блест", @"блист", @"чит", @"чет", @"чет", @"чит", @"чот", @"чет", @"чет", @"чот", @"че", @"чо", @"чо", @"че", @"рос", @"роз", @"роз", @"рос", @"шу", @"шю", @"жу", @"жю", @"ания", @"анья", @"ония", @"онья", nil];
         
     [self resetGame];
 }
@@ -369,14 +398,19 @@ typedef enum gameTableMode
     
     UIButton* button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 24, 24)];
     [button setImage:buttonImage forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = backButton;
 }
 
-- (void)goBack
+- (void)goBack: (UIView *) button
 {
+    if (button != nil)
+    {
+        [button removeFromSuperview];
+    }
+    
     [self.navigationController popViewControllerAnimated: YES];
     [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_HIDE_LEFT_VIEW object: nil];
 }
@@ -452,14 +486,30 @@ typedef enum gameTableMode
                 cell.userInteractionEnabled = YES;
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
                 
+                FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(40, 5, 240, 50)];
+                button.enabled = YES;
+                
+                [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
+                [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+                
                 if (indexPath.row == 3)
                 {
                     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:26.0f];
+                    [button addTarget:self action:@selector(nextTaskButton:) forControlEvents: UIControlEventTouchUpInside];
                 }
                 else if (indexPath.row == 4)
                 {
+                    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+                    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+                    
                     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:24.0f];
+                    [button addTarget:self action:@selector(goBack:) forControlEvents: UIControlEventTouchUpInside];
                 }
+                
+                button.titleLabel.font = cell.textLabel.font;
+
+                [cell addSubview: button];
             }
             else
             {
@@ -467,10 +517,9 @@ typedef enum gameTableMode
                 cell.userInteractionEnabled = NO;
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.textLabel.numberOfLines = 2;
+                cell.textLabel.text = self.task [indexPath.row];
             }
             
-            cell.textLabel.text = self.task [indexPath.row];
-
             break;
             
         case kModeGameEn:
@@ -525,35 +574,32 @@ typedef enum gameTableMode
                 cell.imageView.image = nil;
                 cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:28.0f];
                 cell.textLabel.textAlignment = NSTextAlignmentCenter;
-                
+                cell.textLabel.text = self.task [indexPath.row];
+
                 if (indexPath.row == 6)
                 {
-                    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
-                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    cell.textLabel.text = @"";
+
+                    FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(40, 5, 240, 50)];
+                    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
+                    button.enabled = YES;
+                    
+                    [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
+                    [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
+                    [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+
+                    [button addTarget:self action:@selector(startNewGame:) forControlEvents: UIControlEventTouchUpInside];
+                    [cell addSubview: button];
+                    
+//                    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
+//                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
                     cell.userInteractionEnabled = YES;
-                    //cell.imageView.image = [UIImage imageNamed:@"point2"];
                 }
-                
-                cell.textLabel.text = self.task [indexPath.row];
             }
             else
             {
                 cell.textLabel.textAlignment = NSTextAlignmentLeft;
                 cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
-                
-//                if (indexPath.row == 1)
-//                {
-//                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.totalPassed];
-//                }
-//                else if (indexPath.row == 2)
-//                {
-//                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.score];
-//                }
-//                else if (indexPath.row == 3)
-//                {
-//                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.errors];
-//                }
-                
                 cell.textLabel.text = self.task [indexPath.row];
 
                 if (indexPath.row == 1)
@@ -602,7 +648,7 @@ typedef enum gameTableMode
         else
         {
             // Quit somehow
-            [self goBack];
+            [self goBack: nil];
         }
     }
     else
@@ -641,7 +687,7 @@ typedef enum gameTableMode
             
             if (self.tableMode == kModeScore)
             {
-                [self startNewGame];
+                [self startNewGame: nil];
             }
         }
         else
