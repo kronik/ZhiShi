@@ -268,16 +268,16 @@ typedef enum gameTableMode
     switch (permut)
     {
         case 0:
-            self.task = @[@"Выбери правильный вариант:", baseWord, firstIncorrect, secondIncorrect];
-            self.correctWordIndex = 1;
-            break;
-        case 1:
-            self.task = @[@"Выбери правильный вариант:", firstIncorrect, baseWord, secondIncorrect];
+            self.task = @[@"", @"Выбери правильный вариант:", baseWord, firstIncorrect, secondIncorrect];
             self.correctWordIndex = 2;
             break;
-        case 2:
-            self.task = @[@"Выбери правильный вариант:", firstIncorrect, secondIncorrect, baseWord];
+        case 1:
+            self.task = @[@"", @"Выбери правильный вариант:", firstIncorrect, baseWord, secondIncorrect];
             self.correctWordIndex = 3;
+            break;
+        case 2:
+            self.task = @[@"", @"Выбери правильный вариант:", firstIncorrect, secondIncorrect, baseWord];
+            self.correctWordIndex = 4;
             break;
             
         default:
@@ -301,6 +301,7 @@ typedef enum gameTableMode
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.allowsSelection = YES;
+    self.tableView.scrollEnabled = NO;
     self.tableView.separatorColor = [UIColor clearColor];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.tableView setUserInteractionEnabled:YES];
@@ -399,8 +400,8 @@ typedef enum gameTableMode
             if (indexPath.row == 3 || indexPath.row == 4)
             {
                 // YES and NO
-                cell.imageView.image = [UIImage imageNamed:@"point2"];
-                cell.userInteractionEnabled = NO;
+                cell.imageView.image = nil;
+                cell.userInteractionEnabled = YES;
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
                 
                 if (indexPath.row == 3)
@@ -409,7 +410,7 @@ typedef enum gameTableMode
                 }
                 else if (indexPath.row == 4)
                 {
-                    cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+                    cell.textLabel.font = [UIFont systemFontOfSize: 24.0];
                 }
             }
             else
@@ -427,7 +428,7 @@ typedef enum gameTableMode
         case kModeGameEn:
         case kModeGameRu:
 
-            if (indexPath.row == 0)
+            if (indexPath.row == 1)
             {
                 // Question cell
                 cell.textLabel.font = [UIFont boldSystemFontOfSize: 26.0];
@@ -441,10 +442,18 @@ typedef enum gameTableMode
             {
                 cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
                 cell.textLabel.numberOfLines = 1;
-                cell.imageView.image = [UIImage imageNamed:@"point2"];
                 cell.textLabel.textAlignment = NSTextAlignmentLeft;
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
                 cell.userInteractionEnabled = YES;
+                
+                if ([self.task [indexPath.row] isEqualToString:@""])
+                {
+                    cell.imageView.image = nil;
+                }
+                else
+                {
+                    cell.imageView.image = [UIImage imageNamed:@"point2"];
+                }
             }
             
             cell.textLabel.text = self.task [indexPath.row];
