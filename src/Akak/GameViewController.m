@@ -61,6 +61,9 @@ typedef enum gameTableMode
 
 - (void)resetGame
 {
+    self.navigationItem.title = @"Проверятор";
+    self.navigationItem.rightBarButtonItem = nil;
+
     self.score = 0;
     self.errors = 0;
     self.totalPassed = 0;
@@ -189,16 +192,16 @@ typedef enum gameTableMode
     switch (permut)
     {
         case 0:
-            self.task = @[@"", @"Выбери правильный вариант:", @"", baseWord, firstIncorrect, secondIncorrect];
-            self.correctWordIndex = 3;
+            self.task = @[@"Выбери правильный вариант:", baseWord, firstIncorrect, secondIncorrect];
+            self.correctWordIndex = 1;
             break;
         case 1:
-            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, baseWord, secondIncorrect];
-            self.correctWordIndex = 4;
+            self.task = @[@"Выбери правильный вариант:", firstIncorrect, baseWord, secondIncorrect];
+            self.correctWordIndex = 2;
             break;
         case 2:
-            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, baseWord];
-            self.correctWordIndex = 5;
+            self.task = @[@"Выбери правильный вариант:", firstIncorrect, secondIncorrect, baseWord];
+            self.correctWordIndex = 3;
             break;
             
         default:
@@ -243,12 +246,7 @@ typedef enum gameTableMode
     {
         self.ruWords = notificationData;
     
-        self.tableMode = kModeStart;
-
-        self.task = @[@"", @"Поиграем?", @"", @"Да", @"Нет"];
-        self.correctWordIndex = 3;
-        
-        [self.tableView reloadData];
+        [self resetGame];
     }
 }
 
