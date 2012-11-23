@@ -123,6 +123,18 @@ typedef enum gameTableMode
     return _noSounds;
 }
 
+- (void)startNewGame
+{
+    self.score = 0;
+    self.errors = 0;
+    self.totalPassed = 0;
+    self.correctWordIndex = 0;
+    self.inSequence = 0;
+    
+    self.tableMode = kModeGameRu;
+    [self generateNextTask];
+}
+
 - (void)resetGame
 {
     self.navigationItem.title = @"Проверятор";
@@ -364,49 +376,130 @@ typedef enum gameTableMode
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
     }
     
-    cell.imageView.image = nil;
-    
-    if (indexPath.row < 3)
+    switch (self.tableMode)
     {
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell setUserInteractionEnabled: NO];
-    }
-    else
-    {
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-        [cell setUserInteractionEnabled: YES];
-    }
-    
-    if (indexPath.row == 1)
-    {
-        // Header cell
-        cell.textLabel.font = [UIFont boldSystemFontOfSize: 26.0];
-        cell.textLabel.numberOfLines = 2;
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    }
-    else if (indexPath.row == 3 && self.tableMode == kModeStart)
-    {
-        cell.textLabel.font = [UIFont systemFontOfSize: 28.0];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    }
-    else
-    {
-        cell.textLabel.font = [UIFont systemFontOfSize: 24.0];
-        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        case kModeInit:
+            cell.imageView.image = nil;
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+            cell.userInteractionEnabled = NO;
+            cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.numberOfLines = 1;
 
-        if ((self.tableMode == kModeGameRu) && ([self.task [indexPath.row] isEqualToString:@""] == NO))
-        {
-            cell.imageView.image = [UIImage imageNamed:@"point2"];
-            cell.textLabel.textAlignment = NSTextAlignmentLeft;
-        }
+            cell.textLabel.text = self.task [indexPath.row];
+
+            break;
+        
+        case kModeStart:
+            
+            cell.textLabel.numberOfLines = 1;
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+            cell.textLabel.font = [UIFont boldSystemFontOfSize: 28.0];
+            
+            if (indexPath.row == 3 || indexPath.row == 4)
+            {
+                // YES and NO
+                cell.imageView.image = [UIImage imageNamed:@"point2"];
+                cell.userInteractionEnabled = NO;
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                
+                if (indexPath.row == 3)
+                {
+                    cell.textLabel.font = [UIFont boldSystemFontOfSize: 26.0];
+                }
+                else if (indexPath.row == 4)
+                {
+                    cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+                }
+            }
+            else
+            {
+                cell.imageView.image = nil;
+                cell.userInteractionEnabled = NO;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.textLabel.numberOfLines = 2;
+            }
+            
+            cell.textLabel.text = self.task [indexPath.row];
+
+            break;
+            
+        case kModeGameEn:
+        case kModeGameRu:
+
+            if (indexPath.row == 0)
+            {
+                // Question cell
+                cell.textLabel.font = [UIFont boldSystemFontOfSize: 26.0];
+                cell.textLabel.numberOfLines = 2;
+                cell.imageView.image = nil;
+                cell.userInteractionEnabled = NO;
+                cell.textLabel.textAlignment = NSTextAlignmentCenter;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            else
+            {
+                cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+                cell.textLabel.numberOfLines = 1;
+                cell.imageView.image = [UIImage imageNamed:@"point2"];
+                cell.textLabel.textAlignment = NSTextAlignmentLeft;
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                cell.userInteractionEnabled = YES;
+            }
+            
+            cell.textLabel.text = self.task [indexPath.row];
+
+            break;
+            
+        case kModeScore:
+            
+            cell.imageView.image = nil;
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+            cell.userInteractionEnabled = NO;
+            cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.numberOfLines = 1;
+            
+            if ((indexPath.row == 0) || (indexPath.row == 5))
+            {
+                cell.imageView.image = nil;
+                cell.textLabel.font = [UIFont boldSystemFontOfSize: 28.0];
+                cell.textLabel.textAlignment = NSTextAlignmentCenter;
+                
+                if (indexPath.row == 5)
+                {
+                    cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    cell.userInteractionEnabled = YES;
+                    cell.imageView.image = [UIImage imageNamed:@"point2"];
+                }
+                
+                cell.textLabel.text = self.task [indexPath.row];
+            }
+            else
+            {
+                cell.textLabel.textAlignment = NSTextAlignmentLeft;
+                cell.textLabel.font = [UIFont boldSystemFontOfSize: 24.0];
+                
+                if (indexPath.row == 1)
+                {
+                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.totalPassed];
+                }
+                else if (indexPath.row == 2)
+                {
+                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.score];
+                }
+                else if (indexPath.row == 3)
+                {
+                    cell.textLabel.text = [NSString stringWithFormat: self.task [indexPath.row], self.errors];
+                }
+            }
+
+            break;
+            
+        default:
+            break;
     }
-    
-    if ((self.tableMode == kModeScore) && (indexPath.row == 1 || indexPath.row == 2 || indexPath.row == 3))
-    {
-        cell.textLabel.textAlignment = NSTextAlignmentLeft;
-    }
-    
-    cell.textLabel.text = self.task [indexPath.row];
     
     return cell;
 }
@@ -421,6 +514,8 @@ typedef enum gameTableMode
     {
         if (indexPath.row == self.correctWordIndex)
         {
+            [self playYesSound];
+            
             // Start the game
             self.tableMode = kModeGameRu;
             [self generateNextTask];
@@ -433,16 +528,24 @@ typedef enum gameTableMode
     }
     else
     {
-        [self showCorrectWord];
-
         if (indexPath.row == self.correctWordIndex)
         {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath: indexPath];
+            cell.imageView.image = [UIImage imageNamed:@"correct2"];
+
+            [self playYesSound];
+
             self.score++;
             self.inSequence++;
             
             if (self.inSequence > self.maxInSequence)
             {
                 self.maxInSequence = self.inSequence;
+            }
+            
+            if (self.tableMode == kModeScore)
+            {
+                [self performSelector:@selector(startNewGame) withObject:nil afterDelay:1];
             }
         }
         else
@@ -452,6 +555,8 @@ typedef enum gameTableMode
 
             self.inSequence = 0;
             self.errors++;
+            
+            [self playNoSound];
         }
         self.totalPassed++;
         
@@ -462,13 +567,6 @@ typedef enum gameTableMode
 - (float) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
-}
-
-- (void)showCorrectWord
-{
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:self.correctWordIndex inSection: 0]];
-    
-    cell.imageView.image = [UIImage imageNamed:@"correct2"];
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
