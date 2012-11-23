@@ -7,58 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		021C7B93165BD26B00A48648 /* FacingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7A165BD26B00A48648 /* FacingView.m */; };
-		021C7B94165BD26B00A48648 /* FacingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7A165BD26B00A48648 /* FacingView.m */; };
-		021C7B95165BD26B00A48648 /* FacingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7A165BD26B00A48648 /* FacingView.m */; };
-		021C7B96165BD26B00A48648 /* FacingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7A165BD26B00A48648 /* FacingView.m */; };
-		021C7B97165BD26B00A48648 /* FoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7C165BD26B00A48648 /* FoldView.m */; };
-		021C7B98165BD26B00A48648 /* FoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7C165BD26B00A48648 /* FoldView.m */; };
-		021C7B99165BD26B00A48648 /* FoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7C165BD26B00A48648 /* FoldView.m */; };
-		021C7B9A165BD26B00A48648 /* FoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7C165BD26B00A48648 /* FoldView.m */; };
-		021C7B9B165BD26B00A48648 /* MultiFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7E165BD26B00A48648 /* MultiFoldView.m */; };
-		021C7B9C165BD26B00A48648 /* MultiFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7E165BD26B00A48648 /* MultiFoldView.m */; };
-		021C7B9D165BD26B00A48648 /* MultiFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7E165BD26B00A48648 /* MultiFoldView.m */; };
-		021C7B9E165BD26B00A48648 /* MultiFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B7E165BD26B00A48648 /* MultiFoldView.m */; };
-		021C7B9F165BD26B00A48648 /* PaperFoldNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B81165BD26B00A48648 /* PaperFoldNavigationController.m */; };
-		021C7BA0165BD26B00A48648 /* PaperFoldNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B81165BD26B00A48648 /* PaperFoldNavigationController.m */; };
-		021C7BA1165BD26B00A48648 /* PaperFoldNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B81165BD26B00A48648 /* PaperFoldNavigationController.m */; };
-		021C7BA2165BD26B00A48648 /* PaperFoldNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B81165BD26B00A48648 /* PaperFoldNavigationController.m */; };
-		021C7BA3165BD26B00A48648 /* PaperFoldResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B82165BD26B00A48648 /* PaperFoldResources.bundle */; };
-		021C7BA4165BD26B00A48648 /* PaperFoldResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B82165BD26B00A48648 /* PaperFoldResources.bundle */; };
-		021C7BA5165BD26B00A48648 /* PaperFoldResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B82165BD26B00A48648 /* PaperFoldResources.bundle */; };
-		021C7BA6165BD26B00A48648 /* PaperFoldResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B82165BD26B00A48648 /* PaperFoldResources.bundle */; };
-		021C7BA7165BD26B00A48648 /* PaperFoldSwipeHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B84165BD26B00A48648 /* PaperFoldSwipeHintView.m */; };
-		021C7BA8165BD26B00A48648 /* PaperFoldSwipeHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B84165BD26B00A48648 /* PaperFoldSwipeHintView.m */; };
-		021C7BA9165BD26B00A48648 /* PaperFoldSwipeHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B84165BD26B00A48648 /* PaperFoldSwipeHintView.m */; };
-		021C7BAA165BD26B00A48648 /* PaperFoldSwipeHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B84165BD26B00A48648 /* PaperFoldSwipeHintView.m */; };
-		021C7BAB165BD26B00A48648 /* PaperFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B86165BD26B00A48648 /* PaperFoldView.m */; };
-		021C7BAC165BD26B00A48648 /* PaperFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B86165BD26B00A48648 /* PaperFoldView.m */; };
-		021C7BAD165BD26B00A48648 /* PaperFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B86165BD26B00A48648 /* PaperFoldView.m */; };
-		021C7BAE165BD26B00A48648 /* PaperFoldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B86165BD26B00A48648 /* PaperFoldView.m */; };
-		021C7BAF165BD26B00A48648 /* swipe_guide.psd in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B88165BD26B00A48648 /* swipe_guide.psd */; };
-		021C7BB0165BD26B00A48648 /* swipe_guide.psd in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B88165BD26B00A48648 /* swipe_guide.psd */; };
-		021C7BB1165BD26B00A48648 /* swipe_guide.psd in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B88165BD26B00A48648 /* swipe_guide.psd */; };
-		021C7BB2165BD26B00A48648 /* swipe_guide.psd in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B88165BD26B00A48648 /* swipe_guide.psd */; };
-		021C7BB3165BD26B00A48648 /* swipe_guide2.psd in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B89165BD26B00A48648 /* swipe_guide2.psd */; };
-		021C7BB4165BD26B00A48648 /* swipe_guide2.psd in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B89165BD26B00A48648 /* swipe_guide2.psd */; };
-		021C7BB5165BD26B00A48648 /* swipe_guide2.psd in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B89165BD26B00A48648 /* swipe_guide2.psd */; };
-		021C7BB6165BD26B00A48648 /* swipe_guide2.psd in Resources */ = {isa = PBXBuildFile; fileRef = 021C7B89165BD26B00A48648 /* swipe_guide2.psd */; };
-		021C7BB7165BD26B00A48648 /* ShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8B165BD26B00A48648 /* ShadowView.m */; };
-		021C7BB8165BD26B00A48648 /* ShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8B165BD26B00A48648 /* ShadowView.m */; };
-		021C7BB9165BD26B00A48648 /* ShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8B165BD26B00A48648 /* ShadowView.m */; };
-		021C7BBA165BD26B00A48648 /* ShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8B165BD26B00A48648 /* ShadowView.m */; };
-		021C7BBB165BD26B00A48648 /* TouchThroughUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8D165BD26B00A48648 /* TouchThroughUIView.m */; };
-		021C7BBC165BD26B00A48648 /* TouchThroughUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8D165BD26B00A48648 /* TouchThroughUIView.m */; };
-		021C7BBD165BD26B00A48648 /* TouchThroughUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8D165BD26B00A48648 /* TouchThroughUIView.m */; };
-		021C7BBE165BD26B00A48648 /* TouchThroughUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8D165BD26B00A48648 /* TouchThroughUIView.m */; };
-		021C7BBF165BD26B00A48648 /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8F165BD26B00A48648 /* UIView+Screenshot.m */; };
-		021C7BC0165BD26B00A48648 /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8F165BD26B00A48648 /* UIView+Screenshot.m */; };
-		021C7BC1165BD26B00A48648 /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8F165BD26B00A48648 /* UIView+Screenshot.m */; };
-		021C7BC2165BD26B00A48648 /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B8F165BD26B00A48648 /* UIView+Screenshot.m */; };
-		021C7BC3165BD26B00A48648 /* PaperFoldMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B91165BD26B00A48648 /* PaperFoldMenuController.m */; };
-		021C7BC4165BD26B00A48648 /* PaperFoldMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B91165BD26B00A48648 /* PaperFoldMenuController.m */; };
-		021C7BC5165BD26B00A48648 /* PaperFoldMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B91165BD26B00A48648 /* PaperFoldMenuController.m */; };
-		021C7BC6165BD26B00A48648 /* PaperFoldMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 021C7B91165BD26B00A48648 /* PaperFoldMenuController.m */; };
 		021C7BC8165BD28D00A48648 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021C7BC7165BD28D00A48648 /* QuartzCore.framework */; };
 		0226F0E51658F0E900159CB9 /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 32727D7314C6B23200F60302 /* icon57x57.png */; };
 		023452D41643805A001EE347 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023452D31643805A001EE347 /* AdSupport.framework */; };
@@ -490,6 +438,7 @@
 		02A948E5165FCF7D00C004E5 /* FlatPillButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948E3165FCF7D00C004E5 /* FlatPillButton.m */; };
 		02A948E6165FCF7D00C004E5 /* FlatPillButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948E3165FCF7D00C004E5 /* FlatPillButton.m */; };
 		02A948E7165FCF7D00C004E5 /* FlatPillButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948E3165FCF7D00C004E5 /* FlatPillButton.m */; };
+		02A94905165FDC3600C004E5 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A94904165FDC3600C004E5 /* Twitter.framework */; };
 		02F1DAF2165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
 		02F1DAF3165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
 		02F1DAF4165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
@@ -1144,31 +1093,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		021C7B79165BD26B00A48648 /* FacingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacingView.h; sourceTree = "<group>"; };
-		021C7B7A165BD26B00A48648 /* FacingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacingView.m; sourceTree = "<group>"; };
-		021C7B7B165BD26B00A48648 /* FoldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoldView.h; sourceTree = "<group>"; };
-		021C7B7C165BD26B00A48648 /* FoldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoldView.m; sourceTree = "<group>"; };
-		021C7B7D165BD26B00A48648 /* MultiFoldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiFoldView.h; sourceTree = "<group>"; };
-		021C7B7E165BD26B00A48648 /* MultiFoldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiFoldView.m; sourceTree = "<group>"; };
-		021C7B7F165BD26B00A48648 /* PaperFoldConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldConstants.h; sourceTree = "<group>"; };
-		021C7B80165BD26B00A48648 /* PaperFoldNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldNavigationController.h; sourceTree = "<group>"; };
-		021C7B81165BD26B00A48648 /* PaperFoldNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperFoldNavigationController.m; sourceTree = "<group>"; };
-		021C7B82165BD26B00A48648 /* PaperFoldResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PaperFoldResources.bundle; sourceTree = "<group>"; };
-		021C7B83165BD26B00A48648 /* PaperFoldSwipeHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldSwipeHintView.h; sourceTree = "<group>"; };
-		021C7B84165BD26B00A48648 /* PaperFoldSwipeHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperFoldSwipeHintView.m; sourceTree = "<group>"; };
-		021C7B85165BD26B00A48648 /* PaperFoldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldView.h; sourceTree = "<group>"; };
-		021C7B86165BD26B00A48648 /* PaperFoldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperFoldView.m; sourceTree = "<group>"; };
-		021C7B88165BD26B00A48648 /* swipe_guide.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = swipe_guide.psd; sourceTree = "<group>"; };
-		021C7B89165BD26B00A48648 /* swipe_guide2.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = swipe_guide2.psd; sourceTree = "<group>"; };
-		021C7B8A165BD26B00A48648 /* ShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowView.h; sourceTree = "<group>"; };
-		021C7B8B165BD26B00A48648 /* ShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowView.m; sourceTree = "<group>"; };
-		021C7B8C165BD26B00A48648 /* TouchThroughUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchThroughUIView.h; sourceTree = "<group>"; };
-		021C7B8D165BD26B00A48648 /* TouchThroughUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchThroughUIView.m; sourceTree = "<group>"; };
-		021C7B8E165BD26B00A48648 /* UIView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Screenshot.h"; sourceTree = "<group>"; };
-		021C7B8F165BD26B00A48648 /* UIView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Screenshot.m"; sourceTree = "<group>"; };
-		021C7B90165BD26B00A48648 /* PaperFoldMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldMenuController.h; sourceTree = "<group>"; };
-		021C7B91165BD26B00A48648 /* PaperFoldMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperFoldMenuController.m; sourceTree = "<group>"; };
-		021C7B92165BD26B00A48648 /* PaperFoldMenuControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperFoldMenuControllerDelegate.h; sourceTree = "<group>"; };
 		021C7BC7165BD28D00A48648 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		023452D31643805A001EE347 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		023452D8164381D5001EE347 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -1295,6 +1219,7 @@
 		02A948CF165FC72500C004E5 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		02A948E2165FCF7D00C004E5 /* FlatPillButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatPillButton.h; sourceTree = SOURCE_ROOT; };
 		02A948E3165FCF7D00C004E5 /* FlatPillButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatPillButton.m; sourceTree = SOURCE_ROOT; };
+		02A94904165FDC3600C004E5 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		02D00B1D14ABD8A700806A2D /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resources.h; sourceTree = "<group>"; };
 		02F1DAAB165F5C26001B32D2 /* back_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_right.png; path = Images/back_right.png; sourceTree = "<group>"; };
 		02F1DAAC165F5C26001B32D2 /* back_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back_right@2x.png"; path = "Images/back_right@2x.png"; sourceTree = "<group>"; };
@@ -1573,6 +1498,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02A94905165FDC3600C004E5 /* Twitter.framework in Frameworks */,
 				0244DB7B165DB57F009A7383 /* Accelerate.framework in Frameworks */,
 				021C7BC8165BD28D00A48648 /* QuartzCore.framework in Frameworks */,
 				024BD1AE1632CEC300C93EE5 /* libsqlite3.0.dylib in Frameworks */,
@@ -1662,54 +1588,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		021C7B77165BD26B00A48648 /* PaperFoldMenuController */ = {
-			isa = PBXGroup;
-			children = (
-				021C7B78165BD26B00A48648 /* PaperFold */,
-				021C7B90165BD26B00A48648 /* PaperFoldMenuController.h */,
-				021C7B91165BD26B00A48648 /* PaperFoldMenuController.m */,
-				021C7B92165BD26B00A48648 /* PaperFoldMenuControllerDelegate.h */,
-			);
-			path = PaperFoldMenuController;
-			sourceTree = SOURCE_ROOT;
-		};
-		021C7B78165BD26B00A48648 /* PaperFold */ = {
-			isa = PBXGroup;
-			children = (
-				021C7B79165BD26B00A48648 /* FacingView.h */,
-				021C7B7A165BD26B00A48648 /* FacingView.m */,
-				021C7B7B165BD26B00A48648 /* FoldView.h */,
-				021C7B7C165BD26B00A48648 /* FoldView.m */,
-				021C7B7D165BD26B00A48648 /* MultiFoldView.h */,
-				021C7B7E165BD26B00A48648 /* MultiFoldView.m */,
-				021C7B7F165BD26B00A48648 /* PaperFoldConstants.h */,
-				021C7B80165BD26B00A48648 /* PaperFoldNavigationController.h */,
-				021C7B81165BD26B00A48648 /* PaperFoldNavigationController.m */,
-				021C7B82165BD26B00A48648 /* PaperFoldResources.bundle */,
-				021C7B83165BD26B00A48648 /* PaperFoldSwipeHintView.h */,
-				021C7B84165BD26B00A48648 /* PaperFoldSwipeHintView.m */,
-				021C7B85165BD26B00A48648 /* PaperFoldView.h */,
-				021C7B86165BD26B00A48648 /* PaperFoldView.m */,
-				021C7B87165BD26B00A48648 /* Resources */,
-				021C7B8A165BD26B00A48648 /* ShadowView.h */,
-				021C7B8B165BD26B00A48648 /* ShadowView.m */,
-				021C7B8C165BD26B00A48648 /* TouchThroughUIView.h */,
-				021C7B8D165BD26B00A48648 /* TouchThroughUIView.m */,
-				021C7B8E165BD26B00A48648 /* UIView+Screenshot.h */,
-				021C7B8F165BD26B00A48648 /* UIView+Screenshot.m */,
-			);
-			path = PaperFold;
-			sourceTree = "<group>";
-		};
-		021C7B87165BD26B00A48648 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				021C7B88165BD26B00A48648 /* swipe_guide.psd */,
-				021C7B89165BD26B00A48648 /* swipe_guide2.psd */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		024BD18D16318EE400C93EE5 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1730,6 +1608,10 @@
 				024BD1D21632D99300C93EE5 /* DBController.m */,
 				321DCA6515C6516400BACCA7 /* Reachability.h */,
 				321DCA6615C6516400BACCA7 /* Reachability.m */,
+				02A948CE165FC72500C004E5 /* MBProgressHUD.h */,
+				02A948CF165FC72500C004E5 /* MBProgressHUD.m */,
+				02A948E2165FCF7D00C004E5 /* FlatPillButton.h */,
+				02A948E3165FCF7D00C004E5 /* FlatPillButton.m */,
 				32862F9E14DF78CF009BC331 /* Lexicontext.h */,
 				024BD1AD1632CEC300C93EE5 /* libsqlite3.0.dylib */,
 				024BD1871630334700C93EE5 /* LexicontextAssets.bundle */,
@@ -1857,6 +1739,16 @@
 			name = Data;
 			sourceTree = "<group>";
 		};
+		02A94906165FDC5300C004E5 /* External Components */ = {
+			isa = PBXGroup;
+			children = (
+				32936A9914DA4654005C8810 /* GoogleAdMobAdsSDKiOS */,
+				329369ED14DA4654005C8810 /* AdWhirlSDKiOS */,
+				024BD18D16318EE400C93EE5 /* Libs */,
+			);
+			name = "External Components";
+			sourceTree = "<group>";
+		};
 		02F1DC0E165F60CD001B32D2 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -1909,9 +1801,7 @@
 		321EA82F14A0291F002D5D23 = {
 			isa = PBXGroup;
 			children = (
-				024BD18D16318EE400C93EE5 /* Libs */,
-				329369ED14DA4654005C8810 /* AdWhirlSDKiOS */,
-				32936A9914DA4654005C8810 /* GoogleAdMobAdsSDKiOS */,
+				02A94906165FDC5300C004E5 /* External Components */,
 				321EA84414A02920002D5D23 /* Sources */,
 				02F1DC0E165F60CD001B32D2 /* Sounds */,
 				32727D5514C6B23200F60302 /* IconsRu */,
@@ -1938,6 +1828,7 @@
 		321EA83D14A02920002D5D23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02A94904165FDC3600C004E5 /* Twitter.framework */,
 				0244DB7A165DB57F009A7383 /* Accelerate.framework */,
 				021C7BC7165BD28D00A48648 /* QuartzCore.framework */,
 				023452D8164381D5001EE347 /* StoreKit.framework */,
@@ -1966,14 +1857,9 @@
 			isa = PBXGroup;
 			children = (
 				02F1DC96165F619B001B32D2 /* XIB */,
-				021C7B77165BD26B00A48648 /* PaperFoldMenuController */,
 				02714550165A781200832759 /* Data */,
 				024F19BB1658CC11002185A9 /* Rules */,
 				02D00B1D14ABD8A700806A2D /* Resources.h */,
-				02A948CE165FC72500C004E5 /* MBProgressHUD.h */,
-				02A948CF165FC72500C004E5 /* MBProgressHUD.m */,
-				02A948E2165FCF7D00C004E5 /* FlatPillButton.h */,
-				02A948E3165FCF7D00C004E5 /* FlatPillButton.m */,
 				321EA84D14A02920002D5D23 /* AppDelegate.h */,
 				321EA84E14A02920002D5D23 /* AppDelegate.m */,
 				321EA85014A02920002D5D23 /* MainViewController.h */,
@@ -2539,9 +2425,6 @@
 				024F1B5E1658CC11002185A9 /* 85.html in Resources */,
 				024F1B621658CC11002185A9 /* 9.html in Resources */,
 				024F1B661658CC11002185A9 /* template.html in Resources */,
-				021C7BA3165BD26B00A48648 /* PaperFoldResources.bundle in Resources */,
-				021C7BAF165BD26B00A48648 /* swipe_guide.psd in Resources */,
-				021C7BB3165BD26B00A48648 /* swipe_guide2.psd in Resources */,
 				02F1DAF2165F5C26001B32D2 /* back_right.png in Resources */,
 				02F1DAF6165F5C26001B32D2 /* back_right@2x.png in Resources */,
 				02F1DAFA165F5C26001B32D2 /* back-button.png in Resources */,
@@ -2761,9 +2644,6 @@
 				024F1B631658CC11002185A9 /* 9.html in Resources */,
 				024F1B671658CC11002185A9 /* template.html in Resources */,
 				0226F0E51658F0E900159CB9 /* icon57x57.png in Resources */,
-				021C7BA4165BD26B00A48648 /* PaperFoldResources.bundle in Resources */,
-				021C7BB0165BD26B00A48648 /* swipe_guide.psd in Resources */,
-				021C7BB4165BD26B00A48648 /* swipe_guide2.psd in Resources */,
 				02F1DAF3165F5C26001B32D2 /* back_right.png in Resources */,
 				02F1DAF7165F5C26001B32D2 /* back_right@2x.png in Resources */,
 				02F1DAFB165F5C26001B32D2 /* back-button.png in Resources */,
@@ -2982,9 +2862,6 @@
 				024F1B601658CC11002185A9 /* 85.html in Resources */,
 				024F1B641658CC11002185A9 /* 9.html in Resources */,
 				024F1B681658CC11002185A9 /* template.html in Resources */,
-				021C7BA5165BD26B00A48648 /* PaperFoldResources.bundle in Resources */,
-				021C7BB1165BD26B00A48648 /* swipe_guide.psd in Resources */,
-				021C7BB5165BD26B00A48648 /* swipe_guide2.psd in Resources */,
 				02F1DAF4165F5C26001B32D2 /* back_right.png in Resources */,
 				02F1DAF8165F5C26001B32D2 /* back_right@2x.png in Resources */,
 				02F1DAFC165F5C26001B32D2 /* back-button.png in Resources */,
@@ -3202,9 +3079,6 @@
 				024F1B611658CC11002185A9 /* 85.html in Resources */,
 				024F1B651658CC11002185A9 /* 9.html in Resources */,
 				024F1B691658CC11002185A9 /* template.html in Resources */,
-				021C7BA6165BD26B00A48648 /* PaperFoldResources.bundle in Resources */,
-				021C7BB2165BD26B00A48648 /* swipe_guide.psd in Resources */,
-				021C7BB6165BD26B00A48648 /* swipe_guide2.psd in Resources */,
 				02F1DAF5165F5C26001B32D2 /* back_right.png in Resources */,
 				02F1DAF9165F5C26001B32D2 /* back_right@2x.png in Resources */,
 				02F1DAFD165F5C26001B32D2 /* back-button.png in Resources */,
@@ -3335,16 +3209,6 @@
 				024F19A116588E88002185A9 /* RulesSearcherViewController.m in Sources */,
 				024F19AC1658AEEA002185A9 /* UITableView+Toches.m in Sources */,
 				02714553165A787D00832759 /* GameViewController.m in Sources */,
-				021C7B93165BD26B00A48648 /* FacingView.m in Sources */,
-				021C7B97165BD26B00A48648 /* FoldView.m in Sources */,
-				021C7B9B165BD26B00A48648 /* MultiFoldView.m in Sources */,
-				021C7B9F165BD26B00A48648 /* PaperFoldNavigationController.m in Sources */,
-				021C7BA7165BD26B00A48648 /* PaperFoldSwipeHintView.m in Sources */,
-				021C7BAB165BD26B00A48648 /* PaperFoldView.m in Sources */,
-				021C7BB7165BD26B00A48648 /* ShadowView.m in Sources */,
-				021C7BBB165BD26B00A48648 /* TouchThroughUIView.m in Sources */,
-				021C7BBF165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
-				021C7BC3165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
 				0244DB60165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 				02A948D0165FC72500C004E5 /* MBProgressHUD.m in Sources */,
 				02A948E4165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
@@ -3407,16 +3271,6 @@
 				024F19A216588E88002185A9 /* RulesSearcherViewController.m in Sources */,
 				024F19AD1658AEEA002185A9 /* UITableView+Toches.m in Sources */,
 				02714554165A787D00832759 /* GameViewController.m in Sources */,
-				021C7B94165BD26B00A48648 /* FacingView.m in Sources */,
-				021C7B98165BD26B00A48648 /* FoldView.m in Sources */,
-				021C7B9C165BD26B00A48648 /* MultiFoldView.m in Sources */,
-				021C7BA0165BD26B00A48648 /* PaperFoldNavigationController.m in Sources */,
-				021C7BA8165BD26B00A48648 /* PaperFoldSwipeHintView.m in Sources */,
-				021C7BAC165BD26B00A48648 /* PaperFoldView.m in Sources */,
-				021C7BB8165BD26B00A48648 /* ShadowView.m in Sources */,
-				021C7BBC165BD26B00A48648 /* TouchThroughUIView.m in Sources */,
-				021C7BC0165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
-				021C7BC4165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
 				0244DB61165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 				02A948D1165FC72500C004E5 /* MBProgressHUD.m in Sources */,
 				02A948E5165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
@@ -3449,16 +3303,6 @@
 				024F19A316588E88002185A9 /* RulesSearcherViewController.m in Sources */,
 				024F19AE1658AEEA002185A9 /* UITableView+Toches.m in Sources */,
 				02714555165A787D00832759 /* GameViewController.m in Sources */,
-				021C7B95165BD26B00A48648 /* FacingView.m in Sources */,
-				021C7B99165BD26B00A48648 /* FoldView.m in Sources */,
-				021C7B9D165BD26B00A48648 /* MultiFoldView.m in Sources */,
-				021C7BA1165BD26B00A48648 /* PaperFoldNavigationController.m in Sources */,
-				021C7BA9165BD26B00A48648 /* PaperFoldSwipeHintView.m in Sources */,
-				021C7BAD165BD26B00A48648 /* PaperFoldView.m in Sources */,
-				021C7BB9165BD26B00A48648 /* ShadowView.m in Sources */,
-				021C7BBD165BD26B00A48648 /* TouchThroughUIView.m in Sources */,
-				021C7BC1165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
-				021C7BC5165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
 				0244DB62165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 				02A948D2165FC72500C004E5 /* MBProgressHUD.m in Sources */,
 				02A948E6165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
@@ -3521,16 +3365,6 @@
 				024F19A416588E88002185A9 /* RulesSearcherViewController.m in Sources */,
 				024F19AF1658AEEA002185A9 /* UITableView+Toches.m in Sources */,
 				02714556165A787D00832759 /* GameViewController.m in Sources */,
-				021C7B96165BD26B00A48648 /* FacingView.m in Sources */,
-				021C7B9A165BD26B00A48648 /* FoldView.m in Sources */,
-				021C7B9E165BD26B00A48648 /* MultiFoldView.m in Sources */,
-				021C7BA2165BD26B00A48648 /* PaperFoldNavigationController.m in Sources */,
-				021C7BAA165BD26B00A48648 /* PaperFoldSwipeHintView.m in Sources */,
-				021C7BAE165BD26B00A48648 /* PaperFoldView.m in Sources */,
-				021C7BBA165BD26B00A48648 /* ShadowView.m in Sources */,
-				021C7BBE165BD26B00A48648 /* TouchThroughUIView.m in Sources */,
-				021C7BC2165BD26B00A48648 /* UIView+Screenshot.m in Sources */,
-				021C7BC6165BD26B00A48648 /* PaperFoldMenuController.m in Sources */,
 				0244DB63165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 				02A948D3165FC72500C004E5 /* MBProgressHUD.m in Sources */,
 				02A948E7165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
