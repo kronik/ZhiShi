@@ -229,11 +229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "375289880.021899"
+         timestampString = "375349806.319419"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "231"
-         endingLineNumber = "231"
+         startingLineNumber = "295"
+         endingLineNumber = "295"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>

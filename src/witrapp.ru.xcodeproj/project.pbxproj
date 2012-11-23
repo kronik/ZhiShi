@@ -1550,8 +1550,8 @@
 		32936C1014DA5148005C8810 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		32B4265514AAB4D500D4610A /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iRate.h; path = Akak/iRate.h; sourceTree = "<group>"; };
 		32B4265614AAB4D500D4610A /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iRate.m; path = Akak/iRate.m; sourceTree = "<group>"; };
-		32BE92DD15DA2C46008507D7 /* earcon_done_listening.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = earcon_done_listening.wav; sourceTree = "<group>"; };
-		32BE92DE15DA2C46008507D7 /* earcon_listening.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = earcon_listening.wav; sourceTree = "<group>"; };
+		32BE92DD15DA2C46008507D7 /* earcon_done_listening.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = earcon_done_listening.wav; path = ../Akak/earcon_done_listening.wav; sourceTree = "<group>"; };
+		32BE92DE15DA2C46008507D7 /* earcon_listening.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = earcon_listening.wav; path = ../Akak/earcon_listening.wav; sourceTree = "<group>"; };
 		32C4407914A19A0300FF2E45 /* OnlineDictViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlineDictViewController.h; sourceTree = "<group>"; };
 		32C4407A14A19A0300FF2E45 /* OnlineDictViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlineDictViewController.m; sourceTree = "<group>"; };
 		32C511FB14C65C4E00151879 /* MainViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -1860,6 +1860,8 @@
 		02F1DC0E165F60CD001B32D2 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				32BE92DD15DA2C46008507D7 /* earcon_done_listening.wav */,
+				32BE92DE15DA2C46008507D7 /* earcon_listening.wav */,
 				02F1DC0F165F60CD001B32D2 /* complete.wav */,
 				02F1DC10165F60CD001B32D2 /* fx_group_wow.mp3 */,
 				02F1DC11165F60CD001B32D2 /* FX_group_wow.wav */,
@@ -1890,6 +1892,19 @@
 			);
 			path = Sounds;
 			sourceTree = SOURCE_ROOT;
+		};
+		02F1DC96165F619B001B32D2 /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				32C511FB14C65C4E00151879 /* MainViewController_iPhone.xib */,
+				32C511FC14C65C6200151879 /* MainViewController_iPhone_lite.xib */,
+				32C511FE14C65CD200151879 /* OnlineDictView_lite.xib */,
+				32C511FF14C65CD200151879 /* OnlineDictView.xib */,
+				0254FFCC1567B5CF0004019C /* AboutView.xib */,
+				320A1D5415AD28F5001C8580 /* OtherAppsView.xib */,
+			);
+			name = XIB;
+			sourceTree = "<group>";
 		};
 		321EA82F14A0291F002D5D23 = {
 			isa = PBXGroup;
@@ -1950,6 +1965,7 @@
 		321EA84414A02920002D5D23 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				02F1DC96165F619B001B32D2 /* XIB */,
 				021C7B77165BD26B00A48648 /* PaperFoldMenuController */,
 				02714550165A781200832759 /* Data */,
 				024F19BB1658CC11002185A9 /* Rules */,
@@ -1958,20 +1974,14 @@
 				321EA84E14A02920002D5D23 /* AppDelegate.m */,
 				321EA85014A02920002D5D23 /* MainViewController.h */,
 				321EA85114A02920002D5D23 /* MainViewController.m */,
-				32C511FB14C65C4E00151879 /* MainViewController_iPhone.xib */,
-				32C511FC14C65C6200151879 /* MainViewController_iPhone_lite.xib */,
 				321EA86414A02AFE002D5D23 /* DictSearcher.h */,
 				321EA86514A02AFE002D5D23 /* DictSearcher.m */,
 				32C4407914A19A0300FF2E45 /* OnlineDictViewController.h */,
 				32C4407A14A19A0300FF2E45 /* OnlineDictViewController.m */,
-				32C511FE14C65CD200151879 /* OnlineDictView_lite.xib */,
-				32C511FF14C65CD200151879 /* OnlineDictView.xib */,
 				0254FFC61567B3740004019C /* AboutViewController.h */,
 				0254FFC71567B3740004019C /* AboutViewController.m */,
-				0254FFCC1567B5CF0004019C /* AboutView.xib */,
 				024A425115ACED030047D18F /* OtherAppsViewController.h */,
 				024A425215ACED030047D18F /* OtherAppsViewController.m */,
-				320A1D5415AD28F5001C8580 /* OtherAppsView.xib */,
 				024A425715ACED270047D18F /* AppDescription.h */,
 				024A425815ACED270047D18F /* AppDescription.m */,
 				024F199F16588E88002185A9 /* RulesSearcherViewController.h */,
@@ -1984,8 +1994,6 @@
 				323B304114C9016B00F72486 /* DictEntry.m */,
 				3264081014A96CDD00C3A53B /* DictIndex.h */,
 				3264081114A96CDD00C3A53B /* DictIndex.m */,
-				32BE92DD15DA2C46008507D7 /* earcon_done_listening.wav */,
-				32BE92DE15DA2C46008507D7 /* earcon_listening.wav */,
 				0244DB5E165D2625009A7383 /* UINavigationController+Keyboard.h */,
 				0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */,
 				321EA84514A02920002D5D23 /* Supporting Files */,
