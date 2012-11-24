@@ -1463,7 +1463,10 @@
             */
             _dictionaryRu = [NSMutableArray arrayWithContentsOfFile:filePathRu];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_DICTIONARY_READY object: self.dictionaryRu];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_DICTIONARY_READY object: self.dictionaryRu];
+            });
             
             _dictionaryEn = [NSMutableArray arrayWithContentsOfFile:filePathEn];
 

@@ -10,8 +10,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import "MBProgressHUD.h"
 #import "FlatPillButton.h"
+#import "BCDShareSheet.h"
 
-#define TESTS_IN_SESSION 20
+#define TESTS_IN_SESSION 5
 
 typedef enum gameTableMode
 {
@@ -66,6 +67,27 @@ typedef enum gameTableMode
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dictionaryReady:) name:NOTIFICATION_DICTIONARY_READY object:nil];
     }
     return self;
+}
+
+- (void) setTableMode:(gameTableMode)tableMode
+{
+    _tableMode = tableMode;
+    
+//    if ((tableMode == kModeInit) || (self.task.count == 0))
+//    {
+//        return;
+//    }
+//    
+//    NSMutableArray *indexPathsToRemove = [[NSMutableArray alloc] init];
+//    
+//    for (NSInteger i = 0; i < self.task.count; i++)
+//	{
+//        [indexPathsToRemove addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+//    }
+//	
+//	[self.tableView beginUpdates];
+//    [self.tableView insertRowsAtIndexPaths:indexPathsToRemove withRowAnimation:UITableViewRowAnimationTop];
+//    [self.tableView endUpdates];
 }
 
 - (void)playSound: (NSString*)soundFile
@@ -146,6 +168,8 @@ typedef enum gameTableMode
     {
         [button removeFromSuperview];
     }
+    
+    self.navigationItem.rightBarButtonItem = nil;
 
     self.score = 0;
     self.errors = 0;
@@ -190,7 +214,6 @@ typedef enum gameTableMode
     self.totalPassed = 0;
     self.correctWordIndex = 0;
     self.inSequence = 0;
-    self.maxInSequence = 0;
     
     if (self.ruWords != nil && self.ruWords.count > 0)
     {
@@ -226,7 +249,16 @@ typedef enum gameTableMode
     self.task = @[@"Итого:", @"Слов:", @"Ошибок:", @"Правильно:", @"Правильно подряд:", @"", @"Начать заново"];
     self.correctWordIndex = 6;
 
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+
     [self.tableView reloadData];
+    
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showShareResults:)];
+    self.navigationItem.rightBarButtonItem = shareButton;
 }
 
 - (NSString*)getNextWord
@@ -603,7 +635,7 @@ typedef enum gameTableMode
                 cell.textLabel.text = self.task [indexPath.row];
 
                 if (indexPath.row == 1)
-                {
+                {                    
                     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.totalPassed];
                 }
                 else if (indexPath.row == 2)
@@ -713,6 +745,31 @@ typedef enum gameTableMode
     {
         return 60;
     }
+}
+
+- (void)showShareResults: (UIView*) button
+{
+    [BCDShareSheet sharedSharer].appName = @"Жи-Ши";
+    [BCDShareSheet sharedSharer].rootViewController = self;
+    
+    BCDShareableItem *item = [[BCDShareableItem alloc] initWithTitle:@"Мой результат сегодня:"];
+    
+    NSString *message = [NSString stringWithFormat:@"Всего слов: %d\nОшибок: %d\nПравильно: %d\nПравильно подряд уже: %d!", self.totalPassed, self.errors, self.score, self.maxInSequence];
+    
+    [item setDescription:message];
+    [item setShortDescription:message];
+    [item setItemURLString: @"https://itunes.apple.com/ru/app/zi-si/id493483440?ls=1&mt=8"];
+    [item setImageURLString:@"https://dl.dropbox.com/u/14628282/zhishi512.png"];
+     
+    UIActionSheet *sheet = [[BCDShareSheet sharedSharer] sheetForSharing:item completion:^(BCDResult result)
+    {
+        if (result == BCDResultSuccess)
+        {
+            NSLog(@"Yay!");
+        }
+    }];
+    
+    [sheet showInView:self.tableView];
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

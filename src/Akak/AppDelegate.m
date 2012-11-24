@@ -15,6 +15,8 @@
 #import "RulesSearcherViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
+NSString *const FBSessionStateChangedNotification = @"com.example.Login:FBSessionStateChangedNotification";
+
 static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* current, double threshold)
 {
 	double
@@ -33,6 +35,8 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 @synthesize lastAcceleration = _lastAcceleration;
 
 @synthesize window = _window;
+@synthesize session = _session;
+
 //@synthesize managedObjectContextRu = __managedObjectContextRu;
 //@synthesize managedObjectContextEn = __managedObjectContextEn;
 //@synthesize managedObjectModelRu = __managedObjectModelRu;
@@ -87,11 +91,15 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [FBProfilePictureView class];
+
     [UIAccelerometer sharedAccelerometer].delegate = self;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"ipad-menubar-right"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTintColor: [UIColor colorWithRed:0.28f green:0.12f blue:0.02f alpha:1.00f]];
+
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], UITextAttributeTextColor, [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0, -1)], UITextAttributeTextShadowOffset, nil]];
     // Override point for customization after application launch.
     
@@ -142,8 +150,106 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
         NSLog(@"Failed to set category on AVAudioSession");
     }
     
+    if (![self openSessionWithAllowLoginUI:NO])
+    {
+        // No? Display the login page.
+        [self openSessionWithAllowLoginUI: YES];
+    }
+    
     [self.window makeKeyAndVisible];
     return YES;
+}
+
++ (NSString *)FBErrorCodeDescription:(FBErrorCode) code {
+    switch(code){
+        case FBErrorInvalid :{
+            return @"FBErrorInvalid";
+        }
+        case FBErrorOperationCancelled:{
+            return @"FBErrorOperationCancelled";
+        }
+        case FBErrorLoginFailedOrCancelled:{
+            return @"FBErrorLoginFailedOrCancelled";
+        }
+        case FBErrorRequestConnectionApi:{
+            return @"FBErrorRequestConnectionApi";
+        }case FBErrorProtocolMismatch:{
+            return @"FBErrorProtocolMismatch";
+        }
+        case FBErrorHTTPError:{
+            return @"FBErrorHTTPError";
+        }
+        case FBErrorNonTextMimeTypeReturned:{
+            return @"FBErrorNonTextMimeTypeReturned";
+        }
+        case FBErrorNativeDialog:{
+            return @"FBErrorNativeDialog";
+        }
+        default:
+            return @"[Unknown]";
+    }
+}
+
+- (void)sessionStateChanged:(FBSession *)session
+                      state:(FBSessionState) state
+                      error:(NSError *)error
+{
+    switch (state) {
+        case FBSessionStateOpen:
+        {
+            if (!error)
+            {
+                // We have a valid session
+                NSLog(@"User session found");
+            }
+            
+            FBCacheDescriptor *cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
+            [cacheDescriptor prefetchAndCacheForSession:session];
+        }
+            
+            break;
+        case FBSessionStateClosed:
+        case FBSessionStateClosedLoginFailed:
+            [FBSession.activeSession closeAndClearTokenInformation];
+            break;
+        default:
+            break;
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:FBSessionStateChangedNotification object:session];
+    
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Error: %@",
+                                                                     [AppDelegate FBErrorCodeDescription:error.code]]
+                                                            message:error.localizedDescription
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+/*
+ * Opens a Facebook session and optionally shows the login UX.
+ */
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI
+{
+    return [FBSession openActiveSessionWithReadPermissions:nil
+                                              allowLoginUI:allowLoginUI
+                                         completionHandler:^(FBSession *session, FBSessionState state, NSError *error)
+                                         {
+                                             [self sessionStateChanged:session state:state error:error];
+                                         }];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // FBSample logic
+    // We need to handle URLs by passing them to FBSession in order for SSO authentication
+    // to work.
+    return [FBSession.activeSession handleOpenURL:url];
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal
@@ -179,11 +285,17 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    
+    // FBSample logic
+    // We need to properly handle activation of the application with regards to SSO
+    //  (e.g., returning from iOS 6.0 authorization dialog or from fast app switching).
+    [FBSession.activeSession handleDidBecomeActive];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     [UIAccelerometer sharedAccelerometer].delegate = nil;
+    [FBSession.activeSession close];
 
     /*
      Called when the application is about to terminate.

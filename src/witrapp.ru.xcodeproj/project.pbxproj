@@ -439,6 +439,30 @@
 		02A948E6165FCF7D00C004E5 /* FlatPillButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948E3165FCF7D00C004E5 /* FlatPillButton.m */; };
 		02A948E7165FCF7D00C004E5 /* FlatPillButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948E3165FCF7D00C004E5 /* FlatPillButton.m */; };
 		02A94905165FDC3600C004E5 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A94904165FDC3600C004E5 /* Twitter.framework */; };
+		02A9490E165FDD3800C004E5 /* BCDShareableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A9490B165FDD3800C004E5 /* BCDShareableItem.m */; };
+		02A9490F165FDD3800C004E5 /* BCDShareableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A9490B165FDD3800C004E5 /* BCDShareableItem.m */; };
+		02A94910165FDD3800C004E5 /* BCDShareableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A9490B165FDD3800C004E5 /* BCDShareableItem.m */; };
+		02A94911165FDD3800C004E5 /* BCDShareableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A9490B165FDD3800C004E5 /* BCDShareableItem.m */; };
+		02A94912165FDD3800C004E5 /* BCDShareSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A9490D165FDD3800C004E5 /* BCDShareSheet.m */; };
+		02A94913165FDD3800C004E5 /* BCDShareSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A9490D165FDD3800C004E5 /* BCDShareSheet.m */; };
+		02A94914165FDD3800C004E5 /* BCDShareSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A9490D165FDD3800C004E5 /* BCDShareSheet.m */; };
+		02A94915165FDD3800C004E5 /* BCDShareSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A9490D165FDD3800C004E5 /* BCDShareSheet.m */; };
+		02A949171660579100C004E5 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A949161660579100C004E5 /* FacebookSDK.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		02A94919166057E500C004E5 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A94918166057E500C004E5 /* FacebookSDKResources.bundle */; };
+		02A9491A166057E500C004E5 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A94918166057E500C004E5 /* FacebookSDKResources.bundle */; };
+		02A9491B166057E500C004E5 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A94918166057E500C004E5 /* FacebookSDKResources.bundle */; };
+		02A9491C166057E500C004E5 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A94918166057E500C004E5 /* FacebookSDKResources.bundle */; };
+		02A9491E1660581600C004E5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A9491D1660581600C004E5 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		02A9491F1660581C00C004E5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023452D31643805A001EE347 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		02A949211660585200C004E5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A949201660585200C004E5 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		02A949371660AC3200C004E5 /* zopa.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A949361660AC3200C004E5 /* zopa.otf */; };
+		02A949381660AC3200C004E5 /* zopa.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A949361660AC3200C004E5 /* zopa.otf */; };
+		02A949391660AC3200C004E5 /* zopa.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A949361660AC3200C004E5 /* zopa.otf */; };
+		02A9493A1660AC3200C004E5 /* zopa.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A949361660AC3200C004E5 /* zopa.otf */; };
+		02A949491660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A949481660B4D100C004E5 /* FBUserSettingsViewResources.bundle */; };
+		02A9494A1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A949481660B4D100C004E5 /* FBUserSettingsViewResources.bundle */; };
+		02A9494B1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A949481660B4D100C004E5 /* FBUserSettingsViewResources.bundle */; };
+		02A9494C1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A949481660B4D100C004E5 /* FBUserSettingsViewResources.bundle */; };
 		02F1DAF2165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
 		02F1DAF3165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
 		02F1DAF4165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
@@ -1220,6 +1244,16 @@
 		02A948E2165FCF7D00C004E5 /* FlatPillButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatPillButton.h; sourceTree = SOURCE_ROOT; };
 		02A948E3165FCF7D00C004E5 /* FlatPillButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatPillButton.m; sourceTree = SOURCE_ROOT; };
 		02A94904165FDC3600C004E5 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		02A9490A165FDD3800C004E5 /* BCDShareableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCDShareableItem.h; sourceTree = "<group>"; };
+		02A9490B165FDD3800C004E5 /* BCDShareableItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCDShareableItem.m; sourceTree = "<group>"; };
+		02A9490C165FDD3800C004E5 /* BCDShareSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCDShareSheet.h; sourceTree = "<group>"; };
+		02A9490D165FDD3800C004E5 /* BCDShareSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCDShareSheet.m; sourceTree = "<group>"; };
+		02A949161660579100C004E5 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		02A94918166057E500C004E5 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		02A9491D1660581600C004E5 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		02A949201660585200C004E5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		02A949361660AC3200C004E5 /* zopa.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = zopa.otf; sourceTree = "<group>"; };
+		02A949481660B4D100C004E5 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		02D00B1D14ABD8A700806A2D /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resources.h; sourceTree = "<group>"; };
 		02F1DAAB165F5C26001B32D2 /* back_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_right.png; path = Images/back_right.png; sourceTree = "<group>"; };
 		02F1DAAC165F5C26001B32D2 /* back_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back_right@2x.png"; path = "Images/back_right@2x.png"; sourceTree = "<group>"; };
@@ -1498,6 +1532,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02A949211660585200C004E5 /* Social.framework in Frameworks */,
+				02A9491F1660581C00C004E5 /* AdSupport.framework in Frameworks */,
+				02A9491E1660581600C004E5 /* Accounts.framework in Frameworks */,
+				02A949171660579100C004E5 /* FacebookSDK.framework in Frameworks */,
 				02A94905165FDC3600C004E5 /* Twitter.framework in Frameworks */,
 				0244DB7B165DB57F009A7383 /* Accelerate.framework in Frameworks */,
 				021C7BC8165BD28D00A48648 /* QuartzCore.framework in Frameworks */,
@@ -1612,10 +1650,15 @@
 				02A948CF165FC72500C004E5 /* MBProgressHUD.m */,
 				02A948E2165FCF7D00C004E5 /* FlatPillButton.h */,
 				02A948E3165FCF7D00C004E5 /* FlatPillButton.m */,
+				02A9490A165FDD3800C004E5 /* BCDShareableItem.h */,
+				02A9490B165FDD3800C004E5 /* BCDShareableItem.m */,
+				02A9490C165FDD3800C004E5 /* BCDShareSheet.h */,
+				02A9490D165FDD3800C004E5 /* BCDShareSheet.m */,
 				32862F9E14DF78CF009BC331 /* Lexicontext.h */,
 				024BD1AD1632CEC300C93EE5 /* libsqlite3.0.dylib */,
 				024BD1871630334700C93EE5 /* LexicontextAssets.bundle */,
 				32862FA014DF78CF009BC331 /* libLexicontext.a */,
+				02A949361660AC3200C004E5 /* zopa.otf */,
 			);
 			name = Libs;
 			sourceTree = "<group>";
@@ -1742,6 +1785,8 @@
 		02A94906165FDC5300C004E5 /* External Components */ = {
 			isa = PBXGroup;
 			children = (
+				02A949481660B4D100C004E5 /* FBUserSettingsViewResources.bundle */,
+				02A94918166057E500C004E5 /* FacebookSDKResources.bundle */,
 				32936A9914DA4654005C8810 /* GoogleAdMobAdsSDKiOS */,
 				329369ED14DA4654005C8810 /* AdWhirlSDKiOS */,
 				024BD18D16318EE400C93EE5 /* Libs */,
@@ -1828,6 +1873,9 @@
 		321EA83D14A02920002D5D23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02A949201660585200C004E5 /* Social.framework */,
+				02A9491D1660581600C004E5 /* Accounts.framework */,
+				02A949161660579100C004E5 /* FacebookSDK.framework */,
 				02A94904165FDC3600C004E5 /* Twitter.framework */,
 				0244DB7A165DB57F009A7383 /* Accelerate.framework */,
 				021C7BC7165BD28D00A48648 /* QuartzCore.framework */,
@@ -2523,6 +2571,9 @@
 				02F1DC8A165F60CD001B32D2 /* попробуй еще раз2.mp3 in Resources */,
 				02F1DC8E165F60CD001B32D2 /* умничка.mp3 in Resources */,
 				02F1DC92165F60CD001B32D2 /* хммм.mp3 in Resources */,
+				02A94919166057E500C004E5 /* FacebookSDKResources.bundle in Resources */,
+				02A949371660AC3200C004E5 /* zopa.otf in Resources */,
+				02A949491660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2742,6 +2793,9 @@
 				02F1DC8B165F60CD001B32D2 /* попробуй еще раз2.mp3 in Resources */,
 				02F1DC8F165F60CD001B32D2 /* умничка.mp3 in Resources */,
 				02F1DC93165F60CD001B32D2 /* хммм.mp3 in Resources */,
+				02A9491A166057E500C004E5 /* FacebookSDKResources.bundle in Resources */,
+				02A949381660AC3200C004E5 /* zopa.otf in Resources */,
+				02A9494A1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2960,6 +3014,9 @@
 				02F1DC8C165F60CD001B32D2 /* попробуй еще раз2.mp3 in Resources */,
 				02F1DC90165F60CD001B32D2 /* умничка.mp3 in Resources */,
 				02F1DC94165F60CD001B32D2 /* хммм.mp3 in Resources */,
+				02A9491B166057E500C004E5 /* FacebookSDKResources.bundle in Resources */,
+				02A949391660AC3200C004E5 /* zopa.otf in Resources */,
+				02A9494B1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3177,6 +3234,9 @@
 				02F1DC8D165F60CD001B32D2 /* попробуй еще раз2.mp3 in Resources */,
 				02F1DC91165F60CD001B32D2 /* умничка.mp3 in Resources */,
 				02F1DC95165F60CD001B32D2 /* хммм.mp3 in Resources */,
+				02A9491C166057E500C004E5 /* FacebookSDKResources.bundle in Resources */,
+				02A9493A1660AC3200C004E5 /* zopa.otf in Resources */,
+				02A9494C1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3212,6 +3272,8 @@
 				0244DB60165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 				02A948D0165FC72500C004E5 /* MBProgressHUD.m in Sources */,
 				02A948E4165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
+				02A9490E165FDD3800C004E5 /* BCDShareableItem.m in Sources */,
+				02A94912165FDD3800C004E5 /* BCDShareSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3274,6 +3336,8 @@
 				0244DB61165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 				02A948D1165FC72500C004E5 /* MBProgressHUD.m in Sources */,
 				02A948E5165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
+				02A9490F165FDD3800C004E5 /* BCDShareableItem.m in Sources */,
+				02A94913165FDD3800C004E5 /* BCDShareSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3306,6 +3370,8 @@
 				0244DB62165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 				02A948D2165FC72500C004E5 /* MBProgressHUD.m in Sources */,
 				02A948E6165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
+				02A94910165FDD3800C004E5 /* BCDShareableItem.m in Sources */,
+				02A94914165FDD3800C004E5 /* BCDShareSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3368,6 +3434,8 @@
 				0244DB63165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */,
 				02A948D3165FC72500C004E5 /* MBProgressHUD.m in Sources */,
 				02A948E7165FCF7D00C004E5 /* FlatPillButton.m in Sources */,
+				02A94911165FDD3800C004E5 /* BCDShareableItem.m in Sources */,
+				02A94915165FDD3800C004E5 /* BCDShareSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3455,6 +3523,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Akak\"",
+					"\"$(SRCROOT)/../../../../../Documents/FacebookSDK\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Akak/witrapp.ru-Prefix.pch";
@@ -3470,6 +3539,7 @@
 					"\"$(SRCROOT)/Akak\"",
 				);
 				OTHER_CFLAGS = "-DRU_APP";
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = witrapp.ru;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -3487,6 +3557,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Akak\"",
+					"\"$(SRCROOT)/../../../../../Documents/FacebookSDK\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Akak/witrapp.ru-Prefix.pch";
@@ -3506,6 +3577,7 @@
 					"-DRU_APP",
 					"-DNS_BLOCK_ASSERTIONS=1",
 				);
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = witrapp.ru;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
