@@ -463,6 +463,18 @@
 		02A9494A1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A949481660B4D100C004E5 /* FBUserSettingsViewResources.bundle */; };
 		02A9494B1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A949481660B4D100C004E5 /* FBUserSettingsViewResources.bundle */; };
 		02A9494C1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02A949481660B4D100C004E5 /* FBUserSettingsViewResources.bundle */; };
+		02D86AD716624AF50023ED1C /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86AD516624AF50023ED1C /* 37x-Checkmark.png */; };
+		02D86AD816624AF50023ED1C /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86AD516624AF50023ED1C /* 37x-Checkmark.png */; };
+		02D86AD916624AF50023ED1C /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86AD516624AF50023ED1C /* 37x-Checkmark.png */; };
+		02D86ADA16624AF50023ED1C /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86AD516624AF50023ED1C /* 37x-Checkmark.png */; };
+		02D86ADB16624AF50023ED1C /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86AD616624AF50023ED1C /* 37x-Checkmark@2x.png */; };
+		02D86ADC16624AF50023ED1C /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86AD616624AF50023ED1C /* 37x-Checkmark@2x.png */; };
+		02D86ADD16624AF50023ED1C /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86AD616624AF50023ED1C /* 37x-Checkmark@2x.png */; };
+		02D86ADE16624AF50023ED1C /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86AD616624AF50023ED1C /* 37x-Checkmark@2x.png */; };
+		02D86AE016624B760023ED1C /* icon512.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 02D86ADF16624B760023ED1C /* icon512.PNG */; };
+		02D86AE116624B760023ED1C /* icon512.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 02D86ADF16624B760023ED1C /* icon512.PNG */; };
+		02D86AE216624B760023ED1C /* icon512.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 02D86ADF16624B760023ED1C /* icon512.PNG */; };
+		02D86AE316624B760023ED1C /* icon512.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 02D86ADF16624B760023ED1C /* icon512.PNG */; };
 		02F1DAF2165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
 		02F1DAF3165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
 		02F1DAF4165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
@@ -1255,6 +1267,9 @@
 		02A949361660AC3200C004E5 /* zopa.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = zopa.otf; sourceTree = "<group>"; };
 		02A949481660B4D100C004E5 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		02D00B1D14ABD8A700806A2D /* Resources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resources.h; sourceTree = "<group>"; };
+		02D86AD516624AF50023ED1C /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "37x-Checkmark.png"; path = "Images/37x-Checkmark.png"; sourceTree = "<group>"; };
+		02D86AD616624AF50023ED1C /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "37x-Checkmark@2x.png"; path = "Images/37x-Checkmark@2x.png"; sourceTree = "<group>"; };
+		02D86ADF16624B760023ED1C /* icon512.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon512.PNG; path = Images/icon512.PNG; sourceTree = "<group>"; };
 		02F1DAAB165F5C26001B32D2 /* back_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_right.png; path = Images/back_right.png; sourceTree = "<group>"; };
 		02F1DAAC165F5C26001B32D2 /* back_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back_right@2x.png"; path = "Images/back_right@2x.png"; sourceTree = "<group>"; };
 		02F1DAAD165F5C26001B32D2 /* back-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back-button.png"; path = "Images/back-button.png"; sourceTree = "<group>"; };
@@ -1957,6 +1972,9 @@
 		326408C314A9BFCC00C3A53B /* CommonIcons */ = {
 			isa = PBXGroup;
 			children = (
+				02D86ADF16624B760023ED1C /* icon512.PNG */,
+				02D86AD516624AF50023ED1C /* 37x-Checkmark.png */,
+				02D86AD616624AF50023ED1C /* 37x-Checkmark@2x.png */,
 				02F1DAAB165F5C26001B32D2 /* back_right.png */,
 				02F1DAAC165F5C26001B32D2 /* back_right@2x.png */,
 				02F1DAAD165F5C26001B32D2 /* back-button.png */,
@@ -2574,6 +2592,9 @@
 				02A94919166057E500C004E5 /* FacebookSDKResources.bundle in Resources */,
 				02A949371660AC3200C004E5 /* zopa.otf in Resources */,
 				02A949491660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */,
+				02D86AD716624AF50023ED1C /* 37x-Checkmark.png in Resources */,
+				02D86ADB16624AF50023ED1C /* 37x-Checkmark@2x.png in Resources */,
+				02D86AE016624B760023ED1C /* icon512.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2796,6 +2817,9 @@
 				02A9491A166057E500C004E5 /* FacebookSDKResources.bundle in Resources */,
 				02A949381660AC3200C004E5 /* zopa.otf in Resources */,
 				02A9494A1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */,
+				02D86AD816624AF50023ED1C /* 37x-Checkmark.png in Resources */,
+				02D86ADC16624AF50023ED1C /* 37x-Checkmark@2x.png in Resources */,
+				02D86AE116624B760023ED1C /* icon512.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3017,6 +3041,9 @@
 				02A9491B166057E500C004E5 /* FacebookSDKResources.bundle in Resources */,
 				02A949391660AC3200C004E5 /* zopa.otf in Resources */,
 				02A9494B1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */,
+				02D86AD916624AF50023ED1C /* 37x-Checkmark.png in Resources */,
+				02D86ADD16624AF50023ED1C /* 37x-Checkmark@2x.png in Resources */,
+				02D86AE216624B760023ED1C /* icon512.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3237,6 +3264,9 @@
 				02A9491C166057E500C004E5 /* FacebookSDKResources.bundle in Resources */,
 				02A9493A1660AC3200C004E5 /* zopa.otf in Resources */,
 				02A9494C1660B4D100C004E5 /* FBUserSettingsViewResources.bundle in Resources */,
+				02D86ADA16624AF50023ED1C /* 37x-Checkmark.png in Resources */,
+				02D86ADE16624AF50023ED1C /* 37x-Checkmark@2x.png in Resources */,
+				02D86AE316624B760023ED1C /* icon512.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

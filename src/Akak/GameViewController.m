@@ -12,7 +12,7 @@
 #import "FlatPillButton.h"
 #import "BCDShareSheet.h"
 
-#define TESTS_IN_SESSION 20
+#define TESTS_IN_SESSION 10
 
 typedef enum gameTableMode
 {
@@ -32,6 +32,7 @@ typedef enum gameTableMode
 @property (nonatomic) int score;
 @property (nonatomic) int errors;
 @property (nonatomic) int totalPassed;
+@property (nonatomic) int allPassed;
 @property (nonatomic) int correctWordIndex;
 @property (nonatomic) int inSequence;
 @property (nonatomic) int maxInSequence;
@@ -59,6 +60,7 @@ typedef enum gameTableMode
 @synthesize noSounds = _noSounds;
 @synthesize hud = _hud;
 @synthesize isTimed = _isTimed;
+@synthesize allPassed = _allPassed;
 
 - (id) init
 {
@@ -732,6 +734,7 @@ typedef enum gameTableMode
             [self playNoSound];
         }
         self.totalPassed++;
+        self.allPassed++;
         
         [self performSelector:@selector(generateNextTask) withObject:nil afterDelay:2];
     }

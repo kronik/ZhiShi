@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MBProgressHUD.h"
 
 typedef enum {
 	BCDEmailService,
@@ -35,6 +36,7 @@ typedef void (^CompletionBlock)(BCDResult);
 @property (nonatomic, copy) CompletionBlock completionBlock;
 @property (nonatomic, retain) NSMutableArray *availableSharingServices; // services available for sharing
 @property (nonatomic) BOOL waitingForFacebookAuthorisation;
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 - (void)determineAvailableSharingServices;
 
@@ -60,6 +62,7 @@ typedef void (^CompletionBlock)(BCDResult);
 @synthesize completionBlock = _completionBlock;
 @synthesize availableSharingServices = _availableSharingServices;
 @synthesize waitingForFacebookAuthorisation = _waitingForFacebookAuthorisation;
+@synthesize hud = _hud;
 
 + (BCDShareSheet *)sharedSharer {
     static BCDShareSheet *sharedInstance = nil;
@@ -272,6 +275,16 @@ typedef void (^CompletionBlock)(BCDResult);
                                              self.item.title, @"caption",
                                              self.item.description, @"description", nil];
     
+    
+    self.hud = [[MBProgressHUD alloc] initWithView:self.rootViewController.view];
+    self.hud.removeFromSuperViewOnHide = YES;
+    self.hud.labelText = @"Публикую...";
+    self.hud.alpha = 0.7;
+    
+    [self.rootViewController.view addSubview: self.hud];
+    
+    [self.hud show: YES];
+    
     [FBRequestConnection startWithGraphPath:@"me/feed"
                                  parameters:postParams
                                  HTTPMethod:@"POST"
@@ -289,9 +302,21 @@ typedef void (^CompletionBlock)(BCDResult);
          {
              alertText = @"Отправлено в Facebook";
          }
+        
+         self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+         self.hud.mode = MBProgressHUDModeCustomView;
+         self.hud.labelText = alertText;
+        
+         [self performSelector:@selector(hideHud) withObject:nil afterDelay:1.0];
          // Show the result in an alert
-         [[[UIAlertView alloc] initWithTitle:@"Результат:" message:alertText delegate:self cancelButtonTitle:@"OK!" otherButtonTitles:nil] show];
+         //[[[UIAlertView alloc] initWithTitle:@"Результат:" message:alertText delegate:self cancelButtonTitle:@"OK!" otherButtonTitles:nil] show];
      }];
+}
+
+- (void) hideHud
+{
+    [self.hud hide: YES];
+    [self.hud removeFromSuperview];
 }
 
 - (void)sessionStateChanged:(NSNotification*)notification
@@ -559,14 +584,14 @@ typedef void (^CompletionBlock)(BCDResult);
 
 #pragma mark - Twitter
 
-- (void)shareViaTwitter {
-    
+- (void)shareViaTwitter
+{    
     NSMutableString *tweetText = [NSMutableString string];
     
     [tweetText appendString:self.item.title];
     
     if (self.item.shortDescription!=nil) {
-        [tweetText appendFormat:@" - %@", self.item.shortDescription];
+        [tweetText appendFormat:@"%@", self.item.shortDescription];
     }
     
     if (self.hashTag!=nil) {
@@ -575,7 +600,7 @@ typedef void (^CompletionBlock)(BCDResult);
         
     TWTweetComposeViewController *tweetComposeViewController = [[TWTweetComposeViewController alloc] init];
     [tweetComposeViewController setInitialText:tweetText];
-    [tweetComposeViewController addImage:[UIImage imageNamed:@"icon144x144.png"]];
+    [tweetComposeViewController addImage:[UIImage imageNamed:@"icon512"]];
     [tweetComposeViewController addURL:[NSURL URLWithString:self.item.itemURLString]];
     [self.rootViewController presentModalViewController:tweetComposeViewController animated:YES];
     
