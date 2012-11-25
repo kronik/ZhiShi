@@ -153,7 +153,7 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
     if (![self openSessionWithAllowLoginUI:NO])
     {
         // No? Display the login page.
-        [self openSessionWithAllowLoginUI: YES];
+        //[self openSessionWithAllowLoginUI: YES];
     }
     
     [self.window makeKeyAndVisible];

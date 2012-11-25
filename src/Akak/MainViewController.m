@@ -435,9 +435,12 @@
         
     self.isCorrectionStarted = YES;
     
+    self.dictSearcherRu.requestToStopSearch = YES;
+    self.dictSearcherEn.requestToStopSearch = YES;
+    
     dispatch_queue_t processQueue = dispatch_queue_create("corrector", NULL);
     dispatch_async(processQueue, ^{
-                
+        
         [self findTextInFileFast:searchText forceFastSearch:YES];
         
         self.isCorrectionStarted = NO;

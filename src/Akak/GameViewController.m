@@ -12,7 +12,7 @@
 #import "FlatPillButton.h"
 #import "BCDShareSheet.h"
 
-#define TESTS_IN_SESSION 5
+#define TESTS_IN_SESSION 20
 
 typedef enum gameTableMode
 {
@@ -35,6 +35,7 @@ typedef enum gameTableMode
 @property (nonatomic) int correctWordIndex;
 @property (nonatomic) int inSequence;
 @property (nonatomic) int maxInSequence;
+@property (nonatomic) BOOL isTimed;
 @property (strong, nonatomic) NSArray *yesSounds;
 @property (strong, nonatomic) NSArray *noSounds;
 @property (strong, nonatomic) MBProgressHUD *hud;
@@ -57,6 +58,7 @@ typedef enum gameTableMode
 @synthesize yesSounds = _yesSounds;
 @synthesize noSounds = _noSounds;
 @synthesize hud = _hud;
+@synthesize isTimed = _isTimed;
 
 - (id) init
 {
