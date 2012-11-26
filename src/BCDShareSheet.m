@@ -276,12 +276,12 @@ typedef void (^CompletionBlock)(BCDResult);
                                              self.item.description, @"description", nil];
     
     
-    self.hud = [[MBProgressHUD alloc] initWithView:self.rootViewController.view];
-    self.hud.removeFromSuperViewOnHide = YES;
+    self.hud = [[MBProgressHUD alloc] initWithView:self.rootViewController.navigationController.view];
+    self.hud.mode = MBProgressHUDModeIndeterminate;
     self.hud.labelText = @"Публикую...";
     self.hud.alpha = 0.7;
     
-    [self.rootViewController.view addSubview: self.hud];
+    [self.rootViewController.navigationController.view addSubview: self.hud];
     
     [self.hud show: YES];
     
@@ -291,6 +291,9 @@ typedef void (^CompletionBlock)(BCDResult);
                           completionHandler:^(FBRequestConnection *connection, id result, NSError *error)
     {
          NSString *alertText;
+        
+         [self.hud hide: YES];
+         [self.hud removeFromSuperview];
     
          if (error)
          {
@@ -303,11 +306,16 @@ typedef void (^CompletionBlock)(BCDResult);
              alertText = @"Отправлено в Facebook";
          }
         
+         self.hud = [[MBProgressHUD alloc] initWithView:self.rootViewController.navigationController.view];
          self.hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
          self.hud.mode = MBProgressHUDModeCustomView;
          self.hud.labelText = alertText;
         
-         [self performSelector:@selector(hideHud) withObject:nil afterDelay:1.0];
+         [self.rootViewController.navigationController.view addSubview: self.hud];
+
+         [self.hud show: YES];
+
+         [self performSelector:@selector(hideHud) withObject:nil afterDelay:2.0];
          // Show the result in an alert
          //[[[UIAlertView alloc] initWithTitle:@"Результат:" message:alertText delegate:self cancelButtonTitle:@"OK!" otherButtonTitles:nil] show];
      }];
@@ -591,16 +599,16 @@ typedef void (^CompletionBlock)(BCDResult);
     [tweetText appendString:self.item.title];
     
     if (self.item.shortDescription!=nil) {
-        [tweetText appendFormat:@"%@", self.item.shortDescription];
+        [tweetText appendFormat:@" %@", self.item.shortDescription];
     }
     
     if (self.hashTag!=nil) {
         [tweetText appendFormat:@" #%@", self.hashTag];
     }
-        
+            
     TWTweetComposeViewController *tweetComposeViewController = [[TWTweetComposeViewController alloc] init];
     [tweetComposeViewController setInitialText:tweetText];
-    [tweetComposeViewController addImage:[UIImage imageNamed:@"icon512"]];
+    [tweetComposeViewController addImage:[UIImage imageNamed:@"icon512.png"]];
     [tweetComposeViewController addURL:[NSURL URLWithString:self.item.itemURLString]];
     [self.rootViewController presentModalViewController:tweetComposeViewController animated:YES];
     
