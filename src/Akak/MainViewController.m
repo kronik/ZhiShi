@@ -1589,7 +1589,14 @@
     [self adjustAdSize];
 #endif 
     
-    return YES;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 #if LITE_VER == 1

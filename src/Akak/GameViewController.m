@@ -36,10 +36,14 @@ typedef enum gameTableMode
 @property (nonatomic) int correctWordIndex;
 @property (nonatomic) int inSequence;
 @property (nonatomic) int maxInSequence;
+@property (nonatomic) BOOL isTimedMode;
 @property (nonatomic) BOOL isTimed;
+@property (nonatomic) int seconds;
 @property (strong, nonatomic) NSArray *yesSounds;
 @property (strong, nonatomic) NSArray *noSounds;
 @property (strong, nonatomic) MBProgressHUD *hud;
+@property (strong, nonatomic) NSTimer *secondsCounter;
+@property (strong, nonatomic) UILabel *timeLabel;
 
 @end
 
@@ -61,6 +65,10 @@ typedef enum gameTableMode
 @synthesize hud = _hud;
 @synthesize isTimed = _isTimed;
 @synthesize allPassed = _allPassed;
+@synthesize isTimedMode = _isTimedMode;
+@synthesize seconds = _seconds;
+@synthesize secondsCounter = _secondsCounter;
+@synthesize timeLabel = _timeLabel;
 
 - (id) init
 {
@@ -168,6 +176,8 @@ typedef enum gameTableMode
 
 - (void)startNewGame: (UIView*) button
 {
+    [self.secondsCounter invalidate];
+
     if (button != nil)
     {
         [button removeFromSuperview];
@@ -185,19 +195,17 @@ typedef enum gameTableMode
     [self generateNextTask];
 }
 
-- (void)nextTaskButton: (UIView*) button
-{    
-    for (int i=0; i<self.task.count; i++)
+- (void)nextTaskButton: (FlatPillButton*) button
+{
+    if ([button.titleLabel.text isEqualToString: self.task[self.correctWordIndex]])
     {
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForItem: i inSection:0]];
-        
-        for (UIView *subButton in cell.subviews)
-        {
-            if ([subButton isKindOfClass:[FlatPillButton class]])
-            {
-                [subButton removeFromSuperview];
-            }
-        }
+        self.timeLabel.hidden = YES;
+        self.isTimed = NO;
+    }
+    else
+    {
+        self.timeLabel.hidden = NO;
+        self.isTimed = YES;
     }
     
     [self playYesSound];
@@ -210,6 +218,8 @@ typedef enum gameTableMode
 
 - (void)resetGame
 {
+    self.timeLabel.hidden = YES;
+
     self.navigationItem.title = @"Проверятор";
     self.navigationItem.rightBarButtonItem = nil;
 
@@ -219,11 +229,14 @@ typedef enum gameTableMode
     self.correctWordIndex = 0;
     self.inSequence = 0;
     
+    self.task = @[@"", @"", @"", @"", @"", @"", @""];
+    [self.tableView reloadData];
+    
     if (self.ruWords != nil && self.ruWords.count > 0)
     {
         self.tableMode = kModeStart;
         
-        self.task = @[@"", @"Поиграем?", @"", @"Да", @"Нет"];
+        self.task = @[@"", @"Хочу поиграть:", @"", @"Без времени", @"На время"];
         self.correctWordIndex = 3;
     }
     else
@@ -249,6 +262,9 @@ typedef enum gameTableMode
 
 - (void)showScore
 {
+    self.timeLabel.hidden = YES;
+    [self.secondsCounter invalidate];
+    
     self.tableMode = kModeScore;
     self.task = @[@"Итого:", @"Слов:", @"Ошибок:", @"Правильно:", @"Правильно подряд:", @"", @"Начать заново"];
     self.correctWordIndex = 6;
@@ -268,7 +284,7 @@ typedef enum gameTableMode
 - (NSString*)getNextWord
 {
     NSString *word = nil;
-    NSArray *wordsPool = self.ruWords;
+    NSArray *wordsPool = self.ruWords;    
     
     while (word == nil)
     {
@@ -335,7 +351,9 @@ typedef enum gameTableMode
 
 - (void)generateNextTask
 {
-    if (self.totalPassed == TESTS_IN_SESSION)
+    [self.secondsCounter invalidate];
+    
+    if (self.isTimed && (self.totalPassed == TESTS_IN_SESSION))
     {
         [self showScore];
         return;
@@ -379,8 +397,39 @@ typedef enum gameTableMode
             break;
     }
     
-    self.navigationItem.title = [NSString stringWithFormat:@"%d / %d", self.totalPassed + 1, TESTS_IN_SESSION];
+    if (self.isTimed)
+    {
+        self.navigationItem.title = [NSString stringWithFormat:@"%d из %d", self.totalPassed + 1, TESTS_IN_SESSION];
+    }
+    else
+    {
+        if (self.totalPassed < 11)
+        {
+            self.navigationItem.title = [NSString stringWithFormat:@"Правильно пока: %d", self.totalPassed];
+        }
+        else
+        {
+            self.navigationItem.title = [NSString stringWithFormat:@"Правильно уже: %d", self.totalPassed];
+        }
+    }
     [self.tableView reloadData];
+    
+    self.secondsCounter = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(onSecondsTimer) userInfo:nil repeats:YES];
+}
+
+- (void) setSeconds:(int)seconds
+{
+    _seconds = seconds;
+    
+    int minutes = seconds / 60;
+    int leftSeconds = seconds % 60;
+    
+    self.timeLabel.text = [NSString stringWithFormat:@"%02d : %02d", minutes, leftSeconds];
+}
+
+- (void)onSecondsTimer
+{
+    self.seconds++;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -495,6 +544,14 @@ typedef enum gameTableMode
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
     }
     
+    for (UIView *subButton in cell.subviews)
+    {
+        if ([subButton isKindOfClass:[FlatPillButton class]])
+        {
+            [subButton removeFromSuperview];
+        }
+    }
+    
     switch (self.tableMode)
     {
         case kModeInit:
@@ -514,14 +571,16 @@ typedef enum gameTableMode
             cell.textLabel.numberOfLines = 1;
             cell.textLabel.textAlignment = NSTextAlignmentCenter;
             cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:28.0f];
-            
+            cell.textLabel.text = @"";
+
             if (indexPath.row == 3 || indexPath.row == 4)
             {
-                // YES and NO
+                // EASY and HARD
                 cell.imageView.image = nil;
                 cell.userInteractionEnabled = YES;
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
-                
+                cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:26.0f];
+
                 FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(40, 5, 240, 50)];
                 button.enabled = YES;
                 
@@ -529,21 +588,17 @@ typedef enum gameTableMode
                 [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
                 [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
                 
-                if (indexPath.row == 3)
-                {
-                    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:26.0f];
-                    [button addTarget:self action:@selector(nextTaskButton:) forControlEvents: UIControlEventTouchUpInside];
-                }
-                else if (indexPath.row == 4)
-                {
-                    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
-                    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-                    
-                    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:24.0f];
-                    [button addTarget:self action:@selector(goBack:) forControlEvents: UIControlEventTouchUpInside];
-                }
-                
+                [button addTarget:self action:@selector(nextTaskButton:) forControlEvents: UIControlEventTouchUpInside];
                 button.titleLabel.font = cell.textLabel.font;
+
+//                if (indexPath.row == 3)
+//                {
+//                    [button addTarget:self action:@selector(nextTaskButton:) forControlEvents: UIControlEventTouchUpInside];
+//                }
+//                else if (indexPath.row == 4)
+//                {
+//                }
+                
 
                 [cell addSubview: button];
             }
@@ -560,6 +615,17 @@ typedef enum gameTableMode
             
         case kModeGameEn:
         case kModeGameRu:
+            
+            if (self.isTimed && indexPath.row == 0 && self.timeLabel == nil)
+            {
+                self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 10, 200, 50)];
+                self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size: 20.0f];
+                self.timeLabel.backgroundColor = [UIColor clearColor];
+                self.timeLabel.textColor = [UIColor darkGrayColor];
+                self.timeLabel.textAlignment = NSTextAlignmentRight;
+                self.timeLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
+                [self.view addSubview: self.timeLabel];
+            }
 
             if (indexPath.row == 1)
             {
@@ -624,7 +690,7 @@ typedef enum gameTableMode
                     [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
                     [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
 
-                    [button addTarget:self action:@selector(startNewGame:) forControlEvents: UIControlEventTouchUpInside];
+                    [button addTarget:self action:@selector(resetGame) forControlEvents: UIControlEventTouchUpInside];
                     [cell addSubview: button];
                     
 //                    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
@@ -732,11 +798,18 @@ typedef enum gameTableMode
             self.errors++;
             
             [self playNoSound];
+            
+            if (self.isTimed == NO && self.tableMode == kModeGameRu)
+            {
+                self.totalPassed++;
+                [self showScore];
+                return;
+            }
         }
         self.totalPassed++;
         self.allPassed++;
         
-        [self performSelector:@selector(generateNextTask) withObject:nil afterDelay:2];
+        [self performSelector:@selector(generateNextTask) withObject:nil afterDelay:1];
     }
 }
 
@@ -780,7 +853,14 @@ typedef enum gameTableMode
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    return YES;
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 @end

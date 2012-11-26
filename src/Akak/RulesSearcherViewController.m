@@ -190,7 +190,15 @@
     {
         self.searchBar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
     }
-    return YES;
+
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
