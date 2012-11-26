@@ -133,22 +133,22 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 //    [rightNavController setNavigationBarHidden:NO];
 //    [paperFoldNavController setRightViewController:rightNavController width:ScreenWidth rightViewFoldCount:3 rightViewPullFactor:0.9];
     
-    NSError *error = nil;
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    
-    [session setCategory: AVAudioSessionCategorySoloAmbient error: &error];
-    
-    if (error != nil)
-    {
-        NSLog(@"Failed to set category on AVAudioSession");
-    }
-    
-    BOOL active = [session setActive: YES error: nil];
-    
-    if (!active)
-    {
-        NSLog(@"Failed to set category on AVAudioSession");
-    }
+//    NSError *error = nil;
+//    AVAudioSession *session = [AVAudioSession sharedInstance];
+//    
+//    [session setCategory: AVAudioSessionCategorySoloAmbient error: &error];
+//    
+//    if (error != nil)
+//    {
+//        NSLog(@"Failed to set category on AVAudioSession");
+//    }
+//    
+//    BOOL active = [session setActive: YES error: nil];
+//    
+//    if (!active)
+//    {
+//        NSLog(@"Failed to set category on AVAudioSession");
+//    }
     
     if (![self openSessionWithAllowLoginUI:NO])
     {

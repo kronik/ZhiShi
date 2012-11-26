@@ -11,6 +11,12 @@
 #import "MBProgressHUD.h"
 #import "FlatPillButton.h"
 #import "BCDShareSheet.h"
+#import <Social/Social.h>
+
+#define kIndexTwitter 0
+#define kIndexFavorite 1
+#define kIndexEmail 2
+#define kIndexFaceBook 3
 
 #define TESTS_IN_SESSION 10
 
@@ -102,77 +108,77 @@ typedef enum gameTableMode
 //    [self.tableView endUpdates];
 }
 
-- (void)playSound: (NSString*)soundFile
-{
-    NSArray *tokens = [soundFile componentsSeparatedByString:@"."];
-    
-    SystemSoundID soundID;
-    NSString *path = [[NSBundle mainBundle] pathForResource: tokens[0] ofType:tokens[1]];
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundID);
-    AudioServicesPlaySystemSound(soundID);
-    AudioServicesDisposeSystemSoundID(soundID);    
-}
-
-- (void)playBgSound: (NSString*)soundFile
-{    
-    NSError *error = nil;
-    NSString *path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], soundFile];
-    NSURL *url = [NSURL fileURLWithPath:path];
-    
-    if( [[NSFileManager defaultManager] fileExistsAtPath: path] == NO)
-    {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:[NSString stringWithFormat: @"Нет файла: %@", soundFile] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-        
-        return;
-    }
-        
-    AVAudioPlayer *soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    soundPlayer.numberOfLoops = 0;
-    soundPlayer.volume = 1.0;
-    
-    if (error != nil)
-    {
-        NSLog(@"%@", [error description]);
-    }
-    
-    [soundPlayer prepareToPlay];
-    [soundPlayer play];
-}
-
--(void)playYesSound
-{
-    int idx = arc4random() % self.yesSounds.count;
-    [self playBgSound:[self.yesSounds objectAtIndex:idx]];
-}
-
--(void)playNoSound
-{
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-
-    int idx = arc4random() % self.noSounds.count;
-    [self playBgSound:[self.noSounds objectAtIndex:idx]];
-}
-
--(NSArray*)yesSounds
-{
-    if (_yesSounds == nil)
-    {
-        _yesSounds = [[NSArray alloc] initWithObjects:@"да.mp3", @"здорово.mp3", @"молодец.mp3", @"отлично.mp3", @"умничка.mp3", nil];
-    }
-    
-    return _yesSounds;
-}
-
--(NSArray*)noSounds
-{
-    if (_noSounds == nil)
-    {
-        _noSounds = [[NSArray alloc] initWithObjects:@"еще разок1.mp3", @"еще разок2.mp3", @"нееет.mp3", @"нет.mp3", @"попробуй еще раз1.mp3", @"попробуй еще раз2.mp3", @"хммм.mp3", nil];
-    }
-    
-    return _noSounds;
-}
+//- (void)playSound: (NSString*)soundFile
+//{
+//    NSArray *tokens = [soundFile componentsSeparatedByString:@"."];
+//    
+//    SystemSoundID soundID;
+//    NSString *path = [[NSBundle mainBundle] pathForResource: tokens[0] ofType:tokens[1]];
+//    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundID);
+//    AudioServicesPlaySystemSound(soundID);
+//    AudioServicesDisposeSystemSoundID(soundID);    
+//}
+//
+//- (void)playBgSound: (NSString*)soundFile
+//{    
+//    NSError *error = nil;
+//    NSString *path = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], soundFile];
+//    NSURL *url = [NSURL fileURLWithPath:path];
+//    
+//    if( [[NSFileManager defaultManager] fileExistsAtPath: path] == NO)
+//    {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:[NSString stringWithFormat: @"Нет файла: %@", soundFile] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        [alert show];
+//        
+//        return;
+//    }
+//        
+//    AVAudioPlayer *soundPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+//    soundPlayer.numberOfLoops = 0;
+//    soundPlayer.volume = 1.0;
+//    
+//    if (error != nil)
+//    {
+//        NSLog(@"%@", [error description]);
+//    }
+//    
+//    [soundPlayer prepareToPlay];
+//    [soundPlayer play];
+//}
+//
+//-(void)playYesSound
+//{
+//    int idx = arc4random() % self.yesSounds.count;
+//    [self playBgSound:[self.yesSounds objectAtIndex:idx]];
+//}
+//
+//-(void)playNoSound
+//{
+//    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+//
+//    int idx = arc4random() % self.noSounds.count;
+//    [self playBgSound:[self.noSounds objectAtIndex:idx]];
+//}
+//
+//-(NSArray*)yesSounds
+//{
+//    if (_yesSounds == nil)
+//    {
+//        _yesSounds = [[NSArray alloc] initWithObjects:@"да.mp3", @"здорово.mp3", @"молодец.mp3", @"отлично.mp3", @"умничка.mp3", nil];
+//    }
+//    
+//    return _yesSounds;
+//}
+//
+//-(NSArray*)noSounds
+//{
+//    if (_noSounds == nil)
+//    {
+//        _noSounds = [[NSArray alloc] initWithObjects:@"еще разок1.mp3", @"еще разок2.mp3", @"нееет.mp3", @"нет.mp3", @"попробуй еще раз1.mp3", @"попробуй еще раз2.mp3", @"хммм.mp3", nil];
+//    }
+//    
+//    return _noSounds;
+//}
 
 - (void)startNewGame: (UIView*) button
 {
@@ -208,7 +214,7 @@ typedef enum gameTableMode
         self.isTimed = YES;
     }
     
-    [self playYesSound];
+    //[self playYesSound];
     
     // Start the game
     self.tableMode = kModeGameRu;
@@ -229,7 +235,7 @@ typedef enum gameTableMode
     self.correctWordIndex = 0;
     self.inSequence = 0;
     
-    self.task = @[@"", @"", @"", @"", @"", @"", @""];
+    self.task = @[@"", @"", @"", @"", @"", @"", @"", @""];
     [self.tableView reloadData];
     
     if (self.ruWords != nil && self.ruWords.count > 0)
@@ -266,7 +272,7 @@ typedef enum gameTableMode
     [self.secondsCounter invalidate];
     
     self.tableMode = kModeScore;
-    self.task = @[@"Итого:", @"Слов:", @"Ошибок:", @"Правильно:", @"Правильно подряд:", @"", @"Начать заново"];
+    self.task = @[@"Итого:", @"Слов:", @"Ошибок:", @"Правильно:", @"Правильно подряд:", @"", @"Начать заново", @"Поделиться"];
     self.correctWordIndex = 6;
 
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
@@ -671,7 +677,7 @@ typedef enum gameTableMode
             cell.textLabel.text = @"";
             cell.imageView.image = nil;
 
-            if ((indexPath.row == 0) || (indexPath.row == 6))
+            if ((indexPath.row == 0) || (indexPath.row == 6) || (indexPath.row == 7))
             {
                 cell.imageView.image = nil;
                 cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:28.0f];
@@ -693,8 +699,23 @@ typedef enum gameTableMode
                     [button addTarget:self action:@selector(resetGame) forControlEvents: UIControlEventTouchUpInside];
                     [cell addSubview: button];
                     
-//                    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
-//                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                    cell.userInteractionEnabled = YES;
+                }
+                else if (indexPath.row == 7)
+                {
+                    cell.textLabel.text = @"";
+                    
+                    FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(40, 5, 240, 50)];
+                    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
+                    button.enabled = YES;
+                    
+                    [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
+                    [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
+                    [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+                    
+                    [button addTarget:self action:@selector(showShareResults:) forControlEvents: UIControlEventTouchUpInside];
+                    [cell addSubview: button];
+                    
                     cell.userInteractionEnabled = YES;
                 }
             }
@@ -740,9 +761,7 @@ typedef enum gameTableMode
     if (self.tableMode == kModeStart)
     {
         if (indexPath.row == self.correctWordIndex)
-        {
-            [self playYesSound];
-            
+        {            
             // Start the game
             self.tableMode = kModeGameRu;
             [self generateNextTask];
@@ -777,8 +796,6 @@ typedef enum gameTableMode
 
         if (indexPath.row == self.correctWordIndex)
         {
-            [self playYesSound];
-
             self.score++;
             self.inSequence++;
             
@@ -797,7 +814,7 @@ typedef enum gameTableMode
             self.inSequence = 0;
             self.errors++;
             
-            [self playNoSound];
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             
             if (self.isTimed == NO && self.tableMode == kModeGameRu)
             {
@@ -817,7 +834,14 @@ typedef enum gameTableMode
 {
     if ((self.tableMode == kModeScore) && (indexPath.row > 0))
     {
-        return 40;
+        if ((indexPath.row == 6) || (indexPath.row == 7))
+        {
+            return 60;
+        }
+        else
+        {
+            return 40;
+        }
     }
     else
     {
@@ -827,6 +851,11 @@ typedef enum gameTableMode
 
 - (void)showShareResults: (UIView*) button
 {
+    self.expandingSelect = [[KLExpandingSelect alloc] initWithDelegate: self dataSource: self];
+    [self.view setExpandingSelect:self.expandingSelect];
+    [self.view addSubview: self.expandingSelect];
+    
+    
     [BCDShareSheet sharedSharer].appName = @"Жи-Ши";
     [BCDShareSheet sharedSharer].hashTag = @"ЖиШи";
     [BCDShareSheet sharedSharer].rootViewController = self;
@@ -849,6 +878,118 @@ typedef enum gameTableMode
     }];
     
     [sheet showInView:self.tableView];
+}
+
+- (NSInteger)expandingSelector:(id) expandingSelect numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
+- (KLExpandingPetal *)expandingSelector:(id) expandingSelect itemForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *iconName = nil;
+    
+    switch (indexPath.row)
+    {
+        case kIndexTwitter:
+            iconName = @"petal-twitter@2x";
+            break;
+        case kIndexFavorite:
+            iconName = @"petal-save@2x";
+            break;
+        case kIndexEmail:
+            iconName = @"petal-email@2x";
+            break;
+        case kIndexFaceBook:
+            iconName = @"petal-facebook@2x";
+            break;
+        default:
+            break;
+    }
+    
+    KLExpandingPetal* petal = [[KLExpandingPetal alloc] initWithImage:[UIImage imageNamed:iconName]];
+    return petal;
+}
+
+- (NSIndexPath *)expandingSelector:(id)expandingSelect willSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Will Select Index Path Fired!");
+    return  indexPath;
+}
+
+// Called after the user changes the selection.
+- (void)expandingSelector:(id)expandingSelect didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIImage* sharedImage = [UIImage imageNamed:@"icon512.png"];
+    NSString *subj = @"Мой результат сегодня: ";
+    NSString *message = [NSString stringWithFormat:@"\nВсего слов: %d\nошибок: %d\nправильно: %d\nи правильно подряд уже: %d!", self.totalPassed, self.errors, self.score, self.maxInSequence];
+    
+    SLComposeViewController* shareViewController = nil;
+    
+    switch (indexPath.row)
+    {
+        case kIndexEmail:
+        {
+            MFMailComposeViewController* mailViewController = [[MFMailComposeViewController alloc] init];
+            
+            [mailViewController setMailComposeDelegate: self];
+            [mailViewController setSubject: subj];
+            [mailViewController setMessageBody:message isHTML:NO];
+            
+            NSData *imageAttachment = UIImageJPEGRepresentation(sharedImage,1);
+            
+            [mailViewController addAttachmentData: imageAttachment mimeType:@"image/png" fileName:@"icon512.png"];
+            [self presentViewController: mailViewController animated: YES completion: nil];
+            
+            return;
+        }
+            break;
+        case kIndexFaceBook:
+            shareViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+            break;
+        case kIndexTwitter:
+            shareViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+            break;
+        case kIndexFavorite:
+            //Handle favorites
+            
+            return;
+        default:
+            break;
+    }
+    [shareViewController addURL:[NSURL URLWithString:@"https://itunes.apple.com/ru/app/zi-si/id493483440?ls=1&mt=8"]];
+    [shareViewController setInitialText: [NSString stringWithFormat:@"%@%@ #ЖиШи", subj, message]];
+    [shareViewController addImage: sharedImage];
+    
+    if ([SLComposeViewController isAvailableForServiceType:shareViewController.serviceType])
+    {
+        [self presentViewController:shareViewController animated:YES completion: nil];
+    }
+    else
+    {
+        UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle: @"Service Not Supported"
+                                                             message: @"You must go to device settings and configure the service"
+                                                            delegate: nil
+                                                   cancelButtonTitle: nil
+                                                   otherButtonTitles: nil];
+        [errorAlert show];
+    }
+}
+
+//Called after the animations have completed
+- (void)expandingSelector:(id)expandingSelect didFinishExpandingAtPoint:(CGPoint) point
+{
+    NSLog(@"Finished expanding at point (%f, %f)", point.x, point.y);
+}
+- (void)expandingSelector:(id)expandingSelect didFinishCollapsingAtPoint:(CGPoint) point
+{
+    NSLog(@"Finished Collapsing at point (%f, %f)", point.x, point.y);
+}
+
+#pragma mark - MFMailComposerDelegate callback - Not required by KLExpandingSelect
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
