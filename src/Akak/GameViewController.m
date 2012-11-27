@@ -255,9 +255,9 @@ typedef enum gameTableMode
         self.task = @[@"", @"Хочу поиграть:", @"", @"Без времени", @"На время"];
         self.correctWordIndex = 3;
         
-        self.wrongIndex1 = arc4random() % self.ruWords.count;
-        self.wrongIndex2 = arc4random() % self.ruWords.count;
-        self.wrongIndex3 = arc4random() % self.ruWords.count;
+        self.wrongIndex1 = arc4random() % self.rules.count;
+        self.wrongIndex2 = arc4random() % self.rules.count;
+        self.wrongIndex3 = arc4random() % self.rules.count;
     }
     else
     {
@@ -338,6 +338,9 @@ typedef enum gameTableMode
     {
         int i = 0;
         
+        keyIndex++;
+        keyIndex %= self.rules.count;
+        
         for (NSString *key in self.rules.keyEnumerator)
         {
             if (i == keyIndex)
@@ -390,9 +393,9 @@ typedef enum gameTableMode
     NSString *secondIncorrect = nil;
     NSString *thirdIncorrect = nil;
     
-    self.wrongIndex1 %= self.ruWords.count;
-    self.wrongIndex2 %= self.ruWords.count;
-    self.wrongIndex3 %= self.ruWords.count;
+    self.wrongIndex1 %= self.rules.count;
+    self.wrongIndex2 %= self.rules.count;
+    self.wrongIndex3 %= self.rules.count;
     
     while (baseWord == nil || firstIncorrect == nil || secondIncorrect == nil || thirdIncorrect == nil || ([secondIncorrect isEqualToString:firstIncorrect]) ||  ([thirdIncorrect isEqualToString:firstIncorrect]) || ([secondIncorrect isEqualToString:thirdIncorrect]))
     {
@@ -400,11 +403,15 @@ typedef enum gameTableMode
         firstIncorrect = [self getIncorrectWordBasedOn: baseWord keyIndex:self.wrongIndex1];
         secondIncorrect = [self getIncorrectWordBasedOn: baseWord keyIndex:self.wrongIndex2];
         thirdIncorrect = [self getIncorrectWordBasedOn: baseWord keyIndex:self.wrongIndex3];
+        
+        self.wrongIndex1 ++;
+        self.wrongIndex2 ++;
+        self.wrongIndex3 ++;
+        
+        self.wrongIndex1 %= self.rules.count;
+        self.wrongIndex2 %= self.rules.count;
+        self.wrongIndex3 %= self.rules.count;
     }
-    
-    self.wrongIndex1 ++;
-    self.wrongIndex2 ++;
-    self.wrongIndex3 ++;
     
     int permut = arc4random() % 3;
     
