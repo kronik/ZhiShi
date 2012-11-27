@@ -45,6 +45,9 @@ typedef enum gameTableMode
 @property (nonatomic) BOOL isTimedMode;
 @property (nonatomic) BOOL isTimed;
 @property (nonatomic) int seconds;
+@property (nonatomic) int wrongIndex1;
+@property (nonatomic) int wrongIndex2;
+@property (nonatomic) int wrongIndex3;
 @property (strong, nonatomic) NSArray *yesSounds;
 @property (strong, nonatomic) NSArray *noSounds;
 @property (strong, nonatomic) MBProgressHUD *hud;
@@ -75,6 +78,9 @@ typedef enum gameTableMode
 @synthesize seconds = _seconds;
 @synthesize secondsCounter = _secondsCounter;
 @synthesize timeLabel = _timeLabel;
+@synthesize wrongIndex1 = _wrongIndex1;
+@synthesize wrongIndex2 = _wrongIndex2;
+@synthesize wrongIndex3 = _wrongIndex3;
 
 - (id) init
 {
@@ -182,6 +188,8 @@ typedef enum gameTableMode
 
 - (void)startNewGame: (UIView*) button
 {
+    //TODO: May be remove?
+    
     [self.secondsCounter invalidate];
 
     if (button != nil)
@@ -196,6 +204,7 @@ typedef enum gameTableMode
     self.totalPassed = 0;
     self.correctWordIndex = 0;
     self.inSequence = 0;
+    self.seconds = 0;
     
     self.tableMode = kModeGameRu;
     [self generateNextTask];
@@ -234,7 +243,8 @@ typedef enum gameTableMode
     self.totalPassed = 0;
     self.correctWordIndex = 0;
     self.inSequence = 0;
-    
+    self.seconds = 0;
+
     self.task = @[@"", @"", @"", @"", @"", @"", @"", @""];
     [self.tableView reloadData];
     
@@ -244,6 +254,10 @@ typedef enum gameTableMode
         
         self.task = @[@"", @"Хочу поиграть:", @"", @"Без времени", @"На время"];
         self.correctWordIndex = 3;
+        
+        self.wrongIndex1 = arc4random() % self.ruWords.count;
+        self.wrongIndex2 = arc4random() % self.ruWords.count;
+        self.wrongIndex3 = arc4random() % self.ruWords.count;
     }
     else
     {
@@ -272,12 +286,17 @@ typedef enum gameTableMode
     [self.secondsCounter invalidate];
     
     self.tableMode = kModeScore;
-    self.task = @[@"Итого:", @"Слов:", @"Ошибок:", @"Правильно:", @"Правильно подряд:", @"", @"Начать заново", @"Поделиться"];
+    
+    if (self.isTimed)
+    {
+        self.task = @[@"Итого:", @"Время:", @"Ошибок:", @"Правильно:", @"Правильно подряд:", @"", @"Начать заново", @"Поделиться"];
+
+    }
+    else
+    {
+        self.task = @[@"Итого:", @"Слов:", @"", @"", @"", @"", @"Начать заново", @"Поделиться"];
+    }
     self.correctWordIndex = 6;
-
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 
@@ -310,14 +329,13 @@ typedef enum gameTableMode
     return NO;
 }
 
-- (NSString *) getIncorrectWordBasedOn: (NSString*) correctWord
+- (NSString *) getIncorrectWordBasedOn: (NSString*) correctWord keyIndex: (int)keyIndex
 {
     NSString *word = nil;
     int triesCount = 0;
     
     while (word == nil)
     {
-        int keyIndex = arc4random() % self.rules.count;
         int i = 0;
         
         for (NSString *key in self.rules.keyEnumerator)
@@ -365,39 +383,49 @@ typedef enum gameTableMode
         return;
     }
     
+    // TODO: Generate next word index
+    
     NSString *baseWord = nil;
     NSString *firstIncorrect = nil;
     NSString *secondIncorrect = nil;
-    //NSString *thirdIncorrect = nil;
+    NSString *thirdIncorrect = nil;
     
-    while (baseWord == nil || firstIncorrect == nil || secondIncorrect == nil || ([secondIncorrect isEqualToString:firstIncorrect]))
+    self.wrongIndex1 %= self.ruWords.count;
+    self.wrongIndex2 %= self.ruWords.count;
+    self.wrongIndex3 %= self.ruWords.count;
+    
+    while (baseWord == nil || firstIncorrect == nil || secondIncorrect == nil || thirdIncorrect == nil || ([secondIncorrect isEqualToString:firstIncorrect]) ||  ([thirdIncorrect isEqualToString:firstIncorrect]) || ([secondIncorrect isEqualToString:thirdIncorrect]))
     {
         baseWord = [self getNextWord];
-        firstIncorrect = [self getIncorrectWordBasedOn: baseWord];
-        secondIncorrect = [self getIncorrectWordBasedOn: baseWord];
-        //thirdIncorrect = [self getIncorrectWordBasedOn: baseWord];
+        firstIncorrect = [self getIncorrectWordBasedOn: baseWord keyIndex:self.wrongIndex1];
+        secondIncorrect = [self getIncorrectWordBasedOn: baseWord keyIndex:self.wrongIndex2];
+        thirdIncorrect = [self getIncorrectWordBasedOn: baseWord keyIndex:self.wrongIndex3];
     }
+    
+    self.wrongIndex1 ++;
+    self.wrongIndex2 ++;
+    self.wrongIndex3 ++;
     
     int permut = arc4random() % 3;
     
     switch (permut)
     {
         case 0:
-            self.task = @[@"", @"Выбери правильный вариант:", @"", baseWord, firstIncorrect, secondIncorrect];
+            self.task = @[@"", @"Выбери правильный вариант:", @"", baseWord, firstIncorrect, secondIncorrect, thirdIncorrect];
             self.correctWordIndex = 3;
             break;
         case 1:
-            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, baseWord, secondIncorrect];
+            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, baseWord, secondIncorrect, thirdIncorrect];
             self.correctWordIndex = 4;
             break;
         case 2:
-            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, baseWord];
+            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, baseWord, thirdIncorrect];
             self.correctWordIndex = 5;
             break;
-//        case 3:
-//            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, thirdIncorrect, baseWord];
-//            self.correctWordIndex = 6;
-//            break;
+        case 3:
+            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, thirdIncorrect, baseWord];
+            self.correctWordIndex = 6;
+            break;
             
         default:
             break;
@@ -725,21 +753,35 @@ typedef enum gameTableMode
                 cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
                 cell.textLabel.text = self.task [indexPath.row];
 
-                if (indexPath.row == 1)
-                {                    
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.totalPassed];
-                }
-                else if (indexPath.row == 2)
+                if (self.isTimed)
                 {
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.errors];
+                    if (indexPath.row == 1)
+                    {
+                        int minutes = self.seconds / 60;
+                        int leftSeconds = self.seconds % 60;
+                        
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%02d : %02d", minutes, leftSeconds];
+                    }
+                    else if (indexPath.row == 2)
+                    {
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.errors];
+                    }
+                    else if (indexPath.row == 3)
+                    {
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.score];
+                    }
+                    else if (indexPath.row == 4)
+                    {
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.maxInSequence];
+                    }
                 }
-                else if (indexPath.row == 3)
+                else
                 {
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.score];
-                }
-                else if (indexPath.row == 4)
-                {
-                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.maxInSequence];
+                    if (indexPath.row == 1)
+                    {                    
+                        cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.totalPassed];
+                        self.navigationItem.title = @"Проверятор";
+                    }
                 }
             }
 
@@ -967,8 +1009,8 @@ typedef enum gameTableMode
     }
     else
     {
-        UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle: @"Service Not Supported"
-                                                             message: @"You must go to device settings and configure the service"
+        UIAlertView* errorAlert = [[UIAlertView alloc] initWithTitle: @"Сервис не доступен"
+                                                             message: @"Пожалуйста, настройте сервис в настройках."
                                                             delegate: nil
                                                    cancelButtonTitle: nil
                                                    otherButtonTitles: nil];
