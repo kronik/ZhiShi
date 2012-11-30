@@ -695,8 +695,8 @@
     // Create label with section title
     UILabel *label = [[UILabel alloc] init];
     label.frame = CGRectMake(0, 0, 1024.0, 22);
-    label.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-menubar-right.png"]];
-    label.textColor = UIColorFromRGB(0xF6D993);
+    label.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-menubar-right"]];
+    label.textColor = [UIColor whiteColor]; //UIColorFromRGB(0xF6D993);
     label.font = [UIFont boldSystemFontOfSize:18];
     label.text = sectionTitle;
     
@@ -1146,8 +1146,8 @@
         [self showActionSheet:self];
     }
     
-    self.showRulesButton.titleLabel.textColor = UIColorFromRGB(0x361707);//[UIColor brownColor];
-    self.cancelButton.titleLabel.textColor = UIColorFromRGB(0x361707);//[UIColor brownColor];
+    self.showRulesButton.titleLabel.textColor = [UIColor whiteColor]; //UIColorFromRGB(0x361707);//[UIColor brownColor];
+    self.cancelButton.titleLabel.textColor = [UIColor whiteColor]; //UIColorFromRGB(0x361707);//[UIColor brownColor];
 }
 
 - (BOOL) isWord: (NSString*)word inAlphabet: (NSString*)alphabet
@@ -1279,7 +1279,7 @@
     
     //self.tableView.backgroundColor = [UIColor colorWithRed:251/255.0f green:248/255.0f blue:148/255.0f alpha:1.0];
     self.tableView.separatorColor = [UIColor clearColor];//[UIColor colorWithRed:180/255.0f green:188/255.0f blue:164/255.0f alpha:1.0];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG@2x.png"]];
+    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG"]];
     
     //self.searchBar.tintColor = [UIColor colorWithRed:77/255.0f green:55/255.0f blue:47/255.0f alpha:1.0f];
     //self.cancelButton.backgroundColor = [UIColor colorWithRed:77/255.0f green:55/255.0f blue:47/255.0f alpha:1.0f];
@@ -1287,12 +1287,16 @@
     //self.showRulesButton.backgroundColor = [UIColor colorWithRed:77/255.0f green:55/255.0f blue:47/255.0f alpha:1.0f];
     //self.showRulesButton.tintColor = [UIColor colorWithRed:77/255.0f green:55/255.0f blue:47/255.0f alpha:1.0f];
 
-    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"menu-bar-button@2x.png"] forState:UIControlStateNormal];
-    [self.showRulesButton setBackgroundImage:[UIImage imageNamed:@"menu-bar-button@2x.png"] forState:UIControlStateNormal];
-    self.showRulesButton.titleLabel.textColor = UIColorFromRGB(0x361707);//[UIColor brownColor];
-    self.cancelButton.titleLabel.textColor = UIColorFromRGB(0x361707);//[UIColor brownColor];
+    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"ipad-button-red"] forState:UIControlStateNormal];
+    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"ipad-button-red-pressed"] forState:UIControlStateHighlighted];
+
+    [self.showRulesButton setBackgroundImage:[UIImage imageNamed:@"ipad-button-blue"] forState:UIControlStateNormal];
+    [self.showRulesButton setBackgroundImage:[UIImage imageNamed:@"ipad-button-blue-pressed"] forState:UIControlStateHighlighted];
+
+    self.showRulesButton.titleLabel.textColor = [UIColor whiteColor];// UIColorFromRGB(0x361707);//[UIColor brownColor];
+    self.cancelButton.titleLabel.textColor = [UIColor whiteColor]; //UIColorFromRGB(0x361707);//[UIColor brownColor];
     
-    [self.searchBar setBackgroundImage:[UIImage imageNamed:@"ipad-menubar-right.png"]];
+    [self.searchBar setBackgroundImage:[UIImage imageNamed:@"ipad-menubar-right"]];
 
     self.cancelButton.layer.cornerRadius = 5.0;
     self.showRulesButton.layer.cornerRadius = 5.0;
@@ -1393,8 +1397,8 @@
     
     [self searchBarTextDidBeginEditing: self.searchBar];
     
-    self.showRulesButton.titleLabel.textColor = UIColorFromRGB(0x361707);//[UIColor brownColor];
-    self.cancelButton.titleLabel.textColor = UIColorFromRGB(0x361707);//[UIColor brownColor];
+    self.showRulesButton.titleLabel.textColor = [UIColor whiteColor]; //UIColorFromRGB(0x361707);//[UIColor brownColor];
+    self.cancelButton.titleLabel.textColor = [UIColor whiteColor]; //UIColorFromRGB(0x361707);//[UIColor brownColor];
     
     self.isVisible = YES;
 }

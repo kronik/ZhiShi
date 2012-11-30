@@ -98,7 +98,7 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"ipad-menubar-right"] forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setTintColor: [UIColor colorWithRed:0.28f green:0.12f blue:0.02f alpha:1.00f]];
+    [[UINavigationBar appearance] setTintColor: [UIColor blueColor]];
 
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], UITextAttributeTextColor, [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0, -1)], UITextAttributeTextShadowOffset, nil]];
     // Override point for customization after application launch.

@@ -20,6 +20,34 @@
 
 #define TESTS_IN_SESSION 10
 
+@interface NSPair : NSObject
+
+-(id)initWithKey: (NSString*) key andData: (NSString*)data;
+
+@property (nonatomic, strong, readonly) NSString *key;
+@property (nonatomic, strong, readonly) NSString *data;
+
+@end
+
+@implementation NSPair
+
+@synthesize key = _key;
+@synthesize data = _data;
+
+-(id)initWithKey: (NSString*) key andData: (NSString*)data
+{
+    self = [super init];
+    
+    if (self != nil)
+    {
+        _key = key;
+        _data = data;
+    }
+    return self;
+}
+
+@end
+
 typedef enum gameTableMode
 {
     kModeInit,
@@ -34,6 +62,7 @@ typedef enum gameTableMode
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic) gameTableMode tableMode;
 @property (nonatomic, strong) NSDictionary *rules;
+@property (nonatomic, strong) NSMutableArray *rulesIndexer;
 @property (nonatomic, strong) NSArray *task;
 @property (nonatomic) int score;
 @property (nonatomic) int errors;
@@ -81,6 +110,7 @@ typedef enum gameTableMode
 @synthesize wrongIndex1 = _wrongIndex1;
 @synthesize wrongIndex2 = _wrongIndex2;
 @synthesize wrongIndex3 = _wrongIndex3;
+@synthesize rulesIndexer = _rulesIndexer;
 
 - (id) init
 {
@@ -197,8 +227,6 @@ typedef enum gameTableMode
         [button removeFromSuperview];
     }
     
-    self.navigationItem.rightBarButtonItem = nil;
-
     self.score = 0;
     self.errors = 0;
     self.totalPassed = 0;
@@ -236,7 +264,6 @@ typedef enum gameTableMode
     self.timeLabel.hidden = YES;
 
     self.navigationItem.title = @"Проверятор";
-    self.navigationItem.rightBarButtonItem = nil;
 
     self.score = 0;
     self.errors = 0;
@@ -302,8 +329,8 @@ typedef enum gameTableMode
 
     [self.tableView reloadData];
     
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showShareResults:)];
-    self.navigationItem.rightBarButtonItem = shareButton;
+//    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showShareResults:)];
+//    self.navigationItem.rightBarButtonItem = shareButton;
 }
 
 - (NSString*)getNextWord
@@ -321,7 +348,7 @@ typedef enum gameTableMode
         }
     }
     
-    return [word lowercaseString];
+    return [[word lowercaseString] stringByReplacingOccurrencesOfString:@"" withString:@"е"];
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal
@@ -329,47 +356,32 @@ typedef enum gameTableMode
     return NO;
 }
 
-- (NSString *) getIncorrectWordBasedOn: (NSString*) correctWord keyIndex: (int)keyIndex
+- (NSString *) getIncorrectWordBasedOn: (NSString*) correctWord
 {
     NSString *word = nil;
-    int triesCount = 0;
-    
-    while (word == nil)
+    int startIndex = self.wrongIndex1;
+            
+    while (true)
     {
-        int i = 0;
+        self.wrongIndex1 ++;
+        self.wrongIndex1 %= self.rulesIndexer.count;
         
-        keyIndex++;
-        keyIndex %= self.rules.count;
-        
-        for (NSString *key in self.rules.keyEnumerator)
-        {
-            if (i == keyIndex)
-            {
-                NSString *destRule = self.rules [key];
-                
-                word = [correctWord stringByReplacingOccurrencesOfString: key withString: destRule];
-                
-                if ([word isEqualToString: correctWord] == NO)
-                {
-                    return word;
-                }
-                else
-                {
-                    word = nil;
-                }
-                
-                break;
-            }
-            else
-            {
-                i++;
-            }
-        }
-        triesCount ++;
-        
-        if (triesCount == 10)
+        if (self.wrongIndex1 == startIndex)
         {
             break;
+        }
+        
+        NSPair *pair = self.rulesIndexer [self.wrongIndex1];
+        
+        word = [correctWord stringByReplacingOccurrencesOfString: pair.key withString: pair.data];
+        
+        if ([word isEqualToString: correctWord] == NO)
+        {
+            return word;
+        }
+        else
+        {
+            word = nil;
         }
     }
     
@@ -393,24 +405,25 @@ typedef enum gameTableMode
     NSString *secondIncorrect = nil;
     NSString *thirdIncorrect = nil;
     
-    self.wrongIndex1 %= self.rules.count;
-    self.wrongIndex2 %= self.rules.count;
-    self.wrongIndex3 %= self.rules.count;
+//    self.wrongIndex2 %= self.rules.count;
+//    self.wrongIndex3 %= self.rules.count;
     
     while (baseWord == nil || firstIncorrect == nil || secondIncorrect == nil || thirdIncorrect == nil || ([secondIncorrect isEqualToString:firstIncorrect]) ||  ([thirdIncorrect isEqualToString:firstIncorrect]) || ([secondIncorrect isEqualToString:thirdIncorrect]))
     {
+        self.wrongIndex1 = arc4random() % self.rulesIndexer.count;
+
         baseWord = [self getNextWord];
-        firstIncorrect = [self getIncorrectWordBasedOn: baseWord keyIndex:self.wrongIndex1];
-        secondIncorrect = [self getIncorrectWordBasedOn: baseWord keyIndex:self.wrongIndex2];
-        thirdIncorrect = [self getIncorrectWordBasedOn: baseWord keyIndex:self.wrongIndex3];
+        firstIncorrect = [self getIncorrectWordBasedOn: baseWord];
+        secondIncorrect = [self getIncorrectWordBasedOn: baseWord];
+        thirdIncorrect = [self getIncorrectWordBasedOn: baseWord];
         
-        self.wrongIndex1 ++;
-        self.wrongIndex2 ++;
-        self.wrongIndex3 ++;
+//        self.wrongIndex1 ++;
+//        self.wrongIndex2 ++;
+//        self.wrongIndex3 ++;
         
-        self.wrongIndex1 %= self.rules.count;
-        self.wrongIndex2 %= self.rules.count;
-        self.wrongIndex3 %= self.rules.count;
+//        self.wrongIndex1 %= self.rules.count;
+//        self.wrongIndex2 %= self.rules.count;
+//        self.wrongIndex3 %= self.rules.count;
     }
     
     int permut = arc4random() % 3;
@@ -495,8 +508,15 @@ typedef enum gameTableMode
         
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG@2x.png"]];
     
-    self.rules = [NSDictionary dictionaryWithObjectsAndKeys:@"раст", @"рост", @"жы", @"жи", @"шы", @"ши", @"н", @"нн", @"ок", @"окк",  @"ак", @"акк",  @"акк", @"ак",  @"окк", @"ок",  @"лаг", @"лог",  @"лог", @"лаг",  @"рост", @"раст", @"ращ", @"рощ",  @"рощ", @"ращ", @"рос", @"рас", @"рас", @"рос",  @"лож", @"лаж", @"кас", @"кос",  @"кос", @"кас", @"гар", @"гор",  @"гор", @"гар", @"зар", @"зор", @"зор", @"зар", @"клан", @"клон", @"клон", @"клан", @"твар", @"твор", @"твор", @"твар", @"мак", @"мок", @"мок", @"мак", @"равн", @"ровн", @"ровн", @"равн", @"цы", @"ци", @"ци", @"цы", @"ше", @"шо", @"шо", @"ше", @"же", @"жо", @"жо", @"же", @"пре", @"при", @"при", @"пре", @"ива", @"ыва", @"ыва", @"ива", @"ова", @"ева", @"ева", @"ова", @"не", @"ни", @"ни", @"не", @"бир", @"бер", @"бер", @"бир", @"дер", @"дир", @"дир", @"дер", @"мир", @"мер", @"мер", @"мир", @"тир", @"тер", @"тер", @"тир", @"пир", @"пер", @"пер", @"пир", @"жиг", @"жег", @"жег", @"жиг", @"стил", @"стел", @"стел", @"стил", @"блист", @"блест",  @"блест", @"блист", @"чит", @"чет", @"чет", @"чит", @"чот", @"чет", @"чет", @"чот", @"че", @"чо", @"чо", @"че", @"рос", @"роз", @"роз", @"рос", @"шу", @"шю", @"жу", @"жю", @"ания", @"анья", @"ония", @"онья", @"с", @"сс", @"нив", @"нев", @"нев", @"нив", @"кал", @"кол", @"кол", @"кал", @"терр", @"тер", @"кож", @"каж", @"каж", @"кож", @"изк", @"иск", @"зах", @"зох", @"зох", @"зах", @"сар", @"сор", @"мат", @"мот", @"мот", @"мат", @"чиск", @"ческ", @"ческ", @"чиск", @"ео", @"еа", @"еа", @"ео", @"сч", @"щ", @"щ", @"сч", @"бид", @"бед", @"бед", @"бид", @"ота", @"ото", @"ото", @"ота", @"пад", @"под", @"под", @"пад", @"лач", @"лоч", @"лоч", @"лач", @"чев", @"чив", @"чив", @"чев", @"сач", @"соч", @"соч", @"сач", @"пас", @"пос", @"пос", @"пас", @"дот", @"дат", @"дот", @"дат", @"пег", @"пиг", @"пиг", @"пег", @"мен", @"мин", @"мин", @"мен", @"ков", @"кав", @"кав", @"ков", @"наст", @"ност", @"ност", @"наст", @"л", @"лл", @"к", @"кк", @"ара", @"аро", @"аро", @"ара", @"паж", @"пож", @"пож", @"паж", nil];
-        
+    self.rules = [NSDictionary dictionaryWithObjectsAndKeys:@"раст", @"рост", @"жы", @"жи", @"шы", @"ши", @"н", @"нн", @"ок", @"окк",  @"ак", @"акк",  @"акк", @"ак",  @"окк", @"ок",  @"лаг", @"лог",  @"лог", @"лаг",  @"рост", @"раст", @"ращ", @"рощ",  @"рощ", @"ращ", @"рос", @"рас", @"рас", @"рос",  @"лож", @"лаж", @"кас", @"кос",  @"кос", @"кас", @"гар", @"гор",  @"гор", @"гар", @"зар", @"зор", @"зор", @"зар", @"клан", @"клон", @"клон", @"клан", @"твар", @"твор", @"твор", @"твар", @"мак", @"мок", @"мок", @"мак", @"равн", @"ровн", @"ровн", @"равн", @"цы", @"ци", @"ци", @"цы", @"ше", @"шо", @"шо", @"ше", @"же", @"жо", @"жо", @"же", @"пре", @"при", @"при", @"пре", @"ива", @"ыва", @"ыва", @"ива", @"ова", @"ева", @"ева", @"ова", @"не", @"ни", @"ни", @"не", @"бир", @"бер", @"бер", @"бир", @"дер", @"дир", @"дир", @"дер", @"мир", @"мер", @"мер", @"мир", @"тир", @"тер", @"тер", @"тир", @"пир", @"пер", @"пер", @"пир", @"жиг", @"жег", @"жег", @"жиг", @"стил", @"стел", @"стел", @"стил", @"блист", @"блест",  @"блест", @"блист", @"чит", @"чет", @"чет", @"чит", @"чот", @"чет", @"чет", @"чот", @"че", @"чо", @"чо", @"че", @"рос", @"роз", @"роз", @"рос", @"шу", @"шю", @"жу", @"жю", @"ания", @"анья", @"ония", @"онья", @"с", @"сс", @"нив", @"нев", @"нев", @"нив", @"кал", @"кол", @"кол", @"кал", @"терр", @"тер", @"кож", @"каж", @"каж", @"кож", @"изк", @"иск", @"зах", @"зох", @"зох", @"зах", @"сар", @"сор", @"мат", @"мот", @"мот", @"мат", @"чиск", @"ческ", @"ческ", @"чиск", @"ео", @"еа", @"еа", @"ео", @"сч", @"щ", @"щ", @"сч", @"бид", @"бед", @"бед", @"бид", @"ота", @"ото", @"ото", @"ота", @"пад", @"под", @"под", @"пад", @"лач", @"лоч", @"лоч", @"лач", @"чев", @"чив", @"чив", @"чев", @"сач", @"соч", @"соч", @"сач", @"пас", @"пос", @"пос", @"пас", @"дот", @"дат", @"дот", @"дат", @"пег", @"пиг", @"пиг", @"пег", @"мен", @"мин", @"мин", @"мен", @"ков", @"кав", @"кав", @"ков", @"наст", @"ност", @"ност", @"наст", @"л", @"лл", @"к", @"кк", @"ара", @"аро", @"аро", @"ара", @"паж", @"пож", @"пож", @"паж", @"ито", @"ыто", @"игр", @"ыгр", @"ё", @"йо", @"йо", @"ё", nil];
+    
+    self.rulesIndexer = [[NSMutableArray alloc] init];
+
+    for (NSString *key in self.rules.keyEnumerator)
+    {
+        [self.rulesIndexer addObject: [[NSPair alloc] initWithKey: key andData: self.rules [key]]];
+    }
+
     [self resetGame];
 }
 
@@ -904,6 +924,11 @@ typedef enum gameTableMode
     [self.view setExpandingSelect:self.expandingSelect];
     [self.view addSubview: self.expandingSelect];
     
+    [button setHidden: YES];
+
+    [self.expandingSelect expandItemsAtPoint: self.tableView.center];
+    
+    return;
     
     [BCDShareSheet sharedSharer].appName = @"Жи-Ши";
     [BCDShareSheet sharedSharer].hashTag = @"ЖиШи";
