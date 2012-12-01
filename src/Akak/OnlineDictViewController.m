@@ -79,7 +79,7 @@
     
     self.webView.backgroundColor = UIColorFromRGB(0xFFF4CB);
     
-    UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar-right"];
+    UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar"];
     [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
     
     UIImage* buttonImage = [UIImage imageNamed:@"back.png"];

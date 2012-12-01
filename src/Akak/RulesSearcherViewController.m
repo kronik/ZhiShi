@@ -40,7 +40,7 @@
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     self.searchBar.showsCancelButton = NO;
     self.searchBar.delegate = self;
-    [self.searchBar setBackgroundImage:[UIImage imageNamed:@"ipad-menubar-right"]];
+    [self.searchBar setBackgroundImage:[UIImage imageNamed:@"ipad-menubar"]];
     
     self.tableView = [[MYTableView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style: UITableViewStyleGrouped];
     self.tableView.dataSource = self;
@@ -61,7 +61,7 @@
 
 - (void)addBackButton
 {
-    UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar-right"];
+    UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar"];
     [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
     
     UIImage* buttonImage = [UIImage imageNamed:@"back.png"];

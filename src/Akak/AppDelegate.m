@@ -104,7 +104,7 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"ipad-menubar-right"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"ipad-menubar"] forBarMetrics:UIBarMetricsDefault];
     //[[UINavigationBar appearance] setBackgroundColor: [UIColor clearColor]];
     [[UINavigationBar appearance] setTintColor: [UIColor blueColor]];
 

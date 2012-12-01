@@ -620,7 +620,7 @@ typedef enum gameTableMode
 
 - (void)addBackButton
 {
-    UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar-right"];
+    UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar"];
     [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
     
     UIImage* buttonImage = [UIImage imageNamed:@"back"];

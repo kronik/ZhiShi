@@ -695,10 +695,12 @@
     // Create label with section title
     UILabel *label = [[UILabel alloc] init];
     label.frame = CGRectMake(0, 0, 1024.0, 22);
-    label.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-menubar-right"]];
+    label.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-menubar"]];
     label.textColor = [UIColor whiteColor]; //UIColorFromRGB(0xF6D993);
     label.font = [UIFont boldSystemFontOfSize:18];
     label.text = sectionTitle;
+    label.shadowColor = [UIColor blackColor];
+    label.shadowOffset = CGSizeMake(0, 1);
     
     // Create header view and add label as a subview
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024.0, 22)];
@@ -1296,7 +1298,7 @@
     self.showRulesButton.titleLabel.textColor = [UIColor whiteColor];// UIColorFromRGB(0x361707);//[UIColor brownColor];
     self.cancelButton.titleLabel.textColor = [UIColor whiteColor]; //UIColorFromRGB(0x361707);//[UIColor brownColor];
     
-    [self.searchBar setBackgroundImage:[UIImage imageNamed:@"ipad-menubar-right"]];
+    [self.searchBar setBackgroundImage:[UIImage imageNamed:@"ipad-menubar"]];
 
 //    [self.searchBar setBackgroundColor:[UIColor clearColor]];
 //    for (UIView *subview in self.searchBar.subviews) {
