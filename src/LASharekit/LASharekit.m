@@ -25,6 +25,7 @@
 #import <objc/runtime.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "Vkontakte.h"
 
 #import "LASharekit.h"
 #import "PinterestViewController.h"
@@ -280,6 +281,82 @@ typedef enum {
 }
 
 #pragma mark - SHARE
+
+// Vkontakte
+- (void) vkPost
+{
+    if (YES /* is vk auth ok?*/)
+    {
+        REComposeViewController *composeViewController = [[REComposeViewController alloc] init];
+#if !__has_feature(objc_arc)
+        [composeViewController autorelease];
+#endif
+        composeViewController.hasAttachment = YES;
+        composeViewController.attachmentImage = self.image;
+        composeViewController.text = self.text;
+        
+        // Service name
+        UILabel *titleView          = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 110, 30)];
+        titleView.font              = [UIFont boldSystemFontOfSize:17.0];
+        titleView.textAlignment     = NSTextAlignmentCenter;
+        titleView.backgroundColor   = [UIColor clearColor];
+        titleView.textColor         = [UIColor whiteColor];
+        titleView.text              = @"ВКонтакте";
+        composeViewController.navigationItem.titleView = titleView;
+        
+        // UIApperance setup
+        // Facebook colors
+        composeViewController.navigationBar.tintColor                       = [UIColor colorWithRed:0.34f green:0.48f blue:0.64f alpha:1.00f];
+        //composeViewController.navigationItem.leftBarButtonItem.tintColor    = [UIColor colorWithRed:70.0/255.0 green:91.0/255.0 blue:192.0/255.0 alpha:1.0];
+        //composeViewController.navigationItem.rightBarButtonItem.tintColor   = [UIColor colorWithRed:70.0/255.0 green:91.0/255.0 blue:192.0/255.0 alpha:1.0];
+        
+        // Alternative use with REComposeViewControllerCompletionHandler
+        composeViewController.completionHandler = ^(REComposeResult result)
+        {
+            switch (result)
+            {
+                case REComposeResultCancelled:
+                    [self completionResult:typeCanceled];
+                    break;
+                    
+                case REComposeResultPosted:
+//                    [self performPublishAction:^{
+//                        
+//                        // paso los parametros para mandar al feed del usuario
+//                        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+//                                                       UIImagePNGRepresentation(self.image), @"source",
+//                                                       self.text, @"message",
+//                                                       [self.url absoluteString], @"link",
+//                                                       self.title, @"caption",
+//                                                       self.imageUrl, @"picture",
+//                                                       @"Жи-Ши", @"name",
+//                                                       nil];
+//                        [FBRequestConnection startWithGraphPath:@"me/feed"
+//                                                     parameters:params
+//                                                     HTTPMethod:@"POST"
+//                                              completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+//                                                  
+//                                                  if (!error)
+//                                                  {
+//                                                      [self completionResult:typeDone];
+//                                                  }
+//                                                  else
+//                                                  {
+//                                                      NSLog(@"ERROR AT 'startWithGraphPath': %@", [error localizedDescription]);
+//                                                      [self completionResult:typeCanceled];
+//                                                  }
+//                                              }];
+//                    }];
+                    break;
+                    
+                default:
+                    break;
+            }
+        };
+        
+        [self.controller presentViewController:composeViewController animated:YES completion:nil];
+    }
+}
 
 // FACEBOOK
 - (void) facebookPost

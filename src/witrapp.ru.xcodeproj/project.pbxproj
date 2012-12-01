@@ -569,6 +569,10 @@
 		02A076AE1669A618008036E9 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02A94904165FDC3600C004E5 /* Twitter.framework */; };
 		02A076AF1669A621008036E9 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0244DB7A165DB57F009A7383 /* Accelerate.framework */; };
 		02A076B01669A662008036E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021C7BC7165BD28D00A48648 /* QuartzCore.framework */; };
+		02A076B21669B19F008036E9 /* petal-vk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A076B11669B19F008036E9 /* petal-vk@2x.png */; };
+		02A076B31669B19F008036E9 /* petal-vk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A076B11669B19F008036E9 /* petal-vk@2x.png */; };
+		02A076B41669B19F008036E9 /* petal-vk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A076B11669B19F008036E9 /* petal-vk@2x.png */; };
+		02A076B51669B19F008036E9 /* petal-vk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A076B11669B19F008036E9 /* petal-vk@2x.png */; };
 		02A948D0165FC72500C004E5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948CF165FC72500C004E5 /* MBProgressHUD.m */; };
 		02A948D1165FC72500C004E5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948CF165FC72500C004E5 /* MBProgressHUD.m */; };
 		02A948D2165FC72500C004E5 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 02A948CF165FC72500C004E5 /* MBProgressHUD.m */; };
@@ -1459,6 +1463,7 @@
 		02A0769816691DFC008036E9 /* Vkontakte.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vkontakte.m; sourceTree = "<group>"; };
 		02A0769916691DFC008036E9 /* VkontakteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VkontakteViewController.h; sourceTree = "<group>"; };
 		02A0769A16691DFC008036E9 /* VkontakteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VkontakteViewController.m; sourceTree = "<group>"; };
+		02A076B11669B19F008036E9 /* petal-vk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "petal-vk@2x.png"; path = "Images/petal-vk@2x.png"; sourceTree = "<group>"; };
 		02A948CE165FC72500C004E5 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = SOURCE_ROOT; };
 		02A948CF165FC72500C004E5 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		02A948E2165FCF7D00C004E5 /* FlatPillButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatPillButton.h; sourceTree = SOURCE_ROOT; };
@@ -2254,6 +2259,7 @@
 		326408C314A9BFCC00C3A53B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				02A076B11669B19F008036E9 /* petal-vk@2x.png */,
 				02A0768016691D74008036E9 /* notice_error_icon.png */,
 				02A0768116691D74008036E9 /* notice_error_icon@2x.png */,
 				02A0768216691D74008036E9 /* notice_success_icon.png */,
@@ -2928,6 +2934,7 @@
 				02A0768816691D75008036E9 /* notice_error_icon@2x.png in Resources */,
 				02A0768C16691D75008036E9 /* notice_success_icon.png in Resources */,
 				02A0769016691D75008036E9 /* notice_success_icon@2x.png in Resources */,
+				02A076B21669B19F008036E9 /* petal-vk@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3180,6 +3187,7 @@
 				02A0768916691D75008036E9 /* notice_error_icon@2x.png in Resources */,
 				02A0768D16691D75008036E9 /* notice_success_icon.png in Resources */,
 				02A0769116691D75008036E9 /* notice_success_icon@2x.png in Resources */,
+				02A076B31669B19F008036E9 /* petal-vk@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3431,6 +3439,7 @@
 				02A0768A16691D75008036E9 /* notice_error_icon@2x.png in Resources */,
 				02A0768E16691D75008036E9 /* notice_success_icon.png in Resources */,
 				02A0769216691D75008036E9 /* notice_success_icon@2x.png in Resources */,
+				02A076B41669B19F008036E9 /* petal-vk@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3681,6 +3690,7 @@
 				02A0768B16691D75008036E9 /* notice_error_icon@2x.png in Resources */,
 				02A0768F16691D75008036E9 /* notice_success_icon.png in Resources */,
 				02A0769316691D75008036E9 /* notice_success_icon@2x.png in Resources */,
+				02A076B51669B19F008036E9 /* petal-vk@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

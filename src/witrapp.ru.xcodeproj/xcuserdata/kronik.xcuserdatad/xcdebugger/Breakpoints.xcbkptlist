@@ -645,11 +645,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LASharekit/LASharekit.m"
-         timestampString = "375987039.505327"
+         timestampString = "376026125.195696"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "390"
-         endingLineNumber = "390"
+         startingLineNumber = "467"
+         endingLineNumber = "467"
          landmarkName = "-facebookPost"
          landmarkType = "5">
       </FileBreakpoint>
@@ -658,24 +658,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LASharekit/LASharekit.m"
-         timestampString = "375987039.505327"
+         timestampString = "376026125.195696"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "384"
-         endingLineNumber = "384"
+         startingLineNumber = "461"
+         endingLineNumber = "461"
          landmarkName = "-facebookPost"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LASharekit/LASharekit.m"
-         timestampString = "375987428.522839"
+         timestampString = "376026125.195696"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "289"
-         endingLineNumber = "289"
+         startingLineNumber = "366"
+         endingLineNumber = "366"
          landmarkName = "-facebookPost"
          landmarkType = "5">
       </FileBreakpoint>
@@ -684,11 +684,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376026195.452672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1226"
-         endingLineNumber = "1226"
+         startingLineNumber = "1225"
+         endingLineNumber = "1225"
          landmarkName = "-adWhirlTestMode"
          landmarkType = "5">
       </FileBreakpoint>
@@ -697,11 +697,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376026195.452672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1240"
-         endingLineNumber = "1240"
+         startingLineNumber = "1239"
+         endingLineNumber = "1239"
          landmarkName = "-adWhirlDidReceiveAd:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -710,11 +710,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376026195.452672"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1245"
-         endingLineNumber = "1245"
+         startingLineNumber = "1244"
+         endingLineNumber = "1244"
          landmarkName = "-adjustAdSize"
          landmarkType = "5">
       </FileBreakpoint>
@@ -729,6 +729,19 @@
          startingLineNumber = "585"
          endingLineNumber = "585"
          landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Akak/GameViewController.m"
+         timestampString = "376026215.004241"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1095"
+         endingLineNumber = "1095"
+         landmarkName = "-expandingSelector:didSelectItemAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

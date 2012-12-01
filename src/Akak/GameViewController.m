@@ -17,9 +17,9 @@
 #import "AdWhirlView.h"
 #import "Resources.h"
 
-#define kIndexTwitter 0
-#define kIndexFavorite 1
-#define kIndexEmail 2
+#define kIndexTwitter  0
+#define kIndexVK       1
+#define kIndexEmail    2
 #define kIndexFaceBook 3
 
 #define TESTS_IN_SESSION 10
@@ -1046,8 +1046,8 @@ typedef enum gameTableMode
         case kIndexTwitter:
             iconName = @"petal-twitter@2x";
             break;
-        case kIndexFavorite:
-            iconName = @"petal-save@2x";
+        case kIndexVK:
+            iconName = @"petal-vk@2x";
             break;
         case kIndexEmail:
             iconName = @"petal-email@2x";
@@ -1091,9 +1091,8 @@ typedef enum gameTableMode
         case kIndexTwitter:
             [self.laSharekit performSelector:@selector(tweet) withObject:nil afterDelay:.1];
             break;
-        case kIndexFavorite:
-            //Handle favorites
-            
+        case kIndexVK:
+            [self.laSharekit performSelector:@selector(vkPost) withObject:nil afterDelay:.1];
             return;
         default:
             break;
@@ -1131,7 +1130,7 @@ typedef enum gameTableMode
         case kIndexTwitter:
             shareViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
             break;
-        case kIndexFavorite:
+        case kIndexVK:
             //Handle favorites
             
             return;

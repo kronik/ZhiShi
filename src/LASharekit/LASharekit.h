@@ -68,6 +68,7 @@ typedef void (^MyCompletionBlock)();
 - (void) pinIt;                     // PINTEREST
 - (void) emailIt;                   // EMAIL
 - (void) saveImage;                 // SAVE IMAGE TO CAMERAROLL
+- (void) vkPost;                    // Vkontakte
 
 - (void) copyTitleToPasteboard;     // COPY THE TITLE TO THE PASTEBOARD
 - (void) copyTextToPasteboard;      // COPY THE TEXT TO THE PASTEBOARD
