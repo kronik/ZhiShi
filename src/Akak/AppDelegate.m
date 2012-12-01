@@ -14,6 +14,9 @@
 #import "GameViewController.h"
 #import "RulesSearcherViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "MyReachability.h"
+
+#define CUSTOMVIEW_TAG 12345
 
 NSString *const FBSessionStateChangedNotification = @"com.example.Login:FBSessionStateChangedNotification";
 
@@ -91,8 +94,12 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // http://stackoverflow.com/questions/1725881/unknown-class-myclass-in-interface-builder-file-error-at-runtime
     [FBProfilePictureView class];
 
+    // check for internet connection
+    self.internetReachable = [MyReachability reachabilityForInternetConnection];
+    
     [UIAccelerometer sharedAccelerometer].delegate = self;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -113,6 +120,15 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
     self.window.rootViewController = navController;
+    
+    // add the HUD
+    hud = [[MBProgressHUD alloc] initWithView:navController.view];
+    hud.dimBackground = NO;
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    hud.delegate = self;
+    [navController.view addSubview:hud];
+    
+    
 //    PaperFoldNavigationController *paperFoldNavController = [[PaperFoldNavigationController alloc] initWithRootViewController:navController];
 //
 //    self.window.rootViewController = paperFoldNavController;
@@ -150,11 +166,11 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 //        NSLog(@"Failed to set category on AVAudioSession");
 //    }
     
-    if (![self openSessionWithAllowLoginUI:NO])
-    {
-        // No? Display the login page.
-        //[self openSessionWithAllowLoginUI: YES];
-    }
+//    if (![self openSessionWithAllowLoginUI:NO])
+//    {
+//        // No? Display the login page.
+//        //[self openSessionWithAllowLoginUI: YES];
+//    }
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -190,65 +206,63 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
     }
 }
 
-- (void)sessionStateChanged:(FBSession *)session
-                      state:(FBSessionState) state
-                      error:(NSError *)error
-{
-    switch (state) {
-        case FBSessionStateOpen:
-        {
-            if (!error)
-            {
-                // We have a valid session
-                NSLog(@"User session found");
-            }
-            
-            FBCacheDescriptor *cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
-            [cacheDescriptor prefetchAndCacheForSession:session];
-        }
-            
-            break;
-        case FBSessionStateClosed:
-        case FBSessionStateClosedLoginFailed:
-            [FBSession.activeSession closeAndClearTokenInformation];
-            break;
-        default:
-            break;
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:FBSessionStateChangedNotification object:session];
-    
-    if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Error: %@",
-                                                                     [AppDelegate FBErrorCodeDescription:error.code]]
-                                                            message:error.localizedDescription
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    }
-}
+//- (void)sessionStateChanged:(FBSession *)session
+//                      state:(FBSessionState) state
+//                      error:(NSError *)error
+//{
+//    switch (state) {
+//        case FBSessionStateOpen:
+//        {
+//            if (!error)
+//            {
+//                // We have a valid session
+//                NSLog(@"User session found");
+//            }
+//            
+//            FBCacheDescriptor *cacheDescriptor = [FBFriendPickerViewController cacheDescriptor];
+//            [cacheDescriptor prefetchAndCacheForSession:session];
+//        }
+//            
+//            break;
+//        case FBSessionStateClosed:
+//        case FBSessionStateClosedLoginFailed:
+//            [FBSession.activeSession closeAndClearTokenInformation];
+//            break;
+//        default:
+//            break;
+//    }
+//    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:FBSessionStateChangedNotification object:session];
+//    
+//    if (error) {
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Error: %@",
+//                                                                     [AppDelegate FBErrorCodeDescription:error.code]]
+//                                                            message:error.localizedDescription
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:@"OK"
+//                                                  otherButtonTitles:nil];
+//        [alertView show];
+//    }
+//}
 
 /*
  * Opens a Facebook session and optionally shows the login UX.
  */
-- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI
-{
-    return [FBSession openActiveSessionWithReadPermissions:nil
-                                              allowLoginUI:allowLoginUI
-                                         completionHandler:^(FBSession *session, FBSessionState state, NSError *error)
-                                         {
-                                             [self sessionStateChanged:session state:state error:error];
-                                         }];
-}
+//- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI
+//{
+//    return [FBSession openActiveSessionWithReadPermissions:nil
+//                                              allowLoginUI:allowLoginUI
+//                                         completionHandler:^(FBSession *session, FBSessionState state, NSError *error)
+//                                         {
+//                                             [self sessionStateChanged:session state:state error:error];
+//                                         }];
+//}
 
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
-    // FBSample logic
-    // We need to handle URLs by passing them to FBSession in order for SSO authentication
-    // to work.
+    // attempt to extract a token from the url
     return [FBSession.activeSession handleOpenURL:url];
 }
 
@@ -257,8 +271,43 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
     return NO;
 }
 
+// called after network status changes
+- (void) checkNetworkStatus
+{
+    NetworkStatus internetStatus = [self.internetReachable currentReachabilityStatus];
+    
+    switch (internetStatus)
+    {
+        case NotReachable:
+        {
+            NSLog(@"The internet is down.");
+            self.hayInternet = NO;
+            
+            break;
+        }
+        case ReachableViaWiFi:
+        {
+            NSLog(@"The internet is working via WIFI.");
+            self.hayInternet = YES;
+            
+            break;
+        }
+        case ReachableViaWWAN:
+        {
+            NSLog(@"The internet is working via WWAN.");
+            // muestro un mensaje el label de salida y habilito el boton de actualizar
+            self.hayInternet = YES;
+            
+            break;
+        }
+    }
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.internetReachable stopNotifier];
+    
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -286,10 +335,17 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
     
-    // FBSample logic
-    // We need to properly handle activation of the application with regards to SSO
-    //  (e.g., returning from iOS 6.0 authorization dialog or from fast app switching).
     [FBSession.activeSession handleDidBecomeActive];
+    
+    
+    // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
+    // method "reachabilityChanged" will be called.
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(checkNetworkStatus) name:kReachabilityChangedNotification object: nil];
+    
+    // inicio la variable de internet
+    self.hayInternet = NO;
+	[self.internetReachable startNotifier];
+	[self checkNetworkStatus];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -530,6 +586,64 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark - HUD
+
+- (void) mostratHUDCargando
+{
+    hud.labelText = NSLocalizedString(@"Loading...", @"");
+    [hud show:YES];
+}
+
+- (void) mostratHUD:(BOOL)animated conTexto:(NSString *)aTexto
+{
+    hud.labelText = aTexto;
+    [hud show:YES];
+}
+
+- (void) mostratHUD:(BOOL)animated conTexto:(NSString *)aTexto conView:(UIView *)aView dimBackground:(BOOL)dimBackg
+{
+    MBProgressHUD *hudCustom = [[MBProgressHUD alloc] initWithView:self.window.rootViewController.view];
+
+    hudCustom.dimBackground = dimBackg;
+    hudCustom.customView = aView;
+    hudCustom.labelText = aTexto;
+    hudCustom.mode = MBProgressHUDModeCustomView;
+    // Regiser for HUD callbacks so we can remove it from the window at the right time
+    hudCustom.delegate = self;
+    hudCustom.tag = CUSTOMVIEW_TAG;
+    [self.window.rootViewController.view addSubview:hudCustom];
+    [hudCustom show:animated];
+}
+
+- (void) mostratHUDConTexto:(NSString *)aTexto WhileExecuting:(SEL)method onTarget:(id)target withObject:(id)object animated:(BOOL)animated
+{
+    hud.labelText = aTexto;
+    [hud showWhileExecuting:method onTarget:target withObject:object animated:animated];
+}
+
+- (void) ocultarHUD
+{
+    [hud hide:YES];
+}
+
+- (void) ocultarHUD:(BOOL)animated
+{
+    [hud hide:animated];
+}
+
+- (void) ocultarHUD:(BOOL)animated despuesDe:(NSTimeInterval)delay
+{
+    [hud hide:animated afterDelay:delay];
+}
+
+- (void) ocultarHUDConCustomView:(BOOL)animated despuesDe:(NSTimeInterval)delay
+{
+    MBProgressHUD *hudCustom = (MBProgressHUD *)[self.window.rootViewController.view viewWithTag:CUSTOMVIEW_TAG];
+    [hudCustom hide:animated afterDelay:delay];
+    
+    [hudCustom performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:delay];
 }
 
 @end

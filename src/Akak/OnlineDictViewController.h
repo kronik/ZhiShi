@@ -21,9 +21,9 @@
 - (void)onlineDictViewControllerDidFinish:(OnlineDictViewController *)controller;
 @end
 
-@interface OnlineDictViewController : UIViewController<UIWebViewDelegate, UIAlertViewDelegate, ADBannerViewDelegate
+@interface OnlineDictViewController : UIViewController<UIWebViewDelegate, UIAlertViewDelegate
 #ifdef LITE_VERSION
-,AdWhirlDelegate>
+, ADBannerViewDelegate, AdWhirlDelegate>
 {
     AdWhirlView *adView;
 }

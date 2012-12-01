@@ -224,6 +224,9 @@
                      }];
 }
 -(void) longPressDidFire: (UILongPressGestureRecognizer*) recognizer {
+    
+    return;
+
     if (recognizer.state != UIGestureRecognizerStateEnded && self.hidden) {
         //Get the coordinates of the press
         CGPoint touchCenter = [recognizer locationInView: self.receivingView];

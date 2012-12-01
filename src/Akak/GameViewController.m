@@ -12,6 +12,10 @@
 #import "FlatPillButton.h"
 #import "BCDShareSheet.h"
 #import <Social/Social.h>
+#import "AppDelegate.h"
+#import "LASharekit.h"
+#import "AdWhirlView.h"
+#import "Resources.h"
 
 #define kIndexTwitter 0
 #define kIndexFavorite 1
@@ -82,7 +86,7 @@ typedef enum gameTableMode
 @property (strong, nonatomic) MBProgressHUD *hud;
 @property (strong, nonatomic) NSTimer *secondsCounter;
 @property (strong, nonatomic) UILabel *timeLabel;
-
+@property (strong, nonatomic) LASharekit *laSharekit;
 @end
 
 @implementation GameViewController
@@ -111,6 +115,11 @@ typedef enum gameTableMode
 @synthesize wrongIndex2 = _wrongIndex2;
 @synthesize wrongIndex3 = _wrongIndex3;
 @synthesize rulesIndexer = _rulesIndexer;
+@synthesize laSharekit = _laSharekit;
+
+#ifdef LITE_VERSION
+@synthesize adView;
+#endif
 
 - (id) init
 {
@@ -282,9 +291,9 @@ typedef enum gameTableMode
         self.task = @[@"", @"Хочу поиграть:", @"", @"Без времени", @"На время"];
         self.correctWordIndex = 3;
         
-        self.wrongIndex1 = arc4random() % self.rules.count;
-        self.wrongIndex2 = arc4random() % self.rules.count;
-        self.wrongIndex3 = arc4random() % self.rules.count;
+        self.wrongIndex1 = arc4random() % self.rulesIndexer.count;
+        self.wrongIndex2 = arc4random() % self.rulesIndexer.count;
+        self.wrongIndex3 = arc4random() % self.rulesIndexer.count;
     }
     else
     {
@@ -311,6 +320,8 @@ typedef enum gameTableMode
 {
     self.timeLabel.hidden = YES;
     [self.secondsCounter invalidate];
+    
+    self.navigationItem.title = @"Проверятор";
     
     self.tableMode = kModeScore;
     
@@ -425,8 +436,30 @@ typedef enum gameTableMode
 //        self.wrongIndex2 %= self.rules.count;
 //        self.wrongIndex3 %= self.rules.count;
     }
-    
+
+#ifdef LITE_VERSION
     int permut = arc4random() % 3;
+    
+    switch (permut)
+    {
+        case 0:
+            self.task = @[@"", @"Выбери правильный вариант:", @"", baseWord, firstIncorrect, secondIncorrect, @""];
+            self.correctWordIndex = 3;
+            break;
+        case 1:
+            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, baseWord, secondIncorrect, @""];
+            self.correctWordIndex = 4;
+            break;
+        case 2:
+            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, baseWord, @""];
+            self.correctWordIndex = 5;
+            break;
+            
+        default:
+            break;
+    }
+#else
+    int permut = arc4random() % 4;
     
     switch (permut)
     {
@@ -450,6 +483,7 @@ typedef enum gameTableMode
         default:
             break;
     }
+#endif
     
     if (self.isTimed)
     {
@@ -495,6 +529,30 @@ typedef enum gameTableMode
 {
     [super viewDidLoad];
     
+    self.laSharekit = [[LASharekit alloc] init:self];
+    
+    // COMPLETION BLOCKS
+    [self.laSharekit setCompletionDone:^{
+        UIImageView *Checkmark = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark"]];
+        [APPDELEGATE mostratHUD:YES conTexto:NSLocalizedString(@"Готово!", @"") conView:Checkmark dimBackground:YES];
+        [APPDELEGATE ocultarHUDConCustomView:YES despuesDe:2.0];
+    }];
+    [self.laSharekit setCompletionCanceled:^{
+        UIImageView *errorMark = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"notice_error_icon"]];
+        [APPDELEGATE mostratHUD:YES conTexto:NSLocalizedString(@"Отменено!", @"") conView:errorMark dimBackground:YES];
+        [APPDELEGATE ocultarHUDConCustomView:YES despuesDe:2.0];
+    }];
+    [self.laSharekit setCompletionFailed:^{
+        UIImageView *errorMark = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"notice_error_icon"]];
+        [APPDELEGATE mostratHUD:YES conTexto:NSLocalizedString(@"Ошибка!", @"") conView:errorMark dimBackground:YES];
+        [APPDELEGATE ocultarHUDConCustomView:YES despuesDe:2.0];
+    }];
+    [self.laSharekit setCompletionSaved:^{
+        UIImageView *Checkmark = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark"]];
+        [APPDELEGATE mostratHUD:YES conTexto:NSLocalizedString(@"Сохранено!", @"") conView:Checkmark dimBackground:YES];
+        [APPDELEGATE ocultarHUDConCustomView:YES despuesDe:2.0];
+    }];
+    
     self.tableView = [[MYTableView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style: UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -508,7 +566,7 @@ typedef enum gameTableMode
         
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG@2x.png"]];
     
-    self.rules = [NSDictionary dictionaryWithObjectsAndKeys:@"раст", @"рост", @"жы", @"жи", @"шы", @"ши", @"н", @"нн", @"ок", @"окк",  @"ак", @"акк",  @"акк", @"ак",  @"окк", @"ок",  @"лаг", @"лог",  @"лог", @"лаг",  @"рост", @"раст", @"ращ", @"рощ",  @"рощ", @"ращ", @"рос", @"рас", @"рас", @"рос",  @"лож", @"лаж", @"кас", @"кос",  @"кос", @"кас", @"гар", @"гор",  @"гор", @"гар", @"зар", @"зор", @"зор", @"зар", @"клан", @"клон", @"клон", @"клан", @"твар", @"твор", @"твор", @"твар", @"мак", @"мок", @"мок", @"мак", @"равн", @"ровн", @"ровн", @"равн", @"цы", @"ци", @"ци", @"цы", @"ше", @"шо", @"шо", @"ше", @"же", @"жо", @"жо", @"же", @"пре", @"при", @"при", @"пре", @"ива", @"ыва", @"ыва", @"ива", @"ова", @"ева", @"ева", @"ова", @"не", @"ни", @"ни", @"не", @"бир", @"бер", @"бер", @"бир", @"дер", @"дир", @"дир", @"дер", @"мир", @"мер", @"мер", @"мир", @"тир", @"тер", @"тер", @"тир", @"пир", @"пер", @"пер", @"пир", @"жиг", @"жег", @"жег", @"жиг", @"стил", @"стел", @"стел", @"стил", @"блист", @"блест",  @"блест", @"блист", @"чит", @"чет", @"чет", @"чит", @"чот", @"чет", @"чет", @"чот", @"че", @"чо", @"чо", @"че", @"рос", @"роз", @"роз", @"рос", @"шу", @"шю", @"жу", @"жю", @"ания", @"анья", @"ония", @"онья", @"с", @"сс", @"нив", @"нев", @"нев", @"нив", @"кал", @"кол", @"кол", @"кал", @"терр", @"тер", @"кож", @"каж", @"каж", @"кож", @"изк", @"иск", @"зах", @"зох", @"зох", @"зах", @"сар", @"сор", @"мат", @"мот", @"мот", @"мат", @"чиск", @"ческ", @"ческ", @"чиск", @"ео", @"еа", @"еа", @"ео", @"сч", @"щ", @"щ", @"сч", @"бид", @"бед", @"бед", @"бид", @"ота", @"ото", @"ото", @"ота", @"пад", @"под", @"под", @"пад", @"лач", @"лоч", @"лоч", @"лач", @"чев", @"чив", @"чив", @"чев", @"сач", @"соч", @"соч", @"сач", @"пас", @"пос", @"пос", @"пас", @"дот", @"дат", @"дот", @"дат", @"пег", @"пиг", @"пиг", @"пег", @"мен", @"мин", @"мин", @"мен", @"ков", @"кав", @"кав", @"ков", @"наст", @"ност", @"ност", @"наст", @"л", @"лл", @"к", @"кк", @"ара", @"аро", @"аро", @"ара", @"паж", @"пож", @"пож", @"паж", @"ито", @"ыто", @"игр", @"ыгр", @"ё", @"йо", @"йо", @"ё", nil];
+    self.rules = [NSDictionary dictionaryWithObjectsAndKeys:@"раст", @"рост", @"жы", @"жи", @"шы", @"ши", @"н", @"нн", @"ок", @"окк",  @"ак", @"акк",  @"акк", @"ак",  @"окк", @"ок",  @"лаг", @"лог",  @"лог", @"лаг",  @"рост", @"раст", @"ращ", @"рощ",  @"рощ", @"ращ", @"рос", @"рас", @"рас", @"рос",  @"лож", @"лаж", @"кас", @"кос",  @"кос", @"кас", @"гар", @"гор",  @"гор", @"гар", @"зар", @"зор", @"зор", @"зар", @"клан", @"клон", @"клон", @"клан", @"твар", @"твор", @"твор", @"твар", @"мак", @"мок", @"мок", @"мак", @"равн", @"ровн", @"ровн", @"равн", @"цы", @"ци", @"ци", @"цы", @"ше", @"шо", @"шо", @"ше", @"же", @"жо", @"жо", @"же", @"пре", @"при", @"при", @"пре", @"ива", @"ыва", @"ыва", @"ива", @"ова", @"ева", @"ева", @"ова", @"не", @"ни", @"ни", @"не", @"бир", @"бер", @"бер", @"бир", @"дер", @"дир", @"дир", @"дер", @"мир", @"мер", @"мер", @"мир", @"тир", @"тер", @"тер", @"тир", @"пир", @"пер", @"пер", @"пир", @"жиг", @"жег", @"жег", @"жиг", @"стил", @"стел", @"стел", @"стил", @"блист", @"блест",  @"блест", @"блист", @"чит", @"чет", @"чет", @"чит", @"чот", @"чет", @"чет", @"чот", @"че", @"чо", @"чо", @"че", @"рос", @"роз", @"роз", @"рос", @"шу", @"шю", @"жу", @"жю", @"ания", @"анья", @"ония", @"онья", @"с", @"сс", @"нив", @"нев", @"нев", @"нив", @"кал", @"кол", @"кол", @"кал", @"терр", @"тер", @"кож", @"каж", @"каж", @"кож", @"изк", @"иск", @"зах", @"зох", @"зох", @"зах", @"сар", @"сор", @"мат", @"мот", @"мот", @"мат", @"чиск", @"ческ", @"ческ", @"чиск", @"ео", @"еа", @"еа", @"ео", @"сч", @"щ", @"щ", @"сч", @"бид", @"бед", @"бед", @"бид", @"ота", @"ото", @"ото", @"ота", @"пад", @"под", @"под", @"пад", @"лач", @"лоч", @"лоч", @"лач", @"чев", @"чив", @"чив", @"чев", @"сач", @"соч", @"соч", @"сач", @"пас", @"пос", @"пос", @"пас", @"дот", @"дат", @"дот", @"дат", @"пег", @"пиг", @"пиг", @"пег", @"мен", @"мин", @"мин", @"мен", @"ков", @"кав", @"кав", @"ков", @"наст", @"ност", @"ност", @"наст", @"л", @"лл", @"к", @"кк", @"ара", @"аро", @"аро", @"ара", @"паж", @"пож", @"пож", @"паж", @"ито", @"ыто", @"игр", @"ыгр", @"ё", @"йо", @"йо", @"ё", @"д", @"дд", @"ск", @"ськ",  nil];
     
     self.rulesIndexer = [[NSMutableArray alloc] init];
 
@@ -516,8 +574,20 @@ typedef enum gameTableMode
     {
         [self.rulesIndexer addObject: [[NSPair alloc] initWithKey: key andData: self.rules [key]]];
     }
+    
+    self.expandingSelect = [[KLExpandingSelect alloc] initWithDelegate: self dataSource: self];
+    [self.tableView setExpandingSelect:self.expandingSelect];
+    [self.tableView addSubview: self.expandingSelect];
 
     [self resetGame];
+    
+#ifdef LITE_VERSION
+    self.adView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
+    self.adView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleRightMargin;
+    [self.tableView addSubview:self.adView];
+    
+    [self adjustAdSize];
+#endif
 }
 
 - (void)dictionaryReady:(NSNotification *)inNotification
@@ -807,7 +877,10 @@ typedef enum gameTableMode
                     if (indexPath.row == 1)
                     {                    
                         cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", self.totalPassed];
-                        self.navigationItem.title = @"Проверятор";
+                    }
+                    else
+                    {
+                        cell.detailTextLabel.text = @"";
                     }
                 }
             }
@@ -920,12 +993,17 @@ typedef enum gameTableMode
 
 - (void)showShareResults: (UIView*) button
 {
-    self.expandingSelect = [[KLExpandingSelect alloc] initWithDelegate: self dataSource: self];
-    [self.view setExpandingSelect:self.expandingSelect];
-    [self.view addSubview: self.expandingSelect];
+    NSString *message = [NSString stringWithFormat:@"\nВсего слов: %d\nошибок: %d\nправильно: %d\nи правильно подряд уже: %d! Можешь лучше? #ЖиШи ", self.totalPassed, self.errors, self.score, self.maxInSequence];
     
-    [button setHidden: YES];
+    //[button setHidden: YES];
 
+    self.laSharekit.title    = @"Мой результат сегодня: ";
+    self.laSharekit.url      = [NSURL URLWithString:@"https://itunes.apple.com/ru/app/zi-si/id493483440?ls=1&mt=8"];
+    self.laSharekit.text     = [NSString stringWithFormat:@"%@%@", self.laSharekit.title, message];
+    self.laSharekit.imageUrl = [NSURL URLWithString:@"https://dl.dropbox.com/u/14628282/zhishi512.png"];
+    self.laSharekit.image    = [UIImage imageNamed:@"icon144x144"];
+    self.laSharekit.tweetCC  = @"";
+    
     [self.expandingSelect expandItemsAtPoint: self.tableView.center];
     
     return;
@@ -936,7 +1014,7 @@ typedef enum gameTableMode
     
     BCDShareableItem *item = [[BCDShareableItem alloc] initWithTitle:@"Мой результат сегодня: "];
     
-    NSString *message = [NSString stringWithFormat:@"\nВсего слов: %d\nошибок: %d\nправильно: %d\nи правильно подряд уже: %d!", self.totalPassed, self.errors, self.score, self.maxInSequence];
+
     
     [item setDescription:message];
     [item setShortDescription:message];
@@ -994,6 +1072,35 @@ typedef enum gameTableMode
 // Called after the user changes the selection.
 - (void)expandingSelector:(id)expandingSelect didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+#ifdef LITE_VERSION
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ATTENTION_TXT message:FEATURE_NOT_AVAILABLE delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    alert.tag = 1001;
+    [alert show];
+    
+    return;
+#endif
+    
+    switch (indexPath.row)
+    {
+        case kIndexEmail:
+            [self.laSharekit performSelector:@selector(emailIt) withObject:nil afterDelay:.1];
+            break;
+        case kIndexFaceBook:
+            [self.laSharekit performSelector:@selector(facebookPost) withObject:nil afterDelay:.1];
+            break;
+        case kIndexTwitter:
+            [self.laSharekit performSelector:@selector(tweet) withObject:nil afterDelay:.1];
+            break;
+        case kIndexFavorite:
+            //Handle favorites
+            
+            return;
+        default:
+            break;
+    }
+
+    return;
+    
     UIImage* sharedImage = [UIImage imageNamed:@"icon512.png"];
     NSString *subj = @"Мой результат сегодня: ";
     NSString *message = [NSString stringWithFormat:@"\nВсего слов: %d\nошибок: %d\nправильно: %d\nи правильно подряд уже: %d!", self.totalPassed, self.errors, self.score, self.maxInSequence];
@@ -1077,5 +1184,76 @@ typedef enum gameTableMode
         return NO;
     }
 }
+
+#ifdef LITE_VERSION
+
+- (IBAction)buyFullVerButtonClicked: (UIButton*)button
+{
+#if RU_LANG == 1
+    NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=493483440";
+#else
+    NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=496458462";
+#endif
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1001)
+    {
+        [alertView dismissWithClickedButtonIndex:0 animated:YES];
+#if RU_LANG == 1
+        NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=493483440";
+#else
+        NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=496458462";
+#endif
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
+}
+
+#endif
+
+#pragma mark AdWhirl
+
+#ifdef LITE_VERSION
+- (NSString *)adWhirlApplicationKey
+{
+    return @"5656e05a98154aafbeba074ee21361fb";
+}
+//
+- (BOOL)adWhirlTestMode
+{
+    return NO;
+}
+//
+- (void)adWhirlDidDismissFullScreenModal
+{
+}
+//
+- (UIViewController *)viewControllerForPresentingModalView
+{
+    return self;
+}
+//
+- (void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView
+{
+    [self adjustAdSize];
+}
+//
+- (void)adjustAdSize
+{
+    [UIView beginAnimations:@"AdResize" context:nil];
+    [UIView setAnimationDuration:0.7];
+    CGSize adSize = [adView actualAdSize];
+    CGRect newFrame = adView.frame;
+    newFrame.size.height = adSize.height;
+    newFrame.size.width = adSize.width;
+    newFrame.origin.x = (self.view.bounds.size.width - adSize.width)/2;
+    newFrame.origin.y = self.view.bounds.size.height - adSize.height;
+    adView.frame = newFrame;
+    [UIView commitAnimations];
+}
+#endif
+
 
 @end

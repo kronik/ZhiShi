@@ -11,10 +11,10 @@
 #import <netinet/in.h>
 
 typedef enum {
-	NotReachable = 0,
-	ReachableViaWiFi,
-	ReachableViaWWAN
-} NetworkStatus;
+	MyNotReachable = 0,
+	MyReachableViaWiFi,
+	MyReachableViaWWAN
+} MyNetworkStatus;
 
 #define kReachabilityChangedNotification @"kNetworkReachabilityChangedNotification"
 
@@ -41,7 +41,7 @@ typedef enum {
 - (BOOL) startNotifier;
 - (void) stopNotifier;
 
-- (NetworkStatus) currentReachabilityStatus;
+- (MyNetworkStatus) currentReachabilityStatus;
 //WWAN may be available, but not active until a connection has been established.
 //WiFi may require a connection for VPN on Demand.
 - (BOOL) connectionRequired;

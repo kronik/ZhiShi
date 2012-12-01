@@ -376,10 +376,10 @@ typedef void (^CompletionBlock)(BCDResult);
 
 - (void)shareViaFacebook
 {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    //AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     // The user has initiated a login, so call the openSession method
     // and show the login UX if necessary.
-    [appDelegate openSessionWithAllowLoginUI:YES];
+    //[appDelegate openSessionWithAllowLoginUI:YES];
 
 //    if (!appDelegate.session.isOpen)
 //    {

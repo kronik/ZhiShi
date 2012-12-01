@@ -95,13 +95,13 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error;
     
-    [session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
-    if (error != nil)
-    {
-        NSLog(@"Failed to set category on AVAudioSession");
-    }
+//    [session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
+//    if (error != nil)
+//    {
+//        NSLog(@"Failed to set category on AVAudioSession");
+//    }
     
-    BOOL active = [session setActive: YES error: nil];
+    BOOL active = [session setActive: YES error: &error];
     if (!active)
     {
         NSLog(@"Failed to set category on AVAudioSession");
@@ -122,11 +122,11 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error;
     
-    [session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
-    if (error != nil)
-    {
-        NSLog(@"Failed to set category on AVAudioSession");
-    }
+//    [session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
+//    if (error != nil)
+//    {
+//        NSLog(@"Failed to set category on AVAudioSession");
+//    }
     
     BOOL active = [session setActive: YES error: nil];
     if (!active)
