@@ -53,7 +53,7 @@ typedef enum {
 
 #pragma mark -
 
-@interface LASharekit () <MFMailComposeViewControllerDelegate, FBLoginViewDelegate, UIAlertViewDelegate>
+@interface LASharekit () <MFMailComposeViewControllerDelegate, FBLoginViewDelegate, UIAlertViewDelegate, VkontakteDelegate>
 
 // Controller   -> Is used to present modalViews (is the target)
 // title        -> Is used for the title in facebook, twitter and pinterest, then in the subject for email
@@ -280,12 +280,40 @@ typedef enum {
     self.tweetCC        = nil;
 }
 
+
+- (void)vkontakteDidFailedWithError:(NSError *)error
+{
+    [self completionResult:typeFailed];
+}
+
+- (void)vkontakteDidFinishLogin:(Vkontakte *)vkontakte
+{
+    [self vkPost];
+}
+
+- (void)showVkontakteAuthController:(UIViewController *)controller
+{
+    [self.controller presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)vkontakteAuthControllerDidCancelled
+{
+    [self completionResult:typeCanceled];
+}
+
+- (void)vkontakteDidFinishPostingToWall:(NSDictionary *)responce
+{
+    [self completionResult:typeDone];
+}
+
 #pragma mark - SHARE
 
 // Vkontakte
 - (void) vkPost
 {
-    if (YES /* is vk auth ok?*/)
+    Vkontakte *vk = [Vkontakte sharedInstance];
+
+    if (vk.isAuthorized == YES)
     {
         REComposeViewController *composeViewController = [[REComposeViewController alloc] init];
 #if !__has_feature(objc_arc)
@@ -320,33 +348,7 @@ typedef enum {
                     break;
                     
                 case REComposeResultPosted:
-//                    [self performPublishAction:^{
-//                        
-//                        // paso los parametros para mandar al feed del usuario
-//                        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-//                                                       UIImagePNGRepresentation(self.image), @"source",
-//                                                       self.text, @"message",
-//                                                       [self.url absoluteString], @"link",
-//                                                       self.title, @"caption",
-//                                                       self.imageUrl, @"picture",
-//                                                       @"Жи-Ши", @"name",
-//                                                       nil];
-//                        [FBRequestConnection startWithGraphPath:@"me/feed"
-//                                                     parameters:params
-//                                                     HTTPMethod:@"POST"
-//                                              completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-//                                                  
-//                                                  if (!error)
-//                                                  {
-//                                                      [self completionResult:typeDone];
-//                                                  }
-//                                                  else
-//                                                  {
-//                                                      NSLog(@"ERROR AT 'startWithGraphPath': %@", [error localizedDescription]);
-//                                                      [self completionResult:typeCanceled];
-//                                                  }
-//                                              }];
-//                    }];
+                    [vk postImageToWall:self.image text:self.text link: self.url];
                     break;
                     
                 default:
@@ -355,6 +357,10 @@ typedef enum {
         };
         
         [self.controller presentViewController:composeViewController animated:YES completion:nil];
+    }
+    else
+    {
+        [vk authenticate];
     }
 }
 
