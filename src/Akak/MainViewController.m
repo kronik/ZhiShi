@@ -461,7 +461,7 @@
 	
     [UIView beginAnimations:@"FadeIn" context:nil];
     [UIView setAnimationDuration:0.5];
-    self.disableViewOverlay.alpha = 0.6;
+    self.disableViewOverlay.alpha = 0.1;
     [UIView commitAnimations];
     
     self.tableView.scrollEnabled = NO;
@@ -1298,6 +1298,14 @@
     
     [self.searchBar setBackgroundImage:[UIImage imageNamed:@"ipad-menubar-right"]];
 
+//    [self.searchBar setBackgroundColor:[UIColor clearColor]];
+//    for (UIView *subview in self.searchBar.subviews) {
+//        if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
+//            [subview removeFromSuperview];
+//            break;
+//        }
+//    }
+    
     self.cancelButton.layer.cornerRadius = 5.0;
     self.showRulesButton.layer.cornerRadius = 5.0;
     //self.recognizeButton.hidden = YES;
@@ -1317,7 +1325,7 @@
     self.disableViewOverlay = [[UIView alloc]
                                initWithFrame:CGRectMake(0.0f,94.0f,1024.0f,1024)];//416.0f
 #endif
-    self.disableViewOverlay.backgroundColor=[UIColor blackColor];
+    self.disableViewOverlay.backgroundColor=[UIColor lightGrayColor];
     self.disableViewOverlay.alpha = 0;
     self.cancelButton.titleLabel.text = STOP_TXT;
         

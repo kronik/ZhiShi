@@ -227,6 +227,8 @@ typedef enum gameTableMode
 
 - (void)startNewGame: (UIView*) button
 {
+    [self.expandingSelect collapseItems];
+
     //TODO: May be remove?
     
     [self.secondsCounter invalidate];
@@ -249,6 +251,8 @@ typedef enum gameTableMode
 
 - (void)nextTaskButton: (FlatPillButton*) button
 {
+    [self.expandingSelect collapseItems];
+
     if ([button.titleLabel.text isEqualToString: self.task[self.correctWordIndex]])
     {
         self.timeLabel.hidden = YES;
@@ -270,6 +274,8 @@ typedef enum gameTableMode
 
 - (void)resetGame
 {
+    [self.expandingSelect collapseItems];
+
     self.timeLabel.hidden = YES;
 
     self.navigationItem.title = @"Проверятор";
@@ -522,7 +528,14 @@ typedef enum gameTableMode
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear: animated];
     [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_REQUEST_TO_HIDE_KEYPAD object: nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear: animated];
+    [self.expandingSelect collapseItems];
 }
 
 - (void)viewDidLoad
@@ -1005,7 +1018,6 @@ typedef enum gameTableMode
     self.laSharekit.tweetCC  = @"";
     
     [self.expandingSelect expandItemsAtPoint: self.tableView.center];
-    
     return;
     
     [BCDShareSheet sharedSharer].appName = @"Жи-Ши";

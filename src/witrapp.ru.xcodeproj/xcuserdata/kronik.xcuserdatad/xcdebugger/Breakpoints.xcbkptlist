@@ -216,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/MainViewController.m"
-         timestampString = "375980902.962829"
+         timestampString = "376028073.449685"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1604"
-         endingLineNumber = "1604"
+         startingLineNumber = "1612"
+         endingLineNumber = "1612"
          landmarkName = "-shouldAutorotateToInterfaceOrientation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -229,11 +229,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "562"
-         endingLineNumber = "562"
+         startingLineNumber = "575"
+         endingLineNumber = "575"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -268,11 +268,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "899"
-         endingLineNumber = "899"
+         startingLineNumber = "912"
+         endingLineNumber = "912"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -411,11 +411,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "271"
-         endingLineNumber = "271"
+         startingLineNumber = "275"
+         endingLineNumber = "275"
          landmarkName = "-resetGame"
          landmarkType = "5">
       </FileBreakpoint>
@@ -515,37 +515,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "516"
+         endingLineNumber = "516"
+         landmarkName = "-setSeconds:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Akak/GameViewController.m"
+         timestampString = "376029674.457734"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "521"
+         endingLineNumber = "521"
+         landmarkName = "-setSeconds:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Akak/GameViewController.m"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "510"
          endingLineNumber = "510"
-         landmarkName = "-setSeconds:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "515"
-         endingLineNumber = "515"
-         landmarkName = "-setSeconds:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "504"
-         endingLineNumber = "504"
          landmarkName = "-generateNextTask"
          landmarkType = "5">
       </FileBreakpoint>
@@ -554,11 +554,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "505"
-         endingLineNumber = "505"
+         startingLineNumber = "511"
+         endingLineNumber = "511"
          landmarkName = "-generateNextTask"
          landmarkType = "5">
       </FileBreakpoint>
@@ -567,11 +567,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "701"
-         endingLineNumber = "701"
+         startingLineNumber = "714"
+         endingLineNumber = "714"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -580,11 +580,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "703"
-         endingLineNumber = "703"
+         startingLineNumber = "716"
+         endingLineNumber = "716"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -593,11 +593,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "707"
-         endingLineNumber = "707"
+         startingLineNumber = "720"
+         endingLineNumber = "720"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -606,11 +606,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "232"
-         endingLineNumber = "232"
+         startingLineNumber = "234"
+         endingLineNumber = "234"
          landmarkName = "-startNewGame:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -619,11 +619,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "422"
-         endingLineNumber = "422"
+         startingLineNumber = "428"
+         endingLineNumber = "428"
          landmarkName = "-generateNextTask"
          landmarkType = "5">
       </FileBreakpoint>
@@ -632,11 +632,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "426"
-         endingLineNumber = "426"
+         startingLineNumber = "432"
+         endingLineNumber = "432"
          landmarkName = "-generateNextTask"
          landmarkType = "5">
       </FileBreakpoint>
@@ -645,7 +645,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LASharekit/LASharekit.m"
-         timestampString = "376026125.195696"
+         timestampString = "376027547.544419"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "473"
+         endingLineNumber = "473"
+         landmarkName = "-facebookPost"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "LASharekit/LASharekit.m"
+         timestampString = "376027547.544419"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "467"
@@ -658,24 +671,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "LASharekit/LASharekit.m"
-         timestampString = "376026125.195696"
+         timestampString = "376027547.544419"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "461"
-         endingLineNumber = "461"
-         landmarkName = "-facebookPost"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "LASharekit/LASharekit.m"
-         timestampString = "376026125.195696"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "366"
-         endingLineNumber = "366"
+         startingLineNumber = "372"
+         endingLineNumber = "372"
          landmarkName = "-facebookPost"
          landmarkType = "5">
       </FileBreakpoint>
@@ -684,11 +684,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376026195.452672"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1225"
-         endingLineNumber = "1225"
+         startingLineNumber = "1237"
+         endingLineNumber = "1237"
          landmarkName = "-adWhirlTestMode"
          landmarkType = "5">
       </FileBreakpoint>
@@ -697,11 +697,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376026195.452672"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1239"
-         endingLineNumber = "1239"
+         startingLineNumber = "1251"
+         endingLineNumber = "1251"
          landmarkName = "-adWhirlDidReceiveAd:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -710,11 +710,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376026195.452672"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1244"
-         endingLineNumber = "1244"
+         startingLineNumber = "1256"
+         endingLineNumber = "1256"
          landmarkName = "-adjustAdSize"
          landmarkType = "5">
       </FileBreakpoint>
@@ -723,11 +723,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376023923.122127"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "585"
-         endingLineNumber = "585"
+         startingLineNumber = "598"
+         endingLineNumber = "598"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -736,11 +736,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Akak/GameViewController.m"
-         timestampString = "376026215.004241"
+         timestampString = "376029674.457734"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1095"
-         endingLineNumber = "1095"
+         startingLineNumber = "1107"
+         endingLineNumber = "1107"
          landmarkName = "-expandingSelector:didSelectItemAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
