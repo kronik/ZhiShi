@@ -13,7 +13,7 @@
 @class MainViewController;
 @class MyReachability;
 
-#define APPDELEGATE             (AppDelegate *)[UIApplication sharedApplication].delegate
+#define APPDELEGATE (AppDelegate *)[UIApplication sharedApplication].delegate
 
 extern NSString *const FBSessionStateChangedNotification;
 
