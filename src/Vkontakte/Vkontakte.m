@@ -213,7 +213,7 @@
 @implementation Vkontakte
 
 #warning Provide your vkontakte app id
-NSString * const vkAppId = @"0000000";//@"YOUR_VK_APP_ID";
+NSString * const vkAppId = @"3287227";//@"YOUR_VK_APP_ID";
 NSString * const vkPermissions = @"wall,photos,offline";
 NSString * const vkRedirectUrl = @"http://oauth.vk.com/blank.html";
 
@@ -239,8 +239,7 @@ NSString * const vkRedirectUrl = @"http://oauth.vk.com/blank.html";
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if ([defaults objectForKey:@"VKAccessTokenKey"] 
             && [defaults objectForKey:@"VKExpirationDateKey"]
-            && [defaults objectForKey:@"VKUserID"]
-            && [defaults objectForKey:@"VKUserEmail"]) 
+            && [defaults objectForKey:@"VKUserID"]) 
         {
             accessToken = [defaults objectForKey:@"VKAccessTokenKey"];
             expirationDate = [defaults objectForKey:@"VKExpirationDateKey"];

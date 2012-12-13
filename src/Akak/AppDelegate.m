@@ -116,7 +116,7 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 #else
     self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController_iPhone_lite" bundle:nil];
 #endif
-    
+        
     [self.mainViewController startToBuildIndex];
 
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
@@ -128,7 +128,6 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
     // Regiser for HUD callbacks so we can remove it from the window at the right time
     hud.delegate = self;
     [navController.view addSubview:hud];
-    
     
 //    PaperFoldNavigationController *paperFoldNavController = [[PaperFoldNavigationController alloc] initWithRootViewController:navController];
 //
@@ -593,7 +592,7 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 
 - (void) mostratHUDCargando
 {
-    hud.labelText = NSLocalizedString(@"Loading...", @"");
+    hud.labelText = NSLocalizedString(@"Загрузка...", @"");
     [hud show:YES];
 }
 
@@ -645,6 +644,40 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
     [hudCustom hide:animated afterDelay:delay];
     
     [hudCustom performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:delay];
+}
+
+- (void)showLoaderInView: (UIView*)view
+{
+    hud = [[MBProgressHUD alloc] initWithView: view];
+    
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.dimBackground = YES;
+    hud.labelText = NSLocalizedString(@"Отправка...", @"");
+    
+    [view addSubview:hud];
+    [hud show: YES];
+}
+
+- (void)hideLoader
+{
+    [hud hide:YES];
+    [hud removeFromSuperview];
+}
+
+- (void) showInfoHudInView: (UIView*)view
+{
+    hud = [[MBProgressHUD alloc] initWithView: view];
+    [view addSubview:hud];
+
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = NSLocalizedString(@"Потряси, чтобы начать игру!", @"");
+	hud.yOffset = 50.f;
+    hud.margin = 10.f;
+    [hud show: YES];
+
+    [hud hide: YES afterDelay: 7.0];
+    
+    [hud performSelector:@selector(removeFromSuperview) withObject:nil afterDelay: 7.0];
 }
 
 @end

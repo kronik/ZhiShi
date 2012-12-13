@@ -13,6 +13,7 @@
 #import "AdWhirlView.h"
 #import "RulesSearcherViewController.h"
 #import "GameViewController.h"
+#import "WBNoticeView.h"
 
 #if LITE_VER == 0
 
@@ -1531,6 +1532,8 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
 
     self.hostReach = [Reachability reachabilityWithHostName: @"www.google.ru"];
@@ -1543,9 +1546,11 @@
         [alert show];
     }
     
-    self.appLaunchesCount += 1;
+    WBNoticeView *noticeView = [[WBNoticeView alloc] initWithView:self.tableView title:@"Потряси, чтобы начать игру!"];
     
-    [super viewDidAppear:animated];
+    [noticeView showSuccessNoticeInView:self.tableView message:@"Потряси, чтобы начать игру!" duration:3.0 delay:1.0 alpha:0.9 yOrigin:0.0];
+    
+    self.appLaunchesCount += 1;    
 }
 
 - (void)dictSearcherUpdateProgress:(DictSearcher *)searcher progress:(float)progress

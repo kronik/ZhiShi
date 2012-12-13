@@ -48,4 +48,8 @@ extern NSString *const FBSessionStateChangedNotification;
 - (void) ocultarHUD:(BOOL)animated despuesDe:(NSTimeInterval)delay;
 - (void) ocultarHUDConCustomView:(BOOL)animated despuesDe:(NSTimeInterval)delay;
 
+- (void)showLoaderInView: (UIView*)view;
+- (void)hideLoader;
+- (void) showInfoHudInView: (UIView*)view;
+
 @end

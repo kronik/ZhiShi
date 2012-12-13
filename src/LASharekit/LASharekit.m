@@ -26,6 +26,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "Vkontakte.h"
+#import "AppDelegate.h"
 
 #import "LASharekit.h"
 #import "PinterestViewController.h"
@@ -283,26 +284,34 @@ typedef enum {
 
 - (void)vkontakteDidFailedWithError:(NSError *)error
 {
+    [APPDELEGATE hideLoader];
+
     [self completionResult:typeFailed];
 }
 
 - (void)vkontakteDidFinishLogin:(Vkontakte *)vkontakte
 {
-    [self vkPost];
+    [((UIViewController*)self.controller).navigationController dismissViewControllerAnimated: YES completion:^
+    {
+        [self vkPost];
+    }];
 }
 
 - (void)showVkontakteAuthController:(UIViewController *)controller
 {
-    [self.controller presentViewController:controller animated:YES completion:nil];
+    [((UIViewController*)self.controller).navigationController presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)vkontakteAuthControllerDidCancelled
 {
+    [((UIViewController*)self.controller).navigationController dismissViewControllerAnimated: YES completion:nil];
     [self completionResult:typeCanceled];
 }
 
 - (void)vkontakteDidFinishPostingToWall:(NSDictionary *)responce
 {
+    [APPDELEGATE hideLoader];
+
     [self completionResult:typeDone];
 }
 
@@ -312,6 +321,7 @@ typedef enum {
 - (void) vkPost
 {
     Vkontakte *vk = [Vkontakte sharedInstance];
+    vk.delegate = self;
 
     if (vk.isAuthorized == YES)
     {
@@ -341,27 +351,36 @@ typedef enum {
         // Alternative use with REComposeViewControllerCompletionHandler
         composeViewController.completionHandler = ^(REComposeResult result)
         {
-            switch (result)
+            [((UIViewController*)self.controller).navigationController dismissViewControllerAnimated:YES completion:^
             {
-                case REComposeResultCancelled:
-                    [self completionResult:typeCanceled];
-                    break;
-                    
-                case REComposeResultPosted:
-                    [vk postImageToWall:self.image text:self.text link: self.url];
-                    break;
-                    
-                default:
-                    break;
-            }
+                switch (result)
+                {
+                    case REComposeResultCancelled:
+                        [self completionResult:typeCanceled];
+                        break;
+                        
+                    case REComposeResultPosted:
+                        [APPDELEGATE showLoaderInView:((UIViewController*)self.controller).view];
+                        [self performSelector:@selector(postMessageToVk) withObject:nil afterDelay:0.1];
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }];
         };
         
-        [self.controller presentViewController:composeViewController animated:YES completion:nil];
+        [((UIViewController*)self.controller).navigationController presentViewController:composeViewController animated:YES completion:nil];
     }
     else
     {
         [vk authenticate];
     }
+}
+
+- (void) postMessageToVk
+{
+    [[Vkontakte sharedInstance] postImageToWall:self.image text:self.text link: self.url];
 }
 
 // FACEBOOK
@@ -616,7 +635,7 @@ typedef enum {
                 self.text = [self.text substringToIndex:idx];
             }
             // creo el mensaje
-            NSString *message   = [NSString stringWithFormat:@"%@…", [self.text substringToIndex:idx]];
+            NSString *message   = [NSString stringWithFormat:@"%@", [self.text substringToIndex:idx]];
             
             
             // if the message is bigger than 140 characters, then cut the message
@@ -625,7 +644,7 @@ typedef enum {
                 idx -= 5;
                 if (idx > 5)
                 {
-                    message = [NSString stringWithFormat:@"%@…", [self.text substringToIndex:idx]];
+                    message = [NSString stringWithFormat:@"%@", [self.text substringToIndex:idx]];
                 }
                 else
                 {
