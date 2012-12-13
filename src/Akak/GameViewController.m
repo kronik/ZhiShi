@@ -660,6 +660,9 @@ typedef enum gameTableMode
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    float BUTTON_SIZE = 250;
+    float xPoint = self.tableView.frame.size.width/2 - BUTTON_SIZE/2;
+    
     NSString *CellIdentifier = @"CellForGameTable";
     
     if ((self.tableMode == kModeScore) && ((indexPath.row == 1) || (indexPath.row == 2) || (indexPath.row == 3) || (indexPath.row == 4)))
@@ -725,7 +728,7 @@ typedef enum gameTableMode
                 cell.selectionStyle = UITableViewCellSelectionStyleGray;
                 cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:26.0f];
 
-                FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(40, 5, 240, 50)];
+                FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(xPoint, 5, BUTTON_SIZE, 50)];
                 button.enabled = YES;
                 
                 [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
@@ -762,7 +765,7 @@ typedef enum gameTableMode
             
             if (self.isTimed && indexPath.row == 0 && self.timeLabel == nil)
             {
-                self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(110, 10, 200, 50)];
+                self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 220, 10, 200, 50)];
                 self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size: 20.0f];
                 self.timeLabel.backgroundColor = [UIColor clearColor];
                 self.timeLabel.textColor = [UIColor darkGrayColor];
@@ -826,7 +829,7 @@ typedef enum gameTableMode
                 {
                     cell.textLabel.text = @"";
 
-                    FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(40, 5, 240, 50)];
+                    FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(xPoint, 5, BUTTON_SIZE, 50)];
                     button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
                     button.enabled = YES;
                     
@@ -843,7 +846,9 @@ typedef enum gameTableMode
                 {
                     cell.textLabel.text = @"";
                     
-                    FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(40, 5, 240, 50)];
+                    //FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(40, 5, 240, 50)];
+                    
+                    FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(xPoint, 5, BUTTON_SIZE, 50)];
                     button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
                     button.enabled = YES;
                     
@@ -853,7 +858,7 @@ typedef enum gameTableMode
                     
                     [button addTarget:self action:@selector(showShareResults:) forControlEvents: UIControlEventTouchUpInside];
                     [cell addSubview: button];
-                    
+                                        
                     cell.userInteractionEnabled = YES;
                 }
             }
@@ -933,7 +938,7 @@ typedef enum gameTableMode
         
         for (int i=0; i<self.task.count; i++)
         {
-            cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForItem: i inSection:0]];
+            cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:i inSection:0]];
             cell.userInteractionEnabled = NO;
 
             if (cell.imageView.image != nil)
