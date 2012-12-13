@@ -1357,6 +1357,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shakeDetected:) name:NOTIFICATION_SHAKE_DETECTED object:nil];
 
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    WBNoticeView *noticeView = [[WBNoticeView alloc] initWithView:self.tableView title:@"Потряси, чтобы начать игру!"];
+    
+    [noticeView showSuccessNoticeInView:self.tableView message:@"Потряси, чтобы начать игру!" duration:3.0 delay:2.0 alpha:0.9 yOrigin:0.0];
 }
 
 - (void)shakeDetected:(NSNotification *)inNotification
@@ -1545,10 +1549,6 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ATTENTION_TXT message:APP_LICENCE_TEXT delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
     }
-    
-    WBNoticeView *noticeView = [[WBNoticeView alloc] initWithView:self.tableView title:@"Потряси, чтобы начать игру!"];
-    
-    [noticeView showSuccessNoticeInView:self.tableView message:@"Потряси, чтобы начать игру!" duration:3.0 delay:1.0 alpha:0.9 yOrigin:0.0];
     
     self.appLaunchesCount += 1;    
 }
