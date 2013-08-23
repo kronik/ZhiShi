@@ -120,8 +120,8 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
     customLocale = recognitionLocale;
     
     AVAudioSession *session = [AVAudioSession sharedInstance];
-    NSError *error;
-    
+//    NSError *error;
+//
 //    [session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
 //    if (error != nil)
 //    {

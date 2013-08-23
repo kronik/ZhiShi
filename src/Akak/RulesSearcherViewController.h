@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "UITableView+Toches.h"
+#import "BasicViewController.h"
 
-@interface RulesSearcherViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface RulesSearcherViewController : BasicViewController <UITableViewDataSource, UITableViewDelegate>
 
 - (void)addBackButton;
 

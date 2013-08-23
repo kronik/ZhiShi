@@ -775,7 +775,7 @@
 		222835EB143E9EBD000D6E05 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Dmitry Klimkin";
 			};
 			buildConfigurationList = 222835EE143E9EBD000D6E05 /* Build configuration list for PBXProject "SpeechToText" */;
@@ -874,10 +874,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -894,6 +890,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -904,10 +901,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_THUMB_SUPPORT = NO;
@@ -927,7 +920,6 @@
 		22283602143E9EBE000D6E05 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/speex.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -938,6 +930,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SpeechToText;
 				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = build;
 			};
 			name = Debug;
@@ -945,7 +938,6 @@
 		22283603143E9EBE000D6E05 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/speex.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -956,6 +948,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SpeechToText;
 				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = build;
 			};
 			name = Release;

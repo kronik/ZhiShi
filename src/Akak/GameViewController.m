@@ -14,7 +14,6 @@
 #import <Social/Social.h>
 #import "AppDelegate.h"
 #import "LASharekit.h"
-#import "AdWhirlView.h"
 #import "Resources.h"
 
 #define kIndexTwitter  0
@@ -116,10 +115,6 @@ typedef enum gameTableMode
 @synthesize wrongIndex3 = _wrongIndex3;
 @synthesize rulesIndexer = _rulesIndexer;
 @synthesize laSharekit = _laSharekit;
-
-#ifdef LITE_VERSION
-@synthesize adView;
-#endif
 
 - (id) init
 {
@@ -324,6 +319,8 @@ typedef enum gameTableMode
 
 - (void)showScore
 {
+    [Flurry logEvent: @"Game finished"];
+
     self.timeLabel.hidden = YES;
     [self.secondsCounter invalidate];
     
@@ -593,14 +590,6 @@ typedef enum gameTableMode
     [self.tableView addSubview: self.expandingSelect];
 
     [self resetGame];
-    
-#ifdef LITE_VERSION
-    self.adView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
-    self.adView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleRightMargin;
-    [self.tableView addSubview:self.adView];
-    
-    [self adjustAdSize];
-#endif
 }
 
 - (void)dictionaryReady:(NSNotification *)inNotification
@@ -620,8 +609,17 @@ typedef enum gameTableMode
 
 - (void)addBackButton
 {
-    UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar"];
-    [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    // Create a 1 by 1 pixel context
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    
+    [[UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.00f] setFill];
+    
+    UIRectFill(rect);   // Fill it with your color
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
     UIImage* buttonImage = [UIImage imageNamed:@"back"];
     
@@ -691,7 +689,7 @@ typedef enum gameTableMode
         cell.textLabel.adjustsFontSizeToFitWidth = YES;
     }
     
-    for (UIView *subButton in cell.subviews)
+    for (UIView *subButton in cell.contentView.subviews)
     {
         if ([subButton isKindOfClass:[FlatPillButton class]])
         {
@@ -747,7 +745,7 @@ typedef enum gameTableMode
 //                }
                 
 
-                [cell addSubview: button];
+                [cell.contentView addSubview: button];
             }
             else
             {
@@ -838,7 +836,7 @@ typedef enum gameTableMode
                     [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
 
                     [button addTarget:self action:@selector(resetGame) forControlEvents: UIControlEventTouchUpInside];
-                    [cell addSubview: button];
+                    [cell.contentView addSubview: button];
                     
                     cell.userInteractionEnabled = YES;
                 }
@@ -857,7 +855,7 @@ typedef enum gameTableMode
                     [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
                     
                     [button addTarget:self action:@selector(showShareResults:) forControlEvents: UIControlEventTouchUpInside];
-                    [cell addSubview: button];
+                    [cell.contentView addSubview: button];
                                         
                     cell.userInteractionEnabled = YES;
                 }
@@ -909,6 +907,7 @@ typedef enum gameTableMode
             break;
     }
     
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 
@@ -1011,6 +1010,8 @@ typedef enum gameTableMode
 
 - (void)showShareResults: (UIView*) button
 {
+    [Flurry logEvent: @"Show share results"];
+
     NSString *message = [NSString stringWithFormat:@"\nВсего слов: %d\nошибок: %d\nправильно: %d\nи правильно подряд уже: %d! Можешь лучше? #ЖиШи ", self.totalPassed, self.errors, self.score, self.maxInSequence];
     
     //[button setHidden: YES];
@@ -1030,8 +1031,6 @@ typedef enum gameTableMode
     [BCDShareSheet sharedSharer].rootViewController = self;
     
     BCDShareableItem *item = [[BCDShareableItem alloc] initWithTitle:@"Мой результат сегодня: "];
-    
-
     
     [item setDescription:message];
     [item setShortDescription:message];
@@ -1101,15 +1100,26 @@ typedef enum gameTableMode
     {
         case kIndexEmail:
             [self.laSharekit performSelector:@selector(emailIt) withObject:nil afterDelay:.1];
+            [Flurry logEvent: @"Share to email"];
+
             break;
         case kIndexFaceBook:
             [self.laSharekit performSelector:@selector(facebookPost) withObject:nil afterDelay:.1];
+            
+            [Flurry logEvent: @"Share to facebook"];
+
             break;
         case kIndexTwitter:
             [self.laSharekit performSelector:@selector(tweet) withObject:nil afterDelay:.1];
+            
+            [Flurry logEvent: @"Share to twitter"];
+
             break;
         case kIndexVK:
             [self.laSharekit performSelector:@selector(vkPost) withObject:nil afterDelay:.1];
+            
+            [Flurry logEvent: @"Share to vkontakte"];
+
             return;
         default:
             break;
@@ -1229,47 +1239,13 @@ typedef enum gameTableMode
 
 #endif
 
-#pragma mark AdWhirl
-
 #ifdef LITE_VERSION
-- (NSString *)adWhirlApplicationKey
-{
-    return @"5656e05a98154aafbeba074ee21361fb";
-}
-//
-- (BOOL)adWhirlTestMode
-{
-    return NO;
-}
-//
-- (void)adWhirlDidDismissFullScreenModal
-{
-}
-//
-- (UIViewController *)viewControllerForPresentingModalView
-{
-    return self;
-}
-//
-- (void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView
-{
-    [self adjustAdSize];
-}
-//
-- (void)adjustAdSize
-{
-    [UIView beginAnimations:@"AdResize" context:nil];
-    [UIView setAnimationDuration:0.7];
-    CGSize adSize = [adView actualAdSize];
-    CGRect newFrame = adView.frame;
-    newFrame.size.height = adSize.height;
-    newFrame.size.width = adSize.width;
-    newFrame.origin.x = (self.view.bounds.size.width - adSize.width)/2;
-    newFrame.origin.y = self.view.bounds.size.height - adSize.height;
-    adView.frame = newFrame;
-    [UIView commitAnimations];
-}
-#endif
 
+- (void)updateAdBannerPosition {
+    self.tableView.tableHeaderView = self.adBanner;
+    
+}
+
+#endif
 
 @end

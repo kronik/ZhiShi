@@ -8,7 +8,6 @@
 
 #import "OnlineDictViewController.h"
 #import "Resources.h"
-#import "AdWhirlView.h"
 
 @interface OnlineDictViewController()
 
@@ -23,15 +22,8 @@
 @synthesize word = _word;
 @synthesize searchURL = _searchURL;
 @synthesize av = _av;
-@synthesize bannerView = _bannerView;
 @synthesize localHtml = _localHtml;
-@synthesize bannerIsVisible = _bannerIsVisible;
-@synthesize myAdView = _myAdView;
 @synthesize alreadyLoaded = _alreadyLoaded;
-
-#if LITE_VER == 1
-@synthesize adView;
-#endif
 
 - (void)goBack
 {
@@ -119,14 +111,6 @@
     {
         [self.webView loadHTMLString:self.localHtml baseURL:baseURL];        
     }
-    
-#if LITE_VER == 1
-    self.adView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
-    self.adView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleRightMargin;
-    [self.view addSubview:self.adView];
-    
-    [self adjustAdSize];
-#endif 
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
@@ -213,16 +197,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-#if LITE_VER == 1
-    [self adjustAdSize];
-    
-    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-        self.bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-    else
-        self.bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-#endif
-    
-
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
     {
         return YES;
@@ -232,41 +206,6 @@
         return NO;
     }
 }
-
-#if LITE_VER == 1
-
-- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
-{
-    return YES;
-}
-
-- (void)bannerViewActionDidFinish:(ADBannerView *)banner
-{
-}
-
-- (void)bannerViewDidLoadAd:(ADBannerView *)banner
-{
-    if (!self.bannerIsVisible)
-    {
-        [self.myAdView setHidden:YES];
-        [self.bannerView setHidden:NO];
-        self.bannerIsVisible = YES;
-    }
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-{
-    NSLog(@"Failed to load iAd");
-    
-    if (self.bannerIsVisible)
-    {
-        //Show own banner
-        [self.myAdView setHidden:NO];
-        [self.bannerView setHidden:YES];
-        self.bannerIsVisible = NO;
-    }
-}
-#endif
 
 - (IBAction)buyFullVerButtonClicked: (UIButton*)button
 {
@@ -280,44 +219,27 @@
 
 #pragma mark AdWhirl
 
-#if LITE_VER == 1
-- (NSString *)adWhirlApplicationKey
-{
-    return @"5656e05a98154aafbeba074ee21361fb";
-}
-//
-- (BOOL)adWhirlTestMode
-{
-    return NO;
-}
-//
-- (void)adWhirlDidDismissFullScreenModal
-{
-}
 //
 - (UIViewController *)viewControllerForPresentingModalView
 {
     return self;
 }
 //
-- (void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView
-{
-    [self adjustAdSize];
+
+#ifdef LITE_VERSION
+
+- (void)updateAdBannerPosition {
+    float heightOffset = -20;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+        heightOffset = 20;
+    }
+    
+    self.adBanner.center = CGPointMake(ScreenWidth / 2, ScreenHeight - self.adBanner.frame.size.height - heightOffset);
+    [self.view addSubview: self.adBanner];
+    [self.view bringSubviewToFront: self.adBanner];
 }
-//
-- (void)adjustAdSize
-{    
-    [UIView beginAnimations:@"AdResize" context:nil];
-    [UIView setAnimationDuration:0.7];
-    CGSize adSize = [adView actualAdSize];
-    CGRect newFrame = adView.frame;
-    newFrame.size.height = adSize.height;
-    newFrame.size.width = adSize.width;
-    newFrame.origin.x = (self.view.bounds.size.width - adSize.width)/2;
-    newFrame.origin.y = self.view.bounds.size.height - adSize.height;
-    adView.frame = newFrame;
-    [UIView commitAnimations];
-}
+
 #endif
 
 @end

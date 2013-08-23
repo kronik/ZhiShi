@@ -8,12 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import <iAd/iAd.h>
-
-#ifdef LITE_VERSION
-#import "AdWhirlDelegateProtocol.h"
-@class AdWhirlView;
-#endif
+#import "BasicViewController.h"
 
 @class OnlineDictViewController;
 
@@ -21,38 +16,18 @@
 - (void)onlineDictViewControllerDidFinish:(OnlineDictViewController *)controller;
 @end
 
-@interface OnlineDictViewController : UIViewController<UIWebViewDelegate, UIAlertViewDelegate
-#ifdef LITE_VERSION
-, ADBannerViewDelegate, AdWhirlDelegate>
-{
-    AdWhirlView *adView;
-}
-#else
->
-#endif
+@interface OnlineDictViewController : BasicViewController <UIWebViewDelegate, UIAlertViewDelegate>
 
 @property (assign, nonatomic) IBOutlet id <OnlineDictViewControllerDelegate> delegate;
 @property (assign, nonatomic) IBOutlet UIWebView *webView;
-@property (assign, nonatomic) IBOutlet ADBannerView *bannerView;
 
 @property (strong, nonatomic) UIActivityIndicatorView *av;
 @property (strong, nonatomic) NSString *word;
 @property (strong, nonatomic) NSString *localHtml;
 @property (strong, nonatomic) NSString *searchURL;
 @property (strong, nonatomic) NSString *header;
-@property (nonatomic) BOOL bannerIsVisible;
 
-#ifdef LITE_VERSION
-@property (strong, nonatomic) AdWhirlView *adView;
-#endif
-
-@property (assign,nonatomic) IBOutlet UIView *myAdView;
 - (IBAction)buyFullVerButtonClicked: (UIButton*)button;
-
 - (IBAction)done:(id)sender;
-
-#ifdef LITE_VERSION
-- (void)adjustAdSize;
-#endif
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BasicViewController.h"
 
 @class OtherAppsViewController;
 
@@ -14,7 +15,7 @@
 - (void)otherAppsViewControllerDidFinish:(OtherAppsViewController *)controller;
 @end
 
-@interface OtherAppsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface OtherAppsViewController : BasicViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (assign, nonatomic) IBOutlet UITableView *tableView;
 @property (assign, nonatomic) IBOutlet UINavigationItem *navBar;

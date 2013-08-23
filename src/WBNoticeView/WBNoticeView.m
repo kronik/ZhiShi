@@ -175,6 +175,20 @@
 }
 
 - (void)showSuccessNoticeInView:(UIView *)view
+                          title:(NSString *)title
+                        message:(NSString *)message
+{
+    [self _showNoticeOfType:WBNoticeViewTypeSuccess
+                       view:view
+                      title:title
+                    message:message
+                   duration:0.0
+                      delay:0.0
+                      alpha:0.8
+                    yOrigin:0.0];
+}
+
+- (void)showSuccessNoticeInView:(UIView *)view
                         message:(NSString *)message
                        duration:(float)duration
                           delay:(float)delay

@@ -11,6 +11,9 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import "Flurry.h"
+    #import "NIKFontAwesomeIconFactory.h"
+    #import "NIKFontAwesomeIconFactory+iOS.h"
 #endif
 
 #import "UINavigationController+Keyboard.h"

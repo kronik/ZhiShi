@@ -51,9 +51,17 @@
 {
     [super viewDidLoad];
     
-    UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar"];
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    // Create a 1 by 1 pixel context
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
     
-    [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
+    [[UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.00f] setFill];
+    
+    UIRectFill(rect);   // Fill it with your color
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
     /*
     UIImage *backButtonImage = [[UIImage imageNamed:@"menu-bar-button"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 14, 0, 4)];
@@ -77,8 +85,9 @@
     [button addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    [self.navBar setLeftBarButtonItem:backButton];
+    [self.navigationItem setLeftBarButtonItem:backButton];
 
+    self.navigationItem.title = @"Наши приложения";
     
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG@2x.png"]];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -91,7 +100,15 @@
 //    zhiShi.appId = 493483440;
 //    
 //    [self.apps addObject:zhiShi];
+
+    AppDescription *ebeanstalk = [[AppDescription alloc] init];
+    ebeanstalk.name = @"eBeanstalk";
+    ebeanstalk.description = @"Быстрый английский язык!";
+    ebeanstalk.iconName = @"ebeanstalk.png";
+    ebeanstalk.appId = 632528131;
     
+    [self.apps addObject:ebeanstalk];
+
     AppDescription *ituneit = [[AppDescription alloc] init];
     ituneit.name = @"iTuneIt";
     ituneit.description = @"Профессиональный тюнер";
@@ -186,8 +203,10 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     [cell.imageView setImage:[currentApp icon]];
-     
-     return cell;
+    
+    cell.backgroundColor = [UIColor clearColor];
+
+    return cell;
 }
 
 - (IBAction)done:(id)sender
@@ -213,5 +232,14 @@
         return NO;
     }
 }
+
+#ifdef LITE_VERSION
+
+- (void)updateAdBannerPosition {
+    self.tableView.tableHeaderView = self.adBanner;
+    
+}
+
+#endif
 
 @end

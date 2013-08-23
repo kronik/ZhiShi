@@ -20,7 +20,6 @@ extern NSString *const FBSessionStateChangedNotification;
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UIAccelerometerDelegate, MBProgressHUDDelegate>
 {
 	BOOL histeresisExcited;
-	UIAcceleration* lastAcceleration;
     MBProgressHUD *hud;
 }
 
@@ -33,8 +32,6 @@ extern NSString *const FBSessionStateChangedNotification;
 
 @property (strong, nonatomic) MainViewController *mainViewController;
 @property (strong, nonatomic) FBSession *session;
-
-@property (strong, nonatomic) UIAcceleration* lastAcceleration;
 
 + (AppDelegate *)appDelegate;
 

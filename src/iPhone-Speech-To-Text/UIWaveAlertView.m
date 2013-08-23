@@ -15,10 +15,18 @@
 
 - (id)initWithTitle:(NSString *)title delegate:(id /*<UIAlertViewDelegate>*/)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles 
 {
-	if ((self = [super initWithTitle:title message:@"\n\n\n" delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil]))
+    NSString *defaultTitle = @"";
+    
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+//        defaultTitle = @"\n\n\n";
+//    }
+    
+	if ((self = [super initWithTitle:title message:defaultTitle delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil]))
     {
-		waveDisplay_ = [[WaveDisplay alloc] initWithFrame:CGRectMake(12.0f, 51.0f, 260.0f, 56.0f)];
-		[self addSubview:waveDisplay_];
+//        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+//            waveDisplay_ = [[WaveDisplay alloc] initWithFrame:CGRectMake(12.0f, 51.0f, 260.0f, 56.0f)];
+//            [self addSubview:waveDisplay_];
+//        }
         
         waveDisplay_.dataPoints = self.dataPoints;
 

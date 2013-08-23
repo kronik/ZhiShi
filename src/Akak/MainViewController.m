@@ -10,10 +10,11 @@
 #import "MainViewController.h"
 #import "DictSearcher.h"
 #import "Resources.h"
-#import "AdWhirlView.h"
 #import "RulesSearcherViewController.h"
 #import "GameViewController.h"
 #import "WBNoticeView.h"
+#import "REMenu.h"
+#import "YLActivityIndicatorView.h"
 
 #if LITE_VER == 0
 
@@ -27,7 +28,6 @@
 
 @interface MainViewController()
 
-@property (strong, nonatomic) UIView *disableViewOverlay;
 @property (strong, nonatomic) NSMutableArray *zeroEdits;
 @property (strong, nonatomic) NSMutableArray *oneEdits;
 @property (strong, nonatomic) NSMutableArray *twoEdits;
@@ -39,8 +39,7 @@
 @property (nonatomic) int selectedIdx;
 @property (nonatomic) BOOL isDictionaryReady;
 @property (nonatomic) BOOL didSearchStarted;
-@property (strong,nonatomic) UIActivityIndicatorView *activity;
-@property (strong, nonatomic) NSUserDefaults *standardUserDefaults;
+@property (strong, nonatomic) YLActivityIndicatorView *busyIndicator;
 @property (nonatomic) int appLaunchesCount;
 @property (nonatomic) BOOL bannerIsVisible;
 @property (nonatomic) BOOL noNeedToShowActionSheet;
@@ -48,10 +47,16 @@
 @property (nonatomic) BOOL isSearchMode;
 @property (nonatomic) BOOL isCorrectionStarted;
 @property (nonatomic) BOOL isRecordingStarted;
-@property (nonatomic, strong) NSTimer *timer;
 @property (strong, nonatomic) SpeechToTextModule* STTConroller;
 @property (strong, nonatomic) Reachability* hostReach;
 @property (nonatomic) BOOL isVisible;
+@property (nonatomic, strong) REMenu *menu;
+@property (nonatomic, strong) UISearchBar *wordSearchBar;
+@property (nonatomic, strong) UIImage *menuItem1Image;
+@property (nonatomic, strong) UIImage *menuItem2Image;
+@property (nonatomic, strong) UIImage *menuItem3Image;
+@property (nonatomic, strong) UIImage *menuItem4Image;
+@property (nonatomic) BOOL memoryWarningDisplayed;
 
 //@property (nonatomic, strong) AVAudioPlayer *clickPlayer;
 //@property (nonatomic, strong) AVAudioPlayer *stopRecPlayer;
@@ -75,15 +80,12 @@
 
 @implementation MainViewController
 
-@synthesize searchBar = _searchBar;
 @synthesize tableView = _tableView;
 @synthesize oneEdits = _oneEdits;
 @synthesize twoEdits = _twoEdits;
 @synthesize threeEdits = _threeEdits;
 @synthesize zeroEdits = _zeroEdits;
-@synthesize disableViewOverlay = _disableViewOverlay;
-@synthesize activity = _activity;
-@synthesize progressView = _progressView;
+@synthesize busyIndicator = _busyIndicator;
 @synthesize isDictionaryReady = _isDictionaryReady;
 @synthesize dictionaryRu = _dictionaryRu;
 @synthesize dictSearcherRu = _dictSearcherRu;
@@ -92,43 +94,37 @@
 @synthesize selectedWord = _selectedWord;
 @synthesize selectedIdx = _selectedIdx;
 @synthesize didSearchStarted = _didSearchStarted;
-//@synthesize managedObjectContextRu = _managedObjectContextRu;
-//@synthesize managedObjectContextEn = _managedObjectContextEn;
-@synthesize standardUserDefaults = _standardUserDefaults;
 @synthesize appLaunchesCount = _appLaunchesCount;
-@synthesize bannerView = _bannerView;
-@synthesize cancelButton = _cancelButton;
-@synthesize showRulesButton = _showRulesButton;
 @synthesize bannerIsVisible = _bannerIsVisible;
-@synthesize myAdView = _myAdView;
 @synthesize noNeedToShowActionSheet = _noNeedToShowActionSheet;
 @synthesize previousWord = _previousWord;
 @synthesize isSearchMode = _isSearchMode;
 @synthesize isCorrectionStarted = _isCorrectionStarted;
-@synthesize recognizeButton = _recognizeButton;
 @synthesize isRecordingStarted = _isRecordingStarted;
-@synthesize timer = _timer;
 @synthesize STTConroller = _STTConroller;
 @synthesize hostReach = _hostReach;
 @synthesize isVisible = _isVisible;
 //@synthesize clickPlayer = _clickPlayer;
 //@synthesize stopRecPlayer = _stopRecPlayer;
-
-#if LITE_VER == 1
-@synthesize adView;
-#endif
+@synthesize menu = _menu;
+@synthesize wordSearchBar = _wordSearchBar;
+@synthesize menuItem1Image = _menuItem1Image;
+@synthesize menuItem2Image = _menuItem2Image;
+@synthesize menuItem3Image = _menuItem3Image;
+@synthesize menuItem4Image = _menuItem4Image;
+@synthesize memoryWarningDisplayed = _memoryWarningDisplayed;
 
 -(int)appLaunchesCount
 {
-    _appLaunchesCount = [self.standardUserDefaults integerForKey:APP_LAUNCHES_COUNT_KEY];
+    _appLaunchesCount = [[NSUserDefaults standardUserDefaults] integerForKey:APP_LAUNCHES_COUNT_KEY];
     return _appLaunchesCount;
 }
 
 -(void)setAppLaunchesCount: (int)newAppLaunchesCount
 {
     _appLaunchesCount = newAppLaunchesCount;
-    [self.standardUserDefaults setInteger:newAppLaunchesCount forKey:APP_LAUNCHES_COUNT_KEY];
-    [self.standardUserDefaults synchronize];
+    [[NSUserDefaults standardUserDefaults] setInteger:newAppLaunchesCount forKey:APP_LAUNCHES_COUNT_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)playStartRecordSound
@@ -190,15 +186,6 @@
 //    
 //    return _stopRecPlayer;
 //}
-
--(NSUserDefaults*)standardUserDefaults
-{
-    if (_standardUserDefaults == nil)
-    {
-        _standardUserDefaults = [NSUserDefaults standardUserDefaults];
-    }
-    return _standardUserDefaults;
-}
 
 -(NSMutableArray*)dictionaryRu
 {
@@ -263,8 +250,6 @@
     if (self.isRecordingStarted == YES)
     {
         self.isRecordingStarted = NO;
-        [self.timer invalidate];
-        self.timer = nil;
     }
 }
 
@@ -344,8 +329,8 @@
     
     if (recognizedText != nil)
     {
-        [self.searchBar setText:recognizedText];
-        [self handleSearch:self.searchBar];
+        [self.wordSearchBar setText:recognizedText];
+        [self handleSearch:self.wordSearchBar];
     }
 }
 
@@ -360,12 +345,7 @@
 
 - (void)enableCancelButton
 {
-    self.cancelButton.hidden = NO;
-    self.searchBar.showsCancelButton = YES;
-    
-#if RU_LANG == 1
-    self.showRulesButton.hidden = YES;
-#endif
+    self.wordSearchBar.showsCancelButton = YES;
 }
 
 - (BOOL) substringIsInDictionary:(NSString *)subString
@@ -414,16 +394,11 @@
 
 - (void)disableCancelButton
 {
-    self.cancelButton.hidden = YES;
-#if RU_LANG == 1
-    self.showRulesButton.hidden = NO;
-#else
-    self.searchBar.showsCancelButton = NO;
-#endif
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    [self showActivityIndicatorInView:self.view style: UIActivityIndicatorViewStyleGray];
     [self handleSearch:searchBar];
 }
 
@@ -454,19 +429,10 @@
 {
     if (self.didSearchStarted == YES)
     {
-        [self.searchBar resignFirstResponder];
+        [self.wordSearchBar resignFirstResponder];
         return;
     }
-    self.disableViewOverlay.alpha = 0;
-    [self.view addSubview:self.disableViewOverlay];
-	
-    [UIView beginAnimations:@"FadeIn" context:nil];
-    [UIView setAnimationDuration:0.5];
-    self.disableViewOverlay.alpha = 0.1;
-    [UIView commitAnimations];
-    
-    self.tableView.scrollEnabled = NO;
-    
+	   
     self.isSearchMode = NO;
 }
 
@@ -475,34 +441,43 @@
     self.isSearchMode = YES;
 }
 
-- (void)showActivityIndicatorInView: (UIView*)view style:(UIActivityIndicatorViewStyle)style
-{
-    if (self.activity != nil)
-    {
-        return;
+- (YLActivityIndicatorView *)busyIndicator {
+    
+    if (_busyIndicator == nil) {
+        _busyIndicator = [[YLActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, 30)];
+
+        _busyIndicator.duration = 2.5f;
+        _busyIndicator.dotCount = 25;
+        
+        [_busyIndicator startAnimating];
     }
     
-    CGRect cgRect = view.bounds;
-    CGSize cgSize = cgRect.size;
+    return _busyIndicator;
+}
+
+- (void)didReceiveMemoryWarning {
     
-    self.activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle: style];
-    
-    [view addSubview:self.activity];
-    
-    self.activity.center = CGPointMake(cgSize.width/2, cgSize.height/3 + 5);
-    [self.activity startAnimating];
+    if (self.memoryWarningDisplayed == NO) {
+        self.memoryWarningDisplayed = YES;
+        
+        [self showError:@"Мало свободной памяти." onView: self.tableView];
+    }
+}
+
+- (void)showActivityIndicatorInView: (UIView*)view style:(UIActivityIndicatorViewStyle)style
+{
+    self.tableView.tableHeaderView = self.busyIndicator;
 }
 
 - (void)hideActivityIndicator
 {
-    if (self.activity == nil)
-    {
-        return;
-    }
+#ifdef LITE_VERSION
+    self.tableView.tableHeaderView = self.adBanner;
+#else
+    self.tableView.tableHeaderView = nil;
+#endif
     
-    [self.activity stopAnimating];
-    [self.activity removeFromSuperview];
-    self.activity = nil;
+    _busyIndicator = nil;
 }
 
 - (void)handleSearch:(UISearchBar *)searchBar
@@ -512,7 +487,7 @@
         return;
     }
     
-    NSString *userString = self.searchBar.text;
+    NSString *userString = self.wordSearchBar.text;
 
     self.didSearchStarted = YES;
     [self enableCancelButton];
@@ -543,18 +518,7 @@
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.searchBar resignFirstResponder]; // if you want the keyboard to go away
-            [self.disableViewOverlay removeFromSuperview];
-            [self hideActivityIndicator];
-            
-            for (UIView *subView in self.searchBar.subviews)
-            {
-                if ([subView isKindOfClass:[UITextField class]])
-                {
-                    UITextField *textField = (UITextField*)subView;                    
-                    [self showActivityIndicatorInView: textField style:UIActivityIndicatorViewStyleGray];
-                }
-            }
+            [self.wordSearchBar resignFirstResponder]; // if you want the keyboard to go away
         });
 
         if ([self.previousWord isEqualToString:userString] == NO)
@@ -591,19 +555,11 @@
 {
     self.dictSearcherRu.requestToStopSearch = YES;
     self.dictSearcherEn.requestToStopSearch = YES;
-
-    [self.disableViewOverlay removeFromSuperview];
     
     [searchBar resignFirstResponder]; // if you want the keyboard to go away
     
     self.tableView.scrollEnabled = YES;
-    //self.searchBar.showsCancelButton = NO;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
+    //self.wordSearchBar.showsCancelButton = NO;
 }
 
 -(void)findTextInFileFast: (NSString*)textToSearch forceFastSearch: (BOOL)forceFastSearch
@@ -696,12 +652,12 @@
     // Create label with section title
     UILabel *label = [[UILabel alloc] init];
     label.frame = CGRectMake(0, 0, 1024.0, 22);
-    label.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-menubar"]];
+    label.backgroundColor = [UIColor colorWithRed:0.50f green:0.63f blue:0.76f alpha:1.00f];//[UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.00f];
     label.textColor = [UIColor whiteColor]; //UIColorFromRGB(0xF6D993);
     label.font = [UIFont boldSystemFontOfSize:18];
     label.text = sectionTitle;
-    label.shadowColor = [UIColor blackColor];
-    label.shadowOffset = CGSizeMake(0, 1);
+//    label.shadowColor = [UIColor blackColor];
+//    label.shadowOffset = CGSizeMake(0, 1);
     
     // Create header view and add label as a subview
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024.0, 22)];
@@ -822,9 +778,11 @@
 
 - (void)paste:(id)sender
 {
-    if (self.searchBar.text.length > 0)
+    if (self.wordSearchBar.text.length > 0)
     {
-        [self searchBarSearchButtonClicked: self.searchBar];
+        [Flurry logEvent:@"Search: paste"];
+
+        [self searchBarSearchButtonClicked: self.wordSearchBar];
     }
 }
 
@@ -834,6 +792,8 @@
     
     if (action == @selector(copy:))
     {
+        [Flurry logEvent:@"Word copy"];
+
         UIPasteboard* pasteboard = [UIPasteboard generalPasteboard];
         [pasteboard setString: cell.textLabel.text ];
     }
@@ -884,13 +844,17 @@
     {
         cell.textLabel.text = title;
     }
+    
+    cell.backgroundColor = [UIColor clearColor];
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-        
+    
+    [self.wordSearchBar resignFirstResponder];
+    
     switch (indexPath.section)
     {
         case 0:
@@ -907,7 +871,7 @@
     
     if ([self.selectedWord isEqualToString:SEARCH_ONLINE_TXT] == YES)
     {
-        self.selectedWord = self.searchBar.text;
+        self.selectedWord = self.wordSearchBar.text;
         self.selectedIdx = -1;
         [self showActionSheet:self];
     }
@@ -932,9 +896,9 @@
 {
     UIView *touchedView = [[touches anyObject] view];
     
-    if (touchedView == self.disableViewOverlay && self.isDictionaryReady == YES)
+    if (touchedView == self.tableView && self.isDictionaryReady == YES)
     {
-        [self searchBarCancelButtonClicked: self.searchBar];
+        [self searchBarCancelButtonClicked: self.wordSearchBar];
     }
 }
 
@@ -976,9 +940,11 @@
         google = GOOGLE_EN;
     }
     
+    [Flurry logEvent:@"Show online options"];
+    
 	popupQuery = [[UIActionSheet alloc] initWithTitle:[[NSString alloc] initWithFormat: CHECK_WORD_ONLINE_TXT, self.selectedWord] delegate:self cancelButtonTitle:CANCEL_TXT destructiveButtonTitle:nil otherButtonTitles:wiktionary, wikipedia, yandex, google, LOCAL_DICTIONARY, nil];
     self.noNeedToShowActionSheet = NO;
-    [self.searchBar resignFirstResponder];
+    [self.wordSearchBar resignFirstResponder];
     
 	popupQuery.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
 	[popupQuery showInView:self.view];
@@ -1020,7 +986,7 @@
         yandex = YANDEX_EN;
         google = GOOGLE_EN;
     }
-
+    
     switch (buttonIndex)
     {
         case 0:
@@ -1051,7 +1017,7 @@
             break;
         default:
             [self.tableView reloadData];
-            [self.searchBar becomeFirstResponder];
+            [self.wordSearchBar becomeFirstResponder];
             break;
     }
 }
@@ -1060,6 +1026,8 @@
 {
     if (alertView.tag == 1001)
     {
+        [Flurry logEvent: @"Go to view full version"];
+
         [alertView dismissWithClickedButtonIndex:0 animated:YES];
 #if RU_LANG == 1
         NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=493483440";
@@ -1077,6 +1045,8 @@
 
 - (IBAction)buyFullVerButtonClicked: (UIButton*)button
 {
+    [Flurry logEvent: @"Go to view full version"];
+
 #if RU_LANG == 1
     NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=493483440";
 #else
@@ -1120,24 +1090,122 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)showRulesButtonClicked: (UIButton*)button
-{
+- (void)showRules {
     self.noNeedToShowActionSheet = YES;
     
 #if LITE_VER != 0
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ATTENTION_TXT message:FEATURE_NOT_AVAILABLE delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
     alert.tag = 1001;
     [alert show];
-    return;    
+    return;
 #endif
     
     RulesSearcherViewController *searchRulesController = [[RulesSearcherViewController alloc] init];
     searchRulesController.sendNotifications = NO;
     [searchRulesController addBackButton];
     [self.navigationController pushViewController:searchRulesController animated:YES];//:searchRulesController animated:YES];
-
-    self.navigationController.navigationBarHidden = NO;
+    
     self.noNeedToShowActionSheet = YES;
+}
+
+- (void) showMenu {
+    if (_menu.isOpen)
+    {
+        [_menu closeWithCompletion:^{
+            self.menu = nil;
+        }];
+        
+        return;
+    }
+    
+    [Flurry logEvent: @"Show menu"];
+    
+    NSMutableArray *menuItems = [[NSMutableArray alloc] init];
+    
+//    menuItem1Image = [UIImage imageNamed:@"back.png"];
+//    menuItem2Image = [UIImage imageNamed:@"back.png"];
+//    menuItem3Image = [UIImage imageNamed:@"back.png"];
+//    menuItem4Image = [UIImage imageNamed:@"back.png"];
+
+    
+    REMenuItem *menuItem = [[REMenuItem alloc] initWithTitle:@"Правила"
+                                                       image:self.menuItem1Image
+                                            highlightedImage:nil
+                                             backgroundImage:nil
+                                                  isSelected:NO
+                                                      action:^(REMenuItem *item) {
+                                                          [self showRules];
+                                                          [Flurry logEvent:@"Show rules"];
+                                                      }];
+    [menuItems addObject: menuItem];
+    
+    menuItem = [[REMenuItem alloc] initWithTitle:@"Голосовой ввод"
+                                           image:self.menuItem2Image
+                                highlightedImage:nil
+                                 backgroundImage:nil
+                                      isSelected:NO
+                                          action:^(REMenuItem *item) {
+                                              [self onRecognize: nil];
+                                              
+                                              [Flurry logEvent:@"Voice recognizer"];
+                                          }];
+    [menuItems addObject: menuItem];
+    
+    menuItem = [[REMenuItem alloc] initWithTitle:@"Проверятор"
+                                           image:self.menuItem3Image
+                                highlightedImage:nil
+                                 backgroundImage:nil
+                                      isSelected:NO
+                                          action:^(REMenuItem *item) {
+                                              [self shakeDetected: nil];
+                                              
+                                              [Flurry logEvent:@"Start game"];
+                                          }];
+    [menuItems addObject: menuItem];
+    
+    menuItem = [[REMenuItem alloc] initWithTitle:@"Дополнительно"
+                                           image:self.menuItem4Image
+                                highlightedImage:nil
+                                 backgroundImage:nil
+                                      isSelected:NO
+                                          action:^(REMenuItem *item) {
+                                              [self showAbout: nil];
+                                              [Flurry logEvent:@"Show other apps"];
+                                          }];
+    [menuItems addObject: menuItem];
+    
+    _menu = [[REMenu alloc] initWithItems: menuItems];
+
+    _menu.cornerRadius = 10;
+    _menu.shadowRadius = 0;
+    _menu.shadowColor = [UIColor colorWithRed:0.96f green:0.93f blue:0.88f alpha:1.00f];
+    _menu.shadowOffset = CGSizeMake(0, 0);
+    _menu.shadowOpacity = 0;
+    _menu.imageOffset = CGSizeMake(5, -1);
+    _menu.separatorHeight = 0;
+    _menu.separatorColor = [UIColor whiteColor];
+    _menu.borderColor = [UIColor clearColor];// [UIColor colorWithRed:0.51f green:0.84f blue:0.85f alpha:1.00f];
+    _menu.itemHeight = 44;
+    _menu.textShadowColor = [UIColor colorWithRed:0.96f green:0.93f blue:0.88f alpha:1.00f];
+    _menu.textShadowOffset = CGSizeMake(0, 0);
+    _menu.textAlignment = NSTextAlignmentCenter;
+    _menu.textColor = [UIColor whiteColor];
+    _menu.highlightedTextColor = [UIColor blueColor];
+    _menu.highlightedTextShadowOffset = CGSizeMake(0, 0);
+    _menu.backgroundColor = [UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.0f];
+    _menu.highlightedBackgroundColor = [UIColor whiteColor];
+    _menu.font = [UIFont boldSystemFontOfSize:18.0f];
+
+    MainViewController *selfWeakRef = self;
+    
+    _menu.closeCompletionHandler = ^{selfWeakRef.menu = nil;};
+    
+    [_menu showInView:self.view];
+}
+
+- (IBAction)showRulesButtonClicked: (UIButton*)button {
+
+    [self showMenu];
 }
 
 - (void)onlineDictViewControllerDidFinish:(OnlineDictViewController *)controller
@@ -1148,9 +1216,6 @@
     {
         [self showActionSheet:self];
     }
-    
-    self.showRulesButton.titleLabel.textColor = [UIColor whiteColor]; //UIColorFromRGB(0x361707);//[UIColor brownColor];
-    self.cancelButton.titleLabel.textColor = [UIColor whiteColor]; //UIColorFromRGB(0x361707);//[UIColor brownColor];
 }
 
 - (BOOL) isWord: (NSString*)word inAlphabet: (NSString*)alphabet
@@ -1185,12 +1250,10 @@
 
 - (void) showOnlineDetails:(NSString *)word searchURL:(NSString*)searchURL title:(NSString*)title
 {
+    [Flurry logEvent: [NSString stringWithFormat: @"Search online: %@", title]];
+
     OnlineDictViewController *controller = nil;
-#if LITE_VER == 0
     controller = [[OnlineDictViewController alloc] initWithNibName:@"OnlineDictView" bundle:nil];
-#else
-    controller = [[OnlineDictViewController alloc] initWithNibName:@"OnlineDictView_lite" bundle:nil];
-#endif
     controller.delegate = self;
     controller.word = word;
 
@@ -1204,7 +1267,7 @@
     {
         html = [[self.dictSearcherRu getWordDescriptionByIdx: self.selectedIdx] stringByReplacingOccurrencesOfString:@"\n" withString:@"</font></p><p><font size=46>"];
     
-        controller.localHtml = [[NSString alloc] initWithFormat:@"<html><body bgcolor=#E4E4E4><p><font size=70><b>%@</b></font></p><p><font size=46>%@</font></p></body></html>", self.selectedWord, html];
+        controller.localHtml = [[NSString alloc] initWithFormat:@"<html><body bgcolor=#FFFFFF><p><font size=70><b>%@</b></font></p><p><font size=46>%@</font></p></body></html>", self.selectedWord, html];
     }
     else
     {
@@ -1212,7 +1275,7 @@
         Lexicontext *dictionary = [Lexicontext sharedDictionary];
         html = [dictionary definitionAsHTMLFor:self.selectedWord
                                      withTextColor:@"000000"
-                                     backgroundColor:@"#E4E4E4"
+                                     backgroundColor:@"#FFFFFF"
                                      definitionBodyFontFamily:@"Helvetica"
                                      definitionBodyFontSize:46];
         controller.localHtml = html;
@@ -1224,8 +1287,6 @@
     //controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     
     [self.navigationController pushViewController:controller animated: YES];
-
-    self.navigationController.navigationBarHidden = NO;
 
     //[self presentModalViewController:controller animated:YES];
 }
@@ -1249,9 +1310,54 @@
 
 - (void)viewDidLoad
 {
-    self.navigationController.navigationBarHidden = YES;
+    //[self.navigationController setNavigationBarHidden:YES animated: YES];
     
     [super viewDidLoad];
+    
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    // Create a 1 by 1 pixel context
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    
+    [[UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.00f] setFill];
+    
+    UIRectFill(rect);   // Fill it with your color
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    self.wordSearchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44.0f)];
+    self.wordSearchBar.placeholder = NSLocalizedString(@"Новый поиск", nil);
+    self.wordSearchBar.delegate = self;
+    self.wordSearchBar.tintColor = [UIColor darkGrayColor];
+    
+    self.navigationItem.titleView = self.wordSearchBar;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Меню", nil) style:UIBarButtonItemStylePlain target:self action:@selector(showMenu)];
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    } else {
+        
+        [self.wordSearchBar setBackgroundImage:image];
+    
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        //UIButton *button = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 24, 24)];
+        
+        button.backgroundColor = [UIColor clearColor];
+        button.titleLabel.textColor = [UIColor whiteColor];
+                
+        [button setTitle:@"Меню" forState:UIControlStateNormal];
+        
+//        UIImage* buttonImage = [[NIKFontAwesomeIconFactory barButtonItemIconFactory] createImageForIcon:NIKFontAwesomeIconCircleArrowLeft];
+//        [button setImage:buttonImage forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+
+        [button addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+        
+        button.frame = CGRectMake(0, 0, 67, 36);
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    }
+    
     UInt32 sessionCategory = kAudioSessionCategory_AmbientSound;
     AudioSessionSetProperty (kAudioSessionProperty_AudioCategory,
                              sizeof (sessionCategory),
@@ -1272,8 +1378,6 @@
 	[SpeechKit setEarcon:earconStop forType:SKStopRecordingEarconType];
 	[SpeechKit setEarcon:earconCancel forType:SKCancelRecordingEarconType];
 #endif
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(deviceOrientationDidChange:) name: UIDeviceOrientationDidChangeNotification object: nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paste:) name:UIMenuControllerWillHideMenuNotification object:nil];
     
@@ -1282,86 +1386,42 @@
     
     //self.tableView.backgroundColor = [UIColor colorWithRed:251/255.0f green:248/255.0f blue:148/255.0f alpha:1.0];
     self.tableView.separatorColor = [UIColor clearColor];//[UIColor colorWithRed:180/255.0f green:188/255.0f blue:164/255.0f alpha:1.0];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG"]];
+    //self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG"]];
+    self.tableView.canCancelContentTouches = NO;
     
-    //self.searchBar.tintColor = [UIColor colorWithRed:77/255.0f green:55/255.0f blue:47/255.0f alpha:1.0f];
-    //self.cancelButton.backgroundColor = [UIColor colorWithRed:77/255.0f green:55/255.0f blue:47/255.0f alpha:1.0f];
-    //self.cancelButton.tintColor = [UIColor colorWithRed:77/255.0f green:55/255.0f blue:47/255.0f alpha:1.0f];
-    //self.showRulesButton.backgroundColor = [UIColor colorWithRed:77/255.0f green:55/255.0f blue:47/255.0f alpha:1.0f];
-    //self.showRulesButton.tintColor = [UIColor colorWithRed:77/255.0f green:55/255.0f blue:47/255.0f alpha:1.0f];
-
-    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"ipad-button-red"] forState:UIControlStateNormal];
-    [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"ipad-button-red-pressed"] forState:UIControlStateHighlighted];
-
-    [self.showRulesButton setBackgroundImage:[UIImage imageNamed:@"ipad-button-blue"] forState:UIControlStateNormal];
-    [self.showRulesButton setBackgroundImage:[UIImage imageNamed:@"ipad-button-blue-pressed"] forState:UIControlStateHighlighted];
-
-    self.showRulesButton.titleLabel.textColor = [UIColor whiteColor];// UIColorFromRGB(0x361707);//[UIColor brownColor];
-    self.cancelButton.titleLabel.textColor = [UIColor whiteColor]; //UIColorFromRGB(0x361707);//[UIColor brownColor];
-    
-    [self.searchBar setBackgroundImage:[UIImage imageNamed:@"ipad-menubar"]];
-
-//    [self.searchBar setBackgroundColor:[UIColor clearColor]];
-//    for (UIView *subview in self.searchBar.subviews) {
-//        if ([subview isKindOfClass:NSClassFromString(@"UISearchBarBackground")]) {
-//            [subview removeFromSuperview];
-//            break;
-//        }
-//    }
-    
-    self.cancelButton.layer.cornerRadius = 5.0;
-    self.showRulesButton.layer.cornerRadius = 5.0;
-    //self.recognizeButton.hidden = YES;
     self.previousWord = @"";
     
-    //[self.searchBar insertSubview:self.showRulesButton atIndex:3];
-    
-#if RU_LANG == 0
-    [self.showRulesButton setHidden:YES];
-    self.searchBar.showsCancelButton = NO;
-#endif
-    
-#if LITE_VER == 0
-    self.disableViewOverlay = [[UIView alloc]
-                               initWithFrame:CGRectMake(0.0f,44.0f,1024.0f,1024)];//416.0f
-#else
-    self.disableViewOverlay = [[UIView alloc]
-                               initWithFrame:CGRectMake(0.0f,94.0f,1024.0f,1024)];//416.0f
-#endif
-    self.disableViewOverlay.backgroundColor=[UIColor lightGrayColor];
-    self.disableViewOverlay.alpha = 0;
-    self.cancelButton.titleLabel.text = STOP_TXT;
-        
-    /*[[self.searchBar.subviews objectAtIndex:0] removeFromSuperview];
-        
-    UIImageView *backgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f,0.0f,1024.0,416.0f)];
-    backgroundView.image = [UIImage imageNamed:@"search_bar2.jpeg"];
-    [self.searchBar insertSubview:backgroundView atIndex:1];
-     */
-    [self.searchBar setPlaceholder:SEARCH_HINT];
+    [self.wordSearchBar setPlaceholder:SEARCH_HINT];
     [self disableCancelButton];
     
-    [self.progressView setBackgroundColor: [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"search_bar2.jpeg"]]];
-    //[self.progressView setProgressTintColor:[[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"search_bar2.jpeg"]]];
-
-    
-#if LITE_VER == 1
-    self.adView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
-    self.adView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |UIViewAutoresizingFlexibleRightMargin;
-    [self.view addSubview:self.adView];
-    
-    [self adjustAdSize];
-#endif 
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideKeypad:) name:NOTIFICATION_REQUEST_TO_HIDE_KEYPAD object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shakeDetected:) name:NOTIFICATION_SHAKE_DETECTED object:nil];
 
 	// Do any additional setup after loading the view, typically from a nib.
     
-    WBNoticeView *noticeView = [[WBNoticeView alloc] initWithView:self.tableView title:@"Потряси, чтобы начать игру!"];
+#ifdef LITE_VERSION
+    self.tableView.tableHeaderView = self.adBanner;
+#endif
     
-    [noticeView showSuccessNoticeInView:self.tableView message:@"Потряси, чтобы начать игру!" duration:3.0 delay:2.0 alpha:0.9 yOrigin:0.0];
+//    NIKFontAwesomeIconFactory *factory = [NIKFontAwesomeIconFactory barButtonItemIconFactory];
+//
+//    self.menuItem1Image = [factory createImageForIcon:NIKFontAwesomeIconLightbulb];
+//    self.menuItem2Image = [factory createImageForIcon:NIKFontAwesomeIconCommentsAlt];
+//    self.menuItem3Image = [factory createImageForIcon:NIKFontAwesomeIconEdit];
+//    self.menuItem4Image = [factory createImageForIcon:NIKFontAwesomeIconStarEmpty];
+    
+    self.menuItem1Image = [UIImage imageNamed:@"menu1"];
+    self.menuItem2Image = [UIImage imageNamed:@"menu2"];
+    self.menuItem3Image = [UIImage imageNamed:@"menu3"];
+    self.menuItem4Image = [UIImage imageNamed:@"menu4"];
 }
+
+#ifdef LITE_VERSION
+
+- (void)updateAdBannerPosition {
+    self.tableView.tableHeaderView = self.adBanner;
+}
+
+#endif
 
 - (void)shakeDetected:(NSNotification *)inNotification
 {
@@ -1372,20 +1432,19 @@
         [gameController addBackButton];
         
         [self.navigationController pushViewController:gameController animated:YES];
-        self.navigationController.navigationBarHidden = NO;
     }
 }
 
 - (void)hideKeypad:(NSNotification *)inNotification
 {
-    [self.searchBar resignFirstResponder];
+    [self.wordSearchBar resignFirstResponder];
 
 //    UIViewController *dummyController = [[UIViewController alloc] init];
 //    UIView *dummy = [[UIView alloc] initWithFrame:CGRectMake(-1, -1,1,1)];
 //    [dummyController setView:dummy];
 //    [self presentModalViewController:dummyController animated:NO];
 //    [dummyController dismissModalViewControllerAnimated:NO];
-    [self searchBarCancelButtonClicked: self.searchBar];
+    [self searchBarCancelButtonClicked: self.wordSearchBar];
 }
 
 - (void)viewDidUnload
@@ -1404,17 +1463,13 @@
 {
     [super viewWillAppear:animated];
 
-    self.navigationController.navigationBarHidden = YES;
+    //[self.navigationController setNavigationBarHidden: YES animated:NO];
 
     self.tableView.allowsSelection = YES;
 
-    [self.searchBar becomeFirstResponder];
+    [self.wordSearchBar becomeFirstResponder];
     
-    [self searchBarTextDidBeginEditing: self.searchBar];
-    
-    self.showRulesButton.titleLabel.textColor = [UIColor whiteColor]; //UIColorFromRGB(0x361707);//[UIColor brownColor];
-    self.cancelButton.titleLabel.textColor = [UIColor whiteColor]; //UIColorFromRGB(0x361707);//[UIColor brownColor];
-    
+    [self searchBarTextDidBeginEditing: self.wordSearchBar];
     self.isVisible = YES;
 }
 
@@ -1426,23 +1481,6 @@
     if (orientation == UIDeviceOrientationFaceUp || orientation == UIDeviceOrientationFaceDown || orientation == UIDeviceOrientationUnknown)
     {
         return;
-    }
- 
-    if (self.activity == nil)
-    {
-        return;
-    }
-    
-    CGRect cgRect =[[UIScreen mainScreen] bounds];
-    CGSize cgSize = cgRect.size;
-    
-    if (UIDeviceOrientationIsPortrait(orientation))
-    {
-        self.activity.center = CGPointMake(cgSize.width/2, cgSize.height/3);
-    }
-    else
-    {
-        self.activity.center = CGPointMake(cgSize.height/2, cgSize.width/3);
     }
 }
 
@@ -1593,21 +1631,12 @@
 	[super viewDidDisappear:animated];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.wordSearchBar resignFirstResponder];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-#if LITE_VER == 1
-    if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
-    {
-        self.bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-    }
-    else
-    {
-        self.bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-    }
-    
-    [self adjustAdSize];
-#endif 
-    
+{    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
     {
         return YES;
@@ -1617,80 +1646,5 @@
         return NO;
     }
 }
-
-#if LITE_VER == 1
-
-- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
-{
-    return NO;
-}
-
-- (void)bannerViewActionDidFinish:(ADBannerView *)banner
-{
-}
-
-- (void)bannerViewDidLoadAd:(ADBannerView *)banner
-{
-    if (!self.bannerIsVisible)
-    {
-        [self.myAdView setHidden:YES];
-        [self.bannerView setHidden:NO];
-        self.bannerIsVisible = YES;
-    }
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-{
-    NSLog(@"Failed to load iAd");
-    
-    if (self.bannerIsVisible)
-    {
-        //Show own banner
-        [self.myAdView setHidden:NO];
-        [self.bannerView setHidden:YES];
-        self.bannerIsVisible = NO;
-    }
-}
-
-#pragma mark AdWhirl
-
-- (NSString *)adWhirlApplicationKey
-{
-    return @"5656e05a98154aafbeba074ee21361fb";
-}
-//
-- (BOOL)adWhirlTestMode
-{
-    return NO;
-}
-//
-- (void)adWhirlDidDismissFullScreenModal
-{
-}
-//
-- (UIViewController *)viewControllerForPresentingModalView
-{
-    return self;
-}
-//
-- (void)adWhirlDidReceiveAd:(AdWhirlView *)adWhirlView
-{
-    [self adjustAdSize];
-}
-//
-- (void)adjustAdSize
-{    
-    [UIView beginAnimations:@"AdResize" context:nil];
-    [UIView setAnimationDuration:0.7];
-    CGSize adSize = [adView actualAdSize];
-    CGRect newFrame = adView.frame;
-    newFrame.size.height = adSize.height;
-    newFrame.size.width = adSize.width;
-    newFrame.origin.x = (self.view.bounds.size.width - adSize.width)/2;
-    newFrame.origin.y = self.view.bounds.size.height - adSize.height;
-    adView.frame = newFrame;
-    [UIView commitAnimations];
-}
-#endif
 
 @end

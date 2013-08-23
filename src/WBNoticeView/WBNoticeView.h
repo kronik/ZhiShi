@@ -66,6 +66,10 @@ typedef void (^WBNoticeViewDismissedBlock)(void);
                         message:(NSString *)message;
 
 - (void)showSuccessNoticeInView:(UIView *)view
+                          title:(NSString *)title
+                        message:(NSString *)message;
+
+- (void)showSuccessNoticeInView:(UIView *)view
                         message:(NSString *)message
                        duration:(float)duration
                           delay:(float)delay

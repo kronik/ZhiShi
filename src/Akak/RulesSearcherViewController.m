@@ -40,9 +40,30 @@
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
     self.searchBar.showsCancelButton = NO;
     self.searchBar.delegate = self;
-    [self.searchBar setBackgroundImage:[UIImage imageNamed:@"ipad-menubar"]];
+    self.searchBar.placeholder = @"Новый поиск";
+    self.searchBar.tintColor = [UIColor darkGrayColor];
     
-    self.tableView = [[MYTableView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style: UITableViewStyleGrouped];
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    // Create a 1 by 1 pixel context
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    
+    [[UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.00f] setFill];
+    
+    UIRectFill(rect);   // Fill it with your color
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [self.searchBar setBackgroundImage:image];
+    
+    float heightOffset = 0.0;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+        heightOffset = 0;
+    } else {
+        heightOffset = 20;
+    }
+    
+    self.tableView = [[MYTableView alloc] initWithFrame: CGRectMake(0, heightOffset, self.view.frame.size.width, self.view.frame.size.height) style: UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.allowsSelection = YES;
@@ -54,15 +75,26 @@
     self.navigationItem.titleView = self.searchBar;
     
     //self.tableView.separatorColor = [UIColor clearColor];//[UIColor colorWithRed:180/255.0f green:188/255.0f blue:164/255.0f alpha:1.0];
-    self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG@2x.png"]];
-
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.separatorColor = [UIColor grayColor];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:0.98f green:0.98f blue:0.98f alpha:1.00f];
     [self.tableView reloadData];
 }
 
 - (void)addBackButton
 {
-    UIImage *navBarImage = [UIImage imageNamed:@"ipad-menubar"];
-    [[UINavigationBar appearance] setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    // Create a 1 by 1 pixel context
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    
+    [[UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.00f] setFill];
+    
+    UIRectFill(rect);   // Fill it with your color
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
     
     UIImage* buttonImage = [UIImage imageNamed:@"back.png"];
     
@@ -128,6 +160,7 @@
         [cell setUserInteractionEnabled: YES];
     }
     
+    cell.backgroundColor = [UIColor colorWithRed:0.98f green:0.98f blue:0.98f alpha:1.00f];
     cell.textLabel.text = self.displayDataList[indexPath.row];
     
     return cell;
@@ -137,6 +170,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [Flurry logEvent: @"Show selected rule"];
+
     [self.tableView deselectRowAtIndexPath:indexPath animated: YES];
     int index = 0;
     

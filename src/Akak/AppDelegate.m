@@ -20,22 +20,7 @@
 
 NSString *const FBSessionStateChangedNotification = @"com.example.Login:FBSessionStateChangedNotification";
 
-static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* current, double threshold)
-{
-	double
-    deltaX = fabs(last.x - current.x),
-    deltaY = fabs(last.y - current.y),
-    deltaZ = fabs(last.z - current.z);
-    
-	return
-    (deltaX > threshold && deltaY > threshold) ||
-    (deltaX > threshold && deltaZ > threshold) ||
-    (deltaY > threshold && deltaZ > threshold);
-}
-
 @implementation AppDelegate
-
-@synthesize lastAcceleration = _lastAcceleration;
 
 @synthesize window = _window;
 @synthesize session = _session;
@@ -72,56 +57,57 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 }
 #endif
 
-- (void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
-    
-	if (self.lastAcceleration)
-    {
-		if (!histeresisExcited && L0AccelerationIsShaking(self.lastAcceleration, acceleration, 0.7))
-        {
-			histeresisExcited = YES;
-            
-			/* SHAKE DETECTED. DO HERE WHAT YOU WANT. */
-            [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_SHAKE_DETECTED object: nil];
-		}
-        else if (histeresisExcited && !L0AccelerationIsShaking(self.lastAcceleration, acceleration, 0.2))
-        {
-			histeresisExcited = NO;
-		}
-	}
-    
-	self.lastAcceleration = acceleration;
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#ifndef DEBUG
+    [Flurry startSession:@"6CWJRSQRNDVV3RGS2WCP"];
+#endif
+
     // http://stackoverflow.com/questions/1725881/unknown-class-myclass-in-interface-builder-file-error-at-runtime
     [FBProfilePictureView class];
 
     // check for internet connection
     self.internetReachable = [MyReachability reachabilityForInternetConnection];
     
-    [UIAccelerometer sharedAccelerometer].delegate = self;
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"ipad-menubar"] forBarMetrics:UIBarMetricsDefault];
-    //[[UINavigationBar appearance] setBackgroundColor: [UIColor clearColor]];
-    [[UINavigationBar appearance] setTintColor: [UIColor blueColor]];
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    // Create a 1 by 1 pixel context
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    
+    [[UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.00f] setFill];
+    
+    UIRectFill(rect);   // Fill it with your color
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
 
-    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], UITextAttributeTextColor, [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0, -1)], UITextAttributeTextShadowOffset, nil]];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    } else {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        
+        [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}];
+        
+        //self.window.tintColor = [UIColor whiteColor];
+    }
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+
+    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], UITextAttributeTextColor, [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],UITextAttributeTextShadowColor, [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset, nil]];
     // Override point for customization after application launch.
     
-#if LITE_VER == 0
     self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController_iPhone" bundle:nil];
-#else
-    self.mainViewController = [[MainViewController alloc] initWithNibName:@"MainViewController_iPhone_lite" bundle:nil];
-#endif
         
     [self.mainViewController startToBuildIndex];
 
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.mainViewController];
-    self.window.rootViewController = navController;
     
+    self.window.rootViewController = navController;
+
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        [navController interactivePopGestureRecognizer];
+    }
     // add the HUD
     hud = [[MBProgressHUD alloc] initWithView:navController.view];
     hud.dimBackground = NO;
@@ -198,7 +184,7 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
         case FBErrorNonTextMimeTypeReturned:{
             return @"FBErrorNonTextMimeTypeReturned";
         }
-        case FBErrorNativeDialog:{
+        case FBErrorDialog:{
             return @"FBErrorNativeDialog";
         }
         default:
@@ -350,7 +336,6 @@ static BOOL L0AccelerationIsShaking(UIAcceleration* last, UIAcceleration* curren
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [UIAccelerometer sharedAccelerometer].delegate = nil;
     [FBSession.activeSession close];
 
     /*
