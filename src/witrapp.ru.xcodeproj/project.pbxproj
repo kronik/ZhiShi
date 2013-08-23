@@ -67,6 +67,30 @@
 		0216948B17C75754005A70EB /* menu1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216947D17C75754005A70EB /* menu1@2x.png */; };
 		0216948C17C75754005A70EB /* menu1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216947D17C75754005A70EB /* menu1@2x.png */; };
 		0216948D17C75754005A70EB /* menu1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216947D17C75754005A70EB /* menu1@2x.png */; };
+		0216949017C7647D005A70EB /* NSArray+Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0216948F17C7647D005A70EB /* NSArray+Memory.m */; };
+		0216949117C7647D005A70EB /* NSArray+Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0216948F17C7647D005A70EB /* NSArray+Memory.m */; };
+		0216949217C7647D005A70EB /* NSArray+Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0216948F17C7647D005A70EB /* NSArray+Memory.m */; };
+		0216949317C7647D005A70EB /* NSArray+Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0216948F17C7647D005A70EB /* NSArray+Memory.m */; };
+		0216949617C7687D005A70EB /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949417C7687D005A70EB /* empty.png */; };
+		0216949717C7687D005A70EB /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949417C7687D005A70EB /* empty.png */; };
+		0216949817C7687D005A70EB /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949417C7687D005A70EB /* empty.png */; };
+		0216949917C7687D005A70EB /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949417C7687D005A70EB /* empty.png */; };
+		0216949A17C7687D005A70EB /* empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949517C7687D005A70EB /* empty@2x.png */; };
+		0216949B17C7687D005A70EB /* empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949517C7687D005A70EB /* empty@2x.png */; };
+		0216949C17C7687D005A70EB /* empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949517C7687D005A70EB /* empty@2x.png */; };
+		0216949D17C7687D005A70EB /* empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949517C7687D005A70EB /* empty@2x.png */; };
+		0216949F17C76A32005A70EB /* correct@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949E17C76A32005A70EB /* correct@2x.png */; };
+		021694A017C76A32005A70EB /* correct@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949E17C76A32005A70EB /* correct@2x.png */; };
+		021694A117C76A32005A70EB /* correct@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949E17C76A32005A70EB /* correct@2x.png */; };
+		021694A217C76A32005A70EB /* correct@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0216949E17C76A32005A70EB /* correct@2x.png */; };
+		021694A517C76A3F005A70EB /* incorrect.png in Resources */ = {isa = PBXBuildFile; fileRef = 021694A317C76A3F005A70EB /* incorrect.png */; };
+		021694A617C76A3F005A70EB /* incorrect.png in Resources */ = {isa = PBXBuildFile; fileRef = 021694A317C76A3F005A70EB /* incorrect.png */; };
+		021694A717C76A3F005A70EB /* incorrect.png in Resources */ = {isa = PBXBuildFile; fileRef = 021694A317C76A3F005A70EB /* incorrect.png */; };
+		021694A817C76A3F005A70EB /* incorrect.png in Resources */ = {isa = PBXBuildFile; fileRef = 021694A317C76A3F005A70EB /* incorrect.png */; };
+		021694A917C76A3F005A70EB /* incorrect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 021694A417C76A3F005A70EB /* incorrect@2x.png */; };
+		021694AA17C76A3F005A70EB /* incorrect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 021694A417C76A3F005A70EB /* incorrect@2x.png */; };
+		021694AB17C76A3F005A70EB /* incorrect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 021694A417C76A3F005A70EB /* incorrect@2x.png */; };
+		021694AC17C76A3F005A70EB /* incorrect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 021694A417C76A3F005A70EB /* incorrect@2x.png */; };
 		021B7B3317B5CD61000E7FAF /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 021B7B3217B5CD61000E7FAF /* libGoogleAdMobAds.a */; };
 		021B7B3417B5CD61000E7FAF /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 021B7B3217B5CD61000E7FAF /* libGoogleAdMobAds.a */; };
 		021B7B3517B5CD61000E7FAF /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 021B7B3217B5CD61000E7FAF /* libGoogleAdMobAds.a */; };
@@ -1334,6 +1358,13 @@
 		0216947B17C75754005A70EB /* menu3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu3@2x.png"; path = "Images/menu3@2x.png"; sourceTree = "<group>"; };
 		0216947C17C75754005A70EB /* menu2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu2@2x.png"; path = "Images/menu2@2x.png"; sourceTree = "<group>"; };
 		0216947D17C75754005A70EB /* menu1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu1@2x.png"; path = "Images/menu1@2x.png"; sourceTree = "<group>"; };
+		0216948E17C7647D005A70EB /* NSArray+Memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Memory.h"; sourceTree = "<group>"; };
+		0216948F17C7647D005A70EB /* NSArray+Memory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Memory.m"; sourceTree = "<group>"; };
+		0216949417C7687D005A70EB /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = empty.png; path = ../../../../../Desktop/empty.png; sourceTree = "<group>"; };
+		0216949517C7687D005A70EB /* empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "empty@2x.png"; path = "../../../../../Desktop/empty@2x.png"; sourceTree = "<group>"; };
+		0216949E17C76A32005A70EB /* correct@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "correct@2x.png"; path = "Images/correct@2x.png"; sourceTree = "<group>"; };
+		021694A317C76A3F005A70EB /* incorrect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = incorrect.png; path = Images/incorrect.png; sourceTree = "<group>"; };
+		021694A417C76A3F005A70EB /* incorrect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "incorrect@2x.png"; path = "Images/incorrect@2x.png"; sourceTree = "<group>"; };
 		021B7B2917B5CD61000E7FAF /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
 		021B7B2A17B5CD61000E7FAF /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
 		021B7B2B17B5CD61000E7FAF /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
@@ -2309,6 +2340,8 @@
 				0244DB5E165D2625009A7383 /* UINavigationController+Keyboard.h */,
 				0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */,
 				321EA84514A02920002D5D23 /* Supporting Files */,
+				0216948E17C7647D005A70EB /* NSArray+Memory.h */,
+				0216948F17C7647D005A70EB /* NSArray+Memory.m */,
 			);
 			name = Sources;
 			path = Akak;
@@ -2331,6 +2364,12 @@
 		326408C314A9BFCC00C3A53B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0216949E17C76A32005A70EB /* correct@2x.png */,
+				02F1DAB8165F5C26001B32D2 /* correct.png */,
+				021694A317C76A3F005A70EB /* incorrect.png */,
+				021694A417C76A3F005A70EB /* incorrect@2x.png */,
+				0216949417C7687D005A70EB /* empty.png */,
+				0216949517C7687D005A70EB /* empty@2x.png */,
 				0216947A17C75754005A70EB /* menu4@2x.png */,
 				0216947B17C75754005A70EB /* menu3@2x.png */,
 				0216947C17C75754005A70EB /* menu2@2x.png */,
@@ -2382,7 +2421,6 @@
 				02F1DAB5165F5C26001B32D2 /* button-pressed@2x.png */,
 				02F1DAB6165F5C26001B32D2 /* button.png */,
 				02F1DAB7165F5C26001B32D2 /* button@2x.png */,
-				02F1DAB8165F5C26001B32D2 /* correct.png */,
 				02F1DAB9165F5C26001B32D2 /* correct2.png */,
 				02F1DABA165F5C26001B32D2 /* country.png */,
 				02F1DABB165F5C26001B32D2 /* country@2x.png */,
@@ -2595,6 +2633,7 @@
 				024F1A3A1658CC11002185A9 /* 19.html in Resources */,
 				024F1A3E1658CC11002185A9 /* 2.html in Resources */,
 				024F1A421658CC11002185A9 /* 20.html in Resources */,
+				0216949A17C7687D005A70EB /* empty@2x.png in Resources */,
 				024F1A461658CC11002185A9 /* 21.html in Resources */,
 				024F1A4A1658CC11002185A9 /* 22.html in Resources */,
 				024F1A4E1658CC11002185A9 /* 23.html in Resources */,
@@ -2636,6 +2675,7 @@
 				024F1ADE1658CC11002185A9 /* 56.html in Resources */,
 				024F1AE21658CC11002185A9 /* 57.html in Resources */,
 				024F1AE61658CC11002185A9 /* 58.html in Resources */,
+				021694A917C76A3F005A70EB /* incorrect@2x.png in Resources */,
 				024F1AEA1658CC11002185A9 /* 59.html in Resources */,
 				024F1AEE1658CC11002185A9 /* 6.html in Resources */,
 				024F1AF21658CC11002185A9 /* 60.html in Resources */,
@@ -2649,6 +2689,7 @@
 				024F1B121658CC11002185A9 /* 68.html in Resources */,
 				024F1B161658CC11002185A9 /* 69.html in Resources */,
 				024F1B1A1658CC11002185A9 /* 7.html in Resources */,
+				021694A517C76A3F005A70EB /* incorrect.png in Resources */,
 				024F1B1E1658CC11002185A9 /* 70.html in Resources */,
 				024F1B221658CC11002185A9 /* 71.html in Resources */,
 				024F1B261658CC11002185A9 /* 72.html in Resources */,
@@ -2674,6 +2715,7 @@
 				02F1DAFE165F5C26001B32D2 /* back-button@2x.png in Resources */,
 				02F1DB02165F5C26001B32D2 /* back.png in Resources */,
 				02F1DB06165F5C26001B32D2 /* back@2x.png in Resources */,
+				0216949617C7687D005A70EB /* empty.png in Resources */,
 				02F1DB0A165F5C26001B32D2 /* background@2x.png in Resources */,
 				02F1DB0E165F5C26001B32D2 /* button-blue.png in Resources */,
 				02F1DB12165F5C26001B32D2 /* button-blue@2x.png in Resources */,
@@ -2682,6 +2724,7 @@
 				02F1DB1E165F5C26001B32D2 /* button.png in Resources */,
 				0216946A17C753F7005A70EB /* menu4.png in Resources */,
 				02F1DB22165F5C26001B32D2 /* button@2x.png in Resources */,
+				0216949F17C76A32005A70EB /* correct@2x.png in Resources */,
 				02F1DB26165F5C26001B32D2 /* correct.png in Resources */,
 				02F1DB2A165F5C26001B32D2 /* correct2.png in Resources */,
 				02F1DB2E165F5C26001B32D2 /* country.png in Resources */,
@@ -2910,14 +2953,17 @@
 				024F1B171658CC11002185A9 /* 69.html in Resources */,
 				024F1B1B1658CC11002185A9 /* 7.html in Resources */,
 				024F1B1F1658CC11002185A9 /* 70.html in Resources */,
+				021694A017C76A32005A70EB /* correct@2x.png in Resources */,
 				024F1B231658CC11002185A9 /* 71.html in Resources */,
 				024F1B271658CC11002185A9 /* 72.html in Resources */,
 				024F1B2B1658CC11002185A9 /* 73.html in Resources */,
 				024F1B2F1658CC11002185A9 /* 74.html in Resources */,
+				021694AA17C76A3F005A70EB /* incorrect@2x.png in Resources */,
 				024F1B331658CC11002185A9 /* 75.html in Resources */,
 				024F1B371658CC11002185A9 /* 76.html in Resources */,
 				024F1B3B1658CC11002185A9 /* 77.html in Resources */,
 				024F1B3F1658CC11002185A9 /* 78.html in Resources */,
+				0216949717C7687D005A70EB /* empty.png in Resources */,
 				024F1B431658CC11002185A9 /* 79.html in Resources */,
 				0216948317C75754005A70EB /* menu3@2x.png in Resources */,
 				0216947317C753F7005A70EB /* menu2.png in Resources */,
@@ -2958,6 +3004,7 @@
 				02F1DB63165F5C26001B32D2 /* icon57x57.png in Resources */,
 				02F1DB67165F5C26001B32D2 /* icon72x72.png in Resources */,
 				02F1DB6B165F5C26001B32D2 /* icon114x114.png in Resources */,
+				0216949B17C7687D005A70EB /* empty@2x.png in Resources */,
 				02F1DB6F165F5C26001B32D2 /* icon144x144.png in Resources */,
 				02F1DB73165F5C26001B32D2 /* ifeelgood.png in Resources */,
 				0216946B17C753F7005A70EB /* menu4.png in Resources */,
@@ -3049,6 +3096,7 @@
 				02A07617166904F1008036E9 /* ipad-button-red-pressed.png in Resources */,
 				02A0761B166904F1008036E9 /* ipad-button-red-pressed@2x.png in Resources */,
 				02A0761F166904F1008036E9 /* ipad-button-red.png in Resources */,
+				021694A617C76A3F005A70EB /* incorrect.png in Resources */,
 				02A07623166904F1008036E9 /* ipad-button-red@2x.png in Resources */,
 				02A0764D16690FE3008036E9 /* LICENSE in Resources */,
 				02A0765116690FE3008036E9 /* README.md in Resources */,
@@ -3071,6 +3119,7 @@
 			files = (
 				32C512C114C689DA00151879 /* ModelEN.sqlite in Resources */,
 				32C5127C14C688B600151879 /* InfoPlist.strings in Resources */,
+				0216949817C7687D005A70EB /* empty.png in Resources */,
 				32C5127D14C688B600151879 /* MainViewController_iPhone.xib in Resources */,
 				32C5128D14C688B600151879 /* OnlineDictView.xib in Resources */,
 				328EE66514E8F98700A4926A /* datatable.css in Resources */,
@@ -3093,6 +3142,7 @@
 				024F1A381658CC11002185A9 /* 18.html in Resources */,
 				024F1A3C1658CC11002185A9 /* 19.html in Resources */,
 				024F1A401658CC11002185A9 /* 2.html in Resources */,
+				021694A717C76A3F005A70EB /* incorrect.png in Resources */,
 				024F1A441658CC11002185A9 /* 20.html in Resources */,
 				024F1A481658CC11002185A9 /* 21.html in Resources */,
 				024F1A4C1658CC11002185A9 /* 22.html in Resources */,
@@ -3144,6 +3194,7 @@
 				024F1AF81658CC11002185A9 /* 61.html in Resources */,
 				024F1AFC1658CC11002185A9 /* 62.html in Resources */,
 				024F1B001658CC11002185A9 /* 63.html in Resources */,
+				021694AB17C76A3F005A70EB /* incorrect@2x.png in Resources */,
 				024F1B041658CC11002185A9 /* 64.html in Resources */,
 				024F1B081658CC11002185A9 /* 65.html in Resources */,
 				024F1B0C1658CC11002185A9 /* 66.html in Resources */,
@@ -3166,6 +3217,7 @@
 				024F1B4C1658CC11002185A9 /* 80.html in Resources */,
 				024F1B501658CC11002185A9 /* 81.html in Resources */,
 				024F1B541658CC11002185A9 /* 82.html in Resources */,
+				0216949C17C7687D005A70EB /* empty@2x.png in Resources */,
 				024F1B581658CC11002185A9 /* 83.html in Resources */,
 				024F1B5C1658CC11002185A9 /* 84.html in Resources */,
 				024F1B601658CC11002185A9 /* 85.html in Resources */,
@@ -3213,6 +3265,7 @@
 				02F1DB98165F5C26001B32D2 /* ipad-list-arrow@2x.png in Resources */,
 				02F1DB9C165F5C26001B32D2 /* ipad-menubar-right.png in Resources */,
 				02F1DBA0165F5C26001B32D2 /* ituneit.png in Resources */,
+				021694A117C76A32005A70EB /* correct@2x.png in Resources */,
 				02F1DBA4165F5C26001B32D2 /* leather-background.png in Resources */,
 				02F1DBA8165F5C26001B32D2 /* leather-background@2x.png in Resources */,
 				0216948017C75754005A70EB /* menu4@2x.png in Resources */,
@@ -3318,6 +3371,7 @@
 				32C512A614C6899C00151879 /* InfoPlist.strings in Resources */,
 				32C512A714C6899C00151879 /* MainViewController_iPhone.xib in Resources */,
 				32C512B714C6899C00151879 /* OnlineDictView.xib in Resources */,
+				021694AC17C76A3F005A70EB /* incorrect@2x.png in Resources */,
 				328EE66614E8F98700A4926A /* datatable.css in Resources */,
 				0254FFD01567B5CF0004019C /* AboutView.xib in Resources */,
 				0216948917C75754005A70EB /* menu2@2x.png in Resources */,
@@ -3453,6 +3507,7 @@
 				02F1DB91165F5C26001B32D2 /* ipad-BG@2x.png in Resources */,
 				02F1DB95165F5C26001B32D2 /* ipad-list-arrow.png in Resources */,
 				02F1DB99165F5C26001B32D2 /* ipad-list-arrow@2x.png in Resources */,
+				021694A817C76A3F005A70EB /* incorrect.png in Resources */,
 				02F1DB9D165F5C26001B32D2 /* ipad-menubar-right.png in Resources */,
 				02F1DBA1165F5C26001B32D2 /* ituneit.png in Resources */,
 				02F1DBA5165F5C26001B32D2 /* leather-background.png in Resources */,
@@ -3498,8 +3553,10 @@
 				02F1DC59165F60CD001B32D2 /* wirl1.mp3 in Resources */,
 				02F1DC5D165F60CD001B32D2 /* wirl1.wav in Resources */,
 				02F1DC61165F60CD001B32D2 /* wirl2.mp3 in Resources */,
+				0216949D17C7687D005A70EB /* empty@2x.png in Resources */,
 				02F1DC65165F60CD001B32D2 /* wirl2.wav in Resources */,
 				02F1DC69165F60CD001B32D2 /* да.mp3 in Resources */,
+				021694A217C76A32005A70EB /* correct@2x.png in Resources */,
 				02F1DC6D165F60CD001B32D2 /* еще разок1.mp3 in Resources */,
 				02F1DC71165F60CD001B32D2 /* еще разок2.mp3 in Resources */,
 				02F1DC75165F60CD001B32D2 /* здорово.mp3 in Resources */,
@@ -3519,6 +3576,7 @@
 				02D86ADA16624AF50023ED1C /* 37x-Checkmark.png in Resources */,
 				02D86ADE16624AF50023ED1C /* 37x-Checkmark@2x.png in Resources */,
 				02D86AE916625B780023ED1C /* icon512.png in Resources */,
+				0216949917C7687D005A70EB /* empty.png in Resources */,
 				02D86B8C1663B0DE0023ED1C /* petal-email@2x.png in Resources */,
 				02D86B901663B0DE0023ED1C /* petal-facebook@2x.png in Resources */,
 				02D86B941663B0DE0023ED1C /* petal-save@2x.png in Resources */,
@@ -3606,6 +3664,7 @@
 				02A0769F16691DFC008036E9 /* Vkontakte.m in Sources */,
 				02A076A316691DFC008036E9 /* VkontakteViewController.m in Sources */,
 				02C9C157167A08A6004EC906 /* UILabel+WBExtensions.m in Sources */,
+				0216949017C7647D005A70EB /* NSArray+Memory.m in Sources */,
 				02C9C15B167A08A6004EC906 /* WBBlueGradientView.m in Sources */,
 				026B8B4417B5E044005C4913 /* REMenuContainerView.m in Sources */,
 				02C9C15F167A08A6004EC906 /* WBErrorNoticeView.m in Sources */,
@@ -3672,6 +3731,7 @@
 				02A076A016691DFC008036E9 /* Vkontakte.m in Sources */,
 				02A076A416691DFC008036E9 /* VkontakteViewController.m in Sources */,
 				02C9C158167A08A6004EC906 /* UILabel+WBExtensions.m in Sources */,
+				0216949117C7647D005A70EB /* NSArray+Memory.m in Sources */,
 				02C9C15C167A08A6004EC906 /* WBBlueGradientView.m in Sources */,
 				026B8B4517B5E044005C4913 /* REMenuContainerView.m in Sources */,
 				02C9C160167A08A6004EC906 /* WBErrorNoticeView.m in Sources */,
@@ -3738,6 +3798,7 @@
 				02A076A116691DFC008036E9 /* Vkontakte.m in Sources */,
 				02A076A516691DFC008036E9 /* VkontakteViewController.m in Sources */,
 				02C9C159167A08A6004EC906 /* UILabel+WBExtensions.m in Sources */,
+				0216949217C7647D005A70EB /* NSArray+Memory.m in Sources */,
 				02C9C15D167A08A6004EC906 /* WBBlueGradientView.m in Sources */,
 				026B8B4617B5E044005C4913 /* REMenuContainerView.m in Sources */,
 				02C9C161167A08A6004EC906 /* WBErrorNoticeView.m in Sources */,
@@ -3804,6 +3865,7 @@
 				02A076A216691DFC008036E9 /* Vkontakte.m in Sources */,
 				02A076A616691DFC008036E9 /* VkontakteViewController.m in Sources */,
 				02C9C15A167A08A6004EC906 /* UILabel+WBExtensions.m in Sources */,
+				0216949317C7647D005A70EB /* NSArray+Memory.m in Sources */,
 				02C9C15E167A08A6004EC906 /* WBBlueGradientView.m in Sources */,
 				026B8B4717B5E044005C4913 /* REMenuContainerView.m in Sources */,
 				02C9C162167A08A6004EC906 /* WBErrorNoticeView.m in Sources */,

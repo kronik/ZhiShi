@@ -9,7 +9,7 @@
 #import "FlatPillButton.h"
 
 const CGFloat kFlatPillButtonBoldLineWidth = 3.0;
-const CGFloat kFlatPillButtonNormalLineWidth = 2.0;
+const CGFloat kFlatPillButtonNormalLineWidth = 1.0;
 
 @implementation FlatPillButton
 

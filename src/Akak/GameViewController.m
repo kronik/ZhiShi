@@ -680,9 +680,9 @@ typedef enum gameTableMode
         {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         }
-        cell.textLabel.highlightedTextColor = [UIColor blackColor];
-        cell.textLabel.textColor = [UIColor darkGrayColor];
-        cell.detailTextLabel.textColor = [UIColor darkGrayColor];
+        cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+        cell.textLabel.textColor = [UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f];
+        cell.detailTextLabel.textColor = [UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f];
         cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:28.0f];
         cell.textLabel.numberOfLines = 1;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -730,8 +730,8 @@ typedef enum gameTableMode
                 button.enabled = YES;
                 
                 [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
-                [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
-                [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
+                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
                 
                 [button addTarget:self action:@selector(nextTaskButton:) forControlEvents: UIControlEventTouchUpInside];
                 button.titleLabel.font = cell.textLabel.font;
@@ -766,7 +766,7 @@ typedef enum gameTableMode
                 self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 220, 10, 200, 50)];
                 self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size: 20.0f];
                 self.timeLabel.backgroundColor = [UIColor clearColor];
-                self.timeLabel.textColor = [UIColor darkGrayColor];
+                self.timeLabel.textColor = [UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f];
                 self.timeLabel.textAlignment = NSTextAlignmentRight;
                 self.timeLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
                 [self.view addSubview: self.timeLabel];
@@ -787,17 +787,23 @@ typedef enum gameTableMode
                 cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size: 24.0f];
                 cell.textLabel.numberOfLines = 1;
                 cell.textLabel.textAlignment = NSTextAlignmentLeft;
-                cell.selectionStyle = UITableViewCellSelectionStyleGray;
-                
+
                 if ([self.task [indexPath.row] isEqualToString:@""])
                 {
                     cell.imageView.image = nil;
                     cell.userInteractionEnabled = NO;
+                    cell.selectionStyle = UITableViewCellSelectionStyleGray;
                 }
                 else
                 {
-                    cell.imageView.image = [UIImage imageNamed:@"point2"];
+//                    NIKFontAwesomeIconFactory *factory = [NIKFontAwesomeIconFactory barButtonItemIconFactory];
+//                    
+//                    factory.colors = @[[UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.00f]];
+//                    factory.size = 25.0;
+
+                    cell.imageView.image = [UIImage imageNamed:@"empty"];//[factory createImageForIcon:NIKFontAwesomeIconCheckEmpty];
                     cell.userInteractionEnabled = YES;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 }
             }
             
@@ -832,8 +838,8 @@ typedef enum gameTableMode
                     button.enabled = YES;
                     
                     [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
-                    [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
-                    [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+                    [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
+                    [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
 
                     [button addTarget:self action:@selector(resetGame) forControlEvents: UIControlEventTouchUpInside];
                     [cell.contentView addSubview: button];
@@ -851,8 +857,8 @@ typedef enum gameTableMode
                     button.enabled = YES;
                     
                     [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
-                    [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
-                    [button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+                    [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
+                    [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
                     
                     [button addTarget:self action:@selector(showShareResults:) forControlEvents: UIControlEventTouchUpInside];
                     [cell.contentView addSubview: button];
@@ -935,6 +941,18 @@ typedef enum gameTableMode
     {
         UITableViewCell *cell = nil;
         
+//        NIKFontAwesomeIconFactory *factory = [NIKFontAwesomeIconFactory barButtonItemIconFactory];
+//
+//        factory.size = 25.0;
+//
+//        factory.colors = @[[UIColor greenColor]];
+
+        UIImage *correctImage = [UIImage imageNamed:@"correct"];//[factory createImageForIcon:NIKFontAwesomeIconOkCircle];
+        
+//        factory.colors = @[[UIColor redColor]];
+        
+        UIImage *incorrectImage = [UIImage imageNamed:@"incorrect"];//[factory createImageForIcon:NIKFontAwesomeIconRemoveCircle];
+        
         for (int i=0; i<self.task.count; i++)
         {
             cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:i inSection:0]];
@@ -944,11 +962,11 @@ typedef enum gameTableMode
             {
                 if (i == self.correctWordIndex)
                 {
-                    cell.imageView.image = [UIImage imageNamed:@"correct2"];
+                    cell.imageView.image = correctImage;
                 }
                 else
                 {
-                    cell.imageView.image = [UIImage imageNamed:@"wrong"];
+                    cell.imageView.image = incorrectImage;
                 }
             }
         }
