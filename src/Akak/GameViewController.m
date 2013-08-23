@@ -15,6 +15,8 @@
 #import "AppDelegate.h"
 #import "LASharekit.h"
 #import "Resources.h"
+#import "ImageUtility.h"
+#import "UIColor+MLPFlatColors.h"
 
 #define kIndexTwitter  0
 #define kIndexVK       1
@@ -86,6 +88,10 @@ typedef enum gameTableMode
 @property (strong, nonatomic) NSTimer *secondsCounter;
 @property (strong, nonatomic) UILabel *timeLabel;
 @property (strong, nonatomic) LASharekit *laSharekit;
+@property (nonatomic, strong) UIImage *emptyCircleImage;
+@property (nonatomic, strong) UIImage *correctCircleImage;
+@property (nonatomic, strong) UIImage *incorrectCircleImage;
+
 @end
 
 @implementation GameViewController
@@ -115,6 +121,9 @@ typedef enum gameTableMode
 @synthesize wrongIndex3 = _wrongIndex3;
 @synthesize rulesIndexer = _rulesIndexer;
 @synthesize laSharekit = _laSharekit;
+@synthesize emptyCircleImage = _emptyCircleImage;
+@synthesize correctCircleImage = _correctCircleImage;
+@synthesize incorrectCircleImage = _incorrectCircleImage;
 
 - (id) init
 {
@@ -123,6 +132,18 @@ typedef enum gameTableMode
     if (self != nil)
     {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dictionaryReady:) name:NOTIFICATION_DICTIONARY_READY object:nil];
+        
+        _emptyCircleImage = [ImageUtility circleImageOfSize:30
+                                             withInnerColor:[UIColor colorWithRed:0.93f green:0.94f blue:0.95f alpha:1.00f]
+                                              andOuterColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f]];
+        
+        _correctCircleImage = [ImageUtility circleImageOfSize:30
+                                               withInnerColor:[UIColor flatGreenColor]
+                                                andOuterColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f]];
+        
+        _incorrectCircleImage = [ImageUtility circleImageOfSize:30
+                                                 withInnerColor:[UIColor flatRedColor]
+                                                  andOuterColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f]];
     }
     return self;
 }
@@ -801,7 +822,8 @@ typedef enum gameTableMode
 //                    factory.colors = @[[UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.00f]];
 //                    factory.size = 25.0;
 
-                    cell.imageView.image = [UIImage imageNamed:@"empty"];//[factory createImageForIcon:NIKFontAwesomeIconCheckEmpty];
+                    //cell.imageView.image = [UIImage imageNamed:@"empty"];//[factory createImageForIcon:NIKFontAwesomeIconCheckEmpty];
+                    cell.imageView.image = self.emptyCircleImage;
                     cell.userInteractionEnabled = YES;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 }
@@ -962,11 +984,11 @@ typedef enum gameTableMode
             {
                 if (i == self.correctWordIndex)
                 {
-                    cell.imageView.image = correctImage;
+                    cell.imageView.image = self.correctCircleImage;
                 }
                 else
                 {
-                    cell.imageView.image = incorrectImage;
+                    cell.imageView.image = self.incorrectCircleImage;
                 }
             }
         }
