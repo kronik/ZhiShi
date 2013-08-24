@@ -1064,6 +1064,34 @@ typedef enum gameTableMode
     return cell;
 }
 
+- (void)flashView: (UIView *)viewToAnimate {
+    
+    viewToAnimate.alpha = 0.0;
+    
+    [UIView animateWithDuration:0.1
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         viewToAnimate.alpha = 1.0;
+                         
+                     } completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.2
+                                               delay:0.0
+                                             options: UIViewAnimationOptionCurveEaseOut
+                                          animations:^{
+                                              viewToAnimate.alpha = 0.0;
+                                          } completion:^(BOOL finished) {
+                                              [UIView animateWithDuration:0.1
+                                                                    delay:0.0
+                                                                  options: UIViewAnimationOptionCurveEaseIn
+                                                               animations:^{
+                                                                   viewToAnimate.alpha = 1.0;
+                                                               } completion:^(BOOL finished) {
+                                                               }];
+                                          }];
+                     }];
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1098,6 +1126,7 @@ typedef enum gameTableMode
                 if (i == self.correctWordIndex)
                 {
                     cell.imageView.image = self.correctCircleImage;
+                    [self flashView: cell.imageView];
                 }
                 else
                 {
