@@ -86,7 +86,7 @@ typedef enum {
     return self;
 }
 
-- (id)init:(id)controller_
+- (id)init:(UIViewController *)controller_
 {
     self = [super init];
     if (self)
@@ -102,7 +102,7 @@ typedef enum {
     return self;
 }
 
-- (id)init:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_
+- (id)init:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_
 {
     self = [super init];
     if (self)
@@ -118,7 +118,7 @@ typedef enum {
     return self;
 }
 
-- (id)init:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_ imageUrl:(NSURL *)imageUrl_
+- (id)init:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_ imageUrl:(NSURL *)imageUrl_
 {
     self = [super init];
     if (self)
@@ -134,7 +134,7 @@ typedef enum {
     return self;
 }
 
-- (id)init:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_  completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled
+- (id)init:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_  completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled
 {
     self = [super init];
     if (self)
@@ -153,7 +153,7 @@ typedef enum {
     return self;
 }
 
-- (id)init:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_  imageUrl:(NSURL *)imageUrl_ completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled
+- (id)init:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_  imageUrl:(NSURL *)imageUrl_ completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled
 {
     self = [super init];
     if (self)
@@ -731,7 +731,9 @@ typedef enum {
     if ([MFMailComposeViewController canSendMail]==YES)
     {
         NSAssert(self.controller, @"ViewController must not be nil.");
-        
+
+        [[UINavigationBar appearance] setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+
         MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
         controller.mailComposeDelegate = self;
         if (self.title)

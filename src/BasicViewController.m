@@ -30,6 +30,38 @@
 
 @synthesize hud = _hud;
 
+- (void)setMainTitle:(NSString*)title
+{
+    UILabel *label = [[UILabel alloc] init];
+    
+	label.text = title;
+	label.backgroundColor = [UIColor clearColor];
+	label.font = [UIFont boldSystemFontOfSize:20.0f];
+	label.textAlignment = NSTextAlignmentCenter;
+	label.textColor =[UIColor whiteColor];
+    
+    CGSize size = [label sizeThatFits:CGSizeMake(1, 44)];
+    label.frame = CGRectMake(0, 0, size.width, 44);
+    label.adjustsFontSizeToFitWidth = YES;
+	self.navigationItem.titleView = label;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    // Create a 1 by 1 pixel context
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    
+    [[UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.00f] setFill];
+    
+    UIRectFill(rect);   // Fill it with your color
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [[UINavigationBar appearance] setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

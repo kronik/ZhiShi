@@ -59,7 +59,8 @@ typedef enum gameTableMode
     kModeStart,
     kModeGameRu,
     kModeGameEn,
-    kModeScore
+    kModeScore,
+    kModeShare
 } gameTableMode;
 
 @interface GameViewController ()
@@ -243,8 +244,6 @@ typedef enum gameTableMode
 
 - (void)startNewGame: (UIView*) button
 {
-    [self.expandingSelect collapseItems];
-
     //TODO: May be remove?
     
     [self.secondsCounter invalidate];
@@ -267,8 +266,6 @@ typedef enum gameTableMode
 
 - (void)nextTaskButton: (FlatPillButton*) button
 {
-    [self.expandingSelect collapseItems];
-
     if ([button.titleLabel.text isEqualToString: self.task[self.correctWordIndex]])
     {
         self.timeLabel.hidden = YES;
@@ -290,11 +287,9 @@ typedef enum gameTableMode
 
 - (void)resetGame
 {
-    [self.expandingSelect collapseItems];
-
     self.timeLabel.hidden = YES;
 
-    self.navigationItem.title = @"Проверятор";
+    [self setMainTitle:@"Проверятор"];
 
     self.score = 0;
     self.errors = 0;
@@ -345,7 +340,7 @@ typedef enum gameTableMode
     self.timeLabel.hidden = YES;
     [self.secondsCounter invalidate];
     
-    self.navigationItem.title = @"Проверятор";
+    [self setMainTitle: @"Проверятор"];
     
     self.tableMode = kModeScore;
     
@@ -366,6 +361,22 @@ typedef enum gameTableMode
     
 //    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showShareResults:)];
 //    self.navigationItem.rightBarButtonItem = shareButton;
+}
+
+- (void)showShareOptions {
+    [Flurry logEvent: @"Show share options"];
+    
+    self.timeLabel.hidden = YES;
+    [self.secondsCounter invalidate];
+    
+    [self setMainTitle: @"Проверятор"];
+    
+    self.tableMode = kModeShare;
+    
+    self.task = @[@"Поделиться:", @"Email", @"Facebook", @"Twitter", @"Vkontakte", @"", @"Начать заново", @""];
+    self.correctWordIndex = 6;
+    
+    [self.tableView reloadData];
 }
 
 - (NSString*)getNextWord
@@ -511,17 +522,17 @@ typedef enum gameTableMode
     
     if (self.isTimed)
     {
-        self.navigationItem.title = [NSString stringWithFormat:@"%d из %d", self.totalPassed + 1, TESTS_IN_SESSION];
+        [self setMainTitle: [NSString stringWithFormat:@"%d из %d", self.totalPassed + 1, TESTS_IN_SESSION]];
     }
     else
     {
         if (self.totalPassed < 11)
         {
-            self.navigationItem.title = [NSString stringWithFormat:@"Правильно пока: %d", self.totalPassed];
+            [self setMainTitle: [NSString stringWithFormat:@"Правильно пока: %d", self.totalPassed]];
         }
         else
         {
-            self.navigationItem.title = [NSString stringWithFormat:@"Правильно уже: %d", self.totalPassed];
+            [self setMainTitle: [NSString stringWithFormat:@"Правильно уже: %d", self.totalPassed]];
         }
     }
     [self.tableView reloadData];
@@ -553,7 +564,6 @@ typedef enum gameTableMode
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear: animated];
-    [self.expandingSelect collapseItems];
 }
 
 - (void)viewDidLoad
@@ -584,7 +594,13 @@ typedef enum gameTableMode
         [APPDELEGATE ocultarHUDConCustomView:YES despuesDe:2.0];
     }];
     
-    self.tableView = [[MYTableView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style: UITableViewStylePlain];
+    float heightOffset = 0;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        heightOffset = 44;
+    }
+    
+    self.tableView = [[MYTableView alloc] initWithFrame: CGRectMake(0, heightOffset, self.view.frame.size.width, self.view.frame.size.height) style: UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.allowsSelection = YES;
@@ -592,6 +608,11 @@ typedef enum gameTableMode
     self.tableView.separatorColor = [UIColor clearColor];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.tableView setUserInteractionEnabled:YES];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        self.tableView.contentOffset = CGPointMake(0, 0);
+    }
     
     [self.view addSubview:self.tableView];
         
@@ -606,10 +627,6 @@ typedef enum gameTableMode
         [self.rulesIndexer addObject: [[NSPair alloc] initWithKey: key andData: self.rules [key]]];
     }
     
-    self.expandingSelect = [[KLExpandingSelect alloc] initWithDelegate: self dataSource: self];
-    [self.tableView setExpandingSelect:self.expandingSelect];
-    [self.tableView addSubview: self.expandingSelect];
-
     [self resetGame];
 }
 
@@ -784,7 +801,13 @@ typedef enum gameTableMode
             
             if (self.isTimed && indexPath.row == 0 && self.timeLabel == nil)
             {
-                self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 220, 10, 200, 50)];
+                float heightOffset = 0;
+                
+                if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+                    heightOffset = 40;
+                }
+                
+                self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 220, 10 + heightOffset, 200, 50)];
                 self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size: 20.0f];
                 self.timeLabel.backgroundColor = [UIColor clearColor];
                 self.timeLabel.textColor = [UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f];
@@ -882,7 +905,7 @@ typedef enum gameTableMode
                     [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
                     [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
                     
-                    [button addTarget:self action:@selector(showShareResults:) forControlEvents: UIControlEventTouchUpInside];
+                    [button addTarget:self action:@selector(showShareOptions) forControlEvents: UIControlEventTouchUpInside];
                     [cell.contentView addSubview: button];
                                         
                     cell.userInteractionEnabled = YES;
@@ -931,6 +954,105 @@ typedef enum gameTableMode
 
             break;
             
+        case kModeShare:
+            
+            cell.imageView.image = nil;
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+            cell.userInteractionEnabled = NO;
+            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:28.0f];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.textLabel.numberOfLines = 1;
+            cell.imageView.image = nil;
+            cell.textLabel.text = self.task [indexPath.row];
+                
+            if (indexPath.row == 1)
+            {
+                cell.textLabel.text = @"";
+                
+                FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(xPoint, 5, BUTTON_SIZE, 50)];
+                button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
+                button.enabled = YES;
+                
+                [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
+                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
+                
+                [button addTarget:self action:@selector(shareToEmail) forControlEvents: UIControlEventTouchUpInside];
+                [cell.contentView addSubview: button];
+                
+                cell.userInteractionEnabled = YES;
+            }
+            else if (indexPath.row == 2)
+            {
+                cell.textLabel.text = @"";
+                
+                FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(xPoint, 5, BUTTON_SIZE, 50)];
+                button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
+                button.enabled = YES;
+                
+                [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
+                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
+                
+                [button addTarget:self action:@selector(shareToFacebook) forControlEvents: UIControlEventTouchUpInside];
+                [cell.contentView addSubview: button];
+                
+                cell.userInteractionEnabled = YES;
+            }
+            else if (indexPath.row == 3)
+            {
+                cell.textLabel.text = @"";
+                
+                FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(xPoint, 5, BUTTON_SIZE, 50)];
+                button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
+                button.enabled = YES;
+                
+                [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
+                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
+                
+                [button addTarget:self action:@selector(shareToTwitter) forControlEvents: UIControlEventTouchUpInside];
+                [cell.contentView addSubview: button];
+                
+                cell.userInteractionEnabled = YES;
+            }
+            else if (indexPath.row == 4)
+            {
+                cell.textLabel.text = @"";
+                
+                FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(xPoint, 5, BUTTON_SIZE, 50)];
+                button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
+                button.enabled = YES;
+                
+                [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
+                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
+                
+                [button addTarget:self action:@selector(shareToVkontakte) forControlEvents: UIControlEventTouchUpInside];
+                [cell.contentView addSubview: button];
+                
+                cell.userInteractionEnabled = YES;
+            }
+            else if (indexPath.row == 6)
+                {
+                    cell.textLabel.text = @"";
+                    
+                    FlatPillButton *button = [[FlatPillButton alloc] initWithFrame:CGRectMake(xPoint, 5, BUTTON_SIZE, 50)];
+                    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0f];
+                    button.enabled = YES;
+                    
+                    [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
+                    [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
+                    [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
+                    
+                    [button addTarget:self action:@selector(resetGame) forControlEvents: UIControlEventTouchUpInside];
+                    [cell.contentView addSubview: button];
+                    
+                    cell.userInteractionEnabled = YES;
+                }
+
+            break;
+            
         default:
             break;
     }
@@ -962,19 +1084,7 @@ typedef enum gameTableMode
     else
     {
         UITableViewCell *cell = nil;
-        
-//        NIKFontAwesomeIconFactory *factory = [NIKFontAwesomeIconFactory barButtonItemIconFactory];
-//
-//        factory.size = 25.0;
-//
-//        factory.colors = @[[UIColor greenColor]];
-
-        UIImage *correctImage = [UIImage imageNamed:@"correct"];//[factory createImageForIcon:NIKFontAwesomeIconOkCircle];
-        
-//        factory.colors = @[[UIColor redColor]];
-        
-        UIImage *incorrectImage = [UIImage imageNamed:@"incorrect"];//[factory createImageForIcon:NIKFontAwesomeIconRemoveCircle];
-        
+                
         for (int i=0; i<self.task.count; i++)
         {
             cell = [self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:i inSection:0]];
@@ -1063,7 +1173,6 @@ typedef enum gameTableMode
     self.laSharekit.image    = [UIImage imageNamed:@"icon144x144"];
     self.laSharekit.tweetCC  = @"";
     
-    [self.expandingSelect expandItemsAtPoint: self.tableView.center];
     return;
     
     [BCDShareSheet sharedSharer].appName = @"Жи-Ши";
@@ -1093,36 +1202,24 @@ typedef enum gameTableMode
     return 4;
 }
 
-- (KLExpandingPetal *)expandingSelector:(id) expandingSelect itemForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *iconName = nil;
-    
-    switch (indexPath.row)
-    {
-        case kIndexTwitter:
-            iconName = @"petal-twitter@2x";
-            break;
-        case kIndexVK:
-            iconName = @"petal-vk@2x";
-            break;
-        case kIndexEmail:
-            iconName = @"petal-email@2x";
-            break;
-        case kIndexFaceBook:
-            iconName = @"petal-facebook@2x";
-            break;
-        default:
-            break;
-    }
-    
-    KLExpandingPetal* petal = [[KLExpandingPetal alloc] initWithImage:[UIImage imageNamed:iconName]];
-    return petal;
+- (void)shareToEmail {
+    [self.laSharekit performSelector:@selector(emailIt) withObject:nil afterDelay:.1];
+    [Flurry logEvent: @"Share to email"];
 }
 
-- (NSIndexPath *)expandingSelector:(id)expandingSelect willSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"Will Select Index Path Fired!");
-    return  indexPath;
+- (void)shareToFacebook {
+    [self.laSharekit performSelector:@selector(facebookPost) withObject:nil afterDelay:.1];
+    [Flurry logEvent: @"Share to facebook"];
+}
+
+- (void)shareToTwitter {
+    [self.laSharekit performSelector:@selector(tweet) withObject:nil afterDelay:.1];
+    [Flurry logEvent: @"Share to twitter"];
+}
+
+- (void)shareToVkontakte {
+    [self.laSharekit performSelector:@selector(vkPost) withObject:nil afterDelay:.1];
+    [Flurry logEvent: @"Share to vkontakte"];
 }
 
 // Called after the user changes the selection.

@@ -87,7 +87,7 @@
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     [self.navigationItem setLeftBarButtonItem:backButton];
 
-    self.navigationItem.title = @"Наши приложения";
+    [self setMainTitle: @"Наши приложения"];
     
     self.tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad-BG@2x.png"]];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

@@ -201,12 +201,12 @@
     
     _backgroundButton.frame = _containerView.bounds;
     
-//    _backgroundBlurredImageView = [[UIImageView alloc] initWithFrame: _containerView.bounds];
-//    
-//    _backgroundBlurredImageView.backgroundColor = [UIColor clearColor];
-//    _backgroundBlurredImageView.alpha = 0.0;
-//    
-//    [_containerView addSubview: self.backgroundBlurredImageView];
+    _backgroundBlurredImageView = [[UIImageView alloc] initWithFrame: _containerView.bounds];
+    
+    _backgroundBlurredImageView.backgroundColor = [UIColor clearColor];
+    _backgroundBlurredImageView.alpha = 0.0;
+    
+    [_containerView addSubview: self.backgroundBlurredImageView];
     
     // Add subviews
     //
@@ -223,21 +223,21 @@
         frame.origin.y = -40 - _separatorHeight;
         weakSelf.menuWrapperView.frame = frame;
     } completion:^(BOOL finished) {
-//        UIImage *backgroundImage = [view screenshot];
-//        
-//        dispatch_queue_t queue = dispatch_queue_create("Blur queue", NULL);
-//        
-//        dispatch_async(queue, ^ {
-//            UIImage *blurredImage = [REMenu blurryImage: backgroundImage withBlurLevel: 0.9f];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                _backgroundBlurredImageView.image = blurredImage;
-//                [UIView animateWithDuration:0.5 animations:^{
-//                    _backgroundBlurredImageView.alpha = 1.0;
-//                }];
-//            });
-//        });
-//        
-//        dispatch_release(queue);
+        UIImage *backgroundImage = [view screenshot];
+        
+        dispatch_queue_t queue = dispatch_queue_create("Blur queue", NULL);
+        
+        dispatch_async(queue, ^ {
+            UIImage *blurredImage = [REMenu blurryImage: backgroundImage withBlurLevel: 0.9f];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _backgroundBlurredImageView.image = blurredImage;
+                [UIView animateWithDuration:0.5 animations:^{
+                    _backgroundBlurredImageView.alpha = 1.0;
+                }];
+            });
+        });
+        
+        dispatch_release(queue);
     }];
 }
 

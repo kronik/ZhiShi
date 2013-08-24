@@ -790,10 +790,6 @@
 		02D86B9A1663B0DE0023ED1C /* petal-unsave@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86B881663B0DE0023ED1C /* petal-unsave@2x.png */; };
 		02D86B9B1663B0DE0023ED1C /* petal-unsave@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86B881663B0DE0023ED1C /* petal-unsave@2x.png */; };
 		02D86B9C1663B0DE0023ED1C /* petal-unsave@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86B881663B0DE0023ED1C /* petal-unsave@2x.png */; };
-		02D86B9F1663B11A0023ED1C /* KLExpandingSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D86B9E1663B11A0023ED1C /* KLExpandingSelect.m */; };
-		02D86BA01663B11A0023ED1C /* KLExpandingSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D86B9E1663B11A0023ED1C /* KLExpandingSelect.m */; };
-		02D86BA11663B11A0023ED1C /* KLExpandingSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D86B9E1663B11A0023ED1C /* KLExpandingSelect.m */; };
-		02D86BA21663B11A0023ED1C /* KLExpandingSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D86B9E1663B11A0023ED1C /* KLExpandingSelect.m */; };
 		02F1DAF2165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
 		02F1DAF3165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
 		02F1DAF4165F5C26001B32D2 /* back_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F1DAAB165F5C26001B32D2 /* back_right.png */; };
@@ -1583,8 +1579,6 @@
 		02D86B861663B0DE0023ED1C /* petal-save@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "petal-save@2x.png"; path = "Images/petal-save@2x.png"; sourceTree = "<group>"; };
 		02D86B871663B0DE0023ED1C /* petal-twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "petal-twitter@2x.png"; path = "Images/petal-twitter@2x.png"; sourceTree = "<group>"; };
 		02D86B881663B0DE0023ED1C /* petal-unsave@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "petal-unsave@2x.png"; path = "Images/petal-unsave@2x.png"; sourceTree = "<group>"; };
-		02D86B9D1663B11A0023ED1C /* KLExpandingSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLExpandingSelect.h; sourceTree = "<group>"; };
-		02D86B9E1663B11A0023ED1C /* KLExpandingSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLExpandingSelect.m; sourceTree = "<group>"; };
 		02F1DAAB165F5C26001B32D2 /* back_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_right.png; path = Images/back_right.png; sourceTree = "<group>"; };
 		02F1DAAC165F5C26001B32D2 /* back_right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back_right@2x.png"; path = "Images/back_right@2x.png"; sourceTree = "<group>"; };
 		02F1DAAD165F5C26001B32D2 /* back-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back-button.png"; path = "Images/back-button.png"; sourceTree = "<group>"; };
@@ -1914,8 +1908,6 @@
 				024BD1911632A8C000C93EE5 /* SpeechToText.xcodeproj */,
 				32B4265514AAB4D500D4610A /* iRate.h */,
 				32B4265614AAB4D500D4610A /* iRate.m */,
-				02D86B9D1663B11A0023ED1C /* KLExpandingSelect.h */,
-				02D86B9E1663B11A0023ED1C /* KLExpandingSelect.m */,
 				024BD1B31632D89800C93EE5 /* FMDatabaseQueue.h */,
 				024BD1B41632D89800C93EE5 /* FMDatabaseQueue.m */,
 				024BD1B51632D89800C93EE5 /* FMDatabaseAdditions.h */,
@@ -3606,7 +3598,6 @@
 				021694AF17C7907D005A70EB /* ImageUtility.m in Sources */,
 				02A94912165FDD3800C004E5 /* BCDShareSheet.m in Sources */,
 				021694B617C7A8F6005A70EB /* UIColor+MLPFlatColors.m in Sources */,
-				02D86B9F1663B11A0023ED1C /* KLExpandingSelect.m in Sources */,
 				02A0764016690FE3008036E9 /* MyReachability.m in Sources */,
 				02A0764416690FE3008036E9 /* DEComposeRuledView.m in Sources */,
 				02A0764816690FE3008036E9 /* DEComposeTextView.m in Sources */,
@@ -3675,7 +3666,6 @@
 				021694B017C7907D005A70EB /* ImageUtility.m in Sources */,
 				02A94913165FDD3800C004E5 /* BCDShareSheet.m in Sources */,
 				021694B717C7A8F6005A70EB /* UIColor+MLPFlatColors.m in Sources */,
-				02D86BA01663B11A0023ED1C /* KLExpandingSelect.m in Sources */,
 				02A0764116690FE3008036E9 /* MyReachability.m in Sources */,
 				02A0764516690FE3008036E9 /* DEComposeRuledView.m in Sources */,
 				02A0764916690FE3008036E9 /* DEComposeTextView.m in Sources */,
@@ -3744,7 +3734,6 @@
 				021694B117C7907D005A70EB /* ImageUtility.m in Sources */,
 				02A94914165FDD3800C004E5 /* BCDShareSheet.m in Sources */,
 				021694B817C7A8F6005A70EB /* UIColor+MLPFlatColors.m in Sources */,
-				02D86BA11663B11A0023ED1C /* KLExpandingSelect.m in Sources */,
 				02A0764216690FE3008036E9 /* MyReachability.m in Sources */,
 				02A0764616690FE3008036E9 /* DEComposeRuledView.m in Sources */,
 				02A0764A16690FE3008036E9 /* DEComposeTextView.m in Sources */,
@@ -3813,7 +3802,6 @@
 				021694B217C7907D005A70EB /* ImageUtility.m in Sources */,
 				02A94915165FDD3800C004E5 /* BCDShareSheet.m in Sources */,
 				021694B917C7A8F6005A70EB /* UIColor+MLPFlatColors.m in Sources */,
-				02D86BA21663B11A0023ED1C /* KLExpandingSelect.m in Sources */,
 				02A0764316690FE3008036E9 /* MyReachability.m in Sources */,
 				02A0764716690FE3008036E9 /* DEComposeRuledView.m in Sources */,
 				02A0764B16690FE3008036E9 /* DEComposeTextView.m in Sources */,

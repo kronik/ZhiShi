@@ -83,7 +83,7 @@
     UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = backButton;
     
-    self.navigationItem.title = self.header;
+    [self setMainTitle: self.header];
     
     NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
                                                [UIColor whiteColor],UITextAttributeTextColor,

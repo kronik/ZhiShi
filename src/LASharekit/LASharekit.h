@@ -33,7 +33,7 @@ typedef void (^MyCompletionBlock)();
 // Image        -> Is used for the image in facebook, twitter and pinterest, then in the attached for email and to save in the cameraroll
 // tweetCC      -> Is used to insert a cc on the tweet
 
-@property (nonatomic, retain) id controller;
+@property (nonatomic, retain) UIViewController *controller;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *text;
 @property (nonatomic, retain) NSURL *url;
@@ -42,11 +42,11 @@ typedef void (^MyCompletionBlock)();
 @property (nonatomic, retain) NSString *tweetCC;
 
 // INITS
-- (id)init:(id)controller_;
-- (id)init:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_;
-- (id)init:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_ imageUrl:(NSURL *)imageUrl_;
-- (id)init:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_  completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled;
-- (id)init:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_  imageUrl:(NSURL *)imageUrl_ completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled;
+- (id)init:(UIViewController *)controller_;
+- (id)init:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_;
+- (id)init:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_ imageUrl:(NSURL *)imageUrl_;
+- (id)init:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_  completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled;
+- (id)init:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_  imageUrl:(NSURL *)imageUrl_ completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled;
 - (id)initWithImage:(UIImage *)image_;
 
 // BLOCKS
@@ -56,11 +56,11 @@ typedef void (^MyCompletionBlock)();
 - (void) setCompletionSaved:(MyCompletionBlock)blockSaved;
 
 // FUNCTIONS
-- (void)setController:(id)controller_;
-- (void)setController:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_;
-- (void)setController:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_ imageUrl:(NSURL *)imageUrl_;
-- (void)setController:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_ completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled;
-- (void)setController:(id)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_ imageUrl:(NSURL *)imageUrl_ completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled;
+- (void)setController:(UIViewController *)controller_;
+- (void)setController:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_;
+- (void)setController:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_ imageUrl:(NSURL *)imageUrl_;
+- (void)setController:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_ completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled;
+- (void)setController:(UIViewController *)controller_ title:(NSString *)title_ text:(NSString *)text_ image:(UIImage *)image_ url:(NSURL *)url_ imageUrl:(NSURL *)imageUrl_ completionDone:(MyCompletionBlock)blockDone completionCanceled:(MyCompletionBlock)blockCanceled;
 
 // SHARE
 - (void) facebookPost;              // FACEBOOK

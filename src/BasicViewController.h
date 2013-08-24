@@ -48,6 +48,7 @@
 - (void) hideHUD:(BOOL)animated;
 - (void) hideHUD:(BOOL)animated afterDelay:(NSTimeInterval)delay;
 - (void) hideHUDCustomView:(BOOL)animated afterDelay:(NSTimeInterval)delay;
+- (void)setMainTitle:(NSString*)title;
 
 @end
 
