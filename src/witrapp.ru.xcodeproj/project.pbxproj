@@ -4009,6 +4009,7 @@
 					"/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/GoogleAdMobAdsSdkiOS-6.5.0",
 					/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/Flurry,
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-DRU_APP",
 					"-DLITE_VERSION",
@@ -4045,6 +4046,7 @@
 					"/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/GoogleAdMobAdsSdkiOS-6.5.0",
 					/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/Flurry,
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-DNO_DEBUG",
 					"-DRU_APP",

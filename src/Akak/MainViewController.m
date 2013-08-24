@@ -345,7 +345,7 @@
 
 - (void)enableCancelButton
 {
-    self.wordSearchBar.showsCancelButton = YES;
+    //self.wordSearchBar.showsCancelButton = YES;
 }
 
 - (BOOL) substringIsInDictionary:(NSString *)subString
@@ -481,7 +481,7 @@
 }
 
 - (void)handleSearch:(UISearchBar *)searchBar
-{   
+{
     if (self.didSearchStarted == YES)
     {
         return;

@@ -109,7 +109,7 @@
 - (UIColor*)currentInnerColor:(NSInteger)index
 {
     if (_currentStep == index) {
-        return [UIColor grayColor];
+        return [UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f];
 //        return [UIColor colorWithRed:140.0f/255.0f
 //                               green:158.0f/255.0f
 //                                blue:195.0f/255.0f
@@ -118,14 +118,14 @@
         return [UIColor clearColor];
     } else {
         if (_currentStep - index == 1) {
-            return [UIColor grayColor];
+            return [UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:0.8f];
 
 //            return [UIColor colorWithRed:189.0f/255.0f
 //                                   green:198.0f/255.0f
 //                                    blue:219.0f/255.0f
 //                                   alpha:1];
         } else {
-            return [UIColor lightGrayColor];
+            return [UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:0.7f];
 
 //            return [UIColor colorWithRed:244.0f/255.0f
 //                                   green:246.0f/255.0f

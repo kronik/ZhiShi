@@ -807,6 +807,9 @@ typedef enum gameTableMode
                     heightOffset = 40;
                 }
                 
+#ifdef LITE_VERSION
+                heightOffset += 40;
+#endif
                 self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 220, 10 + heightOffset, 200, 50)];
                 self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size: 20.0f];
                 self.timeLabel.backgroundColor = [UIColor clearColor];
