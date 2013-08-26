@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0278949117CB110F002394AE /* SIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0278948C17CB110F002394AE /* SIAlertView.h */; };
+		0278949217CB110F002394AE /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0278948D17CB110F002394AE /* SIAlertView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		0278949317CB110F002394AE /* YLActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0278948F17CB110F002394AE /* YLActivityIndicatorView.h */; };
+		0278949417CB110F002394AE /* YLActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0278949017CB110F002394AE /* YLActivityIndicatorView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		222835F8143E9EBD000D6E05 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222835F7143E9EBD000D6E05 /* Foundation.framework */; };
 		222836C1143E9F0B000D6E05 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 22283604143E9F0B000D6E05 /* config.h */; };
 		222836C2143E9F0B000D6E05 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 22283606143E9F0B000D6E05 /* Makefile */; };
@@ -146,6 +150,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0278948B17CB110F002394AE /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
+		0278948C17CB110F002394AE /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
+		0278948D17CB110F002394AE /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
+		0278948F17CB110F002394AE /* YLActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLActivityIndicatorView.h; sourceTree = "<group>"; };
+		0278949017CB110F002394AE /* YLActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLActivityIndicatorView.m; sourceTree = "<group>"; };
 		222835F4143E9EBD000D6E05 /* libSpeechToText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSpeechToText.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		222835F7143E9EBD000D6E05 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		222835FB143E9EBE000D6E05 /* SpeechToText-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpeechToText-Prefix.pch"; sourceTree = "<group>"; };
@@ -366,9 +375,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0278948A17CB110F002394AE /* SIAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				0278948B17CB110F002394AE /* SIAlertView.bundle */,
+				0278948C17CB110F002394AE /* SIAlertView.h */,
+				0278948D17CB110F002394AE /* SIAlertView.m */,
+			);
+			path = SIAlertView;
+			sourceTree = "<group>";
+		};
+		0278948E17CB110F002394AE /* YLActivityIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				0278948F17CB110F002394AE /* YLActivityIndicatorView.h */,
+				0278949017CB110F002394AE /* YLActivityIndicatorView.m */,
+			);
+			path = YLActivityIndicatorView;
+			sourceTree = "<group>";
+		};
 		222835E9143E9EBD000D6E05 = {
 			isa = PBXGroup;
 			children = (
+				0278948A17CB110F002394AE /* SIAlertView */,
+				0278948E17CB110F002394AE /* YLActivityIndicatorView */,
 				32E357EB15A2BB80002EDD6C /* UIProgressAlertView.h */,
 				32E357EC15A2BB80002EDD6C /* UIProgressAlertView.m */,
 				32E1088615A2843900CE9046 /* UIWaveAlertView.h */,
@@ -679,6 +709,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				224861BF1444D21D00796103 /* WaveDisplay.h in Headers */,
+				0278949317CB110F002394AE /* YLActivityIndicatorView.h in Headers */,
 				2253D53B1443D470004EF35F /* SpeechToTextModule.h in Headers */,
 				222836C1143E9F0B000D6E05 /* config.h in Headers */,
 				222836C4143E9F0B000D6E05 /* speex.h in Headers */,
@@ -726,6 +757,7 @@
 				2228370C143E9F0B000D6E05 /* nb_celp.h in Headers */,
 				2228370D143E9F0B000D6E05 /* os_support.h in Headers */,
 				2228370F143E9F0B000D6E05 /* pseudofloat.h in Headers */,
+				0278949117CB110F002394AE /* SIAlertView.h in Headers */,
 				22283711143E9F0B000D6E05 /* quant_lsp.h in Headers */,
 				22283712143E9F0B000D6E05 /* quant_lsp_bfin.h in Headers */,
 				22283714143E9F0B000D6E05 /* resample_sse.h in Headers */,
@@ -811,6 +843,7 @@
 				222836DD143E9F0B000D6E05 /* exc_5_256_table.c in Sources */,
 				222836DE143E9F0B000D6E05 /* exc_5_64_table.c in Sources */,
 				222836DF143E9F0B000D6E05 /* exc_8_128_table.c in Sources */,
+				0278949217CB110F002394AE /* SIAlertView.m in Sources */,
 				222836E0143E9F0B000D6E05 /* fftwrap.c in Sources */,
 				222836E2143E9F0B000D6E05 /* filterbank.c in Sources */,
 				222836E4143E9F0B000D6E05 /* filters.c in Sources */,
@@ -843,6 +876,7 @@
 				2228371E143E9F0B000D6E05 /* stereo.c in Sources */,
 				2228371F143E9F0B000D6E05 /* testdenoise.c in Sources */,
 				22283720143E9F0B000D6E05 /* testecho.c in Sources */,
+				0278949417CB110F002394AE /* YLActivityIndicatorView.m in Sources */,
 				22283721143E9F0B000D6E05 /* testenc.c in Sources */,
 				22283722143E9F0B000D6E05 /* testenc_uwb.c in Sources */,
 				22283723143E9F0B000D6E05 /* testenc_wb.c in Sources */,

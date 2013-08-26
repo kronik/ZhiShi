@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YLActivityIndicatorView.h"
+#import "SIAlertView.h"
 
-@interface UIProgressAlertView : UIAlertView
+@interface UIProgressAlertView : SIAlertView
 {
     @private
-    UIActivityIndicatorView *activityIndicator_;
+    YLActivityIndicatorView *activityIndicator_;
 }
 
 - (id)initWithTitle:(NSString *)title delegate:(id /*<UIAlertViewDelegate>*/)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles;

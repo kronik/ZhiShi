@@ -8,6 +8,7 @@
 
 #import "OnlineDictViewController.h"
 #import "Resources.h"
+#import "UIColor+MLPFlatColors.h"
 
 @interface OnlineDictViewController()
 

@@ -175,10 +175,10 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
     }
 
     self.delegate = nil;
-    waveAlert.delegate = nil;
+//    waveAlert.delegate = nil;
     [waveAlert release];
     
-    progressAlert.delegate = nil;
+//    progressAlert.delegate = nil;
     [progressAlert release];
     progressAlert = nil;
     
@@ -305,7 +305,7 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
             
             [delegate speechStopRecording];
             
-            [waveAlert dismissWithClickedButtonIndex:-1 animated:YES];
+            [waveAlert dismissAnimated: YES];
             [waveAlert release];
             waveAlert = nil;
 
@@ -426,7 +426,7 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
         NSLog(@"utterance: %@", [result objectForKey:@"utterance"]);
     }
     
-    [progressAlert dismissWithClickedButtonIndex:-1 animated:YES];
+    [progressAlert dismissAnimated: YES];
     [progressAlert release];
     progressAlert = nil;
     

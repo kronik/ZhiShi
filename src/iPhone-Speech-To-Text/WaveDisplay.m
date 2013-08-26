@@ -43,13 +43,9 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGContextBeginPath(context);
-
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        CGContextSetRGBStrokeColor(context, 1.0, 0.0, 0.0, 1.0);
-    } else {
-        CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0);
-    }
-    CGContextSetLineWidth(context, 3.0);
+    
+    CGContextSetRGBStrokeColor(context, 28/255.0f, 160/255.0f, 170/255.0f, 0.7);
+    CGContextSetLineWidth(context, 1.5);
     int count = [self.dataPoints count];
     CGFloat dx = rect.size.width / count;
     CGFloat x = 0.0;
@@ -62,10 +58,7 @@
         CGFloat raw = [point floatValue] * scaleFactor;
         CGFloat draw = (down ? -raw : raw);
         draw = (reverse ? -draw : draw);
-        
-        x += dx;
-        
-        CGContextAddQuadCurveToPoint(context, x + dx/2, y - draw * 2, x, y);
+        CGContextAddQuadCurveToPoint(context, x + dx/2, y - draw * 2, x += dx, y);
         
         down = !down;
     }

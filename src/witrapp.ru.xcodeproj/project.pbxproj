@@ -2318,11 +2318,11 @@
 				3264081114A96CDD00C3A53B /* DictIndex.m */,
 				0244DB5E165D2625009A7383 /* UINavigationController+Keyboard.h */,
 				0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */,
-				321EA84514A02920002D5D23 /* Supporting Files */,
 				0216948E17C7647D005A70EB /* NSArray+Memory.h */,
 				0216948F17C7647D005A70EB /* NSArray+Memory.m */,
 				021694AD17C7907D005A70EB /* ImageUtility.h */,
 				021694AE17C7907D005A70EB /* ImageUtility.m */,
+				321EA84514A02920002D5D23 /* Supporting Files */,
 			);
 			name = Sources;
 			path = Akak;

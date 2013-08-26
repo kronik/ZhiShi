@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "WaveDisplay.h"
+#import "SIAlertView.h"
 
-@interface UIWaveAlertView : UIAlertView
+@interface UIWaveAlertView : SIAlertView
 {
     @private
     WaveDisplay *waveDisplay_;

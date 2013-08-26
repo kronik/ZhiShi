@@ -15,68 +15,31 @@
 
 - (id)initWithTitle:(NSString *)title delegate:(id /*<UIAlertViewDelegate>*/)delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitles:(NSString *)otherButtonTitles 
 {
-    NSString *defaultTitle = @"";
-    
-//    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
-//        defaultTitle = @"\n\n\n";
-//    }
-    
-	if ((self = [super initWithTitle:title message:defaultTitle delegate:delegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil]))
-    {
-//        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
-//            waveDisplay_ = [[WaveDisplay alloc] initWithFrame:CGRectMake(12.0f, 51.0f, 260.0f, 56.0f)];
-//            [self addSubview:waveDisplay_];
-//        }
-        
-        waveDisplay_.dataPoints = self.dataPoints;
+    waveDisplay_ = [[WaveDisplay alloc] initWithFrame:CGRectMake(12.0f, 51.0f, 260.0f, 70.0f)];
 
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];        
-		[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+	if ((self = [super initWithTitle:title message:nil delegate:delegate customView:waveDisplay_ cancelButtonTitle:cancelButtonTitle otherButtonTitles:otherButtonTitles, nil]))
+    {
+        waveDisplay_.dataPoints = self.dataPoints;
 	}
 	return self;
 }
 
-- (void)setDataPoints:(NSArray *)_dataPoints 
+- (void)setDataPoints:(NSArray *)_dataPoints
 {
     // Have to hold on to them here in case the wave display hasn't loaded when they're first set
     [dataPoints release];
+    
     dataPoints = [_dataPoints retain];
     waveDisplay_.dataPoints = dataPoints;
+    
+    [self.waveDisplay setNeedsDisplay];
 }
 
 - (void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-	[[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-	
+{	
     [dataPoints release];
 	[waveDisplay_ release];
     [super dealloc];
-}
-
-- (void)layoutSubviews
-{
-	if ([[UIDevice currentDevice] isGeneratingDeviceOrientationNotifications]) 
-    {
-        self.waveDisplay.frame = CGRectMake(12.0f, 51.0f, 260.0f, 56.0f);		
-
-        /*
-		if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation]))
-        {
-			//self.center = CGPointMake(160.0f, (460.0f - 216.0f)/2 + 12.0f);
-		} 
-        else 
-        {
-			//self.center = CGPointMake(240.0f, (300.0f - 162.0f)/2 + 12.0f);
-			self.waveDisplay.frame = CGRectMake(12.0f, 35.0f, 260.0f, 56.0f);		
-		}
-         */
-	}
-}
-
-- (void)orientationDidChange:(NSNotification *)notification
-{
-	[self setNeedsLayout];
 }
 
 - (void)updateWaveDisplay 
