@@ -460,7 +460,9 @@
     if (self.memoryWarningDisplayed == NO) {
         self.memoryWarningDisplayed = YES;
         
-        [self showError:@"Мало свободной памяти." onView: self.tableView];
+        [Flurry logEvent:@"Memory warning"];
+        
+        //[self showError:@"Мало свободной памяти." onView: self.tableView];
     }
 }
 
@@ -497,11 +499,15 @@
     
     if ([locale isEqualToString: APP_LOCALE_RU])
     {
+        [Flurry logEvent:@"Search ru word"];
+
         localDictSearcher = self.dictSearcherRu;
     }
     else
     {
-        localDictSearcher = self.dictSearcherEn;
+        [Flurry logEvent:@"Search en word"];
+
+        localDictSearcher = self.dictSearcherRu;
     }
     
     if (localDictSearcher.isIndexReady == NO)
@@ -1115,11 +1121,15 @@
             self.menu = nil;
         }];
         
+        [self.wordSearchBar becomeFirstResponder];
+        
         return;
     }
     
     [Flurry logEvent: @"Show menu"];
     
+    [self.wordSearchBar resignFirstResponder];
+
     NSMutableArray *menuItems = [[NSMutableArray alloc] init];
     
 //    menuItem1Image = [UIImage imageNamed:@"back.png"];
@@ -1522,13 +1532,15 @@
             [_dictionary writeToFile:dictFile atomically:YES];
             */
             _dictionaryRu = [NSMutableArray arrayWithContentsOfFile:filePathRu];
-            
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName: NOTIFICATION_DICTIONARY_READY object: self.dictionaryRu];
             });
             
+#if 0
             _dictionaryEn = [NSMutableArray arrayWithContentsOfFile:filePathEn];
+#endif
 
             //}
         }
@@ -1536,8 +1548,10 @@
         NSDate *endTime = [NSDate date];
         
         [self.dictSearcherRu makeHashTableLight:(NSMutableArray*)_dictionaryRu];
-        [self.dictSearcherEn makeHashTableLight:(NSMutableArray*)_dictionaryEn];
         
+#if 0
+        [self.dictSearcherEn makeHashTableLight:(NSMutableArray*)_dictionaryEn];
+#endif
         endTime = [NSDate date];
         NSLog(@"Total load time: %f", [endTime timeIntervalSinceDate:startTime]);
         

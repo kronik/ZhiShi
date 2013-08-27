@@ -1190,14 +1190,12 @@ typedef enum gameTableMode
     }
 }
 
-- (void)showShareResults: (UIView*) button
+- (void)updateShareResults
 {
     [Flurry logEvent: @"Show share results"];
 
     NSString *message = [NSString stringWithFormat:@"\nВсего слов: %d\nошибок: %d\nправильно: %d\nи правильно подряд уже: %d! Можешь лучше? #ЖиШи ", self.totalPassed, self.errors, self.score, self.maxInSequence];
     
-    //[button setHidden: YES];
-
     self.laSharekit.title    = @"Мой результат сегодня: ";
     self.laSharekit.url      = [NSURL URLWithString:@"https://itunes.apple.com/ru/app/zi-si/id493483440?ls=1&mt=8"];
     self.laSharekit.text     = [NSString stringWithFormat:@"%@%@", self.laSharekit.title, message];
@@ -1235,21 +1233,25 @@ typedef enum gameTableMode
 }
 
 - (void)shareToEmail {
+    [self updateShareResults];
     [self.laSharekit performSelector:@selector(emailIt) withObject:nil afterDelay:.1];
     [Flurry logEvent: @"Share to email"];
 }
 
 - (void)shareToFacebook {
+    [self updateShareResults];
     [self.laSharekit performSelector:@selector(facebookPost) withObject:nil afterDelay:.1];
     [Flurry logEvent: @"Share to facebook"];
 }
 
 - (void)shareToTwitter {
+    [self updateShareResults];
     [self.laSharekit performSelector:@selector(tweet) withObject:nil afterDelay:.1];
     [Flurry logEvent: @"Share to twitter"];
 }
 
 - (void)shareToVkontakte {
+    [self updateShareResults];
     [self.laSharekit performSelector:@selector(vkPost) withObject:nil afterDelay:.1];
     [Flurry logEvent: @"Share to vkontakte"];
 }
