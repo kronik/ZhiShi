@@ -1,4 +1,4 @@
- //
+//
 //  VoiceAddModule.m
 //  AstridiPhone
 //
@@ -9,6 +9,8 @@
 #import "SpeechToTextModule.h"
 #import <AVFoundation/AVFoundation.h>
 #import "speex.h"
+#import "WCAlertView.h"
+#import "SIAlertView.h"
 
 #define FRAME_SIZE 110
 
@@ -95,13 +97,13 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error;
     
-//    [session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
-//    if (error != nil)
-//    {
-//        NSLog(@"Failed to set category on AVAudioSession");
-//    }
+    [session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
+    if (error != nil)
+    {
+        NSLog(@"Failed to set category on AVAudioSession");
+    }
     
-    BOOL active = [session setActive: YES error: &error];
+    BOOL active = [session setActive: YES error: nil];
     if (!active)
     {
         NSLog(@"Failed to set category on AVAudioSession");
@@ -120,13 +122,13 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
     customLocale = recognitionLocale;
     
     AVAudioSession *session = [AVAudioSession sharedInstance];
-//    NSError *error;
-//
-//    [session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
-//    if (error != nil)
-//    {
-//        NSLog(@"Failed to set category on AVAudioSession");
-//    }
+    NSError *error;
+    
+    [session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
+    if (error != nil)
+    {
+        NSLog(@"Failed to set category on AVAudioSession");
+    }
     
     BOOL active = [session setActive: YES error: nil];
     if (!active)
@@ -175,7 +177,7 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
     }
 
     self.delegate = nil;
-//    waveAlert.delegate = nil;
+    //waveAlert.delegate = nil;
     [waveAlert release];
     
 //    progressAlert.delegate = nil;
@@ -248,11 +250,38 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
     {
         if (!self.recording && !processing)
         {
+            [WCAlertView setDefaultCustomiaztonBlock:^(WCAlertView *alertView) {
+                alertView.labelTextColor = [UIColor darkGrayColor];
+                alertView.labelShadowColor = [UIColor whiteColor];
+                
+                UIColor *topGradient = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f];
+                UIColor *middleGradient = [UIColor colorWithRed:0.93f green:0.94f blue:0.96f alpha:1.0f];
+                UIColor *bottomGradient = [UIColor colorWithRed:0.89f green:0.89f blue:0.92f alpha:1.00f];
+                alertView.gradientColors = @[topGradient,middleGradient,bottomGradient];
+                
+                alertView.outerFrameColor = [UIColor colorWithRed:250.0f/255.0f green:250.0f/255.0f blue:250.0f/255.0f alpha:1.0f];
+                
+                alertView.buttonTextColor = [UIColor darkGrayColor];
+                alertView.buttonShadowColor = [UIColor whiteColor];
+            }];
+
             aqData.mCurrentPacket = 0;
             aqData.mIsRunning = true;
             [self reset];
             AudioQueueStart(aqData.mQueue, NULL);
-                
+            
+//            [UIWaveAlertView showAlertWithTitle:NSLocalizedString(@"Speak now...", nil) message:nil customizationBlock:^(WCAlertView *alertView) {
+//                alertView.style = WCAlertViewStyleCustomizationBlock;
+//
+//            } completionBlock:^(NSUInteger buttonIndex, WCAlertView *alertView) {
+//                if (buttonIndex == alertView.cancelButtonIndex) {
+//                    NSLog(@"Cancel");
+//                } else {
+//                    NSLog(@"Ok");
+//                }
+//            } cancelButtonTitle:NSLocalizedString(@"Done", nil) otherButtonTitles:nil, nil];
+
+            
             if ([customLocale isEqualToString:@"en-US"])
             {
                 waveAlert = [[UIWaveAlertView alloc] initWithTitle:@"Speak now..." delegate:self cancelButtonTitle:@"Done" otherButtonTitles:nil];
@@ -261,8 +290,10 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
             {
                 waveAlert = [[UIWaveAlertView alloc] initWithTitle:@"Слушаю..." delegate:self cancelButtonTitle:@"Готово" otherButtonTitles:nil];
             }
-            waveAlert.dataPoints = volumeDataPoints;
             
+            waveAlert.dataPoints = volumeDataPoints;
+            //waveAlert.style = WCAlertViewStyleCustomizationBlock;
+                        
             [delegate speechStartRecording];
             
             [waveAlert show];
@@ -326,7 +357,7 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
                 {
                     progressAlert = [[UIProgressAlertView alloc] initWithTitle:@"Обработка..." delegate:self cancelButtonTitle:@"Отмена" otherButtonTitles:nil];
                 }
-                
+
                 [progressAlert show];
                 
                 processing = YES;
@@ -383,7 +414,6 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
     NSError *error = nil;
     if ([processingThread isCancelled])
     {
-        //NSLog(@"Caught cancel");
         [self cleanUpProcessingThread];
         [request release];
         [pool drain];
@@ -406,18 +436,8 @@ static void DeriveBufferSize (AudioQueueRef audioQueue, AudioStreamBasicDescript
 {
     NSError *error = nil;
     NSString *recognizedText = nil;
-    
-    if (jsonData == nil || jsonData.length == 0)
-    {
-        return;
-    }
-    
     NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:&error];
-    //NSString *responseString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-
     NSArray *results = [responseDict objectForKey:@"hypotheses"];
-    
-    //recognizedText = responseString;
 
     for (NSDictionary *result in results) 
     {

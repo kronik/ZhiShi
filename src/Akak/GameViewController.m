@@ -17,6 +17,7 @@
 #import "Resources.h"
 #import "ImageUtility.h"
 #import "UIColor+MLPFlatColors.h"
+#import "UIColor+Colours.h"
 
 #define kIndexTwitter  0
 #define kIndexVK       1
@@ -977,8 +978,9 @@ typedef enum gameTableMode
                 button.enabled = YES;
                 
                 [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
-                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
-                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
+                
+                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+                [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
                 
                 [button addTarget:self action:@selector(shareToEmail) forControlEvents: UIControlEventTouchUpInside];
                 [cell.contentView addSubview: button];
@@ -994,8 +996,8 @@ typedef enum gameTableMode
                 button.enabled = YES;
                 
                 [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
-                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
-                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+                [button setTitleColor:[UIColor colorWithRed:0.24f green:0.36f blue:0.61f alpha:1.00f] forState:UIControlStateNormal];
                 
                 [button addTarget:self action:@selector(shareToFacebook) forControlEvents: UIControlEventTouchUpInside];
                 [cell.contentView addSubview: button];
@@ -1011,8 +1013,8 @@ typedef enum gameTableMode
                 button.enabled = YES;
                 
                 [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
-                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
-                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+                [button setTitleColor:[UIColor colorWithRed:0.00f green:0.67f blue:0.95f alpha:1.00f] forState:UIControlStateNormal];
                 
                 [button addTarget:self action:@selector(shareToTwitter) forControlEvents: UIControlEventTouchUpInside];
                 [cell.contentView addSubview: button];
@@ -1028,8 +1030,8 @@ typedef enum gameTableMode
                 button.enabled = YES;
                 
                 [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
-                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
-                [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+                [button setTitleColor:[UIColor colorWithRed:0.28f green:0.43f blue:0.58f alpha:1.00f] forState:UIControlStateNormal];
                 
                 [button addTarget:self action:@selector(shareToVkontakte) forControlEvents: UIControlEventTouchUpInside];
                 [cell.contentView addSubview: button];
@@ -1045,8 +1047,8 @@ typedef enum gameTableMode
                     button.enabled = YES;
                     
                     [button setTitle:self.task [indexPath.row] forState:UIControlStateNormal];
-                    [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateDisabled];
-                    [button setTitleColor:[UIColor colorWithRed:0.14f green:0.33f blue:0.51f alpha:1.00f] forState:UIControlStateNormal];
+                    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+                    [button setTitleColor:[UIColor tealColor] forState:UIControlStateNormal];
                     
                     [button addTarget:self action:@selector(resetGame) forControlEvents: UIControlEventTouchUpInside];
                     [cell.contentView addSubview: button];

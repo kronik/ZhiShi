@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0278949117CB110F002394AE /* SIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0278948C17CB110F002394AE /* SIAlertView.h */; };
-		0278949217CB110F002394AE /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0278948D17CB110F002394AE /* SIAlertView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		0278949317CB110F002394AE /* YLActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0278948F17CB110F002394AE /* YLActivityIndicatorView.h */; };
-		0278949417CB110F002394AE /* YLActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0278949017CB110F002394AE /* YLActivityIndicatorView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		022A09011730C65100A78069 /* YLActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 022A08FF1730C65100A78069 /* YLActivityIndicatorView.h */; };
+		022A09021730C65100A78069 /* YLActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 022A09001730C65100A78069 /* YLActivityIndicatorView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		02368F331730AD0B00854C50 /* WCAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 02368F311730AD0B00854C50 /* WCAlertView.h */; };
+		02368F341730AD0B00854C50 /* WCAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02368F321730AD0B00854C50 /* WCAlertView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		0278948617CAFF5A002394AE /* SIAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0278948417CAFF5A002394AE /* SIAlertView.h */; };
+		0278948717CAFF5A002394AE /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0278948517CAFF5A002394AE /* SIAlertView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		222835F8143E9EBD000D6E05 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222835F7143E9EBD000D6E05 /* Foundation.framework */; };
 		222836C1143E9F0B000D6E05 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = 22283604143E9F0B000D6E05 /* config.h */; };
 		222836C2143E9F0B000D6E05 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 22283606143E9F0B000D6E05 /* Makefile */; };
@@ -150,11 +152,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0278948B17CB110F002394AE /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
-		0278948C17CB110F002394AE /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
-		0278948D17CB110F002394AE /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
-		0278948F17CB110F002394AE /* YLActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLActivityIndicatorView.h; sourceTree = "<group>"; };
-		0278949017CB110F002394AE /* YLActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLActivityIndicatorView.m; sourceTree = "<group>"; };
+		022A08FF1730C65100A78069 /* YLActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLActivityIndicatorView.h; sourceTree = "<group>"; };
+		022A09001730C65100A78069 /* YLActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLActivityIndicatorView.m; sourceTree = "<group>"; };
+		02368F311730AD0B00854C50 /* WCAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WCAlertView.h; sourceTree = "<group>"; };
+		02368F321730AD0B00854C50 /* WCAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WCAlertView.m; sourceTree = "<group>"; };
+		0278948317CAFF5A002394AE /* SIAlertView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SIAlertView.bundle; sourceTree = "<group>"; };
+		0278948417CAFF5A002394AE /* SIAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIAlertView.h; sourceTree = "<group>"; };
+		0278948517CAFF5A002394AE /* SIAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIAlertView.m; sourceTree = "<group>"; };
 		222835F4143E9EBD000D6E05 /* libSpeechToText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSpeechToText.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		222835F7143E9EBD000D6E05 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		222835FB143E9EBE000D6E05 /* SpeechToText-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpeechToText-Prefix.pch"; sourceTree = "<group>"; };
@@ -375,30 +379,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0278948A17CB110F002394AE /* SIAlertView */ = {
+		022A08FE1730C65100A78069 /* YLActivityIndicatorView */ = {
 			isa = PBXGroup;
 			children = (
-				0278948B17CB110F002394AE /* SIAlertView.bundle */,
-				0278948C17CB110F002394AE /* SIAlertView.h */,
-				0278948D17CB110F002394AE /* SIAlertView.m */,
-			);
-			path = SIAlertView;
-			sourceTree = "<group>";
-		};
-		0278948E17CB110F002394AE /* YLActivityIndicatorView */ = {
-			isa = PBXGroup;
-			children = (
-				0278948F17CB110F002394AE /* YLActivityIndicatorView.h */,
-				0278949017CB110F002394AE /* YLActivityIndicatorView.m */,
+				022A08FF1730C65100A78069 /* YLActivityIndicatorView.h */,
+				022A09001730C65100A78069 /* YLActivityIndicatorView.m */,
 			);
 			path = YLActivityIndicatorView;
+			sourceTree = "<group>";
+		};
+		02368F301730AD0B00854C50 /* WCAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				02368F311730AD0B00854C50 /* WCAlertView.h */,
+				02368F321730AD0B00854C50 /* WCAlertView.m */,
+			);
+			path = WCAlertView;
+			sourceTree = "<group>";
+		};
+		0278948217CAFF5A002394AE /* SIAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				0278948317CAFF5A002394AE /* SIAlertView.bundle */,
+				0278948417CAFF5A002394AE /* SIAlertView.h */,
+				0278948517CAFF5A002394AE /* SIAlertView.m */,
+			);
+			path = SIAlertView;
 			sourceTree = "<group>";
 		};
 		222835E9143E9EBD000D6E05 = {
 			isa = PBXGroup;
 			children = (
-				0278948A17CB110F002394AE /* SIAlertView */,
-				0278948E17CB110F002394AE /* YLActivityIndicatorView */,
+				0278948217CAFF5A002394AE /* SIAlertView */,
+				022A08FE1730C65100A78069 /* YLActivityIndicatorView */,
+				02368F301730AD0B00854C50 /* WCAlertView */,
 				32E357EB15A2BB80002EDD6C /* UIProgressAlertView.h */,
 				32E357EC15A2BB80002EDD6C /* UIProgressAlertView.m */,
 				32E1088615A2843900CE9046 /* UIWaveAlertView.h */,
@@ -708,10 +722,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				224861BF1444D21D00796103 /* WaveDisplay.h in Headers */,
-				0278949317CB110F002394AE /* YLActivityIndicatorView.h in Headers */,
 				2253D53B1443D470004EF35F /* SpeechToTextModule.h in Headers */,
 				222836C1143E9F0B000D6E05 /* config.h in Headers */,
+				224861BF1444D21D00796103 /* WaveDisplay.h in Headers */,
 				222836C4143E9F0B000D6E05 /* speex.h in Headers */,
 				222836C5143E9F0B000D6E05 /* speex_bits.h in Headers */,
 				222836C6143E9F0B000D6E05 /* speex_buffer.h in Headers */,
@@ -730,6 +743,7 @@
 				222836D6143E9F0B000D6E05 /* cb_search_arm4.h in Headers */,
 				222836D7143E9F0B000D6E05 /* cb_search_bfin.h in Headers */,
 				222836D8143E9F0B000D6E05 /* cb_search_sse.h in Headers */,
+				0278948617CAFF5A002394AE /* SIAlertView.h in Headers */,
 				222836E1143E9F0B000D6E05 /* fftwrap.h in Headers */,
 				222836E3143E9F0B000D6E05 /* filterbank.h in Headers */,
 				222836E5143E9F0B000D6E05 /* filters.h in Headers */,
@@ -757,7 +771,6 @@
 				2228370C143E9F0B000D6E05 /* nb_celp.h in Headers */,
 				2228370D143E9F0B000D6E05 /* os_support.h in Headers */,
 				2228370F143E9F0B000D6E05 /* pseudofloat.h in Headers */,
-				0278949117CB110F002394AE /* SIAlertView.h in Headers */,
 				22283711143E9F0B000D6E05 /* quant_lsp.h in Headers */,
 				22283712143E9F0B000D6E05 /* quant_lsp_bfin.h in Headers */,
 				22283714143E9F0B000D6E05 /* resample_sse.h in Headers */,
@@ -778,6 +791,8 @@
 				2228374F143EA26C000D6E05 /* os_types.h in Headers */,
 				32E1088815A2843900CE9046 /* UIWaveAlertView.h in Headers */,
 				32E357ED15A2BB80002EDD6C /* UIProgressAlertView.h in Headers */,
+				02368F331730AD0B00854C50 /* WCAlertView.h in Headers */,
+				022A09011730C65100A78069 /* YLActivityIndicatorView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,7 +822,7 @@
 		222835EB143E9EBD000D6E05 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Dmitry Klimkin";
 			};
 			buildConfigurationList = 222835EE143E9EBD000D6E05 /* Build configuration list for PBXProject "SpeechToText" */;
@@ -843,7 +858,6 @@
 				222836DD143E9F0B000D6E05 /* exc_5_256_table.c in Sources */,
 				222836DE143E9F0B000D6E05 /* exc_5_64_table.c in Sources */,
 				222836DF143E9F0B000D6E05 /* exc_8_128_table.c in Sources */,
-				0278949217CB110F002394AE /* SIAlertView.m in Sources */,
 				222836E0143E9F0B000D6E05 /* fftwrap.c in Sources */,
 				222836E2143E9F0B000D6E05 /* filterbank.c in Sources */,
 				222836E4143E9F0B000D6E05 /* filters.c in Sources */,
@@ -876,10 +890,10 @@
 				2228371E143E9F0B000D6E05 /* stereo.c in Sources */,
 				2228371F143E9F0B000D6E05 /* testdenoise.c in Sources */,
 				22283720143E9F0B000D6E05 /* testecho.c in Sources */,
-				0278949417CB110F002394AE /* YLActivityIndicatorView.m in Sources */,
 				22283721143E9F0B000D6E05 /* testenc.c in Sources */,
 				22283722143E9F0B000D6E05 /* testenc_uwb.c in Sources */,
 				22283723143E9F0B000D6E05 /* testenc_wb.c in Sources */,
+				0278948717CAFF5A002394AE /* SIAlertView.m in Sources */,
 				22283724143E9F0B000D6E05 /* testjitter.c in Sources */,
 				22283725143E9F0B000D6E05 /* vbr.c in Sources */,
 				22283728143E9F0B000D6E05 /* vq.c in Sources */,
@@ -898,6 +912,8 @@
 				224861C01444D21D00796103 /* WaveDisplay.m in Sources */,
 				32E1088A15A2843900CE9046 /* UIWaveAlertView.m in Sources */,
 				32E357EE15A2BB80002EDD6C /* UIProgressAlertView.m in Sources */,
+				02368F341730AD0B00854C50 /* WCAlertView.m in Sources */,
+				022A09021730C65100A78069 /* YLActivityIndicatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,7 +924,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -921,14 +947,22 @@
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				ONLY_ACTIVE_ARCH = NO;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include;
+				PRODUCT_NAME = SpeechToText;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = YES;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = armv7;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = debugging;
+				VERSION_INFO_FILE = "$(PRODUCT_NAME)_vers.c";
 			};
 			name = Debug;
 		};
@@ -936,27 +970,46 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
+				EXECUTABLE_EXTENSION = a;
+				EXECUTABLE_PREFIX = lib;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				ONLY_ACTIVE_ARCH = NO;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = /usr/local/include;
+				PRODUCT_NAME = SpeechToText;
+				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = YES;
 				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = debugging;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = armv7;
+				VERSION_INFO_FILE = "$(PRODUCT_NAME)_vers.c";
 			};
 			name = Release;
 		};
 		22283602143E9EBE000D6E05 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/speex.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -967,7 +1020,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SpeechToText;
 				SKIP_INSTALL = YES;
-				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = build;
 			};
 			name = Debug;
@@ -975,6 +1027,7 @@
 		22283603143E9EBE000D6E05 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"ARCHS[sdk=*]" = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/speex.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -985,7 +1038,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = SpeechToText;
 				SKIP_INSTALL = YES;
-				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = build;
 			};
 			name = Release;

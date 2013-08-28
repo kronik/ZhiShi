@@ -154,8 +154,6 @@ static SIAlertView *__si_alert_current_view;
 {
     [super viewDidLoad];
     [self.alertView setup];
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

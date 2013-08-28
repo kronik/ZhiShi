@@ -13,7 +13,7 @@
 #import "AboutViewController.h"
 #import "DictSearcher.h"
 #import <UIKit/UIResponder.h>
-#import "iPhone-Speech-To-Text/SpeechToTextModule.h"
+#import "SpeechToTextModule.h"
 #import "OtherAppsViewController.h"
 #import "BasicViewController.h"
 #import "AppDelegate.h"

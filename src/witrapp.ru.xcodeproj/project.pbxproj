@@ -596,6 +596,10 @@
 		027894F817CBA0CB002394AE /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 027894F217CBA0CB002394AE /* Default-Portrait@2x~ipad.png */; };
 		027894F917CBA0CB002394AE /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 027894F217CBA0CB002394AE /* Default-Portrait@2x~ipad.png */; };
 		027894FA17CBA0CB002394AE /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 027894F217CBA0CB002394AE /* Default-Portrait@2x~ipad.png */; };
+		0278950117CD8845002394AE /* UIColor+Colours.m in Sources */ = {isa = PBXBuildFile; fileRef = 0278950017CD8845002394AE /* UIColor+Colours.m */; };
+		0278950217CD8845002394AE /* UIColor+Colours.m in Sources */ = {isa = PBXBuildFile; fileRef = 0278950017CD8845002394AE /* UIColor+Colours.m */; };
+		0278950317CD8845002394AE /* UIColor+Colours.m in Sources */ = {isa = PBXBuildFile; fileRef = 0278950017CD8845002394AE /* UIColor+Colours.m */; };
+		0278950417CD8845002394AE /* UIColor+Colours.m in Sources */ = {isa = PBXBuildFile; fileRef = 0278950017CD8845002394AE /* UIColor+Colours.m */; };
 		02A075E91668FE2E008036E9 /* ipad-menubar-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A075E81668FE2E008036E9 /* ipad-menubar-right@2x.png */; };
 		02A075EC1668FEF6008036E9 /* menubar-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A075EA1668FEF6008036E9 /* menubar-button.png */; };
 		02A075ED1668FEF6008036E9 /* menubar-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 02A075EA1668FEF6008036E9 /* menubar-button.png */; };
@@ -1529,6 +1533,8 @@
 		027894BC17CB859A002394AE /* icon58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon58x58.png; path = Images/icon58x58.png; sourceTree = "<group>"; };
 		027894F117CBA0CB002394AE /* Default~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default~ipad.png"; path = "Images/Default~ipad.png"; sourceTree = "<group>"; };
 		027894F217CBA0CB002394AE /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait@2x~ipad.png"; path = "Images/Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		027894FF17CD8845002394AE /* UIColor+Colours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Colours.h"; sourceTree = "<group>"; };
+		0278950017CD8845002394AE /* UIColor+Colours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Colours.m"; sourceTree = "<group>"; };
 		02A075E81668FE2E008036E9 /* ipad-menubar-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ipad-menubar-right@2x.png"; path = "Images/ipad-menubar-right@2x.png"; sourceTree = "<group>"; };
 		02A075EA1668FEF6008036E9 /* menubar-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menubar-button.png"; path = "Images/menubar-button.png"; sourceTree = "<group>"; };
 		02A075EB1668FEF6008036E9 /* menubar-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menubar-button@2x.png"; path = "Images/menubar-button@2x.png"; sourceTree = "<group>"; };
@@ -1901,6 +1907,8 @@
 		021694B317C7A8F6005A70EB /* UIColor+MLPFlatColors */ = {
 			isa = PBXGroup;
 			children = (
+				027894FF17CD8845002394AE /* UIColor+Colours.h */,
+				0278950017CD8845002394AE /* UIColor+Colours.m */,
 				021694B417C7A8F6005A70EB /* UIColor+MLPFlatColors.h */,
 				021694B517C7A8F6005A70EB /* UIColor+MLPFlatColors.m */,
 			);
@@ -3640,6 +3648,7 @@
 				321EA86614A02AFE002D5D23 /* DictSearcher.m in Sources */,
 				32C4407B14A19A0300FF2E45 /* OnlineDictViewController.m in Sources */,
 				3264080D14A96BD200C3A53B /* Model.xcdatamodeld in Sources */,
+				0278950117CD8845002394AE /* UIColor+Colours.m in Sources */,
 				323B304214C9016B00F72486 /* DictEntry.m in Sources */,
 				026B8B4C17B5E044005C4913 /* REMenuItemView.m in Sources */,
 				3264081214A96CDD00C3A53B /* DictIndex.m in Sources */,
@@ -3708,6 +3717,7 @@
 				32C5120714C6601F00151879 /* DictSearcher.m in Sources */,
 				32C5120814C6601F00151879 /* OnlineDictViewController.m in Sources */,
 				32C5120914C6601F00151879 /* Model.xcdatamodeld in Sources */,
+				0278950217CD8845002394AE /* UIColor+Colours.m in Sources */,
 				32C5120A14C6601F00151879 /* DictIndex.m in Sources */,
 				026B8B4D17B5E044005C4913 /* REMenuItemView.m in Sources */,
 				32C5120B14C6601F00151879 /* iRate.m in Sources */,
@@ -3776,6 +3786,7 @@
 				32C5126F14C688B600151879 /* DictSearcher.m in Sources */,
 				32C5127014C688B600151879 /* OnlineDictViewController.m in Sources */,
 				32C5127114C688B600151879 /* Model.xcdatamodeld in Sources */,
+				0278950317CD8845002394AE /* UIColor+Colours.m in Sources */,
 				32C5127214C688B600151879 /* DictIndex.m in Sources */,
 				026B8B4E17B5E044005C4913 /* REMenuItemView.m in Sources */,
 				32C5127314C688B600151879 /* iRate.m in Sources */,
@@ -3844,6 +3855,7 @@
 				32C5129914C6899C00151879 /* DictSearcher.m in Sources */,
 				32C5129A14C6899C00151879 /* OnlineDictViewController.m in Sources */,
 				32C5129B14C6899C00151879 /* Model.xcdatamodeld in Sources */,
+				0278950417CD8845002394AE /* UIColor+Colours.m in Sources */,
 				32C5129C14C6899C00151879 /* DictIndex.m in Sources */,
 				026B8B4F17B5E044005C4913 /* REMenuItemView.m in Sources */,
 				32C5129D14C6899C00151879 /* iRate.m in Sources */,
@@ -3990,6 +4002,7 @@
 				GCC_PREFIX_HEADER = "Akak/witrapp.ru-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/iPhone-Speech-To-Text\"/**";
 				INFOPLIST_FILE = "Akak/witrapp.ru-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -4028,6 +4041,7 @@
 				GCC_PREFIX_HEADER = "Akak/witrapp.ru-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/iPhone-Speech-To-Text\"/**";
 				INFOPLIST_FILE = "Akak/witrapp.ru-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
