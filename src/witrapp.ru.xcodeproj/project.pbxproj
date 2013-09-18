@@ -91,8 +91,8 @@
 		021B7B3E17B5CEA1000E7FAF /* ebeanstalk.png in Resources */ = {isa = PBXBuildFile; fileRef = 021B7B3B17B5CEA1000E7FAF /* ebeanstalk.png */; };
 		021B7B3F17B5CEA1000E7FAF /* ebeanstalk.png in Resources */ = {isa = PBXBuildFile; fileRef = 021B7B3B17B5CEA1000E7FAF /* ebeanstalk.png */; };
 		021C7BC8165BD28D00A48648 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021C7BC7165BD28D00A48648 /* QuartzCore.framework */; };
+		022F6A9E17E3EF0A003B507E /* libSpeechToText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 024BD1991632A8C000C93EE5 /* libSpeechToText.a */; };
 		023452D41643805A001EE347 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023452D31643805A001EE347 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		023452D5164380B3001EE347 /* libSpeechToText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 024BD1991632A8C000C93EE5 /* libSpeechToText.a */; };
 		023452D9164381D5001EE347 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023452D8164381D5001EE347 /* StoreKit.framework */; };
 		0244DB60165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */; };
 		0244DB61165D2625009A7383 /* UINavigationController+Keyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0244DB5F165D2625009A7383 /* UINavigationController+Keyboard.m */; };
@@ -818,10 +818,6 @@
 		02D6D45D17B648FE008C43EE /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D6D45817B648FE008C43EE /* Default.png */; };
 		02D6D45E17B648FE008C43EE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D6D45917B648FE008C43EE /* Default@2x.png */; };
 		02D6D45F17B648FE008C43EE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D6D45917B648FE008C43EE /* Default@2x.png */; };
-		02D6D46317B71558008C43EE /* YLActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6D46217B71558008C43EE /* YLActivityIndicatorView.m */; };
-		02D6D46417B71558008C43EE /* YLActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6D46217B71558008C43EE /* YLActivityIndicatorView.m */; };
-		02D6D46517B71558008C43EE /* YLActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6D46217B71558008C43EE /* YLActivityIndicatorView.m */; };
-		02D6D46617B71558008C43EE /* YLActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D6D46217B71558008C43EE /* YLActivityIndicatorView.m */; };
 		02D86AD716624AF50023ED1C /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86AD516624AF50023ED1C /* 37x-Checkmark.png */; };
 		02D86AD816624AF50023ED1C /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86AD516624AF50023ED1C /* 37x-Checkmark.png */; };
 		02D86AD916624AF50023ED1C /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 02D86AD516624AF50023ED1C /* 37x-Checkmark.png */; };
@@ -1320,7 +1316,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		023452D6164380E5001EE347 /* PBXContainerItemProxy */ = {
+		022F6A9C17E3EF00003B507E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 024BD1911632A8C000C93EE5 /* SpeechToText.xcodeproj */;
 			proxyType = 1;
@@ -1618,8 +1614,6 @@
 		02D6D45717B648FE008C43EE /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Images/Default-568h@2x.png"; sourceTree = "<group>"; };
 		02D6D45817B648FE008C43EE /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Images/Default.png; sourceTree = "<group>"; };
 		02D6D45917B648FE008C43EE /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Images/Default@2x.png"; sourceTree = "<group>"; };
-		02D6D46117B71558008C43EE /* YLActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLActivityIndicatorView.h; sourceTree = "<group>"; };
-		02D6D46217B71558008C43EE /* YLActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLActivityIndicatorView.m; sourceTree = "<group>"; };
 		02D86AD516624AF50023ED1C /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "37x-Checkmark.png"; path = "Images/37x-Checkmark.png"; sourceTree = "<group>"; };
 		02D86AD616624AF50023ED1C /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "37x-Checkmark@2x.png"; path = "Images/37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		02D86AE516625B780023ED1C /* icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon512.png; path = Images/icon512.png; sourceTree = "<group>"; };
@@ -1807,6 +1801,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				022F6A9E17E3EF0A003B507E /* libSpeechToText.a in Frameworks */,
 				026B8B6317B639DA005C4913 /* CoreText.framework in Frameworks */,
 				026B8B6217B639CD005C4913 /* Security.framework in Frameworks */,
 				02A076B01669A662008036E9 /* QuartzCore.framework in Frameworks */,
@@ -1816,7 +1811,6 @@
 				02A076AC1669A5F0008036E9 /* Social.framework in Frameworks */,
 				02A076AB1669A5CE008036E9 /* FacebookSDK.framework in Frameworks */,
 				023452D9164381D5001EE347 /* StoreKit.framework in Frameworks */,
-				023452D5164380B3001EE347 /* libSpeechToText.a in Frameworks */,
 				023452D41643805A001EE347 /* AdSupport.framework in Frameworks */,
 				32936C1114DA5148005C8810 /* MessageUI.framework in Frameworks */,
 				32936C0F14DA5109005C8810 /* SystemConfiguration.framework in Frameworks */,
@@ -1936,7 +1930,6 @@
 			isa = PBXGroup;
 			children = (
 				021694B317C7A8F6005A70EB /* UIColor+MLPFlatColors */,
-				02D6D46017B71558008C43EE /* YLActivityIndicatorView */,
 				026B8B5717B63124005C4913 /* Flurry */,
 				021B7B2817B5CD61000E7FAF /* GoogleAdMobAdsSdkiOS-6.5.0 */,
 				0212716C17B5C8F10071A89D /* FontAwesomeIconFactory */,
@@ -2211,15 +2204,6 @@
 				02C9C152167A08A6004EC906 /* WBSuccessNoticeView.m */,
 			);
 			path = WBNoticeView;
-			sourceTree = "<group>";
-		};
-		02D6D46017B71558008C43EE /* YLActivityIndicatorView */ = {
-			isa = PBXGroup;
-			children = (
-				02D6D46117B71558008C43EE /* YLActivityIndicatorView.h */,
-				02D6D46217B71558008C43EE /* YLActivityIndicatorView.m */,
-			);
-			path = YLActivityIndicatorView;
 			sourceTree = "<group>";
 		};
 		02F1DC0E165F60CD001B32D2 /* Sounds */ = {
@@ -2534,7 +2518,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				023452D7164380E5001EE347 /* PBXTargetDependency */,
+				022F6A9D17E3EF00003B507E /* PBXTargetDependency */,
 			);
 			name = witrapp.rulite;
 			productName = Akak;
@@ -3685,7 +3669,6 @@
 				02A0766016690FE3008036E9 /* REComposeViewController.m in Sources */,
 				02A0766F16691263008036E9 /* LASharekit.m in Sources */,
 				02A0767316691263008036E9 /* PinterestViewController.m in Sources */,
-				02D6D46317B71558008C43EE /* YLActivityIndicatorView.m in Sources */,
 				02A0769B16691DFC008036E9 /* NSString+Gender.m in Sources */,
 				02A0769F16691DFC008036E9 /* Vkontakte.m in Sources */,
 				02A076A316691DFC008036E9 /* VkontakteViewController.m in Sources */,
@@ -3754,7 +3737,6 @@
 				02A0766116690FE3008036E9 /* REComposeViewController.m in Sources */,
 				02A0767016691263008036E9 /* LASharekit.m in Sources */,
 				02A0767416691263008036E9 /* PinterestViewController.m in Sources */,
-				02D6D46417B71558008C43EE /* YLActivityIndicatorView.m in Sources */,
 				02A0769C16691DFC008036E9 /* NSString+Gender.m in Sources */,
 				02A076A016691DFC008036E9 /* Vkontakte.m in Sources */,
 				02A076A416691DFC008036E9 /* VkontakteViewController.m in Sources */,
@@ -3823,7 +3805,6 @@
 				02A0766216690FE3008036E9 /* REComposeViewController.m in Sources */,
 				02A0767116691263008036E9 /* LASharekit.m in Sources */,
 				02A0767516691263008036E9 /* PinterestViewController.m in Sources */,
-				02D6D46517B71558008C43EE /* YLActivityIndicatorView.m in Sources */,
 				02A0769D16691DFC008036E9 /* NSString+Gender.m in Sources */,
 				02A076A116691DFC008036E9 /* Vkontakte.m in Sources */,
 				02A076A516691DFC008036E9 /* VkontakteViewController.m in Sources */,
@@ -3892,7 +3873,6 @@
 				02A0766316690FE3008036E9 /* REComposeViewController.m in Sources */,
 				02A0767216691263008036E9 /* LASharekit.m in Sources */,
 				02A0767616691263008036E9 /* PinterestViewController.m in Sources */,
-				02D6D46617B71558008C43EE /* YLActivityIndicatorView.m in Sources */,
 				02A0769E16691DFC008036E9 /* NSString+Gender.m in Sources */,
 				02A076A216691DFC008036E9 /* Vkontakte.m in Sources */,
 				02A076A616691DFC008036E9 /* VkontakteViewController.m in Sources */,
@@ -3916,10 +3896,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		023452D7164380E5001EE347 /* PBXTargetDependency */ = {
+		022F6A9D17E3EF00003B507E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SpeechToText;
-			targetProxy = 023452D6164380E5001EE347 /* PBXContainerItemProxy */;
+			targetProxy = 022F6A9C17E3EF00003B507E /* PBXContainerItemProxy */;
 		};
 		024BD209163443FD00C93EE5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4082,15 +4062,20 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Akak/witrapp.ru-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/iPhone-Speech-To-Text\"/**",
+				);
 				INFOPLIST_FILE = "Akak/witrapp.rulite-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\\\\\\\"",
 					"$(SRCROOT)",
-					"\\\\\\\"$(SRCROOT)/Akak/iPhone-Speech-To-Text/build/Debug-iphoneos\\\\\\\"",
-					"/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/GoogleAdMobAdsSdkiOS-6.5.0/Add-ons/GoogleAnalyticsiOS_2.0beta4/Library",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/Akak/iPhone-Speech-To-Text/build/Debug-iphoneos\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/Akak\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GoogleAdMobAdsSdkiOS-6.5.0",
 					"/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/GoogleAdMobAdsSdkiOS-6.5.0",
+					/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/Akak,
 					/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/Flurry,
 				);
 				ONLY_ACTIVE_ARCH = NO;
@@ -4119,15 +4104,20 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Akak/witrapp.ru-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/iPhone-Speech-To-Text\"/**",
+				);
 				INFOPLIST_FILE = "Akak/witrapp.rulite-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\\\\\"$(SRCROOT)/GoogleAdMobAdsSDKiOS-5.0.5\\\\\\\"",
 					"$(SRCROOT)",
-					"\\\\\\\"$(SRCROOT)/Akak/iPhone-Speech-To-Text/build/Debug-iphoneos\\\\\\\"",
-					"/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/GoogleAdMobAdsSdkiOS-6.5.0/Add-ons/GoogleAnalyticsiOS_2.0beta4/Library",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/Akak/iPhone-Speech-To-Text/build/Debug-iphoneos\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/Akak\\\\\\\\\\\\\\\"",
+					"\\\\\\\\\\\\\\\"$(SRCROOT)/GoogleAdMobAdsSdkiOS-6.5.0",
 					"/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/GoogleAdMobAdsSdkiOS-6.5.0",
+					/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/Akak,
 					/Users/kronik/Dropbox/Projects/iDict/ZhiShi/src/Flurry,
 				);
 				ONLY_ACTIVE_ARCH = NO;
