@@ -12,6 +12,9 @@
 
 int main(int argc, char *argv[])
 {
+#ifndef DEBUG
+    ptrace(PT_DENY_ATTACH, 0, 0, 0);
+#endif
     @autoreleasepool {
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }

@@ -42,7 +42,7 @@
 
 -(void)openAppPage:(int)appId
 {
-    NSString *url = [[NSString alloc] initWithFormat: @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=%i", appId];
+    NSString *url = [[NSString alloc] initWithFormat: @"itms-apps://itunes.apple.com/app/id%i", appId];
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }

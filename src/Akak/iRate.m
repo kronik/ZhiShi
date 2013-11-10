@@ -42,9 +42,8 @@ NSString * const iRateUseCountKey = @"iRateUseCount";
 NSString * const iRateEventCountKey = @"iRateEventCount";
 NSString * const iRateMacAppStoreBundleID = @"com.apple.appstore";
 
-NSString * const iRateiOSAppStoreURLFormat = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%i";
+NSString * const iRateiOSAppStoreURLFormat = @"itms-apps://itunes.apple.com/app/id%i";
 NSString * const iRateMacAppStoreURLFormat = @"macappstore://itunes.apple.com/app/id%i";
-
 
 #define SECONDS_IN_A_DAY 86400.0
 #define MAC_APP_STORE_REFRESH_DELAY 5.0
