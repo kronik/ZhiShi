@@ -87,6 +87,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
+    
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [Flurry logEvent:@"ViewPurchaseOptions"];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
