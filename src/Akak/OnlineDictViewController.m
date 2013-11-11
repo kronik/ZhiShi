@@ -211,9 +211,9 @@
 - (IBAction)buyFullVerButtonClicked: (UIButton*)button
 {
 #if RU_LANG == 1
-    NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=493483440";
+    NSString *url = @"itms-apps://itunes.apple.com/app/id493483440";
 #else
-    NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=496458462";
+    NSString *url = @"itms-apps://itunes.apple.com/app/id496458462";
 #endif
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }

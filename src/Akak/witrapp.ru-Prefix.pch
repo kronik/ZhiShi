@@ -18,6 +18,17 @@
 
 #import "UINavigationController+Keyboard.h"
 
+#define FCStoreManager ThemeLoader
+#define fetchProductList fetchThemeList
+#define purchaseNonconsumable loadThemeOnce
+#define restorePreviousPurchasesForProduct reloadThemeFromDisk
+#define checkForPendingTransactions suspendLoadingTheme
+#define getProductFullUnlock getCurrentTheme
+#define isFullProduct isDefaultTheme
+#define PurchaseResponse ThemeLoadResponse
+#define sharedStoreManager sharedThemeLoader
+#define setIsFullProduct setIsDefaultTheme
+
 #define NOTIFICATION_HIDE_LEFT_VIEW @"NOTIFICATION_HIDE_LEFT_VIEW"
 #define NOTIFICATION_HIDE_RIGHT_VIEW @"NOTIFICATION_HIDE_RIGHT_VIEW"
 #define NOTIFICATION_SHAKE_DETECTED @"NOTIFICATION_SHAKE_DETECTED"

@@ -84,7 +84,6 @@
 		021B7B3517B5CD61000E7FAF /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 021B7B3217B5CD61000E7FAF /* libGoogleAdMobAds.a */; };
 		021B7B3617B5CD61000E7FAF /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 021B7B3217B5CD61000E7FAF /* libGoogleAdMobAds.a */; };
 		021B7B3717B5CDB7000E7FAF /* libSpeechToText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 024BD1991632A8C000C93EE5 /* libSpeechToText.a */; };
-		021B7B3817B5CDCE000E7FAF /* libLexicontext.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32862FA014DF78CF009BC331 /* libLexicontext.a */; };
 		021B7B3A17B5CDEF000E7FAF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021B7B3917B5CDEF000E7FAF /* CoreText.framework */; };
 		021B7B3C17B5CEA1000E7FAF /* ebeanstalk.png in Resources */ = {isa = PBXBuildFile; fileRef = 021B7B3B17B5CEA1000E7FAF /* ebeanstalk.png */; };
 		021B7B3D17B5CEA1000E7FAF /* ebeanstalk.png in Resources */ = {isa = PBXBuildFile; fileRef = 021B7B3B17B5CEA1000E7FAF /* ebeanstalk.png */; };
@@ -109,10 +108,6 @@
 		024A425C15ACED270047D18F /* AppDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 024A425815ACED270047D18F /* AppDescription.m */; };
 		024BD185163026E000C93EE5 /* dict_en.bin in Resources */ = {isa = PBXBuildFile; fileRef = 325FCB12158AC9E300AF58AD /* dict_en.bin */; };
 		024BD186163026F600C93EE5 /* ModelEN.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 32C5123D14C6874C00151879 /* ModelEN.sqlite */; };
-		024BD1881630334700C93EE5 /* LexicontextAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 024BD1871630334700C93EE5 /* LexicontextAssets.bundle */; };
-		024BD1891630334700C93EE5 /* LexicontextAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 024BD1871630334700C93EE5 /* LexicontextAssets.bundle */; };
-		024BD18A1630334700C93EE5 /* LexicontextAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 024BD1871630334700C93EE5 /* LexicontextAssets.bundle */; };
-		024BD18B1630334700C93EE5 /* LexicontextAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 024BD1871630334700C93EE5 /* LexicontextAssets.bundle */; };
 		024BD19016319DA100C93EE5 /* full_dict_ru.txt in Resources */ = {isa = PBXBuildFile; fileRef = 024BD18E16319DA100C93EE5 /* full_dict_ru.txt */; };
 		024BD1AE1632CEC300C93EE5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 024BD1AD1632CEC300C93EE5 /* libsqlite3.0.dylib */; };
 		024BD1BD1632D89800C93EE5 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 024BD1B41632D89800C93EE5 /* FMDatabaseQueue.m */; };
@@ -779,6 +774,10 @@
 		02BE41ED182DD95500469604 /* FCStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BE41EA182DD95500469604 /* FCStoreManager.m */; };
 		02BE41EE182DD95500469604 /* PurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BE41EC182DD95500469604 /* PurchaseViewController.m */; };
 		02BE41F1182DD9A400469604 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BE41F0182DD9A400469604 /* NSData+MKBase64.m */; };
+		02BE4200182F1C8500469604 /* LexicontextAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02BE41FE182F1C8500469604 /* LexicontextAssets.bundle */; };
+		02BE4201182F1C8500469604 /* LexicontextAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02BE41FE182F1C8500469604 /* LexicontextAssets.bundle */; };
+		02BE4202182F1C8500469604 /* libLexicontext.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02BE41FF182F1C8500469604 /* libLexicontext.a */; };
+		02BE4203182F1C8500469604 /* libLexicontext.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 02BE41FF182F1C8500469604 /* libLexicontext.a */; };
 		02C9C153167A08A6004EC906 /* NoticeView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02C9C141167A08A6004EC906 /* NoticeView.bundle */; };
 		02C9C154167A08A6004EC906 /* NoticeView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02C9C141167A08A6004EC906 /* NoticeView.bundle */; };
 		02C9C155167A08A6004EC906 /* NoticeView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 02C9C141167A08A6004EC906 /* NoticeView.bundle */; };
@@ -1225,8 +1224,6 @@
 		3270737D14D0FD920078A927 /* rules.html in Resources */ = {isa = PBXBuildFile; fileRef = 3270737C14D0FD920078A927 /* rules.html */; };
 		3270737E14D0FD920078A927 /* rules.html in Resources */ = {isa = PBXBuildFile; fileRef = 3270737C14D0FD920078A927 /* rules.html */; };
 		3285D209151B166300283734 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3285D208151B166300283734 /* CFNetwork.framework */; };
-		32862FA314DF78CF009BC331 /* libLexicontext.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32862FA014DF78CF009BC331 /* libLexicontext.a */; };
-		32862FA414DF78CF009BC331 /* libLexicontext.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32862FA014DF78CF009BC331 /* libLexicontext.a */; };
 		328EE66314E8F98700A4926A /* datatable.css in Resources */ = {isa = PBXBuildFile; fileRef = 328EE66214E8F98700A4926A /* datatable.css */; };
 		328EE66414E8F98700A4926A /* datatable.css in Resources */ = {isa = PBXBuildFile; fileRef = 328EE66214E8F98700A4926A /* datatable.css */; };
 		328EE66514E8F98700A4926A /* datatable.css in Resources */ = {isa = PBXBuildFile; fileRef = 328EE66214E8F98700A4926A /* datatable.css */; };
@@ -1393,7 +1390,6 @@
 		024A425215ACED030047D18F /* OtherAppsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherAppsViewController.m; sourceTree = "<group>"; };
 		024A425715ACED270047D18F /* AppDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDescription.h; sourceTree = "<group>"; };
 		024A425815ACED270047D18F /* AppDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDescription.m; sourceTree = "<group>"; };
-		024BD1871630334700C93EE5 /* LexicontextAssets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = LexicontextAssets.bundle; path = Akak/LexicontextAssets.bundle; sourceTree = "<group>"; };
 		024BD18E16319DA100C93EE5 /* full_dict_ru.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = full_dict_ru.txt; sourceTree = SOURCE_ROOT; };
 		024BD1911632A8C000C93EE5 /* SpeechToText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SpeechToText.xcodeproj; path = "iPhone-Speech-To-Text/SpeechToText.xcodeproj"; sourceTree = "<group>"; };
 		024BD1AD1632CEC300C93EE5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -1601,6 +1597,9 @@
 		02BE41EC182DD95500469604 /* PurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseViewController.m; sourceTree = "<group>"; };
 		02BE41EF182DD9A400469604 /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
 		02BE41F0182DD9A400469604 /* NSData+MKBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MKBase64.m"; sourceTree = "<group>"; };
+		02BE41FD182F1C8500469604 /* Lexicontext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lexicontext.h; path = Akak/Lexicontext.h; sourceTree = "<group>"; };
+		02BE41FE182F1C8500469604 /* LexicontextAssets.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = LexicontextAssets.bundle; path = Akak/LexicontextAssets.bundle; sourceTree = "<group>"; };
+		02BE41FF182F1C8500469604 /* libLexicontext.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLexicontext.a; path = Akak/libLexicontext.a; sourceTree = "<group>"; };
 		02C9C141167A08A6004EC906 /* NoticeView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NoticeView.bundle; sourceTree = "<group>"; };
 		02C9C142167A08A6004EC906 /* UILabel+WBExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+WBExtensions.h"; sourceTree = "<group>"; };
 		02C9C143167A08A6004EC906 /* UILabel+WBExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+WBExtensions.m"; sourceTree = "<group>"; };
@@ -1746,7 +1745,6 @@
 		3270737C14D0FD920078A927 /* rules.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = rules.html; path = ../rules.html; sourceTree = "<group>"; };
 		3285D208151B166300283734 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		32862F9E14DF78CF009BC331 /* Lexicontext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Lexicontext.h; path = Akak/Lexicontext.h; sourceTree = "<group>"; };
-		32862FA014DF78CF009BC331 /* libLexicontext.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLexicontext.a; path = Akak/libLexicontext.a; sourceTree = "<group>"; };
 		328EE66214E8F98700A4926A /* datatable.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = datatable.css; path = ../datatable.css; sourceTree = "<group>"; };
 		3293676114DA3723005C8810 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3293676414DA372E005C8810 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -1783,7 +1781,6 @@
 				3203FE29151B1D780048DA3C /* Security.framework in Frameworks */,
 				021B7B3A17B5CDEF000E7FAF /* CoreText.framework in Frameworks */,
 				021B7B3717B5CDB7000E7FAF /* libSpeechToText.a in Frameworks */,
-				021B7B3817B5CDCE000E7FAF /* libLexicontext.a in Frameworks */,
 				02A949211660585200C004E5 /* Social.framework in Frameworks */,
 				02A9491F1660581C00C004E5 /* AdSupport.framework in Frameworks */,
 				02A9491E1660581600C004E5 /* Accounts.framework in Frameworks */,
@@ -1800,6 +1797,7 @@
 				32AB5D0E14EA09C4000CA306 /* MessageUI.framework in Frameworks */,
 				3264080F14A96C3F00C3A53B /* CoreData.framework in Frameworks */,
 				321EA83F14A02920002D5D23 /* UIKit.framework in Frameworks */,
+				02BE4202182F1C8500469604 /* libLexicontext.a in Frameworks */,
 				026B8B5A17B63124005C4913 /* libFlurry_4.2.3.a in Frameworks */,
 				321EA84114A02920002D5D23 /* Foundation.framework in Frameworks */,
 				321EA84314A02920002D5D23 /* CoreGraphics.framework in Frameworks */,
@@ -1823,6 +1821,7 @@
 				023452D41643805A001EE347 /* AdSupport.framework in Frameworks */,
 				32936C1114DA5148005C8810 /* MessageUI.framework in Frameworks */,
 				32936C0F14DA5109005C8810 /* SystemConfiguration.framework in Frameworks */,
+				02BE4203182F1C8500469604 /* libLexicontext.a in Frameworks */,
 				3293676F14DA377D005C8810 /* MapKit.framework in Frameworks */,
 				3293676D14DA3775005C8810 /* libz.dylib in Frameworks */,
 				3293676B14DA3766005C8810 /* libsqlite3.dylib in Frameworks */,
@@ -1857,7 +1856,6 @@
 				32C5127814C688B600151879 /* UIKit.framework in Frameworks */,
 				32C5127914C688B600151879 /* Foundation.framework in Frameworks */,
 				32C5127A14C688B600151879 /* CoreGraphics.framework in Frameworks */,
-				32862FA314DF78CF009BC331 /* libLexicontext.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1881,7 +1879,6 @@
 				32C512A214C6899C00151879 /* UIKit.framework in Frameworks */,
 				32C512A314C6899C00151879 /* Foundation.framework in Frameworks */,
 				32C512A414C6899C00151879 /* CoreGraphics.framework in Frameworks */,
-				32862FA414DF78CF009BC331 /* libLexicontext.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1977,8 +1974,9 @@
 				02A9490D165FDD3800C004E5 /* BCDShareSheet.m */,
 				32862F9E14DF78CF009BC331 /* Lexicontext.h */,
 				024BD1AD1632CEC300C93EE5 /* libsqlite3.0.dylib */,
-				024BD1871630334700C93EE5 /* LexicontextAssets.bundle */,
-				32862FA014DF78CF009BC331 /* libLexicontext.a */,
+				02BE41FD182F1C8500469604 /* Lexicontext.h */,
+				02BE41FE182F1C8500469604 /* LexicontextAssets.bundle */,
+				02BE41FF182F1C8500469604 /* libLexicontext.a */,
 				02A949361660AC3200C004E5 /* zopa.otf */,
 			);
 			name = Libs;
@@ -2641,7 +2639,6 @@
 				320A1D5515AD28F5001C8580 /* OtherAppsView.xib in Resources */,
 				32BE92DF15DA2C46008507D7 /* earcon_done_listening.wav in Resources */,
 				32BE92E315DA2C46008507D7 /* earcon_listening.wav in Resources */,
-				024BD1881630334700C93EE5 /* LexicontextAssets.bundle in Resources */,
 				024F19A616589013002185A9 /* rules.bin in Resources */,
 				024F1A121658CC11002185A9 /* 1.html in Resources */,
 				024F1A161658CC11002185A9 /* 10.html in Resources */,
@@ -2759,6 +2756,7 @@
 				02F1DB4A165F5C26001B32D2 /* details-photo-mask.png in Resources */,
 				02F1DB4E165F5C26001B32D2 /* details-photo-mask@2x.png in Resources */,
 				021B7B3C17B5CEA1000E7FAF /* ebeanstalk.png in Resources */,
+				02BE4200182F1C8500469604 /* LexicontextAssets.bundle in Resources */,
 				02F1DB72165F5C26001B32D2 /* ifeelgood.png in Resources */,
 				02F1DB76165F5C26001B32D2 /* ingredients-list.png in Resources */,
 				02F1DB7A165F5C26001B32D2 /* ingredients-list@2x.png in Resources */,
@@ -2900,7 +2898,6 @@
 				320A1D5615AD28F5001C8580 /* OtherAppsView.xib in Resources */,
 				32BE92E015DA2C46008507D7 /* earcon_done_listening.wav in Resources */,
 				32BE92E415DA2C46008507D7 /* earcon_listening.wav in Resources */,
-				024BD1891630334700C93EE5 /* LexicontextAssets.bundle in Resources */,
 				024BD19016319DA100C93EE5 /* full_dict_ru.txt in Resources */,
 				0216946F17C753F7005A70EB /* menu3.png in Resources */,
 				024F19A716589013002185A9 /* rules.bin in Resources */,
@@ -2912,6 +2909,7 @@
 				024F1A271658CC11002185A9 /* 14.html in Resources */,
 				024F1A2B1658CC11002185A9 /* 15.html in Resources */,
 				024F1A2F1658CC11002185A9 /* 16.html in Resources */,
+				02BE4201182F1C8500469604 /* LexicontextAssets.bundle in Resources */,
 				024F1A331658CC11002185A9 /* 17.html in Resources */,
 				024F1A371658CC11002185A9 /* 18.html in Resources */,
 				024F1A3B1658CC11002185A9 /* 19.html in Resources */,
@@ -3151,7 +3149,6 @@
 				320A1D5715AD28F5001C8580 /* OtherAppsView.xib in Resources */,
 				32BE92E115DA2C46008507D7 /* earcon_done_listening.wav in Resources */,
 				32BE92E515DA2C46008507D7 /* earcon_listening.wav in Resources */,
-				024BD18A1630334700C93EE5 /* LexicontextAssets.bundle in Resources */,
 				024F19A816589013002185A9 /* rules.bin in Resources */,
 				024F1A141658CC11002185A9 /* 1.html in Resources */,
 				024F1A181658CC11002185A9 /* 10.html in Resources */,
@@ -3401,7 +3398,6 @@
 				320A1D5815AD28F5001C8580 /* OtherAppsView.xib in Resources */,
 				32BE92E215DA2C46008507D7 /* earcon_done_listening.wav in Resources */,
 				32BE92E615DA2C46008507D7 /* earcon_listening.wav in Resources */,
-				024BD18B1630334700C93EE5 /* LexicontextAssets.bundle in Resources */,
 				024F19A916589013002185A9 /* rules.bin in Resources */,
 				024F1A151658CC11002185A9 /* 1.html in Resources */,
 				024F1A191658CC11002185A9 /* 10.html in Resources */,
@@ -4073,6 +4069,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Akak\"",
@@ -4113,8 +4110,9 @@
 		32C5122814C6601F00151879 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Dmitry Klimkin";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Akak\"",
@@ -4147,8 +4145,8 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = witrapp.rulite;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "301F171F-53EA-473F-8581-21B92A1495EA";
+				PROVISIONING_PROFILE = "B9CABDA6-5F57-4743-AB15-28C1CDAB13AD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B9CABDA6-5F57-4743-AB15-28C1CDAB13AD";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

@@ -10,6 +10,8 @@
 #import "WBNoticeView.h"
 #import "MBProgressHUD.h"
 #import "NIKFontAwesomeIconFactory+iOS.h"
+#import "PurchaseViewController.h"
+#import "FCStoreManager.h"
 
 #define CUSTOMVIEW_TAG      1111
 
@@ -90,13 +92,18 @@
     [hubParentView addSubview:self.hud];
     
 #ifdef LITE_VERSION
-    self.adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+    
+    if ([[FCStoreManager sharedStoreManager] isFullProduct] == NO) {
+        self.adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
+            
+        self.adBanner.adUnitID = @"a14f29fa9fa7cb1";
+        self.adBanner.delegate = self;
+        [self.adBanner setRootViewController:self];
+        //[self.view addSubview:self.adBanner];
+        [self.adBanner loadRequest:[self createRequest]];
         
-    self.adBanner.adUnitID = @"a14f29fa9fa7cb1";
-    self.adBanner.delegate = self;
-    [self.adBanner setRootViewController:self];
-    //[self.view addSubview:self.adBanner];
-    [self.adBanner loadRequest:[self createRequest]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnlockFullAppNotification) name:kUnlockFullProductNotification object:nil];
+    }
     
     //self.adBanner.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
 #endif
@@ -115,6 +122,11 @@
 
 #ifdef LITE_VERSION
 
+- (void)onUnlockFullAppNotification: (NSNotification *)notification {
+    [self.adBanner removeFromSuperview];
+    self.adBanner = nil;
+}
+    
 - (void)updateAdBannerPosition {
     
 }

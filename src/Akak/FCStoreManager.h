@@ -6,17 +6,6 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#define FCStoreManager ThemeLoader
-#define fetchProductList fetchThemeList
-#define purchaseNonconsumable loadThemeOnce
-#define restorePreviousPurchasesForProduct reloadThemeFromDisk
-#define checkForPendingTransactions suspendLoadingTheme
-#define getProductFullUnlock getCurrentTheme
-#define isFullProduct isDefaultTheme
-#define PurchaseResponse ThemeLoadResponse
-#define sharedStoreManager sharedThemeLoader
-#define setIsFullProduct setIsDefaultTheme 
-
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
 

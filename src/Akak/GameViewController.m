@@ -26,6 +26,13 @@
 
 #define TESTS_IN_SESSION 10
 
+#ifdef LITE_VERSION
+
+#import "FCStoreManager.h"
+#import "PurchaseViewController.h"
+
+#endif
+
 @interface NSPair : NSObject
 
 -(id)initWithKey: (NSString*) key andData: (NSString*)data;
@@ -474,25 +481,53 @@ typedef enum gameTableMode
     }
 
 #ifdef LITE_VERSION
-    int permut = arc4random() % 3;
     
-    switch (permut)
-    {
-        case 0:
-            self.task = @[@"", @"Выбери правильный вариант:", @"", baseWord, firstIncorrect, secondIncorrect, @""];
+    if ([[FCStoreManager sharedStoreManager] isFullProduct] == NO) {
+        int permut = arc4random() % 3;
+        
+        switch (permut)
+        {
+            case 0:
+                self.task = @[@"", @"Выбери правильный вариант:", @"", baseWord, firstIncorrect, secondIncorrect, @""];
+                self.correctWordIndex = 3;
+                break;
+            case 1:
+                self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, baseWord, secondIncorrect, @""];
+                self.correctWordIndex = 4;
+                break;
+            case 2:
+                self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, baseWord, @""];
+                self.correctWordIndex = 5;
+                break;
+                
+            default:
+                break;
+        }
+    } else {
+        int permut = arc4random() % 4;
+        
+        switch (permut)
+        {
+            case 0:
+            self.task = @[@"", @"Выбери правильный вариант:", @"", baseWord, firstIncorrect, secondIncorrect, thirdIncorrect];
             self.correctWordIndex = 3;
             break;
-        case 1:
-            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, baseWord, secondIncorrect, @""];
+            case 1:
+            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, baseWord, secondIncorrect, thirdIncorrect];
             self.correctWordIndex = 4;
             break;
-        case 2:
-            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, baseWord, @""];
+            case 2:
+            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, baseWord, thirdIncorrect];
             self.correctWordIndex = 5;
             break;
-            
-        default:
+            case 3:
+            self.task = @[@"", @"Выбери правильный вариант:", @"", firstIncorrect, secondIncorrect, thirdIncorrect, baseWord];
+            self.correctWordIndex = 6;
             break;
+            
+            default:
+            break;
+        }
     }
 #else
     int permut = arc4random() % 4;
@@ -809,7 +844,10 @@ typedef enum gameTableMode
                 }
                 
 #ifdef LITE_VERSION
-                heightOffset += 40;
+                
+                if ([[FCStoreManager sharedStoreManager] isFullProduct]) {
+                    heightOffset += 40;
+                }
 #endif
                 self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.tableView.frame.size.width - 220, 10 + heightOffset, 200, 50)];
                 self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size: 20.0f];
@@ -1262,10 +1300,13 @@ typedef enum gameTableMode
 - (void)expandingSelector:(id)expandingSelect didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 #ifdef LITE_VERSION
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ATTENTION_TXT message:FEATURE_NOT_AVAILABLE delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    alert.tag = 1001;
-    [alert show];
     
+    if ([[FCStoreManager sharedStoreManager] isFullProduct] == NO) {
+
+        PurchaseViewController *viewController = [[PurchaseViewController alloc] init];
+        
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
     return;
 #endif
     
@@ -1389,9 +1430,9 @@ typedef enum gameTableMode
 - (IBAction)buyFullVerButtonClicked: (UIButton*)button
 {
 #if RU_LANG == 1
-    NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=493483440";
+    NSString *url = @"itms-apps://itunes.apple.com/app/id493483440";
 #else
-    NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=496458462";
+    NSString *url = @"itms-apps://itunes.apple.com/app/id496458462";
 #endif
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
@@ -1402,9 +1443,9 @@ typedef enum gameTableMode
     {
         [alertView dismissWithClickedButtonIndex:0 animated:YES];
 #if RU_LANG == 1
-        NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=493483440";
+        NSString *url = @"itms-apps://itunes.apple.com/app/id493483440";
 #else
-        NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=496458462";
+        NSString *url = @"itms-apps://itunes.apple.com/app/id496458462";
 #endif
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
     }

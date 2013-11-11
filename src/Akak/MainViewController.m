@@ -16,12 +16,13 @@
 #import "REMenu.h"
 #import "YLActivityIndicatorView.h"
 
-#if LITE_VER == 0
+#if LITE_VER != 0
 
-#import "Lexicontext.h"
-
+#import "FCStoreManager.h"
+#import "PurchaseViewController.h"
 #endif
 
+#import "Lexicontext.h"
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 #import <AVFoundation/AVFoundation.h>
@@ -1010,12 +1011,12 @@
         case 4:
         {
 #if LITE_VER == 1
-            UIAlertView *alert = nil;
-
-            alert = [[UIAlertView alloc] initWithTitle:ATTENTION_TXT message:FEATURE_NOT_AVAILABLE delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            alert.tag = 1001;
-            [alert show];
-            return;
+            if ([[FCStoreManager sharedStoreManager] isFullProduct]) {
+                [self showOnlineDetails: nil searchURL:googleUrl title:LOCAL_DICTIONARY];
+            } else {
+                PurchaseViewController *viewController = [[PurchaseViewController alloc] init];
+                [self.navigationController pushViewController:viewController animated:YES];
+            }
 #else
             [self showOnlineDetails: nil searchURL:googleUrl title:LOCAL_DICTIONARY];
 #endif
@@ -1054,9 +1055,9 @@
     [Flurry logEvent: @"Go to view full version"];
 
 #if RU_LANG == 1
-    NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=493483440";
+    NSString *url = @"itms-apps://itunes.apple.com/app/id493483440";
 #else
-    NSString *url = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?type=Purple+Software&id=496458462";
+    NSString *url = @"itms-apps://itunes.apple.com/app/id496458462";
 #endif
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
@@ -1100,18 +1101,21 @@
     self.noNeedToShowActionSheet = YES;
     
 #if LITE_VER != 0
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:ATTENTION_TXT message:FEATURE_NOT_AVAILABLE delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    alert.tag = 1001;
-    [alert show];
-    return;
+    
+    if ([[FCStoreManager sharedStoreManager] isFullProduct] == NO) {
+        PurchaseViewController *viewController = [[PurchaseViewController alloc] init];
+        [self.navigationController pushViewController:viewController animated:YES];
+    } else
+    
 #endif
-    
-    RulesSearcherViewController *searchRulesController = [[RulesSearcherViewController alloc] init];
-    searchRulesController.sendNotifications = NO;
-    [searchRulesController addBackButton];
-    [self.navigationController pushViewController:searchRulesController animated:YES];//:searchRulesController animated:YES];
-    
-    self.noNeedToShowActionSheet = YES;
+    {
+        RulesSearcherViewController *searchRulesController = [[RulesSearcherViewController alloc] init];
+        searchRulesController.sendNotifications = NO;
+        [searchRulesController addBackButton];
+        [self.navigationController pushViewController:searchRulesController animated:YES];//:searchRulesController animated:YES];
+        
+        self.noNeedToShowActionSheet = YES;
+    }
 }
 
 - (void) showMenu {
@@ -1289,7 +1293,21 @@
                                      definitionBodyFontFamily:@"Helvetica"
                                      definitionBodyFontSize:46];
         controller.localHtml = html;
+#else 
+        if ([[FCStoreManager sharedStoreManager] isFullProduct]) {
+            Lexicontext *dictionary = [Lexicontext sharedDictionary];
+            html = [dictionary definitionAsHTMLFor:self.selectedWord
+                                     withTextColor:@"000000"
+                                   backgroundColor:@"#FFFFFF"
+                          definitionBodyFontFamily:@"Helvetica"
+                            definitionBodyFontSize:46];
+            controller.localHtml = html;
+        } else {
+            PurchaseViewController *viewController = [[PurchaseViewController alloc] init];
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
 #endif
+        
     }
     
     controller.header = title;

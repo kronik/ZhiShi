@@ -15,7 +15,7 @@
 #define verifyReceipt resetCurrentTheme
 #define restorePurchasedForProduct restoreDefaultBundleTheme
 #define removeTransaction resetDraw
-#define kProductItemID @"650548827"
+#define kProductItemID @"741599423"
 
 NSString *const kTransactionID	= @"Transaction ID";
 NSString *const kTransactionReceipt = @"Transaction Receipt";
@@ -47,10 +47,6 @@ NSString *const kTransactionReceipt = @"Transaction Receipt";
 
 + (FCStoreManager *)sharedStoreManager
 {
-#ifndef DEBUG
-    SEC_IS_BEING_DEBUGGED_RETURN_NIL();
-#endif
-    
     static dispatch_once_t p = 0;
     
     // initialize sharedObject as nil (first call only)

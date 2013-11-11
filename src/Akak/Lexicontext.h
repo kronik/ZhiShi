@@ -255,6 +255,12 @@ extern NSString * const kLexicontextAdverb;
  *   Verb = (test (verb), test drive, test fly, testify);
  * } 
  *
+ * Important Note: some prefix searches may lead to huge result sets!
+ * For example, the result of the search:
+ * [dictionary wordsWithPrefix:@"a"] returns a result set of about 1800 Adjectives, 400 Adverbs, 500 Verbs and many more Nouns.
+ * Such a search does not return a result for nouns and a warning is printed to the log.
+ * It is therefore advisable to constrain your searches to prevent such cases.
+ *
  * @return all the entries in the dictionary that begin with the given prefix.
  * @param prefix the prefix to use for the search
  */
@@ -278,6 +284,12 @@ extern NSString * const kLexicontextAdverb;
  *   Verb = (test (verb), attest, contest, ...);
  * }
  *
+ * Important Note: some searches may lead to huge result sets!
+ * For example, the result of the search:
+ * [dictionary grep:@"a"] returns a huge result set, especially for Nouns.
+ * Such a search does not return a result for nouns and a warning is printed to the log.
+ * It is therefore advisable to constrain your searches to prevent such cases.
+ *
  * @return all the entries in the dictionary that contain the given search string.
  * @param searchString the string to use for the search
  */
@@ -297,7 +309,9 @@ extern NSString * const kLexicontextAdverb;
  * If you prefer, you can add words to the list by editing the default lexicontext_ext_words.plist that resides in the resource 
  * bundle, before you build your app instead of doing it programmatically from your app's code. If you choose to manually edit the 
  * file, please make sure that you follow the file format precisely, otherwise the auxiliary list will not be able to be loaded 
- * from the file and will be initialized to an empty list instead.
+ * from the file and will be initialized to an empty list instead. 
+ * Also make sure that words you add to the list by editing the file are typed in lowercase (the definition body may contain 
+ * upercases, but not the key).
  * Please note also that The auxiliary list is loaded into memory when the dictionary is initialized and therefore it is only 
  * intended to hold a few hundred words. Adding too many words can impact the performance of the Lexicontext dictionary (and your 
  * app).

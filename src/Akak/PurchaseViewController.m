@@ -34,37 +34,16 @@
 {
     if (_menuItems == nil)
     {
-        SKProduct *wordsUnlock = [[FCStoreManager sharedStoreManager] getProductFullWordsUnlock];
-        SKProduct *phrasesUnlock = [[FCStoreManager sharedStoreManager] getProductFullPhrasesUnlock];
-        SKProduct *noAdvUnlock = [[FCStoreManager sharedStoreManager] getProductNoAdvUnlock];
-        SKProduct *cumulativeUnlock = [[FCStoreManager sharedStoreManager] getProductCumulativeUnlock];
+        SKProduct *appUnlock = [[FCStoreManager sharedStoreManager] getProductFullUnlock];
 
-        NSString *localizedWordsPrice = [self priceAsString:wordsUnlock.priceLocale Price:wordsUnlock.price];
-        NSString *localizedPhrasesPrice = [self priceAsString:phrasesUnlock.priceLocale Price:phrasesUnlock.price];
-        NSString *localizedNoAdvPrice = [self priceAsString:noAdvUnlock.priceLocale Price:noAdvUnlock.price];
-        NSString *localizedCumulativePrice = [self priceAsString:cumulativeUnlock.priceLocale Price:cumulativeUnlock.price];
+        NSString *localizedPrice = [self priceAsString:appUnlock.priceLocale Price:appUnlock.price];
 
-        if (localizedWordsPrice == nil) {
-            localizedWordsPrice = @"$0.99";
+        if (localizedPrice == nil) {
+            localizedPrice = @"$0.99";
         }
         
-        if (localizedPhrasesPrice == nil) {
-            localizedPhrasesPrice = @"$0.99";
-        }
-        
-        if (localizedNoAdvPrice == nil) {
-            localizedNoAdvPrice = @"$0.99";
-        }
-        
-        if (localizedCumulativePrice == nil) {
-            localizedCumulativePrice = @"$1.99";
-        }
-
-        _menuItems = @[[NSString stringWithFormat: @"%@ %@", NSLocalizedString(@"3400+ Words", nil), localizedWordsPrice],
-                       [NSString stringWithFormat: @"%@ %@", NSLocalizedString(@"1000+ Phrases", nil), localizedPhrasesPrice],
-                       [NSString stringWithFormat: @"%@ %@", NSLocalizedString(@"No more Ad", nil), localizedNoAdvPrice],
-                       [NSString stringWithFormat: @"%@ %@", NSLocalizedString(@"All in one", nil), localizedCumulativePrice],
-                       NSLocalizedString(@"Restore", nil)];
+        _menuItems = @[[NSString stringWithFormat: @"%@ %@", NSLocalizedString(@"Купить за", nil), localizedPrice],
+                       NSLocalizedString(@"Восстановить покупки", nil)];
     }
     return  _menuItems;
 }
@@ -103,7 +82,7 @@
     
     [self addBackButton];
     
-    [self setMainTitle: NSLocalizedString(@"Unlock all features", nil)];
+    [self setMainTitle: NSLocalizedString(@"Полная версия Жи-Ши", nil)];
 
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
@@ -179,29 +158,13 @@
         
         switch (indexPath.row) {
             case 0:
-                [button addTarget:self action:@selector(purchaseWordsItem) forControlEvents: UIControlEventTouchUpInside];
+                [button setTitleColor:[UIColor blueberryColor] forState:UIControlStateNormal];
+                [button addTarget:self action:@selector(purchaseAppItem) forControlEvents: UIControlEventTouchUpInside];
                 cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0f];
                 break;
                 
             case 1:
-                [button addTarget:self action:@selector(purchasePhrasesItem) forControlEvents: UIControlEventTouchUpInside];
-                cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0f];
-                break;
-                
-            case 2:
                 [button setTitleColor:[UIColor blueberryColor] forState:UIControlStateNormal];
-                [button addTarget:self action:@selector(purchaseNoAdvItem) forControlEvents: UIControlEventTouchUpInside];
-                cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0f];
-                break;
-                
-            case 3:
-                [button setTitleColor:[UIColor flatYellowColor] forState:UIControlStateNormal];
-                [button addTarget:self action:@selector(purchaseCumulativeItem) forControlEvents: UIControlEventTouchUpInside];
-                cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:26.0f];
-                break;
-                
-            case 4:
-                [button setTitleColor:[UIColor turquoiseColor] forState:UIControlStateNormal];
                 [button addTarget:self action:@selector(restoreItems) forControlEvents: UIControlEventTouchUpInside];
                 cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:26.0f];
                 break;
@@ -233,108 +196,51 @@
     [self hideHUD: YES];
 
     if (allRequestFailed == NO) {
-        [self showSuccessNotification:NSLocalizedString(@"Success!", nil) onView:self.tableView];
+        [self showSuccessNotification:NSLocalizedString(@"Готово!", nil) onView:self.tableView];
         [self performSelector:@selector(goBack:) withObject:self afterDelay:1.5];
     } else {
-        [self showError:NSLocalizedString(@"Operation failed!", nil) onView:self.tableView];
+        [self showError:NSLocalizedString(@"Произошла ошибка!", nil) onView:self.tableView];
     }
 }
 
 - (void)restoreItems {
     [Flurry logEvent:@"TapOnRestoreUnlock"];
     
-    SKProduct *wordsUnlock = [[FCStoreManager sharedStoreManager] getProductFullWordsUnlock];
-    SKProduct *phrasesUnlock = [[FCStoreManager sharedStoreManager] getProductFullPhrasesUnlock];
-    SKProduct *noAdvUnlock = [[FCStoreManager sharedStoreManager] getProductNoAdvUnlock];
-    SKProduct *cumulativeUnlock = [[FCStoreManager sharedStoreManager] getProductCumulativeUnlock];
+    SKProduct *appUnlock = [[FCStoreManager sharedStoreManager] getProductFullUnlock];
     
-    if ((wordsUnlock == nil) || (phrasesUnlock == nil) || (noAdvUnlock == nil) || (cumulativeUnlock == nil)) {
-        [self showError:NSLocalizedString(@"Operation failed!", nil) onView:self.tableView];
+    if (appUnlock == nil) {
+        [self showError:NSLocalizedString(@"Произошла ошибка!", nil) onView:self.tableView];
         return;
     }
     
     [self showProgressHUD];
     
-    _purchaseResults = [@{wordsUnlock.productIdentifier : [NSNumber numberWithInt: 0],
-                         phrasesUnlock.productIdentifier : [NSNumber numberWithInt: 0],
-                         noAdvUnlock.productIdentifier : [NSNumber numberWithInt: 0],
-                         cumulativeUnlock.productIdentifier : [NSNumber numberWithInt: 0]} mutableCopy];
+    _purchaseResults = [@{appUnlock.productIdentifier : [NSNumber numberWithInt: 0]} mutableCopy];
 
     __weak PurchaseViewController *weakRef = self;
     
-    [[FCStoreManager sharedStoreManager] restorePreviousPurchasesForProduct:wordsUnlock
+    [[FCStoreManager sharedStoreManager] restorePreviousPurchasesForProduct:appUnlock
                                                                response:^(BOOL wasSuccess, SKPaymentTransaction *transaction) {
                                                                    @synchronized (weakRef) {
-                                                                       weakRef.purchaseResults [wordsUnlock.productIdentifier] = [NSNumber numberWithInt: wasSuccess ? 1 : 2];
+                                                                       weakRef.purchaseResults [appUnlock.productIdentifier] = [NSNumber numberWithInt: wasSuccess ? 1 : 2];
                                                                        [weakRef checkPurchaseResults];
                                                                    }
                                                                }];
-    
-    [[FCStoreManager sharedStoreManager] restorePreviousPurchasesForProduct:phrasesUnlock
-                                                                   response:^(BOOL wasSuccess, SKPaymentTransaction *transaction) {
-                                                                       @synchronized (weakRef) {
-                                                                           weakRef.purchaseResults [phrasesUnlock.productIdentifier] = [NSNumber numberWithInt: wasSuccess ? 1 : 2];
-                                                                           [weakRef checkPurchaseResults];
-                                                                       }
-                                                                   }];
-    
-    [[FCStoreManager sharedStoreManager] restorePreviousPurchasesForProduct:noAdvUnlock
-                                                                   response:^(BOOL wasSuccess, SKPaymentTransaction *transaction) {
-                                                                       @synchronized (weakRef) {
-                                                                           weakRef.purchaseResults [noAdvUnlock.productIdentifier] = [NSNumber numberWithInt: wasSuccess ? 1 : 2];
-                                                                           [weakRef checkPurchaseResults];
-                                                                       }
-                                                                   }];
-    
-    [[FCStoreManager sharedStoreManager] restorePreviousPurchasesForProduct:cumulativeUnlock
-                                                                   response:^(BOOL wasSuccess, SKPaymentTransaction *transaction) {
-                                                                       @synchronized (weakRef) {
-                                                                           weakRef.purchaseResults [cumulativeUnlock.productIdentifier] = [NSNumber numberWithInt: wasSuccess ? 1 : 2];
-                                                                           [weakRef checkPurchaseResults];
-                                                                       }
-                                                                   }];
 }
 
-- (void)purchaseWordsItem {
+- (void)purchaseAppItem {
     
-    [Flurry logEvent:@"TapOnPurchaseWordsUnlock"];
+    [Flurry logEvent:@"TapOnPurchaseAppUnlock"];
 
-    SKProduct *wordsUnlock = [[FCStoreManager sharedStoreManager] getProductFullWordsUnlock];
+    SKProduct *appUnlock = [[FCStoreManager sharedStoreManager] getProductFullUnlock];
 
-    [self purchaseItem:wordsUnlock];
-}
-
-- (void)purchasePhrasesItem {
-    
-    [Flurry logEvent:@"TapOnPurchasePhrasesUnlock"];
-
-    SKProduct *phrasesUnlock = [[FCStoreManager sharedStoreManager] getProductFullPhrasesUnlock];
-    
-    [self purchaseItem:phrasesUnlock];
-}
-
-- (void)purchaseNoAdvItem {
-    
-    [Flurry logEvent:@"TapOnPurchaseNoAdvUnlock"];
-
-    SKProduct *noAdvUnlock = [[FCStoreManager sharedStoreManager] getProductNoAdvUnlock];
-    
-    [self purchaseItem:noAdvUnlock];
-}
-
-- (void)purchaseCumulativeItem {
-
-    [Flurry logEvent:@"TapOnPurchaseCumulativeUnlock"];
-
-    SKProduct *cumulativeUnlock = [[FCStoreManager sharedStoreManager] getProductCumulativeUnlock];
-    
-    [self purchaseItem:cumulativeUnlock];
+    [self purchaseItem:appUnlock];
 }
 
 - (void)purchaseItem: (SKProduct *)itemToPurchase {
         
     if (itemToPurchase == nil) {
-        [self showError:NSLocalizedString(@"Operation failed!", nil) onView:self.tableView];
+        [self showError:NSLocalizedString(@"Произошла ошибка!", nil) onView:self.tableView];
         return;
     }
     
@@ -346,10 +252,10 @@
                                                           [self hideHUD: YES];
 
                                                           if (wasSuccess) {
-                                                              [self showSuccessNotification:NSLocalizedString(@"Success!", nil) onView:self.tableView];
+                                                              [self showSuccessNotification:NSLocalizedString(@"Готово!", nil) onView:self.tableView];
                                                               [self performSelector:@selector(goBack:) withObject:self afterDelay:1.5];
                                                           } else {
-                                                              [self showError:NSLocalizedString(@"Operation failed!", nil) onView:self.tableView];
+                                                              [self showError:NSLocalizedString(@"Произошла ошибка!", nil) onView:self.tableView];
                                                           }
                                                       }];
 }
