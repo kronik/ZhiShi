@@ -102,7 +102,7 @@
         //[self.view addSubview:self.adBanner];
         [self.adBanner loadRequest:[self createRequest]];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnlockFullAppNotification) name:kUnlockFullProductNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnlockFullAppNotification:) name:kUnlockFullProductNotification object:nil];
     }
     
     //self.adBanner.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
@@ -191,7 +191,13 @@
         inView = self.view;
     }
     
-    [[WBNoticeView defaultManager] showSuccessNoticeInView: inView title:@"" message: message];
+    float origin = 0;
+//
+//    if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)) {
+//        origin += 44;
+//    }
+    
+    [[WBNoticeView defaultManager] showSuccessNoticeInView: inView title:message message: @"" origin: origin];
 }
 
 - (void)showError:(NSString *)errorMessage
@@ -211,7 +217,14 @@
         inView = self.view;
     }
     
-    [[WBNoticeView defaultManager] showErrorNoticeInView: inView title:NSLocalizedString(@"Внимание!", nil) message: errorMessage];
+    float origin = 0;
+    
+//    if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) &&
+//        (self.navigationController.navigationBarHidden == NO)) {
+//        origin += 44;
+//    }
+
+    [[WBNoticeView defaultManager] showErrorNoticeInView: inView title:NSLocalizedString(@"Внимание!", nil) message: errorMessage origin: origin];
 }
 
 - (void)addBackButton {

@@ -1620,7 +1620,7 @@
         [alert show];
     }
     
-    self.appLaunchesCount += 1;    
+    self.appLaunchesCount += 1;
 }
 
 - (void)dictSearcherUpdateProgress:(DictSearcher *)searcher progress:(float)progress

@@ -42,7 +42,8 @@
             localizedPrice = @"$0.99";
         }
         
-        _menuItems = @[[NSString stringWithFormat: @"%@ %@", NSLocalizedString(@"Купить за", nil), localizedPrice],
+        _menuItems = @[@"", @"Без рекламы", @"+ Локальный словарь", @"+ Расширенная игра", @"",
+                       [NSString stringWithFormat: @"%@ %@", NSLocalizedString(@"Купить за", nil), localizedPrice],
                        NSLocalizedString(@"Восстановить покупки", nil)];
     }
     return  _menuItems;
@@ -52,10 +53,10 @@
 {
     self.view.backgroundColor = [UIColor black95PercentColor];
     
-    float heightOffset = 44;
+    float heightOffset = 0;
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        heightOffset = 64;
+        heightOffset = 0;
     }
 
     self.tableView = [[MYTableView alloc] initWithFrame:CGRectMake(0, heightOffset,
@@ -164,12 +165,26 @@
         
         switch (indexPath.row) {
             case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            {
+                cell.textLabel.textColor = [UIColor colorWithRed:0.18f green:0.39f blue:0.59f alpha:1.00f];
+                cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18.0f];
+                cell.textLabel.textAlignment = NSTextAlignmentLeft;
+                cell.textLabel.text = self.menuItems [indexPath.row];
+                button = nil;
+            }
+                break;
+            
+            case 5:
                 [button setTitleColor:[UIColor blueberryColor] forState:UIControlStateNormal];
                 [button addTarget:self action:@selector(purchaseAppItem) forControlEvents: UIControlEventTouchUpInside];
                 cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0f];
                 break;
                 
-            case 1:
+            case 6:
                 [button setTitleColor:[UIColor blueberryColor] forState:UIControlStateNormal];
                 [button addTarget:self action:@selector(restoreItems) forControlEvents: UIControlEventTouchUpInside];
                 cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:26.0f];
@@ -279,7 +294,11 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.0;
+    if (indexPath.row < 5) {
+        return 40.0;
+    } else {
+        return 60.0;
+    }
 }
 
 @end

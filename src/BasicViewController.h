@@ -23,6 +23,7 @@
 
 - (GADRequest *)createRequest;
 - (void)unlockNoAdvProduct: (NSNotification *)notification;
+- (void)onUnlockFullAppNotification: (NSNotification *)notification;
 
 #else 
 

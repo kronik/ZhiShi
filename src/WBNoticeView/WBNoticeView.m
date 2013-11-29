@@ -113,6 +113,7 @@
 - (void)showErrorNoticeInView:(UIView *)view
                         title:(NSString *)title
                       message:(NSString *)message
+                       origin:(CGFloat)origin
 {
     [self _showNoticeOfType:WBNoticeViewTypeError
                        view:view
@@ -121,7 +122,7 @@
                    duration:0.0
                       delay:0.0
                       alpha:0.8
-                    yOrigin:0.0];
+                    yOrigin:origin];
 }
 
 - (void)showErrorNoticeInView:(UIView *)view
@@ -163,6 +164,7 @@
 
 - (void)showSuccessNoticeInView:(UIView *)view
                         message:(NSString *)message
+                         origin:(CGFloat)origin
 {
     [self _showNoticeOfType:WBNoticeViewTypeSuccess
                        view:view
@@ -171,12 +173,13 @@
                    duration:0.0
                       delay:0.0
                       alpha:0.8
-                    yOrigin:0.0];
+                    yOrigin:origin];
 }
 
 - (void)showSuccessNoticeInView:(UIView *)view
                           title:(NSString *)title
                         message:(NSString *)message
+                         origin:(CGFloat)origin;
 {
     [self _showNoticeOfType:WBNoticeViewTypeSuccess
                        view:view
@@ -185,7 +188,7 @@
                    duration:0.0
                       delay:0.0
                       alpha:0.8
-                    yOrigin:0.0];
+                    yOrigin:origin];
 }
 
 - (void)showSuccessNoticeInView:(UIView *)view

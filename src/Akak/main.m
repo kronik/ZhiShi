@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 #ifdef LITE_VERSION
 
 #ifndef DEBUG
+#ifndef TARGET_IPHONE_SIMULATOR
     char* ptrace_root = "socket";
     char ptrace_name[] = {0xfd, 0x05, 0x0f, 0xf6, 0xfe, 0xf1, 0x00};
     for (size_t i = 0; i < sizeof(ptrace_name); i++) {
@@ -33,6 +34,7 @@ int main(int argc, char *argv[])
     ptrace_ptr_t ptrace_ptr = dlsym(handle, ptrace_name);
     ptrace_ptr(PT_DENY_ATTACH, 0, 0, 0);
     dlclose(handle);
+#endif
 #endif
 #endif
     @autoreleasepool {

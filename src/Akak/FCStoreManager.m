@@ -10,7 +10,7 @@
 #import "NSData+MKBase64.h"
 #import "Flurry.h"
 
-#define kProductFullUnlock @"com.witrapp.rulite.fullappunlock"
+#define kProductFullUnlock @"fullappunlock"
 
 #define verifyReceipt resetCurrentTheme
 #define restorePurchasedForProduct restoreDefaultBundleTheme
@@ -146,6 +146,11 @@ NSString *const kTransactionReceipt = @"Transaction Receipt";
 
 - (void)restorePurchasedForProduct:(SKProduct *)product response:(PurchaseResponse)response
 {
+    if (product == nil) {
+        response(NO, nil);
+        return;
+    }
+
     restorePurchaseResponse = response;
     [self.responseByProductId setObject:[response copy] forKey:product.productIdentifier];
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
@@ -153,6 +158,11 @@ NSString *const kTransactionReceipt = @"Transaction Receipt";
 
 - (void)purchase:(SKProduct*)product response:(PurchaseResponse)response
 {
+    if (product == nil) {
+        response(NO, nil);
+        return;
+    }
+    
     SKPayment *payment = [SKPayment paymentWithProduct:product];
     [self.responseByProductId setObject:[response copy] forKey:product.productIdentifier];
     [[SKPaymentQueue defaultQueue] addPayment:payment];
@@ -369,7 +379,7 @@ NSString *const kTransactionReceipt = @"Transaction Receipt";
 
 - (BOOL)verifyReceipt:(NSData*)receiptData {
 
-#ifdef _DEBUG
+#ifdef DEBUG
     NSURL *url = [NSURL URLWithString: @"https://sandbox.itunes.apple.com/verifyReceipt"];
 #else
     NSURL *url = [NSURL URLWithString: @"https://buy.itunes.apple.com/verifyReceipt"];

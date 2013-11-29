@@ -43,7 +43,8 @@ typedef void (^WBNoticeViewDismissedBlock)(void);
 
 - (void)showErrorNoticeInView:(UIView *)view
                         title:(NSString *)title
-                      message:(NSString *)message;
+                      message:(NSString *)message
+                       origin:(CGFloat)origin;
 
 - (void)showErrorNoticeInView:(UIView *)view
                         title:(NSString *)title
@@ -63,11 +64,13 @@ typedef void (^WBNoticeViewDismissedBlock)(void);
 // Success notice methods
 
 - (void)showSuccessNoticeInView:(UIView *)view
-                        message:(NSString *)message;
+                        message:(NSString *)message
+                         origin:(CGFloat)origin;
 
 - (void)showSuccessNoticeInView:(UIView *)view
                           title:(NSString *)title
-                        message:(NSString *)message;
+                        message:(NSString *)message
+                         origin:(CGFloat)origin;
 
 - (void)showSuccessNoticeInView:(UIView *)view
                         message:(NSString *)message
