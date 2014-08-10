@@ -96,10 +96,11 @@
     if ([[FCStoreManager sharedStoreManager] isFullProduct] == NO) {
         self.adBanner = [[GADBannerView alloc] initWithAdSize:kGADAdSizeBanner];
             
-        self.adBanner.adUnitID = @"a14f29fa9fa7cb1";
+        self.adBanner.adUnitID = @"ca-app-pub-6418819291105012/3913481483";
         self.adBanner.delegate = self;
-        [self.adBanner setRootViewController:self];
-        //[self.view addSubview:self.adBanner];
+        self.adBanner.rootViewController = self;
+        self.adBanner.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+
         [self.adBanner loadRequest:[self createRequest]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnlockFullAppNotification:) name:kUnlockFullProductNotification object:nil];
@@ -141,8 +142,6 @@
 
 - (GADRequest *)createRequest {
     self.request = [GADRequest request];
-    
-    self.request.testing = NO;
     
     // Make the request for a test ad. Put in an identifier for the simulator as
     // well as any devices you want to receive test ads.
